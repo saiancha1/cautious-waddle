@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cautious_waddle.Controllers
@@ -15,6 +16,7 @@ namespace cautious_waddle.Controllers
         };
 
         [HttpGet("[action]")]
+        [Authorize(Roles="Admin")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();

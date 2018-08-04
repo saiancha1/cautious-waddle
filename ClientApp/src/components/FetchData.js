@@ -8,9 +8,15 @@ export class FetchData extends Component {
     this.state = { forecasts: [], loading: true };
 
     fetch('api/SampleData/WeatherForecasts')
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ forecasts: data, loading: false });
+      .then((response) =>
+      {
+        if(response.ok)
+        {
+          response.json()
+          .then(data => {
+          this.setState({ forecasts: data, loading: false });
+          })
+        }
       });
   }
 
@@ -34,6 +40,7 @@ export class FetchData extends Component {
               <td>{forecast.summary}</td>
             </tr>
           )}
+          
         </tbody>
       </table>
     );
