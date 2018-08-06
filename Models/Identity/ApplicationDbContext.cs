@@ -7,7 +7,16 @@ namespace cautious_waddle.Models
 {
     public class IdentityDbContext : IdentityDbContext<AppUser>
     {
-        public IdentityDbContext(DbContextOptions opts) : base(opts)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> opts) : base(opts)
+        {
+
+        }
+    }
+
+    public class CompaniesDbContext : DbContext
+    {
+        public DbSet<Company> Companies {get; set;}
+        public CompaniesDbContext(DbContextOptions<CompaniesDbContext> opts) : base(opts)
         {
 
         }
