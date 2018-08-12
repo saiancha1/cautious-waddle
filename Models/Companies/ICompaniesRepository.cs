@@ -4,6 +4,10 @@ namespace cautious_waddle.Models
 {
     public interface ICompaniesRepository
     {
-        IEnumerable<Company> GetCompaniesList();
+        List<Company> GetCompaniesList();
+        void AddCompany(Company company);
+        void UpdateCompany(Company company);
+        void DeleteCompany(Company company);
+        Company GetCompanyById (int id);
     }
 }
