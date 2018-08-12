@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace cautious_waddle.Models
 {
@@ -12,14 +14,22 @@ namespace cautious_waddle.Models
             _context = context;
         }
 
-        public IEnumerable<Company> GetCompaniesList()
+        public IEnumerable<Company> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize)
         {
-            return _context.Companies;
-        }
+            IEnumerable<Company> companies = _companies;
 
-        public IEnumerable<Company> GetCompaniesList(string filter)
-        {
-            return _context.Companies.Where(c => c.BusinessType == filter);
+            if(businessType != null) {
+                companies = companies.Where(c => c.BusinessType == businessType);
+            }
+            if(specialistArea != null) {
+                companies = companies.Where(c => c.SpecialistArea == specialistArea);
+            }
+            companies = companies.Where(c => c.Size >= minSize);
+            if(maxSize != 0 && maxSize >= minSize) {
+                companies = companies.Where(c => c.Size <= maxSize);
+            }
+
+            return companies;
         }
     }
 }

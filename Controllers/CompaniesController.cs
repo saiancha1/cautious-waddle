@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using cautious_waddle.Models;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace cautious_waddle.Controllers
 {
@@ -14,17 +15,10 @@ namespace cautious_waddle.Controllers
             _companiesRepository = CompaniesRepository;
         }
         [HttpGet("listCompanies")]
-        public IActionResult GetCompanies([FromQuery] string filter = null) {
+        public IActionResult GetCompanies([FromQuery] string businessType = null, [FromQuery] string specialistArea = null,
+        [FromQuery] int minSize = 0, [FromQuery] int maxSize = 0) {
             try {
-                if(filter == null) 
-                {
-                    return Ok(_companiesRepository.GetCompaniesList());
-                } 
-                else 
-                {
-                    // Filter by businessType
-                    return Ok(_companiesRepository.GetCompaniesList(filter));
-                }
+                return Ok(_companiesRepository.GetCompaniesList(businessType, specialistArea, minSize, maxSize));
             } catch {
                 return NotFound();
             }
