@@ -15,10 +15,10 @@ namespace cautious_waddle.Controllers
         }
 
         [HttpGet("getJobs")]
-        public IActionResult getJobs()
+        public IActionResult getJobs([FromQuery] int minSalary = 0, [FromQuery] int maxSalary = 0, [FromQuery] string search = null)
         {
             try {
-                return Ok(_jobsRespository.GetJobsList());
+                return Ok(_jobsRespository.GetJobsList(minSalary, maxSalary, search));
             } 
             catch
             {

@@ -51,6 +51,9 @@ namespace cautious_waddle
             services.AddDbContext<CompaniesDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddTransient<ICompaniesRepository, CompaniesRepository>();
+            services.AddDbContext<JobsDbContext>(options =>
+                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
+            services.AddTransient<IJobsRepository, JobsRepository>();
             
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();

@@ -15,12 +15,13 @@ namespace cautious_waddle.Controllers
         }
 
         [HttpGet("getCompanies")]
-        public IActionResult GetCompanies([FromQuery] string businessType = null, [FromQuery] string specialistArea = null,
-        [FromQuery] int minSize = 0, [FromQuery] int maxSize = 0) 
+        public IActionResult GetCompanies(
+            [FromQuery] string businessType = null, [FromQuery] string specialistArea = null,
+            [FromQuery] int minSize = 0, [FromQuery] int maxSize = 0, [FromQuery] string search = null) 
         {
             try 
             {
-                return Ok(_companiesRepository.GetCompaniesList(businessType, specialistArea, minSize, maxSize));
+                return Ok(_companiesRepository.GetCompaniesList(businessType, specialistArea, minSize, maxSize, search));
             } 
             catch 
             {

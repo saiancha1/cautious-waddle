@@ -14,10 +14,17 @@ namespace cautious_waddle.Models
             _context = context;
         }
 
-        public IEnumerable<Company> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize)
+        public IEnumerable<Company> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search)
         {
             IEnumerable<Company> companies = _companies;
 
+            // Search
+            if(search != null) {
+                companies = companies.Where(c => c.Name.ToLower().Contains(search.ToLower()) || c.Description.ToLower().Contains(search.ToLower())
+                || c.BusinessType.ToLower().Contains(search.ToLower()) || c.SpecialistArea.ToLower().Contains(search.ToLower()));
+            }
+
+            // Filters
             if(businessType != null) {
                 companies = companies.Where(c => c.BusinessType == businessType);
             }
