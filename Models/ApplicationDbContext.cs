@@ -22,4 +22,13 @@ namespace cautious_waddle.Models
 
         }
     }
+
+    public class JobsDbContext : DbContext
+    {
+        public DbSet<Job> Jobs { get; set; }
+        public JobsDbContext(DbContextOptions<JobsDbContext> opts) : base(opts)
+        {
+
+        }
+    }
 }

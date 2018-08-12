@@ -39,5 +39,6 @@ namespace cautious_waddle.Models
         public string Country { get; set; }
         [JsonProperty("users")]
         public List<CompanyUser> Users { get; set; }
+       
     }
 }

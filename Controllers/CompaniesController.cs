@@ -6,6 +6,7 @@ using cautious_waddle.ViewModels;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace cautious_waddle.Controllers
 {
@@ -20,11 +21,26 @@ namespace cautious_waddle.Controllers
             _userManager = userManager;
         }
         [HttpGet("listCompanies")]
-        public IActionResult GetCompanies() {
+        public IActionResult GetAllCompanies() {
             try {
-                var companies = _companiesRepository.GetCompaniesList();
+                var companies = _companiesRepository.GetAllCompaniesList();
                 return Ok(companies);
             } catch (Exception ex){
+                return NotFound();
+            }
+        }
+
+        [HttpGet("getCompanies")]
+        public IActionResult GetCompanies(
+            [FromQuery] string businessType = null, [FromQuery] string specialistArea = null,
+            [FromQuery] int minSize = 0, [FromQuery] int maxSize = 0, [FromQuery] string search = null) 
+        {
+            try 
+            {
+                return Ok(_companiesRepository.GetCompaniesList(businessType, specialistArea, minSize, maxSize, search));
+            } 
+            catch 
+            {
                 return NotFound();
             }
         }

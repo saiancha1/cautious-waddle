@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace cautious_waddle.Models
@@ -13,9 +14,33 @@ namespace cautious_waddle.Models
             _context = context;
         }
 
-        public List<Company> GetCompaniesList()
+        public List<Company> GetAllCompaniesList()
         {
             return _context.Companies.Include(a => a.Users).ToList();
+        }
+        public IEnumerable<Company> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search)
+        {
+            IEnumerable<Company> companies = _companies;
+
+            // Search
+            if(search != null) {
+                companies = companies.Where(c => c.Name.ToLower().Contains(search.ToLower()) || c.Description.ToLower().Contains(search.ToLower())
+                || c.BusinessType.ToLower().Contains(search.ToLower()) || c.SpecialistArea.ToLower().Contains(search.ToLower()));
+            }
+
+            // Filters
+            if(businessType != null) {
+                companies = companies.Where(c => c.BusinessType == businessType);
+            }
+            if(specialistArea != null) {
+                companies = companies.Where(c => c.SpecialistArea == specialistArea);
+            }
+            companies = companies.Where(c => c.Size >= minSize);
+            if(maxSize != 0 && maxSize >= minSize) {
+                companies = companies.Where(c => c.Size <= maxSize);
+            }
+
+            return companies;
         }
         public void AddCompany(Company company)
         {
