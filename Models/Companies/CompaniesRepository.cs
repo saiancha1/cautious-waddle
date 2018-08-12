@@ -14,13 +14,9 @@ namespace cautious_waddle.Models
             _context = context;
         }
 
-        public List<Company> GetAllCompaniesList()
-        {
-            return _context.Companies.Include(a => a.Users).ToList();
-        }
         public IEnumerable<Company> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search)
         {
-            IEnumerable<Company> companies = _companies;
+            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
 
             // Search
             if(search != null) {

@@ -20,15 +20,6 @@ namespace cautious_waddle.Controllers
             _companiesRepository = CompaniesRepository;
             _userManager = userManager;
         }
-        [HttpGet("listCompanies")]
-        public IActionResult GetAllCompanies() {
-            try {
-                var companies = _companiesRepository.GetAllCompaniesList();
-                return Ok(companies);
-            } catch (Exception ex){
-                return NotFound();
-            }
-        }
 
         [HttpGet("getCompanies")]
         public IActionResult GetCompanies(
