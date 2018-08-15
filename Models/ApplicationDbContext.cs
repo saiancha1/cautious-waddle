@@ -31,4 +31,13 @@ namespace cautious_waddle.Models
 
         }
     }
+
+    public class ProfilesDbContext : DbContext
+    {
+        public DbSet<Profile> Profiles { get; set; }
+        public ProfilesDbContext(DbContextOptions<ProfilesDbContext> opts) : base(opts)
+        {
+            
+        }
+    }
 }
