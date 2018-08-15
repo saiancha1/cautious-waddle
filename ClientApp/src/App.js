@@ -1,20 +1,30 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import React from 'react';
+import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Navbar from './components/NavBar/NavBar';
+import Home from './components/Home';
+import Companies from './components/Companies';
+import Consultants from './components/Consultants';
+import Work from './components/Work';
+import Events from './components/Events';
+import Contact from './components/Contact';
+import Subscribe from './components/Subscribe';
+import Login from './components/Login';
 
-export default class App extends Component {
-  displayName = App.name
+const App = () => (
+  <Router>
+    <div>
+      <Navbar />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={Companies} />
+      <Route exact path="/" component={Consultants} />
+      <Route exact path="/" component={Work} />
+      <Route exact path="/" component={Events} />
+      <Route exact path="/" component={Contact} />
+      <Route exact path="/" component={Subscribe} />
+      <Route exact path="/" component={Login} />
+    </div>
+  </Router>
+);
 
-  render() {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetchdata' component={FetchData} />
-      </Layout>
-    );
-  }
-}
+export default App;
