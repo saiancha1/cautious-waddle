@@ -6,7 +6,6 @@ using cautious_waddle.ViewModels;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
-using System.Linq;
 
 namespace cautious_waddle.Controllers
 {
