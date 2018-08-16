@@ -39,7 +39,7 @@ namespace cautious_waddle.Models
 
         public Job GetJobById(int id)
         {
-            return _context.Jobs.SingleOrDefault(j => j.JobId == id);;
+            return _context.Jobs.SingleOrDefault(j => j.JobId == id);
         }
 
         public void DeleteJob(Job job)
