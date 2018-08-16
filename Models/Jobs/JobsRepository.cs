@@ -47,5 +47,11 @@ namespace cautious_waddle.Models
             _context.Jobs.Remove(job);
             _context.SaveChanges();
         }
+
+        public void EditJob(Job job)
+        {
+            _context.Jobs.Update(job);
+            _context.SaveChanges();
+        }
     }
 }

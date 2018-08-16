@@ -129,5 +129,53 @@ namespace cautious_waddle.Controllers
                 return NotFound(ex);
             }
         }
+
+        [HttpPost("editJob")]
+        public IActionResult EditJob([FromBody] Job job)
+        {
+            try 
+            {
+                if(job.CompanyId.HasValue)
+                {
+                    Company company = new Company();
+                    company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
+
+                    if(company.Users.Any(user => user.Id ==  HttpContext.User.Identities.First()
+                    .Claims.FirstOrDefault(c => c.Type == "id").Value))
+                    {
+                        _jobsRespository.EditJob(job);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+                else if(job.ProfileId.HasValue)
+                {
+                    Profile profile = new Profile();
+                    profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
+
+                    if(profile.UserId == HttpContext.User.Identities.First()
+                    .Claims.FirstOrDefault(c => c.Type == "id").Value)
+                    {
+                        _jobsRespository.EditJob(job);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            catch (Exception e)
+            {
+                return NotFound(e);
+            }
+        }
     }
 }
