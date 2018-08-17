@@ -16,6 +16,7 @@ namespace cautious_waddle.Models
             _roleManager = roleManager;
         }
 
+        //Adds a
         public async Task<AppUser> AddUser(AppUser user, string role, string password)
         {
             var currentUser =  _userManager.FindByEmailAsync(user.Email);
