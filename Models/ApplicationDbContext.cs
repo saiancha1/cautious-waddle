@@ -13,6 +13,15 @@ namespace cautious_waddle.Models
         }
     }
 
+    public class ListingsDbContext : DbContext
+    {
+        public DbSet<Listing> Listings { get; set; }
+        public ListingsDbContext(DbContextOptions<ListingsDbContext> opts) : base(opts)
+        {
+            
+        }
+    }
+
     public class CompaniesDbContext : DbContext
     {
         public DbSet<Company> Companies {get; set;}
@@ -29,6 +38,15 @@ namespace cautious_waddle.Models
         public JobsDbContext(DbContextOptions<JobsDbContext> opts) : base(opts)
         {
 
+        }
+    }
+
+    public class ProfilesDbContext : DbContext
+    {
+        public DbSet<Profile> Profiles { get; set; }
+        public ProfilesDbContext(DbContextOptions<ProfilesDbContext> opts) : base(opts)
+        {
+            
         }
     }
 }
