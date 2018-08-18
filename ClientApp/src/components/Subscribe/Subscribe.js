@@ -1,8 +1,8 @@
 import React from 'react';
 import "./Subscribe.css";
 
-const Subscribe = () => (
-  <div className="subb"> 
+const Subscribe = () => {
+  return <div className="subb"> 
     <h1>SUBSCRIBE</h1>
     <br></br>
     <h2>Mailing List</h2>
@@ -20,6 +20,6 @@ const Subscribe = () => (
     <input type="submit" name="subsubmit"/>
     </form>
   </div>
-);
+};
 
 export default Subscribe;
