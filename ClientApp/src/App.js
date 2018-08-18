@@ -9,7 +9,6 @@ import Work from './components/Work';
 import Events from './components/Events';
 import Contact from './components/Contact';
 import Subscribe from './components/Subscribe';
-import Login from './components/NavBar/Login';
 
 const App = () => (
   <Router>
