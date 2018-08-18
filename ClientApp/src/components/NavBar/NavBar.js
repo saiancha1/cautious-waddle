@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Login from "./Login";
+import Login from '../Authentication/Login';
 
 class NavBar extends Component {
   render() {
