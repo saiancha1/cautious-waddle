@@ -3,13 +3,13 @@
 Index.js – creates an instance of our App
   App.js – root component
     NavBar.js - contains the bootstrap navigation bar 
-	    Login.js - login form nested in navbar
+      Login.js - login form nested in navbar
     Home.js - homepage
-      CompanySlide - slideshow of companies (calls API)
-        Companies - information about an individual company
+      CompanySlide.js - slideshow of companies (calls API)
+        Companies.js - information about an individual company
     Companies.js - calls API for list of companies, sends to company child component and links to add company
-      Company - an individual company
-      CompanyFilter - TBC, a component to determine API call
+      Company.js - an individual company
+      CompanyFilter.js - TBC, a component to determine API call
       AddCompany.js - form page
     Consultants.js - calls API for list of consultants, sends to consultant child component and links to add consultant
       Consultant.js - an individual consultant 
