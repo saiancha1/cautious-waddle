@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Login from "./Login";
 
 class NavBar extends Component {
   render() {
@@ -13,7 +14,7 @@ class NavBar extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav pullLeft>
+          <Nav>
             <NavItem eventKey={1} componentClass={Link} href="/" to="/">
               Home
             </NavItem>
@@ -34,6 +35,12 @@ class NavBar extends Component {
             </NavItem>
             <NavItem eventKey={7} componentClass={Link} href="/subscribe" to="/subscribe">
               Subscribe
+            </NavItem>
+          </Nav>
+
+          <Nav pullRight>
+            <NavItem>
+              <Login />
             </NavItem>
           </Nav>
         </Navbar.Collapse>

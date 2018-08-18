@@ -9,7 +9,7 @@ import Work from './components/Work';
 import Events from './components/Events';
 import Contact from './components/Contact';
 import Subscribe from './components/Subscribe';
-import Login from './components/Login';
+import Login from './components/NavBar/Login';
 
 const App = () => (
   <Router>
@@ -22,7 +22,6 @@ const App = () => (
       <Route exact path="/events" component={Events} />
       <Route exact path="/contact" component={Contact} />
       <Route exact path="/subscribe" component={Subscribe} />
-      <Route exact path="/login" component={Login} />
     </div>
   </Router>
 );
