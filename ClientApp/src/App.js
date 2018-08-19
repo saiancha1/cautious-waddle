@@ -34,8 +34,7 @@ class App extends Component {
       <Route exact path="/" component={Home} 
       />
       <Route exact path="/companies" component={Companies} 
-      // Currently trying to make this work - changing state on routing event (to display new header name)
-      currentname={() => this.pageNameHandler('COMPANIES')}/>
+      />
       <Route exact path="/consultants" component={Consultants} 
       />
       <Route exact path="/work" component={Work} 
