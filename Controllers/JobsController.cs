@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using cautious_waddle.Models;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+
+using cautious_waddle.Models;
+using cautious_waddle.Helpers;
 
 namespace cautious_waddle.Controllers
 {
@@ -43,8 +45,7 @@ namespace cautious_waddle.Controllers
                     Company company = new Company();
                     company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
 
-                    if(company.Users.Any(user => user.Id ==  HttpContext.User.Identities.First()
-                    .Claims.FirstOrDefault(c => c.Type == "id").Value))
+                    if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
                     {
                         _jobsRespository.AddJob(job);
                         return Ok();
@@ -58,8 +59,7 @@ namespace cautious_waddle.Controllers
                     Profile profile = new Profile();
                     profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
 
-                    if(profile.UserId == HttpContext.User.Identities.First()
-                    .Claims.FirstOrDefault(c => c.Type == "id").Value)
+                    if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
                     {
                         _jobsRespository.AddJob(job);
                         return Ok();
@@ -93,8 +93,7 @@ namespace cautious_waddle.Controllers
                     Company company = new Company();
                     company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
 
-                    if(company.Users.Any(user => user.Id ==  HttpContext.User.Identities.First()
-                    .Claims.FirstOrDefault(c => c.Type == "id").Value))
+                    if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
                     {
                         _jobsRespository.DeleteJob(job);
                         return Ok();
@@ -109,8 +108,7 @@ namespace cautious_waddle.Controllers
                     Profile profile = new Profile();
                     profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
 
-                    if(profile.UserId == HttpContext.User.Identities.First()
-                    .Claims.FirstOrDefault(c => c.Type == "id").Value)
+                    if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
                     {
                         _jobsRespository.DeleteJob(job);
                         return Ok();
@@ -140,8 +138,7 @@ namespace cautious_waddle.Controllers
                     Company company = new Company();
                     company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
 
-                    if(company.Users.Any(user => user.Id ==  HttpContext.User.Identities.First()
-                    .Claims.FirstOrDefault(c => c.Type == "id").Value))
+                    if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
                     {
                         _jobsRespository.EditJob(job);
                         return Ok();
@@ -156,8 +153,7 @@ namespace cautious_waddle.Controllers
                     Profile profile = new Profile();
                     profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
 
-                    if(profile.UserId == HttpContext.User.Identities.First()
-                    .Claims.FirstOrDefault(c => c.Type == "id").Value)
+                    if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
                     {
                         _jobsRespository.EditJob(job);
                         return Ok();
