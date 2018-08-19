@@ -29,6 +29,7 @@ class App extends Component {
     return <Router>
     <div>
       <Navbar />
+      {/* One change */}
 {/* // Added header component to be separate and replicable*/}
       <Header title={this.state.pageName}/>
       <Route exact path="/" component={Home} 
