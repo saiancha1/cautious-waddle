@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Subscribe.css";
 
-const Subscribe = () => {
+const Subscribe = (props) => {
   return <div className="subb"> 
     <h1>SUBSCRIBE</h1>
     <br></br>

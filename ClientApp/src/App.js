@@ -14,24 +14,13 @@ import Header from './components/Header/Header'
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {
-  // This is one example of how state could be used, to have different header names
-  state = {
-    pageName: "HOME - Test Header",
-  }
-// This function is meant to change state ie. page name to be rendered in header component
-  pageNameHandler = (newname) => {
-    this.setState({
-      pageName: newname,
-    })
-  }
+  
 
   render() {
     return <Router>
     <div>
       <Navbar />
-      {/* One change */}
 {/* // Added header component to be separate and replicable*/}
-      <Header title={this.state.pageName}/>
       <Route exact path="/" component={Home} 
       />
       <Route exact path="/companies" component={Companies} 
@@ -52,22 +41,5 @@ class App extends Component {
   </Router>
   }
 }
-// ORIGINAL SIMPLE FUNCTION BELOW
-// const App = () => (
-//   <Router>
-//     <div>
-//       <Navbar />
-//       <Header title={Route.num}/>
-//       <Route exact path="/" component={Home} num="1"/>
-//       <Route exact path="/companies" component={Companies} num="2"/>
-//       <Route exact path="/consultants" component={Consultants} />
-//       <Route exact path="/work" component={Work} />
-//       <Route exact path="/events" component={Events} />
-//       <Route exact path="/contact" component={Contact} />
-//       <Route exact path="/subscribe" component={Subscribe} />
-//       <Route exact path="/login" component={Login} />
-//     </div>
-//   </Router>
-// );
 
 export default App;
