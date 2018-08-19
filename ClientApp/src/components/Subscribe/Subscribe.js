@@ -1,8 +1,11 @@
 import React from 'react';
 import "./Subscribe.css";
+import Header from "../Header/Header.js"
 
 const Subscribe = (props) => {
-  return <div className="subb"> 
+  
+  return <div> <Header title="Subscribe"/>
+    <div className="subb"> 
     <h1>SUBSCRIBE</h1>
     <br></br>
     <h2>Mailing List</h2>
@@ -19,6 +22,7 @@ const Subscribe = (props) => {
     <br></br>
     <input type="submit" name="subsubmit"/>
     </form>
+  </div>
   </div>
 };
 
