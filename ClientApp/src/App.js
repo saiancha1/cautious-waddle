@@ -10,6 +10,7 @@ import Events from './components/Events';
 import Contact from './components/Contact';
 import Subscribe from './components/Subscribe';
 import Login from './components/Login';
+import Footer from './components/Footer/Footer';
 
 const App = () => (
   <Router>
@@ -23,8 +24,10 @@ const App = () => (
       <Route exact path="/contact" component={Contact} />
       <Route exact path="/subscribe" component={Subscribe} />
       <Route exact path="/login" component={Login} />
+      <Footer />
     </div>
   </Router>
+
 );
 
 export default App;
