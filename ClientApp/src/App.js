@@ -20,7 +20,6 @@ class App extends Component {
     return <Router>
     <div>
       <Navbar />
-{/* // Added header component to be separate and replicable*/}
       <Route exact path="/" component={Home} 
       />
       <Route exact path="/companies" component={Companies} 
