@@ -6,22 +6,24 @@ const Subscribe = (props) => {
   
   return <div> <Header title="Subscribe"/>
     <div className="subb"> 
-    <h1>SUBSCRIBE</h1>
     <br></br>
     <h2>Mailing List</h2>
     <br></br>
-    <form action="insertpage server side" method="post"> 
-    <input type="checkbox" name="check1"></input> Events<br></br>
-    <input type="checkbox" name="check2"></input> Meet-Ups<br></br>
-    <input type="checkbox" name="check3"></input> Jobs<br></br>
-    <input type="checkbox" name="check4"></input> Internships<br></br>
-    <input type="checkbox" name="check5"></input> Company News<br></br>
+    <div className="tablesubb">
+    <form action="insertpage server side" method="post" > 
+    <table >
+    <tr ><input type="checkbox" name="check1"></input> <td>Events</td></tr>
+    <tr><input type="checkbox" name="check2"></input> <td>Meet-Ups</td></tr>
+    <tr><input type="checkbox" name="check3"></input> <td>Jobs</td></tr>
+    <tr><input type="checkbox" name="check4"></input> <td>Internships</td></tr>
+    <tr><input type="checkbox" name="check5"></input> <td>Company News</td></tr>
     <br></br>
-    <input type="email" name="emailfield"/>
+    <tr ><input type="email" name="emailfield" Style="width=100px"/></tr>
     <br></br>
-    <br></br>
-    <input type="submit" name="subsubmit"/>
+    <tr><input type="submit" name="subsubmit" Style="margin-left:100px"/></tr>
+    </table>
     </form>
+    </div>
   </div>
   </div>
 };
