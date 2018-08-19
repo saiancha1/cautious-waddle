@@ -20,7 +20,7 @@ export default class AuthService {
     }).then((res) => {
       this.setToken(res.token); // Setting the token in localStorage
       return Promise.resolve(res);
-    })
+    });
   }
 
   loggedIn() {
@@ -32,7 +32,7 @@ export default class AuthService {
   isTokenExpired(token) {
     try {
       const decoded = decode(token);
-      if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
+      if (decoded.exp < Date.now() / 1000) { // Checking if token is expired.
         return true;
       }
       else
@@ -81,11 +81,11 @@ export default class AuthService {
       headers,
       ...options,
     })
-      .then(this._checkStatus)
+      .then(this.checkStatus)
       .then(response => response.json());
   }
 
-  _checkStatus(response) {
+  checkStatus(response) {
     // raises an error in case response status is not a success
     if (this.response.status >= 200 && this.response.status < 300) { // Success status lies between 200 to 300
       return this.response;
