@@ -30,5 +30,28 @@ namespace cautious_waddle.Models
 
             return jobs;
         }
+
+        public void AddJob(Job job)
+        {
+            _context.Jobs.Add(job);
+            _context.SaveChanges();
+        }
+
+        public Job GetJobById(int id)
+        {
+            return _context.Jobs.SingleOrDefault(j => j.JobId == id);
+        }
+
+        public void DeleteJob(Job job)
+        {
+            _context.Jobs.Remove(job);
+            _context.SaveChanges();
+        }
+
+        public void EditJob(Job job)
+        {
+            _context.Jobs.Update(job);
+            _context.SaveChanges();
+        }
     }
 }

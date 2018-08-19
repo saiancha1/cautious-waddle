@@ -1,0 +1,30 @@
+#### Tech Palmy website React component breakdown ###
+
+Index.js – creates an instance of our App
+  App.js – root component
+    NavBar.js - contains the bootstrap navigation bar 
+      Login.js - login form nested in navbar
+    Home.js - homepage
+      CompanySlide.js - slideshow of companies (calls API)
+        Companies.js - information about an individual company
+    Companies.js - calls API for list of companies, sends to company child component and links to add company
+      Company.js - an individual company
+      CompanyFilter.js - TBC, a component to determine API call
+      AddCompany.js - form page
+    Consultants.js - calls API for list of consultants, sends to consultant child component and links to add consultant
+      Consultant.js - an individual consultant 
+      ConsultantFilter.js - TBC, a component to determine API call (Can we have one component for both filter company and consultant?)
+      AddConsultant.js - form page
+    Work.js - calls API for list of jobs and links to list job plus summer of tech
+      Position.js - an individual position 
+      SummerTech.js - summer of tech info page
+      AddWork.js - form page
+    Events.js - calls API for list of events
+      Event.js - an individual event
+      Map.js - map showing where events are
+      EventFilter.js - TBC
+      AddEvent.js - form page
+    Contact.js - contact page
+    Subscribe.js - subscribe page
+  Footer.js - Page footer
+
