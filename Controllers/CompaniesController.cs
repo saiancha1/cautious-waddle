@@ -36,7 +36,7 @@ namespace cautious_waddle.Controllers
                 return NotFound();
             }
         }
-        [HttpPost("addCompany")]
+        [HttpPost("addCompany")]    
         public IActionResult AddCompany([FromBody]Company company)
         {
             try{
@@ -53,7 +53,7 @@ namespace cautious_waddle.Controllers
             }
         }       
          [HttpPost("removeCompany")]
-         [Authorize]
+         [Authorize(Roles="Admin")]
         public IActionResult RemoveCompany([FromBody]int id)
         {
             try{
@@ -81,6 +81,19 @@ namespace cautious_waddle.Controllers
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
+            }
+        }
+        [HttpPost("editCompany")]       
+        public IActionResult EditCompany([FromBody] Company company)
+        {
+            try
+            {
+                _companiesRepository.UpdateCompany(company);
+                return Ok();
+            }
+            catch(Exception)
+            {
+                return BadRequest();
             }
         }       
     }
