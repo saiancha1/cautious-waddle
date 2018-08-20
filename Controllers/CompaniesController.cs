@@ -36,8 +36,7 @@ namespace cautious_waddle.Controllers
                 return NotFound();
             }
         }
-        [HttpPost("addCompany")]
-        [Authorize(Roles="Admin")]
+        [HttpPost("addCompany")]    
         public IActionResult AddCompany([FromBody]Company company)
         {
             try{
