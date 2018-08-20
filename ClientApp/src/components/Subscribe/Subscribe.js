@@ -3,6 +3,10 @@ import "./Subscribe.css";
 import Header from "../Header/Header.js"
 
 const Subscribe = (props) => {
+  const inputstyle = {
+    margin: 'auto',
+
+  };
   
   return <div> <Header title="Subscribe"/>
     <div className="subb"> 
@@ -18,9 +22,9 @@ const Subscribe = (props) => {
     <tr><input type="checkbox" name="check4"></input> <td>Internships</td></tr>
     <tr><input type="checkbox" name="check5"></input> <td>Company News</td></tr>
     <br></br>
-    <tr ><input type="email" name="emailfield" Style="width=100px"/></tr>
+    <tr ><input type="email" name="emailfield" Style="width=1000px"/></tr>
     <br></br>
-    <tr><input type="submit" name="subsubmit" Style="margin-left:100px"/></tr>
+    <tr><input type="submit" name="subsubmit" style={inputstyle}/></tr>
     </table>
     </form>
     </div>
