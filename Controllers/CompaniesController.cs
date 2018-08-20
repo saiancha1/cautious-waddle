@@ -83,8 +83,7 @@ namespace cautious_waddle.Controllers
                 return NotFound(ex.Message);
             }
         }
-        [HttpPost("editCompany")]
-        [Authorize(Roles="Admin")]
+        [HttpPost("editCompany")]       
         public IActionResult EditCompany([FromBody] Company company)
         {
             try
