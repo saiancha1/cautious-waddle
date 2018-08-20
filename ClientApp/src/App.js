@@ -9,35 +9,26 @@ import Work from './components/Work';
 import Events from './components/Events';
 import Contact from './components/Contact';
 import Subscribe from './components/Subscribe/Subscribe';
-import Login from './components/Login';
-import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer';
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {
-  
-
   render() {
-    return <Router>
-    <div>
-      <Navbar />
-      <Route exact path="/" component={Home} 
-      />
-      <Route exact path="/companies" component={Companies} 
-      />
-      <Route exact path="/consultants" component={Consultants} 
-      />
-      <Route exact path="/work" component={Work} 
-      />
-      <Route exact path="/events" component={Events} 
-      />
-      <Route exact path="/contact" component={Contact} 
-      />
-      <Route exact path="/subscribe" component={Subscribe} 
-      />
-      <Route exact path="/login" component={Login} 
-      />
-    </div>
-  </Router>
+    return (
+      <Router>
+        <div>
+          <Navbar />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/companies" component={Companies} />
+          <Route exact path="/consultants" component={Consultants} />
+          <Route exact path="/work" component={Work} />
+          <Route exact path="/events" component={Events} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/subscribe" component={Subscribe} />
+          <Footer />
+        </div>
+      </Router>
+    );
   }
 }
 
