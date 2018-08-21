@@ -45,12 +45,12 @@ export default class AuthService {
 
   setToken(idToken) {
     // Saves user token to localStorage
-    this.localStorage.setItem('id_token', idToken)
+    this.localStorage.setItem('id_token', idToken);
   }
 
   getToken() {
     // Retrieves the user token from localStorage
-    return this.localStorage.getItem('id_token')
+    return this.localStorage.getItem('id_token');
   }
 
   logout() {

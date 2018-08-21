@@ -14,7 +14,7 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.Auth = AuthService();
+    this.Auth = new AuthService();
   }
 
   // TODO: turn this into conditional render, if logged in just show Log out button.
