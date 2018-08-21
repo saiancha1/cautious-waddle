@@ -13,15 +13,6 @@ namespace cautious_waddle.Models
         }
     }
 
-    public class ListingsDbContext : DbContext
-    {
-        public DbSet<Listing> Listings { get; set; }
-        public ListingsDbContext(DbContextOptions<ListingsDbContext> opts) : base(opts)
-        {
-            
-        }
-    }
-
     public class CompaniesDbContext : DbContext
     {
         public DbSet<Company> Companies {get; set;}

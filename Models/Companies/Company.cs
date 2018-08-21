@@ -30,8 +30,8 @@ namespace cautious_waddle.Models
         public string BusinessType { get; set; }
         [JsonProperty("specialistArea")]
         public string SpecialistArea { get; set; }
-        [JsonProperty("companyDescription")]
-        public string CompanyDescription { get; set; }
+        [JsonProperty("companyDesc")]
+        public string CompanyDesc { get; set; }
         [JsonProperty("phone")]
         public string Phone { get; set; }
         [JsonProperty("email")]
