@@ -10,9 +10,9 @@ class Login extends Component {
       userPass: '',
       loggedIn: false,
     };
+    //this.handleSubmit = this.handleSubmit.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.Auth = new AuthService();
   }
@@ -33,9 +33,9 @@ class Login extends Component {
   }
 
   // TODO: Unsure about this part, example code has - .then(res =>{this.props.history.replace('/');)
-  handleFormSubmit(e) {
-    e.preventDefault();
-    this.Auth.login(this.state.username, this.state.password)
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.Auth.login(this.state.userEmail, this.state.userPass)
       .then(
         this.setState({ loggedIn: true }),
       )
@@ -53,7 +53,7 @@ class Login extends Component {
     if (this.state.loggedIn === false) {
       return (
         <div>
-          <form onSubmit={this.handleFormSubmit}>
+          <form onSubmit={(e) => this.setState({"loggedIn":this.Auth.handleSubmit(e, this.state.userEmail, this.state.userPass)})}>
             <input
               placeholder="Email"
               name="userEmail"
@@ -68,7 +68,7 @@ class Login extends Component {
               value={this.state.userPass}
               onChange={this.handleChange}
             />
-            <button type="submit">Login</button>
+            <button type="submit" value="">Login</button>
           </form>
         </div>
       );

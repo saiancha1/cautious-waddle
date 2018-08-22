@@ -6,7 +6,8 @@ import Login from '../Authentication/Login';
 class NavBar extends Component {
   render() {
     return (
-      <Navbar collapseOnSelectr>
+      <div>
+      <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">TechPalmy</Link>
@@ -40,12 +41,14 @@ class NavBar extends Component {
 
           <Nav pullRight>
             <NavItem>
-              <Login />
+             
             </NavItem>
           </Nav>
         </Navbar.Collapse>
 
       </Navbar>
+      <Login />
+      </div>
     );
   }
 }

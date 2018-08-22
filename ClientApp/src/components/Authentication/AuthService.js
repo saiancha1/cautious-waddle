@@ -9,18 +9,31 @@ export default class AuthService {
     this.getProfile = this.getProfile.bind(this);
   }
 
-  login(username, password) {
+  login = async(username, password) => {
     // Get a token from api server using the fetch api
-    return this.fetch(`${this.domain}/api/auth/login`, {
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    }).then((res) => {
-      this.setToken(res.token); // Setting the token in localStorage
-      return Promise.resolve(res);
-    });
+    var loginDetails = {Username:username, Password:password};
+    const result = await fetch('api/Auth/login',{
+      method:"POST",
+      
+      headers:{
+        "content-type":"application/json"
+      },
+      body:JSON.stringify(loginDetails)
+    })
+    .then(res => res.json())
+    .then(response =>
+    {
+    const data = response;
+    if(data.auth_token)
+    {
+     this.setToken(data.auth_token);
+     localStorage.setItem("UserId",data.id);
+     return true;
+    }
+    
+    })
+    return false;
+    
   }
 
   loggedIn() {
@@ -45,12 +58,16 @@ export default class AuthService {
 
   setToken(idToken) {
     // Saves user token to localStorage
-    this.localStorage.setItem('id_token', idToken);
+    localStorage.setItem('id_token', idToken);
   }
 
   getToken() {
     // Retrieves the user token from localStorage
-    return this.localStorage.getItem('id_token');
+    if(localStorage.getItem('id_token'))
+    {
+    return localStorage.getItem('id_token');
+    }
+    return "";
   }
 
   logout() {
@@ -94,5 +111,14 @@ export default class AuthService {
       error.response = response
       throw error
     }
+  }
+  handleSubmit = (event, user, password) => {
+    event.preventDefault();
+    const data = this.login(user, password);
+    if(data === true)
+    {
+      return true;
+    }
+      return false;
   }
 }
