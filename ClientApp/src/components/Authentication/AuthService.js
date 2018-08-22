@@ -12,7 +12,7 @@ export default class AuthService {
   login = async(username, password) => {
     // Get a token from api server using the fetch api
     var loginDetails = {Username:username, Password:password};
-    const result = await fetch('api/Auth/login',{
+    return  await fetch('api/Auth/login',{
       method:"POST",
       
       headers:{
@@ -30,9 +30,13 @@ export default class AuthService {
      localStorage.setItem("UserId",data.id);
      return true;
     }
-    
-    })
+    else
     return false;
+    
+    }).catch(function(error) {
+      return false;
+    })
+    
     
   }
 
@@ -112,13 +116,16 @@ export default class AuthService {
       throw error
     }
   }
-  handleSubmit = (event, user, password) => {
+  handleSubmit = async(event, user, password) => {
     event.preventDefault();
-    const data = this.login(user, password);
-    if(data === true)
-    {
-      return true;
-    }
-      return false;
+    const data = this.login(user, password).then(res => {
+      if(res === true)
+      {
+        return true;
+      }
+
+        return false;
+    });
+   
   }
 }

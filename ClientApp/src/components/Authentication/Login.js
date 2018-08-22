@@ -52,8 +52,11 @@ class Login extends Component {
     // If user not logged in show login form else they must be logged in so show logout.
     if (this.state.loggedIn === false) {
       return (
-        <div>
-          <form onSubmit={(e) => this.setState({"loggedIn":this.Auth.handleSubmit(e, this.state.userEmail, this.state.userPass)})}>
+        <div>]
+          <form onSubmit={(e) => this.Auth.handleSubmit(e, this.state.userEmail, this.state.userPass.then)
+            .then(res => {
+              this.setState({"loggedIn": res})
+              })}>
             <input
               placeholder="Email"
               name="userEmail"
