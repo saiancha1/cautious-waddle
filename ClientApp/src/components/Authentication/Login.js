@@ -18,11 +18,11 @@ class Login extends Component {
   }
 
   // TODO: turn this into conditional render, if logged in just show Log out button.
-  componentWillMount() {
-    if (this.Auth.loggedIn()) {
-      this.props.history.replace('/');
-    }
-  }
+  // componentWillMount() {
+  //   if (this.Auth.loggedIn()) {
+  //     this.props.history.replace('/');
+  //   }
+  // }
 
   handleChange(e) {
     this.setState(
@@ -35,7 +35,6 @@ class Login extends Component {
   // TODO: Unsure about this part, example code has - .then(res =>{this.props.history.replace('/');)
   handleFormSubmit(e) {
     e.preventDefault();
-
     this.Auth.login(this.state.username, this.state.password)
       .then(
         this.setState({ loggedIn: true }),
@@ -69,10 +68,7 @@ class Login extends Component {
               value={this.state.userPass}
               onChange={this.handleChange}
             />
-            <input
-              value="LOGIN"
-              type="submit"
-            />
+            <button type="submit">Login</button>
           </form>
         </div>
       );
