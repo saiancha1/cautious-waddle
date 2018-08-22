@@ -20,7 +20,7 @@ namespace cautious_waddle.Models
 
             // Search
             if(search != null) {
-                companies = companies.Where(c => c.Name.ToLower().Contains(search.ToLower()) || c.Description.ToLower().Contains(search.ToLower())
+                companies = companies.Where(c => c.CompanyName.ToLower().Contains(search.ToLower()) || c.CompanyDesc.ToLower().Contains(search.ToLower())
                 || c.BusinessType.ToLower().Contains(search.ToLower()) || c.SpecialistArea.ToLower().Contains(search.ToLower()));
             }
 

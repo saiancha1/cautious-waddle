@@ -44,6 +44,11 @@ namespace cautious_waddle.Controllers
                 CompanyUser user = new CompanyUser();
                     user.Id = IdentityHelper.GetUserId(HttpContext);             
                 company.Users.Add(user);
+
+                company.CreationDate = DateTime.Now;
+                company.LastUpdate = DateTime.Now;
+                company.ReminderDate = DateTime.Now.AddMonths(1);
+
                 _companiesRepository.AddCompany(company);
                 return Ok();
             }
