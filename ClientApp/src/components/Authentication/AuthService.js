@@ -1,4 +1,5 @@
 import decode from 'jwt-decode';
+import { resolve } from 'path';
 
 export default class AuthService {
   // Initializing important variables
@@ -9,10 +10,10 @@ export default class AuthService {
     this.getProfile = this.getProfile.bind(this);
   }
 
-  login = async(username, password) => {
+  login = (username, password) => {
     // Get a token from api server using the fetch api
     var loginDetails = {Username:username, Password:password};
-    return  await fetch('api/Auth/login',{
+    return  fetch('api/Auth/login',{
       method:"POST",
       
       headers:{
@@ -28,13 +29,17 @@ export default class AuthService {
     {
      this.setToken(data.auth_token);
      localStorage.setItem("UserId",data.id);
-     return true;
+     console.log("auththoken"+ response.auth_token);
+      return true;
+     
     }
     else
-    return false;
-    
-    }).catch(function(error) {
+    {
+      alert("fail");
       return false;
+    }
+    //return false;
+    
     })
     
     
@@ -76,7 +81,7 @@ export default class AuthService {
 
   logout() {
     // Clear user token and profile data from localStorage
-    this.localStorage.removeItem('id_token');
+    localStorage.removeItem('id_token');
   }
 
   getProfile() {
@@ -116,16 +121,13 @@ export default class AuthService {
       throw error
     }
   }
-  handleSubmit = async(event, user, password) => {
+  handleSubmit =   async(event, user, password) => {
     event.preventDefault();
-    const data = this.login(user, password).then(res => {
-      if(res === true)
-      {
-        return true;
-      }
-
-        return false;
+      const res =  await this.login(user, password).then(res2 => {
+      const res2w = res2;
+      console.log(res2);
+      return res2;
     });
-   
+   return res;
   }
 }
