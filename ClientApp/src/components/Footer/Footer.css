@@ -1,0 +1,33 @@
+.footer {
+  position: static;
+  padding-top: 10px;
+  background-color: #e7e7e7;
+  color: #777;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+}
+
+.foot-img-container {
+  height: 100%;
+  text-align: center;
+}
+
+.foot-link-container {
+  padding-left: 50%;
+  list-style: none;
+  border-left: 2px solid #d5d3d3;
+}
+
+.foot-link-container a {
+  color: #777;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.footer-bottom {
+  background-color: #d5d3d3;
+  text-align: center;
+}
+
+.footer-logo {
+  max-width: 50px;
+}

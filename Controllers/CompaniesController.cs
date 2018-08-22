@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using cautious_waddle.Models;
 using System;
 using Microsoft.AspNetCore.Identity;
-using cautious_waddle.ViewModels;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
-using System.Linq;
+
+using cautious_waddle.ViewModels;
+using cautious_waddle.Models;
+using cautious_waddle.Helpers;
 
 namespace cautious_waddle.Controllers
 {
@@ -35,15 +36,19 @@ namespace cautious_waddle.Controllers
                 return NotFound();
             }
         }
-        [HttpPost("addCompany")]
+        [HttpPost("addCompany")]    
         public IActionResult AddCompany([FromBody]Company company)
         {
             try{
                 
                 CompanyUser user = new CompanyUser();
-                    user.Id = HttpContext.User.Identities.First()
-                   .Claims.FirstOrDefault(c => c.Type == "id").Value;             
+                    user.Id = IdentityHelper.GetUserId(HttpContext);             
                 company.Users.Add(user);
+
+                company.CreationDate = DateTime.Now;
+                company.LastUpdate = DateTime.Now;
+                company.ReminderDate = DateTime.Now.AddMonths(1);
+
                 _companiesRepository.AddCompany(company);
                 return Ok();
             }
@@ -53,7 +58,7 @@ namespace cautious_waddle.Controllers
             }
         }       
          [HttpPost("removeCompany")]
-         [Authorize]
+         [Authorize(Roles="Admin")]
         public IActionResult RemoveCompany([FromBody]int id)
         {
             try{
@@ -62,8 +67,7 @@ namespace cautious_waddle.Controllers
                 
                 if(company != null && company.Users != null)
                 {
-                   if(company.Users.Any(user => user.Id ==  HttpContext.User.Identities.First()
-                   .Claims.FirstOrDefault(c => c.Type == "id").Value))
+                   if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
                    {
                        _companiesRepository.DeleteCompany(company);
                        return Ok();
@@ -82,6 +86,19 @@ namespace cautious_waddle.Controllers
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
+            }
+        }
+        [HttpPost("editCompany")]       
+        public IActionResult EditCompany([FromBody] Company company)
+        {
+            try
+            {
+                _companiesRepository.UpdateCompany(company);
+                return Ok();
+            }
+            catch(Exception)
+            {
+                return BadRequest();
             }
         }       
     }

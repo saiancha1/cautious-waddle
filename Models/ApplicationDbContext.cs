@@ -2,6 +2,7 @@ using System;
 using cautious_waddle.ViewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace cautious_waddle.Models
 {
@@ -13,22 +14,25 @@ namespace cautious_waddle.Models
         }
     }
 
-    public class ListingsDbContext : DbContext
-    {
-        public DbSet<Listing> Listings { get; set; }
-        public ListingsDbContext(DbContextOptions<ListingsDbContext> opts) : base(opts)
-        {
-            
-        }
-    }
-
     public class CompaniesDbContext : DbContext
     {
         public DbSet<Company> Companies {get; set;}
         public DbSet<CompanyUser> CompanyUsers {get;set;}
         public CompaniesDbContext(DbContextOptions<CompaniesDbContext> opts) : base(opts)
         {
+    
+        }
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var builder = modelBuilder.Entity<CompanyUser>();
 
+            builder
+            .Property(f => f.Identifier)
+            .ValueGeneratedOnAdd();
+            builder.Property(p => p.Identifier)
+                .UseSqlServerIdentityColumn();
+            builder.Property(p => p.Identifier)
+                .Metadata.AfterSaveBehavior = PropertySaveBehavior.Ignore;
         }
     }
 

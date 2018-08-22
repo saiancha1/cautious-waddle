@@ -13,5 +13,10 @@ namespace cautious_waddle.Helpers
                    .Claims.FirstOrDefault(c => c.Type == "id").Value);   
             return isAuthenticated;
         }
+
+        public static string GetUserId(HttpContext context)
+        {
+            return context.User.Identities.First().Claims.FirstOrDefault(c => c.Type == "id").Value;
+        }
     }
 }

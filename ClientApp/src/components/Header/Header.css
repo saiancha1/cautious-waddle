@@ -1,0 +1,9 @@
+.header{
+    /* width: 70%; */
+    /* margin: auto; */
+    border: 10px solid #eee;
+    box-shadow: 0 2px 4px #ccc;
+    padding: 100px;
+    margin: 0px;
+    text-align: center;
+}
