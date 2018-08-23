@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using System;
+
+using cautious_waddle.ViewModels;
 
 namespace cautious_waddle.Models
 {
@@ -14,7 +18,7 @@ namespace cautious_waddle.Models
             _context = context;
         }
 
-        public IEnumerable<Company> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search)
+        public IEnumerable<CompaniesViewModel> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search)
         {
             IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
 
@@ -36,7 +40,9 @@ namespace cautious_waddle.Models
                 companies = companies.Where(c => c.Size <= maxSize);
             }
 
-            return companies;
+            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(companies);
+
+            return companiesViewModel;
         }
         public void AddCompany(Company company)
         {
@@ -48,15 +54,46 @@ namespace cautious_waddle.Models
             _context.Companies.Remove(company);
             _context.SaveChanges();
         }
-        public void UpdateCompany(Company company)
+        public void UpdateCompany(CompaniesViewModel company)
         {
-            _context.Companies.Update(company);
+            Company oldCompany = GetCompanyById(company.CompanyId.Value);
+            _context.Companies.Attach(oldCompany);
+
+            oldCompany.LastUpdate     = DateTime.Now;
+            oldCompany.ReminderDate   = DateTime.Now.AddMonths(1);
+            oldCompany.ContactEmail   = company.ContactEmail;
+            oldCompany.CompanyName    = company.CompanyName;
+            oldCompany.Logo           = company.Logo;
+            oldCompany.Size           = company.Size;
+            oldCompany.BusinessType   = company.BusinessType;
+            oldCompany.SpecialistArea = company.SpecialistArea;
+            oldCompany.CompanyDesc    = company.CompanyDesc;
+            oldCompany.Phone          = company.Phone;
+            oldCompany.Email          = company.Email;
+            oldCompany.Address1       = company.Address1;
+            oldCompany.Address2       = company.Address2;
+            oldCompany.Suburb         = company.Suburb;
+            oldCompany.PostalCode     = company.PostalCode;
+            oldCompany.City           = company.City;
+            oldCompany.Country        = company.Country;
+            oldCompany.SummerJobs     = company.SummerJobs;
+
+            // I don't think these are necassary because you can't pass them with the view model
+            // _context.Entry(oldCompany).Property(c => c.CompanyId).IsModified = false;
+            // _context.Entry(oldCompany).Property(c => c.IsApproved).IsModified = false;
+            // _context.Entry(oldCompany).Property(c => c.CreationDate).IsModified = false;
+            // _context.Entry(oldCompany).Property(c => c.Users).IsModified = false;
+
             _context.SaveChanges();
         }
         public Company GetCompanyById(int id)
         {
-           return _context.Companies.Include(a => a.Users).SingleOrDefault(x => x.CompanyId == id);;
+           return _context.Companies.Include(a => a.Users).SingleOrDefault(x => x.CompanyId == id);
         }
-       
+
+        public List<CompanyUser> GetUsers(int id)
+        {
+            return _context.Companies.Include(a => a.Users).SingleOrDefault(c => c.CompanyId == id).Users;
+        }
     }
 }

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using AutoMapper;
+using System.Collections.Generic;
 
 using cautious_waddle.ViewModels;
 using cautious_waddle.Models;
@@ -36,11 +38,14 @@ namespace cautious_waddle.Controllers
                 return NotFound();
             }
         }
-        [HttpPost("addCompany")]    
-        public IActionResult AddCompany([FromBody]Company company)
+        [HttpPost("addCompany")]
+        [Authorize]    
+        public IActionResult AddCompany([FromBody]CompaniesViewModel companyViewModel)
         {
             try{
+                Company company = Mapper.Map<CompaniesViewModel, Company>(companyViewModel);
                 
+                company.Users = new List<CompanyUser>();
                 CompanyUser user = new CompanyUser();
                     user.Id = IdentityHelper.GetUserId(HttpContext);             
                 company.Users.Add(user);
@@ -88,15 +93,32 @@ namespace cautious_waddle.Controllers
                 return NotFound(ex.Message);
             }
         }
-        [HttpPost("editCompany")]       
-        public IActionResult EditCompany([FromBody] Company company)
+        [HttpPost("editCompany")]
+        [Authorize]       
+        public IActionResult EditCompany([FromBody] CompaniesViewModel company)
         {
             try
             {
-                _companiesRepository.UpdateCompany(company);
-                return Ok();
+                if(company.CompanyId.HasValue)
+                {
+                    List<CompanyUser> users = _companiesRepository.GetUsers(company.CompanyId.Value);
+
+                    if(users.Any(u => u.Id == IdentityHelper.GetUserId(HttpContext)))
+                    {
+                        _companiesRepository.UpdateCompany(company);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 return BadRequest();
             }
