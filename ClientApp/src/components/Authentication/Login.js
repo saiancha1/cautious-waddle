@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
+import LoginForm from './LoginForm';
 
 class Login extends Component {
   constructor(props) {
@@ -9,11 +10,11 @@ class Login extends Component {
       userEmail: '',
       userPass: '',
       loggedIn: false,
+      open: false,
     };
-    //this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
     this.Auth = new AuthService();
   }
 
@@ -31,62 +32,55 @@ class Login extends Component {
       },
     );
   }
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
 
-  // TODO: Unsure about this part, example code has - .then(res =>{this.props.history.replace('/');)
-  handleSubmit = (event) => {
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+   handleSubmit = async (event) => {
+     event.preventDefault();
+     await this.Auth.handleSubmit(event, this.state.userEmail, this.state.userPass)
+       .then((res) => {
+         if (res === true) {
+           this.setState({ loggedIn: true });
+         }
+       });
+   }
+
+  handleLogout1 = (event) => {
     event.preventDefault();
-    this.Auth.login(this.state.userEmail, this.state.userPass)
-      .then(
-        this.setState({ loggedIn: true }),
-      )
-      .catch((err) => {
-        alert(err);
-      });
+    this.Auth.logout(event).then((res2) => {
+      console.log(res2);
+      if (res2) this.setState({ loggedIn: false });
+    });
   }
 
-  handleLogout() {
-    this.Auth.logout();
+  handleLogout = (event) => {
+    event.preventDefault();
+    const loggedOut = this.Auth.logout(event);
+    if (loggedOut) {
+      this.setState({ loggedIn: false });
+    }
   }
 
   render() {
     // If user not logged in show login form else they must be logged in so show logout.
-    if (this.state.loggedIn === false) {
-      return (
-        <div>
-          <form onSubmit={async (e) => {
-            const x = await this.Auth.handleSubmit(e, this.state.userEmail, this.state.userPass)
-            .then(res => {
-              if(res === true)
-              {
-                this.setState({"loggedIn":true});
-              }
-              })
-              }}>
-            <input
-              placeholder="Email"
-              name="userEmail"
-              type="text"
-              value={this.state.userEmail}
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder="Password"
-              name="userPass"
-              type="password"
-              value={this.state.userPass}
-              onChange={this.handleChange}
-            />
-            <button type="submit" value="">Login</button>
-          </form>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <button type="button" onClick={this.handleLogout}>Logout</button>
-        </div>
-      );
-    }
+    return (
+      <div>
+     
+      <LoginForm
+        userEmail={this.state.userEmail}
+        userPass={this.state.userPass}
+        loggedIn={this.state.loggedIn}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        logout={this.handleLogout}
+      />
+      </div>
+    );
   }
 }
 

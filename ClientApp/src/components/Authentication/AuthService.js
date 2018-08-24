@@ -1,5 +1,4 @@
 import decode from 'jwt-decode';
-import { resolve } from 'path';
 
 export default class AuthService {
   // Initializing important variables
@@ -12,37 +11,29 @@ export default class AuthService {
 
   login = (username, password) => {
     // Get a token from api server using the fetch api
-    var loginDetails = {Username:username, Password:password};
-    return  fetch('api/Auth/login',{
-      method:"POST",
-      
-      headers:{
-        "content-type":"application/json"
+    const loginDetails = { Username: username, Password: password };
+    return fetch('api/Auth/login', {
+      method: 'POST',
+
+      headers: {
+        'content-type': 'application/json',
       },
-      body:JSON.stringify(loginDetails)
+      body: JSON.stringify(loginDetails),
     })
-    .then(res => res.json())
-    .then(response =>
-    {
-    const data = response;
-    if(data.auth_token)
-    {
-     this.setToken(data.auth_token);
-     localStorage.setItem("UserId",data.id);
-     console.log("auththoken"+ response.auth_token);
-      return true;
-     
-    }
-    else
-    {
-      alert("fail");
-      return false;
-    }
-    //return false;
-    
-    })
-    
-    
+      .then(res => res.json())
+      .then((response) => {
+        const data = response;
+        if (data.auth_token) {
+          this.setToken(data.auth_token);
+          localStorage.setItem('UserId', data.id);
+          console.log(`auththoken${response.auth_token}`);
+          return true;
+        } else {
+          alert('fail');
+          return false;
+        }
+        // return false;
+      });
   }
 
   loggedIn() {
@@ -51,37 +42,40 @@ export default class AuthService {
     return !!token && !this.isTokenExpired(token); // handwaiving here
   }
 
-  isTokenExpired(token) {
+  isTokenExpired = (token) => {
     try {
       const decoded = decode(token);
       if (decoded.exp < Date.now() / 1000) { // Checking if token is expired.
         return true;
-      }
-      else
-        return false;
-    }
-    catch (err) {
+      } else { return false; }
+    } catch (err) {
       return false;
     }
   }
 
-  setToken(idToken) {
+  setToken = (idToken) => {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
   }
 
-  getToken() {
+  getToken = () => {
     // Retrieves the user token from localStorage
-    if(localStorage.getItem('id_token'))
-    {
-    return localStorage.getItem('id_token');
+    if (localStorage.getItem('id_token')) {
+      return localStorage.getItem('id_token');
     }
-    return "";
+    return '';
   }
 
-  logout() {
+  logout = (event) => {
+    event.preventDefault();
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
+    
+    if (localStorage.getItem('id_token') === null) {
+      console.log('return true');
+      return true;
+    }
+    return false;
   }
 
   getProfile() {
@@ -93,14 +87,14 @@ export default class AuthService {
   fetch(url, options) {
     // performs api calls sending the required authentication headers
     const headers = {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     };
 
     // Setting Authorization header
     // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
     if (this.loggedIn()) {
-      headers['Authorization'] = 'Bearer ' + this.getToken()
+      headers.Authorization = `Bearer ${this.getToken()}`;
     }
 
     return fetch(url, {
@@ -113,21 +107,21 @@ export default class AuthService {
 
   checkStatus(response) {
     // raises an error in case response status is not a success
-    if (this.response.status >= 200 && this.response.status < 300) { // Success status lies between 200 to 300
+    if (this.response.status >= 200 && this.response.status < 300) {
       return this.response;
     } else {
-      var error = new Error(response.statusText)
-      error.response = response
-      throw error
+      const error = new Error(response.statusText);
+      error.response = response;
+      throw error;
     }
   }
-  handleSubmit =   async(event, user, password) => {
+
+  handleSubmit = async (event, user, password) => {
     event.preventDefault();
-      const res =  await this.login(user, password).then(res2 => {
-      const res2w = res2;
+    const res = await this.login(user, password).then((res2) => {
       console.log(res2);
       return res2;
     });
-   return res;
+    return res;
   }
 }

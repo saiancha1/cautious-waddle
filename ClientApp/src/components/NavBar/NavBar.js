@@ -40,14 +40,14 @@ class NavBar extends Component {
           </Nav>
 
           <Nav pullRight>
-            <NavItem>
-             
-            </NavItem>
+            
+            <Login />
+            
           </Nav>
         </Navbar.Collapse>
-
+        
       </Navbar>
-      <Login />
+      
       </div>
     );
   }
