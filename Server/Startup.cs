@@ -44,8 +44,9 @@ namespace cautious_waddle
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/build";
+                configuration.RootPath = "../ClientApp/build";
             });
+            Console.WriteLine(Configuration["ConnectionStrings:IdentityConnectionString"]);
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddDbContext<CompaniesDbContext>(options =>
@@ -156,7 +157,7 @@ namespace cautious_waddle
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "../ClientApp";
 
                 if (env.IsDevelopment())
                 {
