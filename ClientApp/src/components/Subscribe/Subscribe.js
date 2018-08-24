@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Subscribe.css";
 import Header from "../Header/Header.js"
+import {FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
 
 const Subscribe = (props) => {
   
@@ -11,6 +12,7 @@ const Subscribe = (props) => {
     <br></br>
     <div className="tablesubb">
     <form action="insertpage server side" method="post" > 
+    <FormGroup controlId="formBasix" validationState={this.getValidationState()}>
     <table >
     <tr ><input type="checkbox" name="check1"></input> <td>Events</td></tr>
     <tr><input type="checkbox" name="check2"></input> <td>Meet-Ups</td></tr>
@@ -22,6 +24,7 @@ const Subscribe = (props) => {
     <br></br>
     <tr><input type="submit" name="subsubmit" Style="margin-left:100px"/></tr>
     </table>
+    </FormGroup>
     </form>
     </div>
   </div>
