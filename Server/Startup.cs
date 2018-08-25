@@ -13,7 +13,6 @@ using System.Text;
 using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using cautious_waddle.Helpers;
-using cautious_waddle.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using cautious_waddle.Auth;
@@ -41,7 +40,10 @@ namespace cautious_waddle
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddNodeServices(options =>
+            {
+                options.ProjectPath = "../ClientApp";
+            });     
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
