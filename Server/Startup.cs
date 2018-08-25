@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using cautious_waddle.Models;
+using cautious_waddle.ViewModels;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
@@ -153,6 +154,11 @@ namespace cautious_waddle
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+            });
+
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<CompaniesViewModel, Company>();
+                cfg.CreateMap<Company, CompaniesViewModel>();
             });
 
             app.UseSpa(spa =>
