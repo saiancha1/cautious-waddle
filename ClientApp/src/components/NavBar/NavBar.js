@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Login from '../Authentication/Login';
 
 class NavBar extends Component {
   render() {
     return (
-      <Navbar collapseOnSelectr>
+      <div>
+      <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">TechPalmy</Link>
@@ -13,7 +15,7 @@ class NavBar extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav pullLeft>
+          <Nav>
             <NavItem eventKey={1} componentClass={Link} href="/" to="/">
               Home
             </NavItem>
@@ -36,9 +38,17 @@ class NavBar extends Component {
               Subscribe
             </NavItem>
           </Nav>
-        </Navbar.Collapse>
 
+          <Nav pullRight>
+            
+            <Login />
+            
+          </Nav>
+        </Navbar.Collapse>
+        
       </Navbar>
+      
+      </div>
     );
   }
 }
