@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 using cautious_waddle.Models;
 using cautious_waddle.Helpers;
+using cautious_waddle.ViewModels;
 
 namespace cautious_waddle.Controllers
 {
@@ -37,9 +39,16 @@ namespace cautious_waddle.Controllers
 
         [HttpPost("addJob")]
         [Authorize]
-        public IActionResult AddJob([FromBody] Job job) {
+        public IActionResult AddJob([FromBody] JobsViewModel jobViewModel) {
             try 
             {
+                Job job = Mapper.Map<JobsViewModel, Job>(jobViewModel);
+
+                job.IsApproved = 0;
+                job.CreationDate = DateTime.Now;
+                job.LastUpdate = DateTime.Now;
+                job.Expiry = DateTime.Now.AddMonths(1);
+
                 if(job.CompanyId.HasValue)
                 {
                     Company company = new Company();
@@ -56,7 +65,8 @@ namespace cautious_waddle.Controllers
                 }
                 else if(job.ProfileId.HasValue)
                 {
-                    Profile profile = new Profile();
+                    // 'Profile' is also a class in AutoMapper, so must use namespace as well.
+                    cautious_waddle.Models.Profile profile = new cautious_waddle.Models.Profile();
                     profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
 
                     if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
@@ -71,7 +81,7 @@ namespace cautious_waddle.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
             }
             catch (Exception e)
@@ -105,7 +115,7 @@ namespace cautious_waddle.Controllers
                 }
                 else if(job.ProfileId.HasValue)
                 {
-                    Profile profile = new Profile();
+                    cautious_waddle.Models.Profile profile = new cautious_waddle.Models.Profile();
                     profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
 
                     if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
@@ -129,10 +139,15 @@ namespace cautious_waddle.Controllers
         }
 
         [HttpPost("editJob")]
-        public IActionResult EditJob([FromBody] Job job)
+        [Authorize]
+        public IActionResult EditJob([FromBody] JobsViewModel jobViewModel)
         {
             try 
             {
+                Job job = Mapper.Map<JobsViewModel, Job>(jobViewModel);
+
+                job.LastUpdate = DateTime.Now;
+
                 if(job.CompanyId.HasValue)
                 {
                     Company company = new Company();
@@ -150,7 +165,7 @@ namespace cautious_waddle.Controllers
                 }
                 else if(job.ProfileId.HasValue)
                 {
-                    Profile profile = new Profile();
+                    cautious_waddle.Models.Profile profile = new cautious_waddle.Models.Profile();
                     profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
 
                     if(profile.UserId == IdentityHelper.GetUserId(HttpContext))

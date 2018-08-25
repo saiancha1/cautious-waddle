@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+
+using cautious_waddle.ViewModels;
 
 namespace cautious_waddle.Models
 {
@@ -13,9 +16,9 @@ namespace cautious_waddle.Models
             _context = context;
         }
 
-        public IEnumerable<Job> GetJobsList(int minSalary, int maxSalary, string search)
+        public IEnumerable<JobsViewModel> GetJobsList(int minSalary, int maxSalary, string search)
         {
-            IEnumerable<Job> jobs = _jobs;
+            IEnumerable<Job> jobs = _context.Jobs;
 
             // Search
             if(search != null) {
@@ -28,7 +31,9 @@ namespace cautious_waddle.Models
                 jobs = jobs.Where(j => j.Salary <= maxSalary);
             }
 
-            return jobs;
+            IEnumerable<JobsViewModel> jobsViewModel = Mapper.Map<IEnumerable<Job>, IEnumerable<JobsViewModel>>(_context.Jobs);
+
+            return jobsViewModel;
         }
 
         public void AddJob(Job job)
