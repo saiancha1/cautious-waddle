@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using cautious_waddle.Models;
+using cautious_waddle.ViewModels;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
@@ -44,13 +45,17 @@ namespace cautious_waddle
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/build";
+                configuration.RootPath = "../ClientApp/build";
             });
+            Console.WriteLine(Configuration["ConnectionStrings:IdentityConnectionString"]);
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddDbContext<CompaniesDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddTransient<ICompaniesRepository, CompaniesRepository>();
+            services.AddDbContext<ConsultantsDbContext>(options =>
+                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
+            services.AddTransient<IConsultantsRepository, ConsultantsRepository>();
             services.AddDbContext<JobsDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddTransient<IJobsRepository, JobsRepository>();
@@ -151,9 +156,14 @@ namespace cautious_waddle
                     template: "{controller}/{action=Index}/{id?}");
             });
 
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<CompaniesViewModel, Company>();
+                cfg.CreateMap<Company, CompaniesViewModel>();
+            });
+
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "../ClientApp";
 
                 if (env.IsDevelopment())
                 {
