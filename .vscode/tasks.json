@@ -7,8 +7,21 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/cautious-waddle.csproj"
+                "${workspaceFolder}/Server/cautious-waddle.csproj"
             ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "test",
+                "${workspaceFolder}/Waddle.Tests/Waddle.Tests.csproj"
+            ],
+            "presentation": {
+                "reveal": "silent"
+            },
             "problemMatcher": "$msCompile"
         }
     ]
