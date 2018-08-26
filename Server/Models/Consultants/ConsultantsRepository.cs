@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+
+using cautious_waddle.ViewModels;
 
 namespace cautious_waddle.Models
 {
@@ -23,10 +26,15 @@ namespace cautious_waddle.Models
             return _context.Consultants.SingleOrDefault(c => c.ConsultantId == id);
         }
 
-        public IEnumerable<Consultant> GetConsultants()
+        public IEnumerable<ConsultantsViewModel> GetConsultants()
         {
             IEnumerable<Consultant> consultants = _context.Consultants;
-            return consultants;
+
+            // Filtering here
+
+            IEnumerable<ConsultantsViewModel> consultantsViewModel = Mapper.Map<IEnumerable<Consultant>, IEnumerable<ConsultantsViewModel>>(consultants);
+
+            return consultantsViewModel;
         }
 
         public void AddConsultant(Consultant consultant)
@@ -35,7 +43,7 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
-        public void EditConsultant(Consultant consultant)
+        public void EditConsultant(ConsultantsViewModel consultant)
         {
             Consultant oldConsultant = GetConsultantById(consultant.ConsultantId.Value);
             _context.Consultants.Attach(oldConsultant);
@@ -55,11 +63,6 @@ namespace cautious_waddle.Models
             oldConsultant.PostalCode     = consultant.PostalCode;
             oldConsultant.City           = consultant.City;
             oldConsultant.Country        = consultant.Country;
-
-            _context.Entry(oldConsultant).Property(c => c.ConsultantId).IsModified = false;
-            _context.Entry(oldConsultant).Property(c => c.UserId).IsModified       = false;
-            _context.Entry(oldConsultant).Property(c => c.IsApproved).IsModified   = false;
-            _context.Entry(oldConsultant).Property(c => c.CreationDate).IsModified = false;
 
             _context.SaveChanges();
         }
