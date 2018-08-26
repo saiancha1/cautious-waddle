@@ -1,2 +1,2 @@
 [config]
-project = Server/cautious-waddle.csproj
+command = deploy.cmd
