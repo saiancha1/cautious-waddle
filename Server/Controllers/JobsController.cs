@@ -47,7 +47,12 @@ namespace cautious_waddle.Controllers
                 job.IsApproved = 0;
                 job.CreationDate = DateTime.Now;
                 job.LastUpdate = DateTime.Now;
-                job.Expiry = DateTime.Now.AddMonths(1);
+
+                // Ensure the job advertisment runs for atleast 7 days unless it is removed
+                if(job.Expiry < DateTime.Now.AddDays(7))
+                {
+                    return BadRequest();
+                }
 
                 if(job.CompanyId.HasValue)
                 {
@@ -140,38 +145,49 @@ namespace cautious_waddle.Controllers
 
         [HttpPost("editJob")]
         [Authorize]
-        public IActionResult EditJob([FromBody] JobsViewModel jobViewModel)
+        public IActionResult EditJob([FromBody] JobsViewModel job)
         {
             try 
             {
-                Job job = Mapper.Map<JobsViewModel, Job>(jobViewModel);
-
-                job.LastUpdate = DateTime.Now;
-
-                if(job.CompanyId.HasValue)
+                if(job.JobId.HasValue)
                 {
-                    Company company = new Company();
-                    company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
+                    Job originalJob = _jobsRespository.GetJobById(job.JobId.Value);
 
-                    if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
+                    // Ensure expiry is not set to an invalid date
+                    if(job.Expiry != originalJob.Expiry && job.Expiry < DateTime.Now)
                     {
-                        _jobsRespository.EditJob(job);
-                        return Ok();
+                        return BadRequest();
                     }
-                    else
-                    {
-                        return Unauthorized();
-                    }
-                }
-                else if(job.ProfileId.HasValue)
-                {
-                    cautious_waddle.Models.Profile profile = new cautious_waddle.Models.Profile();
-                    profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
 
-                    if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
+                    if(originalJob.CompanyId.HasValue)
                     {
-                        _jobsRespository.EditJob(job);
-                        return Ok();
+                        Company company = new Company();
+                        company = _companiesRepository.GetCompanyById(originalJob.CompanyId.Value);
+
+                        if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
+                        {
+                            _jobsRespository.EditJob(job);
+                            return Ok();
+                        }
+                        else
+                        {
+                            return Unauthorized();
+                        }
+                    }
+                    else if(originalJob.ProfileId.HasValue)
+                    {
+                        cautious_waddle.Models.Profile profile = new cautious_waddle.Models.Profile();
+                        profile = _profilesRepository.GetProfileById(originalJob.ProfileId.Value);
+
+                        if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
+                        {
+                            _jobsRespository.EditJob(job);
+                            return Ok();
+                        }
+                        else
+                        {
+                            return Unauthorized();
+                        }
                     }
                     else
                     {
@@ -180,7 +196,7 @@ namespace cautious_waddle.Controllers
                 }
                 else
                 {
-                    return Unauthorized();
+                    return BadRequest();
                 }
             }
             catch (Exception e)

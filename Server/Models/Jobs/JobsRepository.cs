@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -53,9 +54,16 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
-        public void EditJob(Job job)
+        public void EditJob(JobsViewModel job)
         {
-            _context.Jobs.Update(job);
+            Job oldJob = GetJobById(job.JobId.Value);
+            _context.Jobs.Attach(oldJob);
+
+            oldJob.LastUpdate     = DateTime.Now;
+            oldJob.JobTitle       = job.JobTitle;
+            oldJob.JobDescription = job.JobDescription;
+            oldJob.Salary         = job.Salary;
+
             _context.SaveChanges();
         }
     }

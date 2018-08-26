@@ -10,6 +10,6 @@ namespace cautious_waddle.Models
         Job GetJobById(int id);
         void AddJob(Job job);
         void DeleteJob(Job job);
-        void EditJob(Job job);
+        void EditJob(JobsViewModel job);
     }
 }
