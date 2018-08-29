@@ -35,6 +35,9 @@ class NavBar extends Component {
             <NavItem eventKey={7} componentClass={Link} href="/subscribe" to="/subscribe">
               Subscribe
             </NavItem>
+            <NavItem eventKey={8} componentClass={Link} href="/summertech" to="/summertech">
+              SummerTech
+            </NavItem>
           </Nav>
         </Navbar.Collapse>
 
