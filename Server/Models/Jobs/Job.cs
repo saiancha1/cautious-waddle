@@ -5,8 +5,10 @@ namespace cautious_waddle.Models
 {
     public class Job
     {
-        [JsonProperty("id")]
+        [JsonProperty("jobId")]
         public int? JobId { get; set; }
+        [JsonProperty("isApproved")]
+        public int IsApproved { get; set; }
         [JsonProperty("companyId")]
         public int? CompanyId { get; set; }
         [JsonProperty("profileId")]
@@ -17,7 +19,7 @@ namespace cautious_waddle.Models
         public string JobDescription { get; set; }
         [JsonProperty("salary")]
         public int Salary { get; set; }
-        [JsonProperty("expirey")]
-        public DateTime Expirey { get; set; }
+        [JsonProperty("expiry")]
+        public DateTime Expiry { get; set; }
     }
 }

@@ -8,4 +8,6 @@ public class CompanyUser{
     public string Id {get;set;}
     [JsonIgnore]
     public virtual Company Company {get;set;}
+    [JsonProperty("CompanyUserId")]
+    public int Identifier {get;set;}
     }

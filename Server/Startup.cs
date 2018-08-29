@@ -7,12 +7,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using cautious_waddle.Models;
+using cautious_waddle.ViewModels;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using cautious_waddle.Helpers;
-using cautious_waddle.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using cautious_waddle.Auth;
@@ -40,20 +40,24 @@ namespace cautious_waddle
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddNodeServices(options =>
+            {
+                options.ProjectPath = "../ClientApp";
+            });     
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/build";
+                configuration.RootPath = "../ClientApp/build";
             });
+            Console.WriteLine(Configuration["ConnectionStrings:IdentityConnectionString"]);
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
-            services.AddDbContext<ListingsDbContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
-            services.AddTransient<IListingsRepository, ListingsRepository>();
             services.AddDbContext<CompaniesDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddTransient<ICompaniesRepository, CompaniesRepository>();
+            services.AddDbContext<ConsultantsDbContext>(options =>
+                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
+            services.AddTransient<IConsultantsRepository, ConsultantsRepository>();
             services.AddDbContext<JobsDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddTransient<IJobsRepository, JobsRepository>();
@@ -154,9 +158,14 @@ namespace cautious_waddle
                     template: "{controller}/{action=Index}/{id?}");
             });
 
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<CompaniesViewModel, Company>();
+                cfg.CreateMap<Company, CompaniesViewModel>();
+            });
+
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "../ClientApp";
 
                 if (env.IsDevelopment())
                 {
