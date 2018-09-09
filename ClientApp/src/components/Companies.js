@@ -1,9 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
+import CompanyList from './Companies/CompanyList';
+class Companies extends Component {
+  state = {
+    companies: [],
+  }
+  async componentWillMount() {
+    fetch('api/Companies/getCompanies').then(res => res.json())
+    .then(json =>{
+      this.setState({companies:json});
+    })
+  
+    };
 
-const Companies = () => (
-  <div>
-    <h1>Companies</h1>
-  </div>
-);
+  render() {
+    return (
+      <CompanyList companies={this.state.companies}/>
+
+    );
+  }
+  
+
+  getCompanies =  async () => {
+     await fetch('api/Companies/getCompanies',{
+      method: 'GET',
+      headers: {
+        'Authorization': 'Token' + localStorage.getItem('id_token'),
+
+      }
+    }).then(res => res.json())
+    .then(json =>{
+     return json;
+    })
+    };
+  }
 
 export default Companies;

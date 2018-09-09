@@ -19,7 +19,7 @@ namespace cautious_waddle.Models
         public string JobDescription { get; set; }
         [JsonProperty("salary")]
         public int Salary { get; set; }
-        [JsonProperty("expirey")]
-        public DateTime Expirey { get; set; }
+        [JsonProperty("expiry")]
+        public DateTime Expiry { get; set; }
     }
 }

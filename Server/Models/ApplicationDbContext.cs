@@ -36,6 +36,16 @@ namespace cautious_waddle.Models
         }
     }
 
+    public class ConsultantsDbContext : DbContext
+    {
+        public DbSet<Consultant> Consultants { get; set; }
+
+        public ConsultantsDbContext(DbContextOptions<ConsultantsDbContext> opts) : base(opts)
+        {
+            
+        }
+    }
+
     public class JobsDbContext : DbContext
     {
         public DbSet<Job> Jobs { get; set; }
