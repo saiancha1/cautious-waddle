@@ -3,19 +3,19 @@ using Newtonsoft.Json;
 
 namespace cautious_waddle.ViewModels
 {
-    public class EventsViewModel
+    public class LocalEventsViewModel
     {
         [JsonProperty("eventId")]
         public int? EventId { get; set; }
         [JsonProperty("eventName")]
-        public String EventName { get; set; }
+        public string EventName { get; set; }
         [JsonProperty("startDate")]
         public DateTime StartDate { get; set; }
         [JsonProperty("duration")]
         public TimeSpan Duration { get; set; }
         [JsonProperty("eventDescription")]
-        public String EventDescription { get; set; }
+        public string EventDescription { get; set; }
         [JsonProperty("eventLocation")]
-        public String EventLocation { get; set; }
+        public string EventLocation { get; set; }
     }
 }

@@ -1,19 +1,21 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace cautious_waddle.Models
 {
-    public class Event
+    public class LocalEvent
     {
+        [Key]
         public int? EventId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int IsApproved { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }
-        public String EventName { get; set; }
+        public string EventName { get; set; }
         public DateTime StartDate { get; set; }
         public TimeSpan Duration { get; set; }
-        public String EventDescription { get; set; }
-        public String EventLocation { get; set; }
+        public string EventDescription { get; set; }
+        public string EventLocation { get; set; }
 
     }
 }
