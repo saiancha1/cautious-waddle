@@ -1,19 +1,23 @@
 using System;
 using Newtonsoft.Json;
 
-namespace cautious_waddle.Models
+namespace cautious_waddle.ViewModels
 {
-    public class Job
+    public class JobsViewModel
     {
+        [JsonProperty("jobId")]
         public int? JobId { get; set; }
-        public int IsApproved { get; set; }
+        [JsonProperty("companyId")]
         public int? CompanyId { get; set; }
+        [JsonProperty("profileId")]
         public int? ProfileId { get; set; }
+        [JsonProperty("jobTitle")]
         public string JobTitle { get; set; }
+        [JsonProperty("jobDescription")]
         public string JobDescription { get; set; }
+        [JsonProperty("salary")]
         public int Salary { get; set; }
-        public DateTime CreationDate { get; set; }
-        public DateTime LastUpdate { get; set; }
+        [JsonProperty("expiry")]
         public DateTime Expiry { get; set; }
     }
 }
