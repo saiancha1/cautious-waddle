@@ -164,6 +164,13 @@ namespace cautious_waddle
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<CompaniesViewModel, Company>();
                 cfg.CreateMap<Company, CompaniesViewModel>();
+
+                cfg.CreateMap<ConsultantsViewModel, Consultant>();
+                cfg.CreateMap<Consultant, ConsultantsViewModel>();
+
+                cfg.CreateMap<JobsViewModel, Job>();
+                cfg.CreateMap<Job, JobsViewModel>();
+              
                 cfg.CreateMap<LocalEventsViewModel, LocalEvent>();
                 cfg.CreateMap<LocalEvent, LocalEventsViewModel>();
             });
