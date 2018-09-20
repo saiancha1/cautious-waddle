@@ -184,7 +184,7 @@ namespace cautious_waddle
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
-            CreateRoles(serviceProvider).Wait();
+            // CreateRoles(serviceProvider).Wait();
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
