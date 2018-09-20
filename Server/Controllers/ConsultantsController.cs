@@ -1,9 +1,13 @@
 using System;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
+using AutoMapper;
+
 using cautious_waddle.Models;
 using cautious_waddle.Helpers;
+using cautious_waddle.ViewModels;
 
 namespace cautious_waddle.Controllers
 {
@@ -36,14 +40,14 @@ namespace cautious_waddle.Controllers
 
         [HttpPost("addConsultant")]
         [Authorize]
-        public IActionResult AddConsultant([FromBody] Consultant consultant)
+        public IActionResult AddConsultant([FromBody] ConsultantsViewModel consultantViewModel)
         {
             try
             {
+                Consultant consultant = Mapper.Map<ConsultantsViewModel, Consultant>(consultantViewModel);
+
                 consultant.UserId = IdentityHelper.GetUserId(HttpContext);
-
                 consultant.IsApproved = 0;
-
                 consultant.CreationDate = DateTime.Now;
                 consultant.LastUpdate = DateTime.Now;
                 consultant.ReminderDate = DateTime.Now.AddMonths(1);
@@ -84,18 +88,25 @@ namespace cautious_waddle.Controllers
 
         [HttpPost("editConsultant")]
         [Authorize]
-        public IActionResult EditConsultant([FromBody] Consultant consultant)
+        public IActionResult EditConsultant([FromBody] ConsultantsViewModel consultant)
         {
             try
             {
-                if(_consultantsRepository.GetUserId(consultant.ConsultantId.Value) == IdentityHelper.GetUserId(HttpContext))
+                if(consultant.ConsultantId.HasValue)
                 {
-                    _consultantsRepository.EditConsultant(consultant);
-                    return Ok();
+                    if(_consultantsRepository.GetUserId(consultant.ConsultantId.Value) == IdentityHelper.GetUserId(HttpContext))
+                    {
+                        _consultantsRepository.EditConsultant(consultant);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
                 }
                 else
                 {
-                    return Unauthorized();
+                    return BadRequest();
                 }
             }
             catch(Exception ex)

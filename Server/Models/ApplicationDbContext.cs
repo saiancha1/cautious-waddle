@@ -63,4 +63,13 @@ namespace cautious_waddle.Models
             
         }
     }
+
+    public class LocalEventsDbContext : DbContext
+    {
+        public DbSet<LocalEvent> LocalEvents { get; set; }
+        public LocalEventsDbContext(DbContextOptions<LocalEventsDbContext> opts) : base(opts)
+        {
+            
+        }
+    }
 }
