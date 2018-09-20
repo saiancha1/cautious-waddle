@@ -64,6 +64,9 @@ namespace cautious_waddle
             services.AddDbContext<ProfilesDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddTransient<IProfilesRepository, ProfilesRepository>();
+            services.AddDbContext<LocalEventsDbContext>(options => 
+                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
+            services.AddTransient<ILocalEventsRepository, LocalEventsRepository>();
             
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
@@ -161,6 +164,15 @@ namespace cautious_waddle
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<CompaniesViewModel, Company>();
                 cfg.CreateMap<Company, CompaniesViewModel>();
+
+                cfg.CreateMap<ConsultantsViewModel, Consultant>();
+                cfg.CreateMap<Consultant, ConsultantsViewModel>();
+
+                cfg.CreateMap<JobsViewModel, Job>();
+                cfg.CreateMap<Job, JobsViewModel>();
+              
+                cfg.CreateMap<LocalEventsViewModel, LocalEvent>();
+                cfg.CreateMap<LocalEvent, LocalEventsViewModel>();
             });
 
             app.UseSpa(spa =>
