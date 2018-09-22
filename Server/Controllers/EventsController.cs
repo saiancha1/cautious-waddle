@@ -2,10 +2,14 @@ using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.ServiceModel;
 
 using cautious_waddle.Models;
 using cautious_waddle.ViewModels;
 using cautious_waddle.Helpers;
+using System.Xml;
+using System.ServiceModel.Syndication;
+using System.Collections.Generic;
 
 namespace cautious_waddle.Controllers
 {
@@ -108,6 +112,32 @@ namespace cautious_waddle.Controllers
             {
                 return BadRequest();
             }
+        }
+        [HttpGet("getEventsFromFeed")]
+        [Authorize(Roles="Admin")]
+        public IActionResult GetEventsFromFeed()
+        {
+            string url = "https://itp.nz/events/palmie_north/rss";
+            XmlReader reader = XmlReader.Create(url);
+            SyndicationFeed feed = SyndicationFeed.Load(reader);
+            reader.Close();
+            List<LocalEvent>lEvents = new List<LocalEvent>();
+            foreach (SyndicationItem item in feed.Items)
+            {
+                LocalEvent Nevent = new LocalEvent();
+                Nevent.EventName = item.Title.Text;
+                Nevent.EventDescription = item.Summary.Text;
+                Nevent.EventUrl = item.Links[0].Uri.AbsoluteUri;
+                Nevent.CreationDate = DateTime.Now;
+                Nevent.LastUpdate = DateTime.Now;
+                Nevent.EventId = null;
+                Nevent.UserId = IdentityHelper.GetUserId(HttpContext);
+                Nevent.IsApproved = 0;
+                _localEventsRepository.addEvent(Nevent);
+                lEvents.Add(Nevent);
+            }
+            return Ok(lEvents);
+
         }
     }
 }
