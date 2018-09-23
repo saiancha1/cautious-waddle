@@ -68,10 +68,10 @@ export default class AuthService {
   }
 
   logout = (event) => {
-    event.preventDefault();
+    event.preventDefault(); // why is this giving me errors??
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
-    
+   
     if (localStorage.getItem('id_token') === null) {
       console.log('return true');
       return true;

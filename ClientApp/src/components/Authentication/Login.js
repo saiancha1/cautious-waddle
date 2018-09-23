@@ -17,42 +17,43 @@ export default class Login extends Component {
     };
     // this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.Auth = new AuthService();
   }
 
-  handleChange(e) {
-    this.setState(
-      {
-        [e.target.name]: e.target.value,
-      },
-    );
-  }
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  // handleChange(e) {
+  //   this.setState(
+  //     {
+  //       [e.target.name]: e.target.value,
+  //     },
+  //   );
+  // }
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  // handleClickOpen = () => {
+  //   this.setState({ open: true });
+  // };
 
-   handleSubmit = async (event) => {
-     event.preventDefault();
-     await this.Auth.handleSubmit(event, this.state.userEmail, this.state.userPass)
-       .then((res) => {
-         if (res === true) {
-           this.setState({ loggedIn: true });
-         }
-       });
-   }
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
 
-  handleLogout1 = (event) => {
-    event.preventDefault();
-    this.Auth.logout(event).then((res2) => {
-      console.log(res2);
-      if (res2) this.setState({ loggedIn: false });
-    });
-  }
+  //  handleSubmit = async (event) => {
+  //    event.preventDefault();
+  //    await this.Auth.handleSubmit(event, this.state.userEmail, this.state.userPass)
+  //      .then((res) => {
+  //        if (res === true) {
+  //          this.setState({ loggedIn: true });
+  //        }
+  //      });
+  //  }
+
+  // handleLogout1 = (event) => {
+  //   event.preventDefault();
+  //   this.Auth.logout(event).then((res2) => {
+  //     console.log(res2);
+  //     if (res2) this.setState({ loggedIn: false });
+  //   });
+  // }
 
   handleLogout = (event) => {
     event.preventDefault();
