@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { NavItem } from 'react-bootstrap';
 import AuthService from './AuthService';
 import LoginForm from './LoginForm';
+import LoginModal from './LoginModal';
 
-class Login extends Component {
+
+export default class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -17,13 +20,6 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.Auth = new AuthService();
   }
-
-  // TODO: turn this into conditional render, if logged in just show Log out button.
-  // componentWillMount() {
-  //   if (this.Auth.loggedIn()) {
-  //     this.props.history.replace('/');
-  //   }
-  // }
 
   handleChange(e) {
     this.setState(
@@ -67,20 +63,16 @@ class Login extends Component {
   }
 
   render() {
-    // If user not logged in show login form else they must be logged in so show logout.
-    return (
-      <div>
-        <LoginForm
-          userEmail={this.state.userEmail}
-          userPass={this.state.userPass}
-          loggedIn={this.state.loggedIn}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          logout={this.handleLogout}
-        />
-      </div>
-    );
+    const { loggedIn } = this.Auth.loggedIn();
+
+    if (loggedIn === true) {
+      return (
+        <NavItem href="#" onClick={this.handleLogout}>Log out</NavItem>
+      );
+    } else {
+      return (
+        <LoginModal />
+      );
+    }
   }
 }
-
-export default Login;
