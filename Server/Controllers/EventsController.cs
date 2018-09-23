@@ -10,6 +10,7 @@ using cautious_waddle.Helpers;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace cautious_waddle.Controllers
 {
@@ -130,14 +131,19 @@ namespace cautious_waddle.Controllers
                 Nevent.EventUrl = item.Links[0].Uri.AbsoluteUri;
                 Nevent.CreationDate = DateTime.Now;
                 Nevent.LastUpdate = DateTime.Now;
+                Nevent.StartDate = DateTime.Now;
                 Nevent.EventId = null;
                 Nevent.UserId = IdentityHelper.GetUserId(HttpContext);
+                Nevent.Duration = null;
                 Nevent.IsApproved = 0;
+                Regex regex = new Regex(@"(?<=\()(.*?)(?=\))");
+                Match matches = regex.Match(Nevent.EventName);
+                GroupCollection groups = matches.Groups;
+
                 _localEventsRepository.addEvent(Nevent);
                 lEvents.Add(Nevent);
             }
             return Ok(lEvents);
-
         }
     }
 }
