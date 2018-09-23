@@ -5,7 +5,7 @@ const Consultant = (props) => {
     <div>
       {props.cl.map((consultant) => {
         return (
-          <div>
+          <div key={consultant.consultantId}>
             <h2>Name: {consultant.consultantName}</h2>
             <h3>{consultant.consultantDesc}</h3>
             <p>City: {consultant.city}</p>

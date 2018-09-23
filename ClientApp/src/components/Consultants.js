@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+} from 'react-router-dom';
 import Consultant from './Consultants/Consultant';
 
-// const cons = console;
 
 class Consultants extends Component {
   state = {
-    consultants: ['test', [1, 2, 3]],
+    consultants: [],
   }
 
   async componentWillMount() {
