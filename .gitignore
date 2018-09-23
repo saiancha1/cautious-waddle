@@ -245,3 +245,5 @@ ClientApp/package.json
 >>>>>>> 9c2cd2202b5cbd5b346f1326771abbafb9743194
 ClientApp/package-lock.json
 ClientApp/package.json
+package-lock.json
+.gitignore

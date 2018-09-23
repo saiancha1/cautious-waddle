@@ -11,6 +11,7 @@ const Consultant = (props) => {
             <p>City: {consultant.city}</p>
             <p>Email: {consultant.contactEmail}</p>
             <p>Website: {consultant.website}</p>
+            <br></br>
 
 
           </div>);

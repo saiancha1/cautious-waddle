@@ -5,6 +5,7 @@ import {BrowserRouter as Router,
   Link,
 } from 'react-router-dom';
 import Consultant from './Consultants/Consultant';
+import Addconsultant from './Consultants/Addconsultant';
 
 
 class Consultants extends Component {
@@ -27,10 +28,13 @@ class Consultants extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Consultants</h1>
-        <Consultant cl={this.state.consultants}/>
-      </div>
+        <div>
+          <h1>Consultants</h1>
+          <Consultant cl={this.state.consultants}/>
+          <Link to="/addconsultant">
+          <button>Add Consultant</button>
+          </Link>
+        </div>
     );
   }
 }

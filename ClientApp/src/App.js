@@ -11,6 +11,7 @@ import Contact from './components/Contact';
 import Subscribe from './components/Subscribe/Subscribe';
 import Footer from './components/Footer/Footer';
 import SummerTech from './components/SummerTech/SummerTech';
+import Addconsultant from './components/Consultants/Addconsultant';
 
 
 // Changed this simple function into a class so that we can manipulate state on this page
@@ -28,6 +29,7 @@ class App extends Component {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/subscribe" component={Subscribe} />
           <Route exact path="/summerTech" component={SummerTech} />
+          <Route exact path="/addconsultant" component={Addconsultant} />
           <Footer />
         </div>
       </Router>
