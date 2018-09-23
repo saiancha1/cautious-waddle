@@ -70,15 +70,14 @@ class Login extends Component {
     // If user not logged in show login form else they must be logged in so show logout.
     return (
       <div>
-     
-      <LoginForm
-        userEmail={this.state.userEmail}
-        userPass={this.state.userPass}
-        loggedIn={this.state.loggedIn}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        logout={this.handleLogout}
-      />
+        <LoginForm
+          userEmail={this.state.userEmail}
+          userPass={this.state.userPass}
+          loggedIn={this.state.loggedIn}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          logout={this.handleLogout}
+        />
       </div>
     );
   }

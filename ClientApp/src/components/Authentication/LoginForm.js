@@ -8,9 +8,9 @@ const LoginForm = (props) => {
     return (
       <div>
         <LoginModule 
-          userEmail={this.state.userEmail}
-          userPass={this.state.userPass}
-          loggedIn={this.state.loggedIn}
+          userEmail={this.props.userEmail}
+          userPass={this.props.userPass}
+          loggedIn={this.props.loggedIn}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           logout={this.handleLogout}
