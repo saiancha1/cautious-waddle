@@ -6,9 +6,12 @@ const Consultant = (props) => {
       {props.cl.map((consultant) => {
         return (
           <div>
-            <h1>{consultant.consultantName}</h1>
-            <p>{consultant.city}</p>
-            <p>{consultant.Desc}</p>
+            <h2>Name: {consultant.consultantName}</h2>
+            <h3>{consultant.consultantDesc}</h3>
+            <p>City: {consultant.city}</p>
+            <p>Email: {consultant.contactEmail}</p>
+            <p>Website: {consultant.website}</p>
+
 
           </div>);
       })}
