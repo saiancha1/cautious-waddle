@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Consultant from './Consultants/Consultant';
 
 // const cons = console;
 
@@ -13,7 +14,7 @@ class Consultants extends Component {
       const consultantlist = await res.json();
       console.log(consultantlist);
       this.setState({
-        consultants: consultantlist 
+        consultants: consultantlist,
       });
     } catch (error) {
       console.log(error);
@@ -25,15 +26,24 @@ class Consultants extends Component {
     return (
       <div>
         <h1>Consultants</h1>
-        {this.state.consultants.map((consultant) => {
+        <Consultant cl={this.state.consultants}/>
+
+
+        {/* {this.state.consultants.map((consultant) => {
           return (
             <div>
-            <h3>{consultant.consultantName}</h3> 
-            <p>{consultant.consultantDesc}</p>
-            <p>{consultant.city}</p>
+            <h3>
+              Name of Consultant:  {consultant.consultantName}
+            </h3>
+            <p>Description: {consultant.consultantDesc}</p>
+            <p>City: {consultant.city}</p>
+
+            <h1></h1>
             </div>
           );
-        })}
+        })} */}
+
+
       </div>
     );
   }
