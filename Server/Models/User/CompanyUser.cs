@@ -2,6 +2,8 @@ using System;
 using cautious_waddle.Models;
 using Newtonsoft.Json;
 
+namespace cautious_waddle.Models
+{
 public class CompanyUser{
 
     [JsonProperty("id")]
@@ -11,3 +13,4 @@ public class CompanyUser{
     [JsonProperty("CompanyUserId")]
     public int Identifier {get;set;}
     }
+}
