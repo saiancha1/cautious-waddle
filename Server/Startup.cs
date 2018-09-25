@@ -42,12 +42,12 @@ namespace cautious_waddle
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddNodeServices(options =>
             {
-                options.ProjectPath = "../ClientApp";
+                options.ProjectPath = "/ClientApp";
             });     
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "../ClientApp/public";
+                configuration.RootPath = "/ClientApp/public";
             });
             Console.WriteLine(Configuration["ConnectionStrings:IdentityConnectionString"]);
             services.AddDbContext<IdentityDbContext>(options =>
@@ -177,7 +177,7 @@ namespace cautious_waddle
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "../ClientApp";
+                spa.Options.SourcePath = "/ClientApp";
 
                 if (env.IsDevelopment())
                 {
