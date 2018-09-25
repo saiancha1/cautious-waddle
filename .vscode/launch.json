@@ -9,9 +9,9 @@
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceRoot}/bin/Debug/netcoreapp2.1/cautious-waddle.dll",
+        "program": "${workspaceRoot}/Server/bin/Debug/netcoreapp2.1/cautious-waddle.dll",
         "args": [],
-        "cwd": "${workspaceRoot}",
+        "cwd": "${workspaceRoot}/Server",
         "stopAtEntry": false,
         "launchBrowser": {
             "enabled": true,
@@ -31,7 +31,7 @@
             "ASPNETCORE_ENVIRONMENT": "Development"
         },
         "sourceFileMap": {
-            "/Views": "${workspaceRoot}/Views"
+            "/Views": "${workspaceRoot}/Server/Views"
         }
     },
         {
@@ -39,9 +39,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.1/cautious-waddle.dll",
+            "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp2.1/cautious-waddle.dll",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/Server",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
@@ -62,7 +62,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
+                "/Views": "${workspaceFolder}/Server/Views"
             }
         },
         {

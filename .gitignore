@@ -236,3 +236,12 @@ ClientApp/package-lock.json
 ClientApp/package-lock.json
 ClientApp/package-lock.json
 ClientApp/package-lock.json
+<<<<<<< HEAD
+.deployment
+.DS_Store
+=======
+ClientApp/package-lock.json
+ClientApp/package.json
+>>>>>>> 9c2cd2202b5cbd5b346f1326771abbafb9743194
+ClientApp/package-lock.json
+ClientApp/package.json
