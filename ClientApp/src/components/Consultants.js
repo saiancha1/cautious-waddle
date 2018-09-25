@@ -5,13 +5,13 @@ import {BrowserRouter as Router,
   Link,
 } from 'react-router-dom';
 import Consultant from './Consultants/Consultant';
-import Addconsultant from './Consultants/Addconsultant';
 
-
+// Creating initial state and setting it to empty
 class Consultants extends Component {
   state = {
     consultants: [],
   }
+  // Fetching consultants info from API pre-mounting
 
   async componentWillMount() {
     try {
@@ -32,6 +32,7 @@ class Consultants extends Component {
           <h1>Consultants</h1>
           <Consultant cl={this.state.consultants}/>
           <Link to="/addconsultant">
+          {/* Here we need to add if  statement - if logged in then link below otherwise to login page*/}
           <button>Add Consultant</button>
           </Link>
         </div>
