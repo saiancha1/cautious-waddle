@@ -32,10 +32,13 @@ class Consultants extends Component {
         <div>
           <h1>Consultants</h1>
           <Consultant cl={this.state.consultants}/>
+
+ {/* Here we need to add if  statement - if logged in then link below otherwise to login page or statement asking user to login*/}
+          <AuthService>
           <Link to="/addconsultant">
-          {/* Here we need to add if  statement - if logged in then link below otherwise to login page*/}
           <button>Add Consultant</button>
           </Link>
+          </AuthService>
         </div>
     );
   }
@@ -52,6 +55,5 @@ class Consultants extends Component {
   //   return json;
   //  })
   //  };
-
 }
 export default Consultants;

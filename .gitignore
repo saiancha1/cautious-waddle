@@ -278,3 +278,4 @@ ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.LICENSE.md.ic
 ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.README.md.icloud
 ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.yarn.lock.icloud
 ClientApp/node_modules/util/..travis.yml.icloud
+.gitignore
