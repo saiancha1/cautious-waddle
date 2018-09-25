@@ -247,3 +247,34 @@ ClientApp/package-lock.json
 ClientApp/package.json
 package-lock.json
 .gitignore
+ClientApp/node_modules/util/..zuul.yml.icloud
+ClientApp/node_modules/array-unique 2/.README.md.icloud
+ClientApp/node_modules/detect-port-alt/.appveyor.yml.icloud
+ClientApp/node_modules/electron-releases/..env.example.icloud
+ClientApp/node_modules/electron-releases/..travis.yml.icloud
+ClientApp/node_modules/js-base64/..travis.yml.icloud
+ClientApp/node_modules/js-base64/.bower.json.bak.icloud
+ClientApp/node_modules/js-base64/.package.json.bak.icloud
+ClientApp/node_modules/macaddress/..travis.yml.icloud
+ClientApp/node_modules/node-forge/..travis.yml.icloud
+ClientApp/node_modules/node-forge/.HACKING.md.icloud
+ClientApp/node_modules/node-forge/.Makefile.in.icloud
+ClientApp/node_modules/node-forge/.bower.json.icloud
+ClientApp/node_modules/node-forge/.build-flash.xml.icloud
+ClientApp/node_modules/node-forge/.end.frag.icloud
+ClientApp/node_modules/node-forge/.start.frag.icloud
+ClientApp/node_modules/original/..travis.yml.icloud
+ClientApp/node_modules/process-nextick-args/..travis.yml.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/aria-query/.CHANGELOG.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/aria-query/.README.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/axobject-query/.README.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/eslint-plugin-react/.CHANGELOG.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/eslint-plugin-react/.README.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/espree/.CHANGELOG.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/espree/.README.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/..travis.yml.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.CHANGELOG.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.LICENSE.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.README.md.icloud
+ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.yarn.lock.icloud
+ClientApp/node_modules/util/..travis.yml.icloud
