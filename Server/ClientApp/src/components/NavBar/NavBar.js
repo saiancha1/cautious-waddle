@@ -40,6 +40,9 @@ class NavBar extends Component {
             <NavItem eventKey={8} componentClass={Link} href="/summertech" to="/summertech">
               SummerTech
             </NavItem>
+            <NavItem eventKey={9} componentClass={Link} href="/admin" to="/admin">
+              Admin
+            </NavItem>
           </Nav>
 
           <Nav pullRight>

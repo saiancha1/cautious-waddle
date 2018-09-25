@@ -16,5 +16,7 @@ namespace cautious_waddle.ViewModels
 
         public string Role {get;set;}
 
+        public string UserId {get;set;}
+
     }
 }

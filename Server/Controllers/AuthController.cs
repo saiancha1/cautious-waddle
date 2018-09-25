@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using cautious_waddle.Auth;
 using cautious_waddle.Helpers;
 using cautious_waddle.Models;
 using cautious_waddle.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -67,22 +69,56 @@ namespace cautious_waddle.Controllers
             return await Task.FromResult<ClaimsIdentity>(null);
         }
 
+        [HttpPost("AddUser")]
         public async Task<IActionResult> AddUser([FromBody]CredentialsViewModel userViewModel, bool isAdmin = false)
         {
             AppUser user  = new AppUser{
                 UserName = userViewModel.UserName,
                 Email = userViewModel.Email,
                 FirstName = userViewModel.FirstName,
-                LastName = userViewModel.LastName
+                LastName = userViewModel.LastName,
+                PhoneNumber = userViewModel.PhoneNumber
             };
+            if(userViewModel.Role == "Admin" && !isAdmin)
+            {
+                return NotFound();
+            }
             var currentUser = await _userManager.FindByEmailAsync(user.Email);
             if(currentUser == null)
             {
-                //var createPowerUser = await _userManager.CreateAsync(user, password);
-               
-                   
+                var createUser = await _userManager.CreateAsync(user, userViewModel.Password);
+                if (createUser.Succeeded)
+                {
+                    string role = (isAdmin) ? "Admin" : userViewModel.Role;
+                    await _userManager.AddToRoleAsync(user,role);
+                }                  
             }
             return Ok();
+        }
+        
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody]CredentialsViewModel viewModel)
+        {
+            
+            AppUser user = await _userManager.FindByIdAsync(viewModel.UserId);
+            if(user != null)
+            {
+                user.PhoneNumber = viewModel.PhoneNumber;
+                user.Email = viewModel.Email;
+                var updatedUser = _userManager.UpdateAsync(user);
+            }
+            return Ok();
+            
+        }
+
+        [HttpGet("GetUsers")]
+        [Authorize(Roles="Admin")]
+        public async Task<IActionResult> GetUsers()
+        {
+            List<AppUser> users = new List<AppUser>();
+            IQueryable<AppUser> users1 = _userManager.Users;
+            users = users1.ToList();
+            return Ok(users);
         }
     }          
 }
