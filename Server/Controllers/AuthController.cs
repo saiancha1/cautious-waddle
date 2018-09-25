@@ -66,5 +66,23 @@ namespace cautious_waddle.Controllers
             // Credentials are invalid, or account doesn't exist
             return await Task.FromResult<ClaimsIdentity>(null);
         }
+
+        public async Task<IActionResult> AddUser([FromBody]CredentialsViewModel userViewModel, bool isAdmin = false)
+        {
+            AppUser user  = new AppUser{
+                UserName = userViewModel.UserName,
+                Email = userViewModel.Email,
+                FirstName = userViewModel.FirstName,
+                LastName = userViewModel.LastName
+            };
+            var currentUser = await _userManager.FindByEmailAsync(user.Email);
+            if(currentUser == null)
+            {
+                //var createPowerUser = await _userManager.CreateAsync(user, password);
+               
+                   
+            }
+            return Ok();
+        }
     }          
 }
