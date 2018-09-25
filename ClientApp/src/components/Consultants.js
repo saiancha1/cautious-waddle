@@ -5,6 +5,7 @@ import {BrowserRouter as Router,
   Link,
 } from 'react-router-dom';
 import Consultant from './Consultants/Consultant';
+import AuthService from './Authentication/AuthService';
 
 // Creating initial state and setting it to empty
 class Consultants extends Component {
@@ -38,5 +39,19 @@ class Consultants extends Component {
         </div>
     );
   }
+
+  // getConsultants =  async () => {
+  //   await fetch('api/Consultants/getConsultants',{
+  //    method: 'GET',
+  //    headers: {
+  //      'Authorization': 'Token' + localStorage.getItem('id_token'),
+
+  //    }
+  //  }).then(res => res.json())
+  //  .then(json =>{
+  //   return json;
+  //  })
+  //  };
+
 }
 export default Consultants;
