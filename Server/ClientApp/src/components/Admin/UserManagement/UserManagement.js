@@ -10,7 +10,8 @@ class UserManagement extends Component {
       }).then(res => res.json())
         .then((json) => {
             this.setState({users:json});
-        });
+        })
+        .catch(function(error) {alert("Not logged in!")});
     };
 
   render() {

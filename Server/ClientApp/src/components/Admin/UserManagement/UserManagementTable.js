@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/Input';
 
 const styles = {
   root: {
@@ -45,11 +46,11 @@ function UserManagementTable(props) {
         </TableHead>
         <TableBody>
           {props.data.map(n => (
-            <TableRow key={n.id}>
+            <TableRow key={n.UserId}>
               <TableCell component="th" scope="row">
                 {n.email}
               </TableCell>
-              <TableCell>{n.userName}</TableCell>
+              <TableCell><TextField  type="text" value={n.userName}/></TableCell>
               <TableCell>{n.firstName}</TableCell>
               <TableCell>{n.lastName}</TableCell>
               <TableCell>{n.phoneNumber}</TableCell>
