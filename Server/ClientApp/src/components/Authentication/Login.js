@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { NavItem } from 'react-bootstrap';
 import AuthService from './AuthService';
 import LoginForm from './LoginForm';
+import LoginModal from './LoginModal';
 
-class Login extends Component {
+
+export default class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -14,49 +17,43 @@ class Login extends Component {
     };
     // this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.Auth = new AuthService();
   }
 
-  // TODO: turn this into conditional render, if logged in just show Log out button.
-  // componentWillMount() {
-  //   if (this.Auth.loggedIn()) {
-  //     this.props.history.replace('/');
-  //   }
+  // handleChange(e) {
+  //   this.setState(
+  //     {
+  //       [e.target.name]: e.target.value,
+  //     },
+  //   );
   // }
 
-  handleChange(e) {
-    this.setState(
-      {
-        [e.target.name]: e.target.value,
-      },
-    );
-  }
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  // handleClickOpen = () => {
+  //   this.setState({ open: true });
+  // };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
 
-   handleSubmit = async (event) => {
-     event.preventDefault();
-     await this.Auth.handleSubmit(event, this.state.userEmail, this.state.userPass)
-       .then((res) => {
-         if (res === true) {
-           this.setState({ loggedIn: true });
-         }
-       });
-   }
+  //  handleSubmit = async (event) => {
+  //    event.preventDefault();
+  //    await this.Auth.handleSubmit(event, this.state.userEmail, this.state.userPass)
+  //      .then((res) => {
+  //        if (res === true) {
+  //          this.setState({ loggedIn: true });
+  //        }
+  //      });
+  //  }
 
-  handleLogout1 = (event) => {
-    event.preventDefault();
-    this.Auth.logout(event).then((res2) => {
-      console.log(res2);
-      if (res2) this.setState({ loggedIn: false });
-    });
-  }
+  // handleLogout1 = (event) => {
+  //   event.preventDefault();
+  //   this.Auth.logout(event).then((res2) => {
+  //     console.log(res2);
+  //     if (res2) this.setState({ loggedIn: false });
+  //   });
+  // }
 
   handleLogout = (event) => {
     event.preventDefault();
@@ -67,21 +64,16 @@ class Login extends Component {
   }
 
   render() {
-    // If user not logged in show login form else they must be logged in so show logout.
-    return (
-      <div>
-     
-      <LoginForm
-        userEmail={this.state.userEmail}
-        userPass={this.state.userPass}
-        loggedIn={this.state.loggedIn}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        logout={this.handleLogout}
-      />
-      </div>
-    );
+    const { loggedIn } = this.Auth.loggedIn();
+
+    if (loggedIn === true) {
+      return (
+        <NavItem href="#" onClick={this.handleLogout}>Log out</NavItem>
+      );
+    } else {
+      return (
+        <LoginModal />
+      );
+    }
   }
 }
-
-export default Login;
