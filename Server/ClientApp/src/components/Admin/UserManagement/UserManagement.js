@@ -21,10 +21,15 @@ class UserManagement extends Component {
       this.setState({ users: data });
     }
 
-    handleChange = (n, e) => {
+    handleChange = (n, e, fieldName) => {
       const data = this.state.users;
-      alert(e.target.value);
-      alert(e.target.name);
+      n[fieldName] = e.target.value;
+      var index = data.indexOf(n);
+      if(index !== null)
+      {
+        data[index] = n;
+        this.setState({users:data});
+      }
       e.preventDefault();
     }
 
@@ -46,7 +51,7 @@ class UserManagement extends Component {
           .then(res => res.json())
           .then((response) => {
             this.setState({ users: data });
-            if (response.status === 200) {
+            if (response.result === "User Added Successfully") {
               alert('Done');
             } else {
               alert('Not Done');

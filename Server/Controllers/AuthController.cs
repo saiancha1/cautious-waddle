@@ -108,6 +108,8 @@ namespace cautious_waddle.Controllers
                 user.PhoneNumber = viewModel.PhoneNumber;
                 user.Email = viewModel.Email;
                 user.UserName = viewModel.UserName;
+                user.FirstName = viewModel.FirstName;
+                user.LastName = viewModel.LastName;
                 var updatedUser = await _userManager.UpdateAsync(user);
                 if(updatedUser.Succeeded)
                 {

@@ -30,6 +30,7 @@ function handleEdit(handleEdit) {
   return handleEdit;
 }
 
+
 const UserManagementTable = (props) => {
   const { classes } = props;
   data = props.data;
@@ -52,10 +53,10 @@ const UserManagementTable = (props) => {
                 <TableCell component="th" scope="row">
                   {n.email}
                 </TableCell>
-                <TableCell><TextField key={n.id} type="text" value={n.userName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e)} /></TableCell>
-                <TableCell><TextField key={n.id} type="text" value={n.firstName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e)} /></TableCell>
-                <TableCell><TextField type="text" value={n.lastName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e)} /></TableCell>
-                <TableCell><TextField type="text" value={n.phoneNumber} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e)} /></TableCell>
+                <TableCell><TextField key={n.id} type="text" value={n.userName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'userName')} /></TableCell>
+                <TableCell><TextField key={n.id} type="text" value={n.firstName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'firstName')} /></TableCell>
+                <TableCell><TextField type="text" value={n.lastName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'lastName')} /></TableCell>
+                <TableCell><TextField type="text" value={n.phoneNumber} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'phoneNumber')} /></TableCell>
                 <TableCell>
 
                   <IconButton
