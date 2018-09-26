@@ -66,5 +66,20 @@ namespace cautious_waddle.Models
 
             _context.SaveChanges();
         }
+
+        public void ExpiredJobs()
+        {
+            List<Job> jobs = _context.Jobs.ToList();
+            DateTime current = DateTime.Now;
+
+            for(int j = 0; j < jobs.Count; j++)
+            {
+                Job job = jobs[j];
+                if(job.Expiry <= current)
+                {
+                    
+                }
+            }
+        }
     }
 }
