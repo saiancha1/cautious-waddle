@@ -17,9 +17,41 @@ class UserManagement extends Component {
     handleEdit = (data) => {
       this.setState({users:data});
     }
+
+    handleSave = (n) => {     
+      let data = this.state.users;
+      var index = data.indexOf(n);
+      if(index !== -1)
+      {
+        data[index] = n;
+        
+        fetch('api/Auth/UpdateUser', {
+          method: 'POST',
+    
+          headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer '+localStorage.getItem('id_token')
+          },
+          body: JSON.stringify(n),
+        })
+          .then(res => res.json())
+          .then((response) => {
+            this.setState({users:data});
+            if(response.status === 200)
+            {
+              alert("Done")
+            }
+            else{
+              alert("Not Done")
+            }
+          })
+          .catch(function(error) {alert("Failed To Update")});
+      }
+
+    }
   render() {
     return (
-      <UserManagementTable data={this.state.users} handleEdit={this.handleEdit}/>
+      <UserManagementTable data={this.state.users} handleEdit={this.handleEdit} handleSave={this.handleSave}/>
 
     );
   }

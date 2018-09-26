@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/Input';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
-
+import SaveIcon from '@material-ui/icons/Save';
 const styles = {
   root: {
     width: '100%',
@@ -56,13 +56,23 @@ const UserManagementTable = (props) =>{
               <TableCell><TextField  type="text" value={n.lastName} disabled={n.isDisabled}/></TableCell>
               <TableCell><TextField  type="text" value={n.phoneNumber} disabled={n.isDisabled}/></TableCell>
             <TableCell>
-              <IconButton aria-label="Edit" 
-              onClick={ () =>{
-                n.isDisabled = !n.isDisabled;
-                props.handleEdit(data)
-              }
+             
+                <IconButton aria-label="Edit" 
+                  onClick={ () =>{
+                    
+                    if(n.isDisabled)
+                    {
+                      n.isDisabled = !n.isDisabled;
+                      props.handleEdit(data)
+                    }
+                    else{
+                      n.isDisabled = !n.isDisabled;
+                      props.handleSave(n)
+                    }
+                }
                 }>
-                <EditIcon/>
+                
+                {n.isDisabled ? <EditIcon/> : <SaveIcon/>}
               </IconButton></TableCell>
             </TableRow>
           ))}

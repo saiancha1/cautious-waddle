@@ -96,18 +96,31 @@ namespace cautious_waddle.Controllers
             return Ok();
         }
         
-        [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUser([FromBody]CredentialsViewModel viewModel)
+        [HttpPost("UpdateUser")]
+        [Authorize(Roles="Admin")]
+        public async Task<IActionResult> UpdateUser([FromBody]AppUser viewModel)
         {
             
-            AppUser user = await _userManager.FindByIdAsync(viewModel.UserId);
+            AppUser user = await _userManager.FindByIdAsync(viewModel.Id);
+            UserResponse resp = new UserResponse();
             if(user != null)
             {
                 user.PhoneNumber = viewModel.PhoneNumber;
                 user.Email = viewModel.Email;
-                var updatedUser = _userManager.UpdateAsync(user);
+                user.UserName = viewModel.UserName;
+                var updatedUser = await _userManager.UpdateAsync(user);
+                if(updatedUser.Succeeded)
+                {
+                    resp.Result = "User Added Successfully";
+                    return Ok(resp);
+                }
+                else{
+                    resp.Result = "Failed";
+                    return NotFound(resp);
+                }
             }
-            return Ok();
+            return NotFound(resp);
+            
             
         }
 
