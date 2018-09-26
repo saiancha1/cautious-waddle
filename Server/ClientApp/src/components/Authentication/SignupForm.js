@@ -14,33 +14,47 @@ export default class SignupForm extends Component {
       password: '',
     };
 
-    // this.handleFirstName = this.handleFirstName.bind(this);
-    // this.handleLastName = this.handleLastName.bind(this);
-    // this.handleEmail = this.handleEmail.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // handleFirstName(event) {
-  //   this.setState({ firstName: event.target.value });
-  // }
-
-  // handleLastName(event) {
-  //   this.setState({ lastName: event.target.value });
-  // }
-
-  // handleEmail(event) {
-  //   this.setState({ email: event.target.value });
-  // }
   handleChange(e) {
-      this.setState(
-        {
-          [e.target.name]: e.target.value,
-        },
-      );
-    }
-  
+    this.setState(
+      {
+        [e.target.name]: e.target.value,
+      },
+    );
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const {
+      firstName,
+      lastName,
+      email1,
+      password,
+    } = this.state;
+
+    fetch('Some url here', {
+      method: 'POST',
+      header: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fName: firstName,
+        lName: lastName,
+        email: email1,
+        password,
+      }),
+    }).then(res => res.JSON()).then(res => console.log(res));
+  }
+
+
   render() {
-    const { firstName, lastName, email1, email2, password } = this.state;
+    const {
+      firstName, lastName, email1, email2, password,
+    } = this.state;
 
     return (
       <div>
@@ -49,7 +63,7 @@ export default class SignupForm extends Component {
             <h4>Create an account</h4>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <div>
                 <label>
                   First Name:
@@ -79,6 +93,7 @@ export default class SignupForm extends Component {
                   Password:
                   <input type="password" name="password" value={password} onChange={this.handleChange} />
                 </label>
+                <input type="submit" value="Sign Up" />
               </div>
             </form>
           </ExpansionPanelDetails>
