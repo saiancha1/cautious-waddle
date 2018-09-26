@@ -12,6 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
+
 const styles = {
   root: {
     width: '100%',
@@ -24,12 +25,12 @@ const styles = {
 
 let data = [];
 
-function handleEdit  (handleEdit) {
+function handleEdit(handleEdit) {
   handleEdit = !handleEdit;
   return handleEdit;
-};
+}
 
-const UserManagementTable = (props) =>{
+const UserManagementTable = (props) => {
   const { classes } = props;
   data = props.data;
   return (
@@ -47,40 +48,41 @@ const UserManagementTable = (props) =>{
         <TableBody>
           {
             data.map(n => (
-            <TableRow key={n.id}>
-              <TableCell component="th" scope="row">
-                {n.email}
-              </TableCell>
-              <TableCell><TextField  type="text" value={n.userName} disabled={n.isDisabled}/></TableCell>
-              <TableCell><TextField  type="text" value={n.firstName} disabled={n.isDisabled}/></TableCell>
-              <TableCell><TextField  type="text" value={n.lastName} disabled={n.isDisabled}/></TableCell>
-              <TableCell><TextField  type="text" value={n.phoneNumber} disabled={n.isDisabled}/></TableCell>
-            <TableCell>
-             
-                <IconButton aria-label="Edit" 
-                  onClick={ () =>{
-                    
-                    if(n.isDisabled)
-                    {
+              <TableRow key={n.id}>
+                <TableCell component="th" scope="row">
+                  {n.email}
+                </TableCell>
+                <TableCell><TextField key={n.id} type="text" value={n.userName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e)} /></TableCell>
+                <TableCell><TextField key={n.id} type="text" value={n.firstName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e)} /></TableCell>
+                <TableCell><TextField type="text" value={n.lastName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e)} /></TableCell>
+                <TableCell><TextField type="text" value={n.phoneNumber} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e)} /></TableCell>
+                <TableCell>
+
+                  <IconButton
+                    aria-label="Edit"
+                    onClick={() => {
+                    if (n.isDisabled) {
                       n.isDisabled = !n.isDisabled;
-                      props.handleEdit(data)
-                    }
-                    else{
+                      props.handleEdit(data);
+                    } else {
                       n.isDisabled = !n.isDisabled;
-                      props.handleSave(n)
+                      props.handleSave(n);
                     }
+                  }
                 }
-                }>
-                
-                {n.isDisabled ? <EditIcon/> : <SaveIcon/>}
-              </IconButton></TableCell>
-            </TableRow>
-          ))}
+                  >
+
+                    {n.isDisabled ? <EditIcon /> : <SaveIcon />}
+                  </IconButton>
+
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </Paper>
   );
-}
+};
 
 UserManagementTable.propTypes = {
   classes: PropTypes.object.isRequired,
