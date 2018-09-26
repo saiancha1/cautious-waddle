@@ -5,8 +5,6 @@ import {BrowserRouter as Router,
   Link,
 } from 'react-router-dom';
 import Consultant from './Consultants/Consultant';
-import AuthService from './Authentication/AuthService';
-
 // Creating initial state and setting it to empty
 class Consultants extends Component {
   state = {
