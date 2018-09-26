@@ -31,7 +31,7 @@ namespace cautious_waddle.Controllers
             {
                 return Ok(_jobsRespository.GetJobsList(minSalary, maxSalary, search));
             } 
-            catch
+            catch(Exception ex)
             {
                 return NotFound();
             }
