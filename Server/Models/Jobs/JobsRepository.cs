@@ -76,7 +76,7 @@ namespace cautious_waddle.Models
             for(int j = 0; j < jobs.Count; j++)
             {
                 Job job = jobs[j];
-                if(job.Expiry <= current)
+                if(job.Expiry < current)
                 {
                     // Mark the job as expired
                     _context.Jobs.Attach(job);
