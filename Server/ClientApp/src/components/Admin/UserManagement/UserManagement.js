@@ -9,31 +9,20 @@ class UserManagement extends Component {
         headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` },
       }).then(res => res.json())
         .then((json) => {
+          json.map(v => v.isDisabled = true);
             this.setState({users:json});
         })
         .catch(function(error) {alert("Not logged in!")});
     };
-
+    handleEdit = (data) => {
+      this.setState({users:data});
+    }
   render() {
     return (
-      <UserManagementTable data={this.state.users}/>
+      <UserManagementTable data={this.state.users} handleEdit={this.handleEdit}/>
 
     );
   }
-  
-
-  getCompanies =  async () => {
-     await fetch('api/Companies/getCompanies',{
-      method: 'GET',
-      headers: {
-        'Authorization': 'Token' + localStorage.getItem('id_token'),
-
-      }
-    }).then(res => res.json())
-    .then(json =>{
-     return json;
-    })
-    };
   }
 
 export default UserManagement;

@@ -8,6 +8,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/Input';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 
 const styles = {
   root: {
@@ -19,19 +22,16 @@ const styles = {
   },
 };
 
-let id = 0;
-function createData(email, username, firstname, lastname, phoneNo) {
-  id += 1;
-  return {
-    id, email, username, firstname, lastname, phoneNo,
-  };
-}
 let data = [];
 
+function handleEdit  (handleEdit) {
+  handleEdit = !handleEdit;
+  return handleEdit;
+};
 
-
-function UserManagementTable(props) {
+const UserManagementTable = (props) =>{
   const { classes } = props;
+  data = props.data;
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -45,15 +45,25 @@ function UserManagementTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data.map(n => (
-            <TableRow key={n.UserId}>
+          {
+            data.map(n => (
+            <TableRow key={n.id}>
               <TableCell component="th" scope="row">
                 {n.email}
               </TableCell>
-              <TableCell><TextField  type="text" value={n.userName}/></TableCell>
-              <TableCell>{n.firstName}</TableCell>
-              <TableCell>{n.lastName}</TableCell>
-              <TableCell>{n.phoneNumber}</TableCell>
+              <TableCell><TextField  type="text" value={n.userName} disabled={n.isDisabled}/></TableCell>
+              <TableCell><TextField  type="text" value={n.firstName} disabled={n.isDisabled}/></TableCell>
+              <TableCell><TextField  type="text" value={n.lastName} disabled={n.isDisabled}/></TableCell>
+              <TableCell><TextField  type="text" value={n.phoneNumber} disabled={n.isDisabled}/></TableCell>
+            <TableCell>
+              <IconButton aria-label="Edit" 
+              onClick={ () =>{
+                n.isDisabled = !n.isDisabled;
+                props.handleEdit(data)
+              }
+                }>
+                <EditIcon/>
+              </IconButton></TableCell>
             </TableRow>
           ))}
         </TableBody>
