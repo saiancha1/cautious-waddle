@@ -26,26 +26,12 @@ class Consultants extends Component {
       console.log(error);
     }
   }
-  checktoken =  async () => {
-    await fetch('api/Consultants/getConsultants',{
-     method: 'POST',
-     headers: {
-       'Authorization': 'Token' + localStorage.getItem('id_token'),
 
-     }
-   }).then(res => res.json())
-   .then(json =>{
-    return json;
-   })
-   };
-  
   render() {
     return (
         <div>
           <h1>Consultants</h1>
           <Consultant cl={this.state.consultants}/>
-
- {/* Here we need to add if  statement - if logged in then link below otherwise to login page or statement asking user to login*/}
           <Link to="/addconsultant">
           <button>Add Consultant</button>
           </Link>
@@ -53,19 +39,5 @@ class Consultants extends Component {
     );
   }
 
-  // getConsultants =  async () => {
-  //   await fetch('api/Consultants/getConsultants',{
-  //    method: 'GET',
-  //    headers: {
-  //      'Authorization': 'Token' + localStorage.getItem('id_token'),
-
-  //    }
-  //  }).then(res => res.json())
-  //  .then(json =>{
-  //   return json;
-  //  })
-  //  };
-
-  
 }
 export default Consultants;

@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import AuthService from '.././Authentication/AuthService';
 
-const Addconsultant = (props) => {
-    // Use addconsultant endpoint to submit form
-        // if (props.loggedIn === false) {
-        //   return <div>Please log in before attempting to add Consultant</div>;
-        // } else { 
-            return (<div>add consultant form here</div>
-            );
-      };
-  
+class Addconsultant extends Component {
+  constructor(props) {
+    super(props);
+    this.Auth=new AuthService();
+  }
+
+  render() {
+    return (
+      <div>
+        {this.Auth.loggedIn() ? (
+          <h1>Logged In</h1>
+        ) : (
+          <h1>Not logged in</h1>
+        )
+           }
+      </div>
+    );
+  }
+}
+
 export default Addconsultant;
