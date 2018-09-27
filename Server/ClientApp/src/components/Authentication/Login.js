@@ -17,7 +17,7 @@ export default class Login extends Component {
   }
 
   handleLogout = (event) => {
-    const { loggedIn } = this.state;
+    // const { loggedIn } = this.state;
     event.preventDefault();
     const loggedOut = this.Auth.logout(event);
     if (loggedOut) {
@@ -26,8 +26,10 @@ export default class Login extends Component {
   }
 
   render() {
-    const { loggedIn } = this.Auth.loggedIn();
+    // const { loggedIn } = this.Auth.loggedIn();
 
+    const { loggedIn } = this.state;
+    
     if (loggedIn === true) {
       return (
         <NavItem href="#" onClick={this.handleLogout}>Log out</NavItem>
