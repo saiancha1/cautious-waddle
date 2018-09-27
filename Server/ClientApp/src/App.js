@@ -30,7 +30,8 @@ class App extends Component {
           <Route exact path="/subscribe" component={Subscribe} />
           <Route exact path="/summerTech" component={SummerTech} />
           <Route exact path="/addconsultant" component={Addconsultant} />
-          <Footer />
+
+          {/* <Footer /> */}
         </div>
       </Router>
     );
