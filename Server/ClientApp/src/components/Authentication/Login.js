@@ -15,48 +15,13 @@ export default class Login extends Component {
       loggedIn: false,
       open: false,
     };
-    // this.handleSubmit = this.handleSubmit.bind(this);
-
-    // this.handleChange = this.handleChange.bind(this);
+   
     this.Auth = new AuthService();
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  // handleChange(e) {
-  //   this.setState(
-  //     {
-  //       [e.target.name]: e.target.value,
-  //     },
-  //   );
-  // }
-
-  // handleClickOpen = () => {
-  //   this.setState({ open: true });
-  // };
-
-  // handleClose = () => {
-  //   this.setState({ open: false });
-  // };
-
-  //  handleSubmit = async (event) => {
-  //    event.preventDefault();
-  //    await this.Auth.handleSubmit(event, this.state.userEmail, this.state.userPass)
-  //      .then((res) => {
-  //        if (res === true) {
-  //          this.setState({ loggedIn: true });
-  //        }
-  //      });
-  //  }
-
-  // handleLogout1 = (event) => {
-  //   event.preventDefault();
-  //   this.Auth.logout(event).then((res2) => {
-  //     console.log(res2);
-  //     if (res2) this.setState({ loggedIn: false });
-  //   });
-  // }
-
   handleLogout = (event) => {
+    const { loggedIn } = this.state;
     event.preventDefault();
     const loggedOut = this.Auth.logout(event);
     if (loggedOut) {
