@@ -135,5 +135,12 @@ namespace cautious_waddle.Controllers
             users = users1.ToList();
             return Ok(users);
         }
+
+        [HttpGet("isAdmin")]
+        [Authorize(Roles="Admin")]
+        public async Task<IActionResult> CheckUserAdmin()
+        {
+            return Ok();
+        }
     }          
 }

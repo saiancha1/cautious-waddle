@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import UserManagementTable from './UserManagementTable';
-
+import AuthService from '../../Authentication/AuthService';
+import Login from '../../Authentication/Login';
 class UserManagement extends Component {
+  
   state = {
     users: [],
+    view: "ViewUsers",
+    isAdmin: false
   }
+  
 
   async componentWillMount() {
+    fetch('api/auth/isAdmin',{
+      headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` }
+    })
+    .then ((res) => {
+      if (res.status === 200)
+      {
+        this.setState({isAdmin:true})
+      }
+    });
     fetch('api/auth/getUsers', {
       headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` },
     }).then(res => res.json())
@@ -14,7 +28,7 @@ class UserManagement extends Component {
         json.map(v => v.isDisabled = true);
         this.setState({ users: json });
       })
-      .catch(() => { alert('Not logged in!'); });
+      .catch(() => { this.setState({isAdmin:false}) });
   }
 
     handleEdit = (data) => {
@@ -22,6 +36,18 @@ class UserManagement extends Component {
     }
 
     handleChange = (n, e, fieldName) => {
+      fetch('api/auth/isAdmin',{
+        headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` }
+      })
+      .then ((res) => {
+        if (res.status === 200)
+        {
+          this.setState({isAdmin:true})
+        }
+        else{
+          this.setState({isAdmin:false})
+        }
+      });
       const data = this.state.users;
       n[fieldName] = e.target.value;
       var index = data.indexOf(n);
@@ -62,12 +88,22 @@ class UserManagement extends Component {
     }
 
     render() {
+      if(this.state.isAdmin === true)
+      {
       return (
+        
         <UserManagementTable data={this.state.users} 
         handleEdit={this.handleEdit} handleSave={this.handleSave} 
         handleChange={this.handleChange}/>
+        
 
       );
+      }
+      else{
+        return (
+       <div>No Access</div>
+        )
+      }
     }
 }
 
