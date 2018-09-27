@@ -19,6 +19,7 @@ export default class Login extends Component {
 
     // this.handleChange = this.handleChange.bind(this);
     this.Auth = new AuthService();
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   // handleChange(e) {
