@@ -32,11 +32,11 @@ export default class Login extends Component {
 
     if (loggedIn === true) {
       return (
-        <NavItem href="#" onClick={this.handleLogout}>Log out</NavItem>
+        <button href="#" onClick={this.handleLogout}>Log out</button>
       );
     } else {
       return (
-        <LoginModal />
+        <LoginModal handleLogout={this.handleLogout}/>
       );
     }
   }
