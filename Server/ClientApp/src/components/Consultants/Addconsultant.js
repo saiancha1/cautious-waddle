@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import AuthService from '.././Authentication/AuthService';
+import Login from '.././Authentication/Login';
+
 
 // const ress = this.Auth.loggedIn;
 
 class Addconsultant extends Component {
-  state = {
-    loginStatus: false,
-  }
+  
   constructor(props) {
-    super();
+    super(props);
     this.Auth=new AuthService();
+    this.Logn= new Login();
+    this.state = {
+      loginStatus: false,
+    }
   }
 
   //before mounting we change the state to current login status
 async componentWillMount() {
   try { 
     // const statuslogin = this.Auth.loggedIn();
-    this.setState ( {loginStatus: this.Auth.loggedIn() },
+    this.setState ( {loginStatus: this.Auth.loggedIn()},
    )} catch(e){
 
    } }
