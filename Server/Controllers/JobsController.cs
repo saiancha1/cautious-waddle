@@ -31,7 +31,7 @@ namespace cautious_waddle.Controllers
             {
                 return Ok(_jobsRespository.GetJobsList(minSalary, maxSalary, search));
             } 
-            catch
+            catch(Exception ex)
             {
                 return NotFound();
             }
@@ -45,6 +45,7 @@ namespace cautious_waddle.Controllers
                 Job job = Mapper.Map<JobsViewModel, Job>(jobViewModel);
 
                 job.IsApproved = 0;
+                job.Expired = 0;
                 job.CreationDate = DateTime.Now;
                 job.LastUpdate = DateTime.Now;
 
