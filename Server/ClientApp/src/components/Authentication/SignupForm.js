@@ -37,7 +37,7 @@ export default class SignupForm extends Component {
       password,
     } = this.state;
 
-    fetch('Some url here', {
+    fetch('api/auth/addUser', {
       method: 'POST',
       header: {
         Accept: 'application/json, text/plain, */*',
