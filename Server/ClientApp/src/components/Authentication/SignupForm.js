@@ -9,6 +9,7 @@ export default class SignupForm extends Component {
     this.state = {
       firstName: '',
       lastName: '',
+      userName: '',
       email1: '',
       email2: '',
       password: '',
@@ -31,6 +32,7 @@ export default class SignupForm extends Component {
     const {
       firstName,
       lastName,
+      userName,
       email1,
       password,
     } = this.state;
@@ -42,10 +44,11 @@ export default class SignupForm extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fName: firstName,
-        lName: lastName,
-        email: email1,
-        password,
+        FirstName: firstName,
+        LastName: lastName,
+        UserName: userName,
+        Email: email1,
+        Password: password,
       }),
     }).then(res => res.JSON()).then(res => console.log(res));
   }
@@ -53,7 +56,7 @@ export default class SignupForm extends Component {
 
   render() {
     const {
-      firstName, lastName, email1, email2, password,
+      firstName, lastName, email1, email2, password, userName,
     } = this.state;
 
     return (
@@ -74,6 +77,12 @@ export default class SignupForm extends Component {
                 <label>
                   Last Name:
                   <input type="text" name="lastName" value={lastName} onChange={this.handleChange} />
+                </label>
+              </div>
+              <div>
+                <label>
+                  User Name:
+                  <input type="text" name="userName" value={userName} onChange={this.handleChange} />
                 </label>
               </div>
               <div>

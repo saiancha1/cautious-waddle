@@ -2,8 +2,6 @@ import React from 'react';
 import {
   Modal,
   NavItem,
-  Button,
-  Panel
 } from 'react-bootstrap';
 import AuthService from './AuthService';
 import SignupForm from './SignupForm';
