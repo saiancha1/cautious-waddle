@@ -29,7 +29,7 @@ export default class Login extends Component {
     // const { loggedIn } = this.Auth.loggedIn();
 
     const { loggedIn } = this.state;
-    
+
     if (loggedIn === true) {
       return (
         <NavItem href="#" onClick={this.handleLogout}>Log out</NavItem>

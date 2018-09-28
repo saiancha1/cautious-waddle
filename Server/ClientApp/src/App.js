@@ -12,6 +12,7 @@ import Subscribe from './components/Subscribe/Subscribe';
 import Footer from './components/Footer/Footer';
 import SummerTech from './components/SummerTech/SummerTech';
 import Addconsultant from './components/Consultants/Addconsultant';
+import Login from './components/Authentication/Login';
 
 
 // Changed this simple function into a class so that we can manipulate state on this page
@@ -20,6 +21,10 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <div>
+            <h2>Tech Palmy</h2>
+            <Login />
+          </div>
           <Navbar />
           <Route exact path="/" component={Home} />
           <Route exact path="/companies" component={Companies} />
