@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import Login from '../Authentication/Login';
 
 class NavBar extends Component {
   render() {
@@ -35,6 +35,7 @@ class NavBar extends Component {
               <NavItem eventKey={8} componentClass={Link} href="/summertech" to="/summertech">
               SummerTech
               </NavItem>
+              <Login />
             </Nav>
           </Navbar.Collapse>
         </Navbar>

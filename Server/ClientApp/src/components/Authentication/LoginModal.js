@@ -61,6 +61,7 @@ export default class LoginModal extends React.Component {
       this.setState({ panel: 'none' });
     }
   }
+ 
 
 
   render() {
@@ -70,7 +71,7 @@ export default class LoginModal extends React.Component {
       return (
         <button
           type="button"
-          onClick={this.Auth.logout()}
+          onClick={this.props.handleLogout}
         >
           Logout
         </button>
@@ -78,7 +79,7 @@ export default class LoginModal extends React.Component {
     } else {
       return (
         <div>
-          <NavItem href="#" onClick={this.handleShow}>Login</NavItem>
+          <button  onClick={this.handleShow}>Login</button>
 
           <Modal show={show} onHide={this.handleClose}>
             <Modal.Header closeButton>
