@@ -12,6 +12,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 const styles = {
   root: {
     width: '100%',
@@ -74,7 +76,12 @@ const UserManagementTable = (props) => {
 
                     {n.isDisabled ? <EditIcon /> : <SaveIcon />}
                   </IconButton>
-
+                  <IconButton aria-label="Delete" onClick={(e) => props.handleDelete(n.id,e)}>
+                  <DeleteIcon />
+                  </IconButton>
+                </TableCell>
+                <TableCell>
+                
                 </TableCell>
               </TableRow>
             ))}

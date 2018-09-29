@@ -142,5 +142,30 @@ namespace cautious_waddle.Controllers
         {
             return Ok();
         }
+        [HttpGet("DeleteUser")]
+        [Authorize(Roles="Admin")]
+        public async Task<IActionResult> DeleteUser([FromQuery]string Id)
+        {
+            return Ok();
+            try 
+            {
+                AppUser user = await _userManager.FindByIdAsync(Id);
+                var isDeleted = await _userManager.DeleteAsync(user);
+                if(isDeleted.Succeeded)
+                {
+                    return Ok();
+                }
+                else 
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+        
     }          
 }

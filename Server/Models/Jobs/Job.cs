@@ -7,6 +7,7 @@ namespace cautious_waddle.Models
     {
         public int? JobId { get; set; }
         public int IsApproved { get; set; }
+        public int Expired { get; set; }
         public int? CompanyId { get; set; }
         public int? ProfileId { get; set; }
         public string JobTitle { get; set; }

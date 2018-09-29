@@ -12,7 +12,7 @@ namespace cautious_waddle.ViewModels
         [JsonProperty("startDate")]
         public DateTime StartDate { get; set; }
         [JsonProperty("duration")]
-        public TimeSpan Duration { get; set; }
+        public int Duration { get; set; }
         [JsonProperty("eventDescription")]
         public string EventDescription { get; set; }
         [JsonProperty("eventLocation")]
