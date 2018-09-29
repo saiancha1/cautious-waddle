@@ -114,7 +114,7 @@ class UserManagement extends Component {
           .then((res) => {
             if (res.status === 200) {
               this.setState({ open: false });
-              this.setState({ successModal: true });
+              alert('User Successfully deleted');
             }
           })
           .catch(() => {
@@ -157,16 +157,6 @@ class UserManagement extends Component {
                 </Button>
               </DialogActions>
             </Dialog>
-            
-              <Modal aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description" open={this.state.successModal} onClose={this.handleModalClose}><div>
-            <Typography variant="title" id="modal-title">
-              Text in a modal
-            </Typography>
-            <Typography variant="subheading" id="simple-modal-description">
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-            </div></Modal>
             
           </div>
         );

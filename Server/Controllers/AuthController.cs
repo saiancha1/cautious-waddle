@@ -146,7 +146,7 @@ namespace cautious_waddle.Controllers
         [Authorize(Roles="Admin")]
         public async Task<IActionResult> DeleteUser([FromQuery]string Id)
         {
-            return Ok();
+            
             try 
             {
                 AppUser user = await _userManager.FindByIdAsync(Id);
