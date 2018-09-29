@@ -96,6 +96,7 @@ const styles = theme => ({
 class Dashboard extends React.Component {
   state = {
     open: true,
+    dashboard: 'UserManagement',
   };
 
   handleDrawerOpen = () => {
@@ -106,45 +107,56 @@ class Dashboard extends React.Component {
     this.setState({ open: false });
   };
 
-  render() {
-    const { classes } = this.props;
+   dBoard = () => {
+     const { classes } = this.props;
+     if (this.state.dashboard === 'UserManagement') {
+       return (
+         <main className={classes.content}>
+         <div className={classes.appBarSpacer} />
 
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <div className={classes.root}>
- 
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-            }}
-            open={this.state.open}
-          >
-            <div className={classes.toolbarIcon}>
-              <IconButton onClick={this.handleDrawerClose}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </div>
-            <Divider />
-            <List>{mainListItems}</List>
-            <Divider />
-            <List>{secondaryListItems}</List>
-          </Drawer>
-          <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-            
-            <Typography variant="display1" gutterBottom>
+         <Typography variant="display1" gutterBottom>
               User Management
-            </Typography>
-            <div className={classes.tableContainer}>
-              <UserManagement />
-            </div>
-          </main>
-        </div>
-      </React.Fragment>
-    );
-  }
+         </Typography>
+         <div className={classes.tableContainer}>
+           <UserManagement />
+         </div>
+       </main>
+       );
+     }
+   }
+
+   render() {
+     const { classes } = this.props;
+     const board = this.dBoard();
+
+
+     return (
+       <React.Fragment>
+         <CssBaseline />
+         <div className={classes.root}>
+
+           <Drawer
+             variant="permanent"
+             classes={{
+               paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+             }}
+             open={this.state.open}
+           >
+             <div className={classes.toolbarIcon}>
+               <IconButton onClick={this.handleDrawerClose}>
+                 <ChevronLeftIcon />
+               </IconButton>
+             </div>
+             <Divider />
+             <List>{mainListItems}</List>
+             <Divider />
+             <List>{secondaryListItems}</List>
+           </Drawer>
+           {board}
+         </div>
+       </React.Fragment>
+     );
+   }
 }
 
 Dashboard.propTypes = {
