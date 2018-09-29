@@ -69,6 +69,7 @@ namespace cautious_waddle.Models
 
         public void ExpiredJobs()
         {
+            Console.WriteLine("***\n***\n***ExpiredJobs***\n***\n***");
             // Get jobs that are not expired already
             List<Job> jobs = _context.Jobs.Where(j => j.Expired == 0).ToList();
             DateTime current = DateTime.Now;
