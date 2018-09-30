@@ -12,8 +12,6 @@ class ConForm extends Component {
       desc: '',
       exp: '',
     }
-    // https://f2e78226-4303-434b-9afd-4299b92f3eb5.mock.pstmn.io/api/postit
-    // 'api/consultantcontroller/addconsultant'
 
     handleSubmit = (e) => {
       e.preventDefault();
@@ -30,11 +28,13 @@ class ConForm extends Component {
         desc,
       } = this.state;
 
-      const res = () => fetch('https://f2e78226-4303-434b-9afd-4299b92f3eb5.mock.pstmn.io/api/postit', {
+      const res = () => fetch('api/Consultants/addConsultant', {
         method: 'POST',
-        header: {
-          Accept: 'application/json, text/plain, */*',
+        headers: {
+          Authorization: `Token${  localStorage.getItem('id_token')}`,
+          // Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
+
         },
         body: JSON.stringify({
           ConsultantFirstName: fname,
@@ -48,6 +48,7 @@ class ConForm extends Component {
           Description: desc,
         }),
       });
+      res();
       const PostingConsultantInfo = () => res.JSON();
       console.log(PostingConsultantInfo);
       console.log(res);
