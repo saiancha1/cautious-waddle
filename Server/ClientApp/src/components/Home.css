@@ -1,3 +1,21 @@
+.home-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered-text h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered-text h3 {
+  margin: 0;
+  font-family: "Open Sans Condensed", sans-serif;
+}
+
 .background-image {
   max-width: 100%;
   height: auto;

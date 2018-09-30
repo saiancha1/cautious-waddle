@@ -1,6 +1,11 @@
 .button-sign {
-  background: #fff !important;
+  background: #fff;
   border: 1px black solid;
   font-family: "Open Sans Condensed", sans-serif;
   font-size: 1.2em;
+  color: #454645;
 }
+.button-sign:hover {
+  background: #949494 !important;
+  color: #fff;
+  }

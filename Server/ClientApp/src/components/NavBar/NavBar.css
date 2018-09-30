@@ -2,6 +2,7 @@
   background: none;
   border: 0;
   box-shadow: none;
+  z-index: 1;
 }
 
 .navItem-Wrapper {
@@ -22,8 +23,12 @@
 .navItem:last-child {
   border-right: 0!important;
 }
+.navItem:hover {
+  /* background-color: beige; */
+  background: rgba(225, 217, 217, 0.5);
+}
 
 .navbar-nav > li > a {
   padding: 0;
-  color: black !important;
+  color: #454645 !important;
 }
