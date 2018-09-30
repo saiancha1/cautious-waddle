@@ -31,10 +31,9 @@ class ConForm extends Component {
       const res = () => fetch('api/Consultants/addConsultant', {
         method: 'POST',
         headers: {
-          Authorization: `Token${  localStorage.getItem('id_token')}`,
-          // Accept: 'application/json, text/plain, */*',
+          Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-
+          'Authorization' : 'Token' + localStorage.getItem('id_token'),
         },
         body: JSON.stringify({
           ConsultantFirstName: fname,
@@ -48,8 +47,8 @@ class ConForm extends Component {
           Description: desc,
         }),
       });
-      res();
       const PostingConsultantInfo = () => res.JSON();
+      res();
       console.log(PostingConsultantInfo);
       console.log(res);
     }
