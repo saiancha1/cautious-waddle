@@ -1,0 +1,21 @@
+.page-header {
+  margin: 15px 20px 25px;
+  border: none;
+}
+
+.page-header > h2 {
+  display: inline;
+  border-bottom: none;
+}
+
+.logo {
+  width: 40px;
+  margin-right: 10px;
+  float: left;
+}
+
+.login-button {
+  /* display: inline; */
+  float: right;
+  border-radius: 50%;
+}

@@ -1,12 +1,29 @@
-.navbarWrapper {
+.navbar-Wrapper {
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.navItem-Wrapper {
   margin: auto;
-  width: 800px;
+  max-width: 1003px;
+  
 }
 
-.navbarItem {
-  border-right: 1px solid #8E2800;
+.navItem {
+  border-right: 1.1px solid #d9534f !important;
+  font-size: 1.3em;
+  font-family: "Open Sans Condensed", sans-serif;
+  color: #036118;
+  padding: 10px 25px;
+  margin: 0;
 }
 
-.navbarItem:last-child {
+.navItem:last-child {
   border-right: 0!important;
+}
+
+.navbar-nav > li > a {
+  padding: 0;
+  color: black !important;
 }

@@ -8,34 +8,34 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar fluid>
+        <Navbar fluid className="navbar-Wrapper">
           <Navbar.Toggle />
           <Navbar.Collapse>
-            <div className="navbarWrapper">
+            <div className="navItem-Wrapper">
               <Nav>
-                <NavItem className="navbarItem" eventKey={1} componentClass={Link} href="/" to="/">
+                <NavItem className="navItem" eventKey={1} componentClass={Link} href="/" to="/">
               Home
                 </NavItem>
-                <NavItem className="navbarItem" eventKey={2} componentClass={Link} href="/companies" to="/companies">
+                <NavItem className="navItem" eventKey={2} componentClass={Link} href="/companies" to="/companies">
               Companies
                 </NavItem>
-                <NavItem className="navbarItem" eventKey={3} componentClass={Link} href="/consultants" to="/consultants">
+                <NavItem className="navItem" eventKey={3} componentClass={Link} href="/consultants" to="/consultants">
               Consultants
                 </NavItem>
-                <NavItem className="navbarItem" eventKey={4} componentClass={Link} href="/work" to="/work">
+                <NavItem className="navItem" eventKey={4} componentClass={Link} href="/work" to="/work">
               Work
                 </NavItem>
-                <NavItem className="navbarItem" eventKey={5} componentClass={Link} href="/events" to="/events">
+                <NavItem className="navItem" eventKey={5} componentClass={Link} href="/events" to="/events">
               Events
                 </NavItem>
-                <NavItem className="navbarItem" eventKey={6} componentClass={Link} href="/contact" to="/contact">
+                <NavItem className="navItem" eventKey={6} componentClass={Link} href="/contact" to="/contact">
               Contact
                 </NavItem>
-                <NavItem className="navbarItem" eventKey={7} componentClass={Link} href="/subscribe" to="/subscribe">
+                <NavItem className="navItem" eventKey={7} componentClass={Link} href="/subscribe" to="/subscribe">
               Subscribe
                 </NavItem>
-                <NavItem className="navbarItem" eventKey={8} componentClass={Link} href="/summertech" to="/summertech">
-              SummerTech
+                <NavItem className="navItem" eventKey={8} componentClass={Link} href="/summertech" to="/summertech">
+              Summer Tech
                 </NavItem>
               </Nav>
             </div>
