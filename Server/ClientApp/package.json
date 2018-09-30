@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.5.1",
+    "@material-ui/icons": "^3.0.1",
     "bootstrap": "^3.3.7",
     "jwt-decode": "^2.2.0",
     "react": "^16.4.2",
