@@ -47,9 +47,9 @@ class ConForm extends Component {
           Address: address,
           Description: desc,
         }),
-      })
-      const PostingConsultantInfo = res.JSON()
-      console.log(PostingConsultantInfo));
+      });
+      const PostingConsultantInfo = () => res.JSON();
+      console.log(PostingConsultantInfo);
     }
 
     handleChange = (e) => {
