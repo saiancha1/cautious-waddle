@@ -12,6 +12,8 @@ class ConForm extends Component {
       desc: '',
       exp: '',
     }
+    // https://f2e78226-4303-434b-9afd-4299b92f3eb5.mock.pstmn.io/api/postit
+    // 'api/consultantcontroller/addconsultant'
 
     handleSubmit = (e) => {
       e.preventDefault();
@@ -28,7 +30,7 @@ class ConForm extends Component {
         desc,
       } = this.state;
 
-      fetch('api/consultantcontroller/addconsultant', {
+      const res = () => fetch('https://f2e78226-4303-434b-9afd-4299b92f3eb5.mock.pstmn.io/api/postit', {
         method: 'POST',
         header: {
           Accept: 'application/json, text/plain, */*',
@@ -45,7 +47,9 @@ class ConForm extends Component {
           Address: address,
           Description: desc,
         }),
-      }).then(res => res.JSON()).then(res => console.log(res));
+      })
+      const PostingConsultantInfo = res.JSON()
+      console.log(PostingConsultantInfo));
     }
 
     handleChange = (e) => {
