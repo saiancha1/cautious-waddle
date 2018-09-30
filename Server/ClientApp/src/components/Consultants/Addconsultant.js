@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ConForm from './ConForm';
-import AuthService from '.././Authentication/AuthService';
+import AuthService from '../Authentication/AuthService';
 
 class Addconsultant extends Component {
   constructor(props) {
@@ -13,9 +13,11 @@ class Addconsultant extends Component {
 
   render() {
     return (
-      <div> {this.state.loginStatus ? (
-      <ConForm />
-) : (<h1>logged out</h1>)
+      <div>
+        {' '}
+        {this.state.loginStatus ? (
+          <ConForm />
+        ) : (<h1>logged out</h1>)
 }
       </div>);
   }
