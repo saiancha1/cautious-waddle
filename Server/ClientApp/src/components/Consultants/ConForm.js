@@ -11,13 +11,41 @@ class ConForm extends Component {
       address: '',
       desc: '',
       exp: '',
-
-
     }
 
     handleSubmit = (e) => {
       e.preventDefault();
       console.log(this.state);
+      const {
+        fname,
+        lname,
+        exp,
+        email,
+        company,
+        website,
+        phone,
+        address,
+        desc,
+      } = this.state;
+
+      fetch('api/consultantcontroller/addconsultant', {
+        method: 'POST',
+        header: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ConsultantFirstName: fname,
+          ConsultantLastName: lname,
+          Expertise: exp,
+          Email: email,
+          Company: company,
+          Website: website,
+          Phone: phone,
+          Address: address,
+          Description: desc,
+        }),
+      }).then(res => res.JSON()).then(res => console.log(res));
     }
 
     handleChange = (e) => {

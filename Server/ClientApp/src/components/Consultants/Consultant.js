@@ -5,23 +5,23 @@ const Consultant = props => (
     {props.cl.map(consultant => (
       <div key={consultant.consultantId}>
         <h2>
-Name:
+                Name:
           {' '}
           {consultant.consultantName}
         </h2>
         <h3>{consultant.consultantDesc}</h3>
         <p>
-City:
+                City:
           {' '}
           {consultant.city}
         </p>
         <p>
-Email:
+                Email:
           {' '}
           {consultant.contactEmail}
         </p>
         <p>
-Website:
+                Website:
           {' '}
           {consultant.website}
         </p>
