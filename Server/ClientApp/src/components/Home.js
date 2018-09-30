@@ -8,7 +8,11 @@ class Home extends Component {
       <div className="home-container">
         <img className="background-image" src={background} alt="background" />
         <div className="centered-text">
-          <h3>This is some text in the middle of image</h3>
+          <h3>
+            <span>Tech Palmy</span>
+            <br />
+            A showcase of technology in Palmerston North
+          </h3>
         </div>
       </div>
     );

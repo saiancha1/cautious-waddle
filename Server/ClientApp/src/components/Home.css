@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Comfortaa:700");
+
 .home-container {
   position: relative;
   text-align: center;
@@ -14,6 +16,14 @@
 .centered-text h3 {
   margin: 0;
   font-family: "Open Sans Condensed", sans-serif;
+  font-size: 3em;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+}
+
+.centered-text h3 span {
+  font-family: "Comfortaa", cursive;
+  font-size: 2em;
 }
 
 .background-image {
