@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavItem } from 'react-bootstrap';
 import AuthService from './AuthService';
 import LoginModal from './LoginModal';
-
+import '../../App.css';
 
 export default class Login extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ export default class Login extends Component {
 
     if (loggedIn === true) {
       return (
-        <button href="#" onClick={this.handleLogout}>Log out</button>
+        <button className="button-sign" href="#" onClick={this.handleLogout}>Log out</button>
       );
     } else {
       return (
