@@ -50,6 +50,7 @@ class ConForm extends Component {
       });
       const PostingConsultantInfo = () => res.JSON();
       console.log(PostingConsultantInfo);
+      console.log(res);
     }
 
     handleChange = (e) => {
