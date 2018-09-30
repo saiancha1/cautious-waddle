@@ -14,6 +14,7 @@ import SummerTech from './components/SummerTech/SummerTech';
 import Addconsultant from './components/Consultants/Addconsultant';
 import Login from './components/Authentication/Login';
 import logo from './images/logoV2.png';
+import Header from './components/Header/Header'
 
 
 // Changed this simple function into a class so that we can manipulate state on this page
@@ -22,13 +23,14 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <div className="page-header">
+          {/* <div className="page-header">
             <img className="logo" src={logo} alt="logo" />
             <h2>Tech Palmy</h2>
             <div className="login-button">
               <Login />
             </div>
-          </div>
+          </div> */}
+          <Header />
           <Navbar />
           <Route exact path="/" component={Home} />
           <Route exact path="/companies" component={Companies} />
