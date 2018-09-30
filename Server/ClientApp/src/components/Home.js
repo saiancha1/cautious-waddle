@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
+import background from '../images/homepage-image.jpg';
 
-const Home = () => (
-  <div>
-    <h1>Home home</h1>
-  </div>
-);
+class Home extends Component {
+  render() {
+    return (
+      <img src={background} alt="background" />
+    );
+  }
+}
 
 export default Home;

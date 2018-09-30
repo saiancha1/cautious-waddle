@@ -1,0 +1,12 @@
+.navbarWrapper {
+  margin: auto;
+  width: 800px;
+}
+
+.navbarItem {
+  border-right: 1px solid #8E2800;
+}
+
+.navbarItem:last-child {
+  border-right: 0!important;
+}

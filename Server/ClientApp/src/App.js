@@ -23,7 +23,7 @@ class App extends Component {
         <div>
           <div>
             <h2>Tech Palmy</h2>
-            
+            <Login />
           </div>
           <Navbar />
           <Route exact path="/" component={Home} />
@@ -35,8 +35,7 @@ class App extends Component {
           <Route exact path="/subscribe" component={Subscribe} />
           <Route exact path="/summerTech" component={SummerTech} />
           <Route exact path="/addconsultant" component={Addconsultant} />
-
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
     );
