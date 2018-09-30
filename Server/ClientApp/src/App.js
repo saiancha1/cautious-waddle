@@ -11,6 +11,7 @@ import Contact from './components/Contact';
 import Subscribe from './components/Subscribe/Subscribe';
 import Footer from './components/Footer/Footer';
 import SummerTech from './components/SummerTech/SummerTech';
+import AdminComponent from './components/Admin/AdminComponent';
 import Addconsultant from './components/Consultants/Addconsultant';
 import Login from './components/Authentication/Login';
 
@@ -34,6 +35,7 @@ class App extends Component {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/subscribe" component={Subscribe} />
           <Route exact path="/summerTech" component={SummerTech} />
+          <Route exact path="/admin" component={AdminComponent} />         
           <Route exact path="/addconsultant" component={Addconsultant} />
 
           {/* <Footer /> */}
