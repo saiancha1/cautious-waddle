@@ -11,6 +11,9 @@ namespace cautious_waddle.Models
         void AddJob(Job job);
         void DeleteJob(Job job);
         void EditJob(JobsViewModel job);
+        void ExpiredJob(Job job);
         void ExpiredJobs();
+        IEnumerable<Job> AdminGetExpiredJobs();
+        IEnumerable<Job> AdminGetActiveJobs();
     }
 }
