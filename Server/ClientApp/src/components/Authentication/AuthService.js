@@ -67,7 +67,7 @@ export default class AuthService {
   }
 
   logout = (event) => {
-    event.preventDefault();
+    // event.preventDefault(); I always get error here - David
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
     
