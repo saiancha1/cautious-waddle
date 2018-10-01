@@ -21,6 +21,9 @@ namespace cautious_waddle.Models
         {
             IEnumerable<Job> jobs = _context.Jobs;
 
+            // Only return jobs that are not expired
+            jobs = jobs.Where(j => j.Expired == 0);
+
             // Search
             if(search != null) {
                 jobs = jobs.Where(j => j.JobTitle.ToLower().Contains(search.ToLower()) || j.JobDescription.ToLower().Contains(search.ToLower()));
@@ -65,6 +68,43 @@ namespace cautious_waddle.Models
             oldJob.Salary         = job.Salary;
 
             _context.SaveChanges();
+        }
+
+        public void ExpiredJob(Job job)
+        {
+            // Mark the job as expired
+            _context.Jobs.Attach(job);
+            job.Expired = 1;
+            _context.SaveChanges();
+        }
+
+        public void ExpiredJobs()
+        {
+            // Get jobs that are not expired already
+            List<Job> jobs = _context.Jobs.Where(j => j.Expired == 0).ToList();
+            DateTime current = DateTime.Now;
+
+            for(int j = 0; j < jobs.Count; j++)
+            {
+                Job job = jobs[j];
+
+                if(job.Expiry < current)
+                {
+                    ExpiredJob(job);
+                }
+            }
+        }
+
+        public IEnumerable<Job> AdminGetExpiredJobs()
+        {
+            IEnumerable<Job> jobs = _context.Jobs.Where(j => j.Expired == 1);
+            return jobs;
+        }
+
+        public IEnumerable<Job> AdminGetActiveJobs()
+        {
+            IEnumerable<Job> jobs = _context.Jobs.Where(j => j.Expired == 0);
+            return jobs;
         }
     }
 }
