@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import CompanyList from './Companies/CompanyList';
+import CompanyView from './Companies/CompanyView';
 class Companies extends Component {
   state = {
     companies: [],
+    selectedCompany:null,
+    companyOpen:false,
   }
   async componentWillMount() {
     fetch('api/Companies/getCompanies').then(res => res.json())
@@ -11,12 +14,33 @@ class Companies extends Component {
     })
   
     };
-
+  handleModalOpen = (company,e) => {
+    
+    this.setState({selectedCompany:company})
+    this.setState({companyOpen:true})
+    e.preventDefault();
+  }
+  handleClose = () => {
+    this.setState({selectedCompany:null});
+    this.setState({companyOpen:false})
+  }
   render() {
+   let company;
+   if(this.state.selectedCompany !== null)
+   {
+     const selectedCompany = this.state.selectedCompany;
+    company =<CompanyView companyToRender={selectedCompany} handleClose={this.handleClose} companyOpen={this.state.companyOpen}/> ;
+    
+   }
     return (
-      <CompanyList companies={this.state.companies}/>
-
+      <div>
+        
+        <CompanyList companies={this.state.companies} handleModalOpen={this.handleModalOpen}/>
+        {company}
+      
+      </div>
     );
+    
   }
   
 
