@@ -19,6 +19,7 @@ const styles = {
   };
  const Company = (props) => {
     const { classes } = props;
+    let modal;
     return(
     <div className="col-md-4">
     <Card className={classes.card}>
@@ -37,11 +38,12 @@ const styles = {
     </CardContent>
     <CardActions>
       
-      <Button size="small" color="primary">
+      <Button size="small" color="primary" onClick={this.modal = props.handleModalOpen}>
         More...
       </Button>
     </CardActions>
   </Card>
+  {this.modal}
   </div>    
     );
 };
