@@ -20,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using Hangfire;
 
 namespace cautious_waddle
 {
@@ -64,6 +65,11 @@ namespace cautious_waddle
             services.AddDbContext<LocalEventsDbContext>(options => 
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddTransient<ILocalEventsRepository, LocalEventsRepository>();
+
+            services.AddHangfire(configuration =>
+            {
+                configuration.UseSqlServerStorage(Configuration["ConnectionStrings:IdentityConnectionString"]);
+            });
             
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
@@ -171,6 +177,9 @@ namespace cautious_waddle
                 cfg.CreateMap<LocalEventsViewModel, LocalEvent>();
                 cfg.CreateMap<LocalEvent, LocalEventsViewModel>();
             });
+
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
 
             app.UseSpa(spa =>
             {

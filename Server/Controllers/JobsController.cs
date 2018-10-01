@@ -205,5 +205,10 @@ namespace cautious_waddle.Controllers
                 return NotFound(e);
             }
         }
+
+        public void expiredJobs()
+        {
+            _jobsRespository.ExpiredJobs();
+        }
     }
 }
