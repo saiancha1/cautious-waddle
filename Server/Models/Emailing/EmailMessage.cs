@@ -6,12 +6,12 @@ namespace cautious_waddle.Models
     {
         public EmailMessage()
         {
-            ToAddress = new List<EmailAddress>();
-            FromAddress = new List<EmailAddress>();
+            ToAddresses = new List<EmailAddress>();
+            FromAddresses = new List<EmailAddress>();
         }
 
-        public List<EmailAddress> ToAddress { get; set; }
-        public List<EmailAddress> FromAddress { get; set; }
+        public List<EmailAddress> ToAddresses { get; set; }
+        public List<EmailAddress> FromAddresses { get; set; }
         public string Subject { get; set; }
         public string Content { get; set; }
     }

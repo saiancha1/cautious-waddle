@@ -70,7 +70,10 @@ namespace cautious_waddle
             {
                 configuration.UseSqlServerStorage(Configuration["ConnectionStrings:IdentityConnectionString"]);
             });
-            
+
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
+
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapper(typeof(Startup));

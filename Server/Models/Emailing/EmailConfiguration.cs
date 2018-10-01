@@ -1,6 +1,6 @@
 namespace cautious_waddle.Models
 {
-    public class EmailConfiguration
+    public class EmailConfiguration : IEmailConfiguration
     {
         public string SmtpServer { get; set; }
         public int SmtpPort  { get; set; }
