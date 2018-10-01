@@ -14,19 +14,23 @@ const CompanyView = (props) => {
     console.log(company.address1 + company.address2);
     let lat;
     let lng;
+    let map;
     Geocode.setApiKey("AIzaSyDcEb-gfVWmcT1ek-MDYS_mOnvBzNVZqyI");
     Geocode.fromAddress(address).then(
       response => {
         const {lat, lng} = response.results[0].geometry.location;
         this.lat = lat;
         this.lng = lng;
-        console.log(lat, lng);
+        this.map = <GoogleMapItem
+        containerElement={ <div style={{ height: `500px`, width: '500px' }} /> }
+        mapElement={ <div style={{ height: `80%` }} lat = {this.lat} lng = {this.lng}/> }
+      />;
       },
       error => {
         console.error(error);
       }
     );
-    const GoogleMapExample = withGoogleMap(props => (
+    const GoogleMapItem = withGoogleMap(props => (
       <GoogleMap
         defaultCenter = { { lat: this.lat, lng: this.lng } }
         defaultZoom = { 13 }
@@ -61,10 +65,8 @@ const CompanyView = (props) => {
             <h3>Contact Information</h3>
             <b>Email: </b> {company.email}<br/>
             <div >
-            <GoogleMapExample
-          containerElement={ <div style={{ height: `500px`, width: '500px' }} /> }
-          mapElement={ <div style={{ height: `80%` }} lat = {this.lat} lng = {this.lng}/> }
-        />
+          {this.map}
+            
         </div>
 
           </div>
