@@ -1,0 +1,20 @@
+.slide-div {
+  max-width: 1000px
+}
+
+.slider-cards div h3 {
+  border: 1px black solid;
+}
+
+.slick-next:before, .slick-prev:before {
+  font-size: 40px;
+  color: #000 !important;
+}
+
+.slick-prev {
+  left: -50px;
+}
+
+.slick-next {
+  right: -50px;
+}
