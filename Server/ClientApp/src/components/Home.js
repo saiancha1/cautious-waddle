@@ -17,7 +17,7 @@ class Home extends Component {
             </h3>
           </div>
         </div>
-        <div>
+        <div className="cardSlide-wrapper">
           <CardSlide />
         </div>
       </div>

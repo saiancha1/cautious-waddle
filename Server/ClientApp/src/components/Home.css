@@ -31,3 +31,7 @@
   height: auto;
   margin-top: -90px;
 }
+
+.cardSlide-wrapper {
+  text-align: -webkit-center;
+}
