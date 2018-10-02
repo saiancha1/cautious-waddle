@@ -19,38 +19,36 @@ namespace cautious_waddle.Controllers
     public class ScheduledTasksController : Controller
     {
         private IJobsRepository _jobsRepository;
-        private UserManager<AppUser> _userManager;
-        public ScheduledTasksController(IJobsRepository jobsRepository, UserManager<AppUser> userManager)
+        private IEmailService _emailService;
+        public ScheduledTasksController(IJobsRepository jobsRepository, IEmailService emailService)
         {
             _jobsRepository = jobsRepository;
-            _userManager = userManager;
-        }
-
-        public async Task<IList<string>> GetUserRoles(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            var roles = await _userManager.GetRolesAsync(user);
-            return roles;
+            _emailService = emailService;
         }
 
         [HttpPost("addExpiredJobs")]
-        [Authorize]
-        public async Task<IActionResult> AddExpiredJobs()
+        [Authorize(Roles="Admin")]
+        public IActionResult AddExpiredJobs(string CronExpression = "* * * * *")
         {
             try
             {
-                string userId = IdentityHelper.GetUserId(HttpContext);
-                var roles = await GetUserRoles(userId);
+                RecurringJob.AddOrUpdate<JobsRepository>(j => j.ExpiredJobs(), CronExpression);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
 
-                if(roles[0] == "Admin")
-                {
-                    RecurringJob.AddOrUpdate<JobsRepository>(j => j.ExpiredJobs(), Cron.Minutely);
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
-                }
+        [HttpPost("addMailingList")]
+        [Authorize(Roles="Admin")]
+        public IActionResult addMailingList([FromBody] string CronExpression = "0 18 * * FRI")
+        {
+            try
+            {
+                RecurringJob.AddOrUpdate<EmailService>(e => e.MailingListWeekly(), "0 18 * * FRI");
+                return Ok();
             }
             catch(Exception ex)
             {
