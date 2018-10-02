@@ -26,9 +26,9 @@ namespace cautious_waddle.Controllers
         {
             try
             {
-                EmailAddress from = new EmailAddress();
-                from.Name = "Mailgun";
-                from.Address = "postmaster@sandboxc33747215c0b494eb6618dd752641b33.mailgun.org";
+                MailingList_EmailAddress from = new MailingList_EmailAddress();
+                from.FullName = "Mailgun";
+                from.EmailAddress = "postmaster@sandboxc33747215c0b494eb6618dd752641b33.mailgun.org";
 
                 EmailMessage emailMessage = new EmailMessage();
                 emailMessage.ToAddresses = emailMessageViewModel.ToAddresses;
@@ -39,6 +39,33 @@ namespace cautious_waddle.Controllers
                 _emailService.Send(emailMessage);
 
                 return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("sendMailingListWeekly")]
+        public IActionResult sendMailingListWeekly()
+        {
+            try
+            {
+                _emailService.MailingListWeekly();
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("getEmailAddresses")]
+        public IActionResult getEmailAddresses()
+        {
+            try
+            {
+                return Ok(_emailService.GetEmailAddresses());
             }
             catch(Exception ex)
             {

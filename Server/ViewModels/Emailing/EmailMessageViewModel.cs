@@ -9,7 +9,7 @@ namespace cautious_waddle.ViewModels
     public class EmailMessageViewModel
     {
         [JsonProperty("toAddresses")]
-        public List<EmailAddress> ToAddresses { get; set; }
+        public List<MailingList_EmailAddress> ToAddresses { get; set; }
         [JsonProperty("subject")]
         public string Subject { get; set; }
         [JsonProperty("content")]

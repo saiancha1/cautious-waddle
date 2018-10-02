@@ -65,14 +65,15 @@ namespace cautious_waddle
             services.AddDbContext<LocalEventsDbContext>(options => 
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddTransient<ILocalEventsRepository, LocalEventsRepository>();
+            services.AddDbContext<MailingListDbContext>(options => 
+                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
 
             services.AddHangfire(configuration =>
             {
                 configuration.UseSqlServerStorage(Configuration["ConnectionStrings:IdentityConnectionString"]);
             });
-
-            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
-            services.AddTransient<IEmailService, EmailService>();
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
