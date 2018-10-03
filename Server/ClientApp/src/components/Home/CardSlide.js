@@ -3,7 +3,6 @@ import Slider from 'react-slick';
 import Card from './Card';
 import './HomeFolder.css';
 
-
 const events = [{
   id: 1,
   title: 'Meet tech man',
@@ -39,13 +38,6 @@ const events = [{
 ];
 
 export default class CardSlide extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      slides: [1, 2, 3],
-    };
-  }
-
   render() {
     const settings = {
       dots: true,
@@ -88,44 +80,11 @@ export default class CardSlide extends Component {
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
         <h2>Upcoming Events</h2>
         <Slider className="slider-cards" {...settings}>
-          {/* <div>
-            <div>
-              {events.map(event => (
-                <Card key={event.id} event={event} />
-              ))}
-            </div>
-          </div> */}
-
           {events.map(event => (
             <div key={event.id}>
               <Card event={event} />
             </div>
           ))}
-
-          {/* <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div> */}
-          {/* <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div> */}
         </Slider>
       </div>
     );
