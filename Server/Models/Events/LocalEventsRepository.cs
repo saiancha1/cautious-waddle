@@ -47,6 +47,7 @@ namespace cautious_waddle.Models
             oldEvent.Duration         = newEvent.Duration;
             oldEvent.EventDescription = newEvent.EventDescription;
             oldEvent.EventLocation    = newEvent.EventLocation;
+            oldEvent.ImageURL         = newEvent.ImageURL;
 
             _context.SaveChanges();
         }
