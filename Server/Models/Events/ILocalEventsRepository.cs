@@ -7,6 +7,7 @@ namespace cautious_waddle.Models
     public interface ILocalEventsRepository
     {
         IEnumerable<LocalEventsViewModel> GetEvents();
+        IEnumerable<LocalEventsViewModel> GetExpiredEvents();
         LocalEvent GetEventById(int id);
         void addEvent(LocalEvent e);
         void editEvent (LocalEventsViewModel e);

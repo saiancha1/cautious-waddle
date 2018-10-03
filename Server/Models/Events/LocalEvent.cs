@@ -9,6 +9,7 @@ namespace cautious_waddle.Models
         public int? EventId { get; set; }
         public string UserId { get; set; }
         public int IsApproved { get; set; }
+        public int Expired { get; set; }
         
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }
