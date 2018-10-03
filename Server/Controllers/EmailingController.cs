@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using MailKit;
 using MailKit.Net.Smtp;
@@ -12,17 +15,22 @@ using cautious_waddle.ViewModels;
 namespace cautious_waddle.Controllers
 {
     [Route("/api/[controller]")]
-    public class EmailingTestController : Controller
+    public class EmailingController : Controller
     {
         private IEmailService _emailService;
+        private JobsDbContext _context2;
+        private MailingListDbContext _context;
 
-        public EmailingTestController(IEmailService emailService)
+        public EmailingController(IEmailService emailService, MailingListDbContext context, JobsDbContext context2)
         {
             _emailService = emailService;
+            _context = context;
+            _context2 = context2;
         }
 
-        [HttpPost("sendEmail")]
-        public IActionResult SendEmail([FromBody] EmailMessageViewModel emailMessageViewModel)
+        [HttpPost("sendBulkEmail")]
+        [Authorize(Roles="Admin")]
+        public IActionResult SendBulkEmail([FromBody] EmailMessageViewModel emailMessageViewModel)
         {
             try
             {
@@ -31,7 +39,17 @@ namespace cautious_waddle.Controllers
                 from.EmailAddress = "postmaster@sandboxc33747215c0b494eb6618dd752641b33.mailgun.org";
 
                 EmailMessage emailMessage = new EmailMessage();
-                emailMessage.ToAddresses = emailMessageViewModel.ToAddresses;
+
+                if(emailMessageViewModel.ToAddresses.Count == 0)
+                {
+                    List<MailingList_EmailAddress> emailAddresses = _context.MailingList.ToList();
+                    emailMessage.ToAddresses = emailAddresses;
+                }
+                else
+                {
+                    emailMessage.ToAddresses = emailMessageViewModel.ToAddresses;
+                }
+
                 emailMessage.FromAddresses.Add(from);
                 emailMessage.Subject = emailMessageViewModel.Subject;
                 emailMessage.Content = emailMessageViewModel.Content;
@@ -47,6 +65,7 @@ namespace cautious_waddle.Controllers
         }
 
         [HttpPost("sendMailingListWeekly")]
+        [Authorize(Roles="Admin")]
         public IActionResult sendMailingListWeekly()
         {
             try
@@ -61,6 +80,7 @@ namespace cautious_waddle.Controllers
         }
 
         [HttpGet("getEmailAddresses")]
+        [Authorize(Roles="Admin")]
         public IActionResult getEmailAddresses()
         {
             try

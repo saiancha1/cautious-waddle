@@ -62,16 +62,18 @@ namespace cautious_waddle.Models
 
         public string formMessage()
         {
-            string content = "Local jobs:";
+            string content = "";
 
+            // Write content for jobs
+            content += "Local jobs:";
             List<JobsViewModel> jobs = _jobsRepository.GetJobsList(0, 0, null).ToList();
             foreach(JobsViewModel job in jobs)
             {
                 content += "\n\n" + job.JobTitle + "\n" + job.JobDescription;
             }
 
+            // Write content for events
             content += "\n\nLocal events:";
-
             List<LocalEventsViewModel> localEvents = _localEventsRepository.GetEvents().ToList();
             foreach(LocalEventsViewModel localEvent in localEvents)
             {
@@ -85,10 +87,12 @@ namespace cautious_waddle.Models
         {
             EmailMessage emailMessage = new EmailMessage();
 
+            // From email address
             MailingList_EmailAddress from = new MailingList_EmailAddress();
             from.FullName = "Mailgun";
             from.EmailAddress = "postmaster@sandboxc33747215c0b494eb6618dd752641b33.mailgun.org";
 
+            // Send email to all email addresses on the mailing list
             List<MailingList_EmailAddress> mailingList = _context.MailingList.ToList();
             emailMessage.ToAddresses = mailingList;
 
@@ -103,11 +107,6 @@ namespace cautious_waddle.Models
         {
             IEnumerable<MailingList_EmailAddress> emailAddresses = _context.MailingList;
             return emailAddresses;
-        }
-
-        public List<EmailMessage> RecieveEmail(int maxCount = 10)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
