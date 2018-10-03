@@ -50,7 +50,7 @@ namespace cautious_waddle.Controllers
                 newEvent.IsApproved = 0;
                 newEvent.CreationDate = DateTime.Now;
                 newEvent.LastUpdate = DateTime.Now;
-                
+
                 _localEventsRepository.addEvent(newEvent);
 
                 return Ok();

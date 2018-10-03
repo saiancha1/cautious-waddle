@@ -18,7 +18,8 @@ namespace cautious_waddle.Models
         public string EventDescription { get; set; }
         public string EventLocation { get; set; }
 
-        public string EventUrl {get;set;}
+        public string EventUrl { get; set; }
+        public string ImageURL { get; set; }
 
     }
 }
