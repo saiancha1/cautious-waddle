@@ -10,6 +10,8 @@ namespace cautious_waddle.ViewModels
         public string FirstName { get; set; }
         [JsonProperty("lastName")]
         public string LastName { get; set; }
+        [JsonProperty("imageURL")]
+        public string ImageURL { get; set; }
         [JsonProperty("specialistArea")]
         public string SpecialistArea { get; set; }
         [JsonProperty("consultantDesc")]
