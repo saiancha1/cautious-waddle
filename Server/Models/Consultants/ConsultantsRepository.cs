@@ -52,6 +52,7 @@ namespace cautious_waddle.Models
             oldConsultant.ReminderDate   = DateTime.Now.AddMonths(1);
             oldConsultant.FirstName      = consultant.FirstName;
             oldConsultant.LastName       = consultant.LastName;
+            oldConsultant.ImageURL       = consultant.ImageURL;
             oldConsultant.SpecialistArea = consultant.SpecialistArea;
             oldConsultant.ConsultantDesc = consultant.ConsultantDesc;
             oldConsultant.Phone          = consultant.Phone;
