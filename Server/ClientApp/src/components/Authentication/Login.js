@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { NavItem } from 'react-bootstrap';
 import AuthService from './AuthService';
 import LoginModal from './LoginModal';
+import { connect } from 'react-redux';
+import { compLoggedOut } from '../../store/reducer';
 
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -21,6 +23,8 @@ export default class Login extends Component {
     event.preventDefault();
     const loggedOut = this.Auth.logout(event);
     if (loggedOut) {
+      const sync = this.props;
+      sync.syncLoggedOut();
       this.setState({ loggedIn: false });
     }
   }
@@ -41,3 +45,13 @@ export default class Login extends Component {
     }
   }
 }
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
+
+const mapDispatchToProps = dispatch => ({
+  syncLoggedOut: () => dispatch(compLoggedOut()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

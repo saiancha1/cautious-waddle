@@ -14,7 +14,7 @@ import SummerTech from './components/SummerTech/SummerTech';
 import AdminComponent from './components/Admin/AdminComponent';
 import Addconsultant from './components/Consultants/Addconsultant';
 import Login from './components/Authentication/Login';
-import AddJob from './components/Containers/AddJobContainer';
+import AddJob from './components/AddJob/AddJob';
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {

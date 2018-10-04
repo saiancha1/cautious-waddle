@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import AuthService from '../Authentication/AuthService';
+import { connect } from 'react-redux';
+//import AuthService from '../Authentication/AuthService';
 
 class AddJob extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loggedIn: false,
       type: '',
       position: '',
       location: '',
       description: '',
     };
 
-    const Auth = new AuthService();
+    //this.Auth = new AuthService();
   }
-
 
   postDataHandler = () => {
     const post = {
@@ -28,14 +27,13 @@ class AddJob extends Component {
   }
 
   render() {
-    this.setState({ loggedIn: Auth.loggedIn() });
-
-    if (this.state.loggedIn === true) {
+    const login = this.props;
+    if (login.auth) {
       return (
         <div>
           <h1>Add Job</h1>
           <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec,
+           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec,
                 mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id.
             {' '}
 
@@ -70,10 +68,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulpu
         </div>
       );
     } else {
-      <div>
-                This page is accessible to valid account holders. If you have an account, please login to submit a new job posting.
-      </div>;
+      return (
+        <div>
+        This page is accessible to valid account holders. If you have an account, please login to submit a new job posting.
+        </div>);
     }
   }
 }
-export default AddJob;
+
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddJob);
