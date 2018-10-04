@@ -10,11 +10,13 @@
     "react": "^16.4.2",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.4.2",
+    "react-geocode": "^0.1.2",
+    "react-google-maps": "^9.4.5",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^1.1.5",
-    "rimraf": "^2.6.2",
-    "react-slick": "latest"
+    "react-slick": "latest",
+    "rimraf": "^2.6.2"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",

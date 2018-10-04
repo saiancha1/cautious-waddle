@@ -48,9 +48,10 @@ namespace cautious_waddle.Controllers
                 newEvent.EventId = null;
                 newEvent.UserId = IdentityHelper.GetUserId(HttpContext);
                 newEvent.IsApproved = 0;
+                newEvent.Expired = 0;
                 newEvent.CreationDate = DateTime.Now;
                 newEvent.LastUpdate = DateTime.Now;
-                
+
                 _localEventsRepository.addEvent(newEvent);
 
                 return Ok();
@@ -136,6 +137,7 @@ namespace cautious_waddle.Controllers
                 Nevent.UserId = IdentityHelper.GetUserId(HttpContext);
                 Nevent.Duration = null;
                 Nevent.IsApproved = 0;
+                Nevent.Expired = 0;
                 Regex regex = new Regex(@"(?<=\()(.*?)(?=\))");
                 Match matches = regex.Match(Nevent.EventName);
                 GroupCollection groups = matches.Groups;
