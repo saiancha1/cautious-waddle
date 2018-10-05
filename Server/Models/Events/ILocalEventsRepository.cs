@@ -12,5 +12,7 @@ namespace cautious_waddle.Models
         void addEvent(LocalEvent e);
         void editEvent (LocalEventsViewModel e);
         void removeEvent(LocalEvent e);
+        void expireEvent(LocalEvent e);
+        void expireEvents();
     }
 }

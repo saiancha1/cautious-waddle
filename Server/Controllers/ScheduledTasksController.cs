@@ -19,11 +19,13 @@ namespace cautious_waddle.Controllers
     public class ScheduledTasksController : Controller
     {
         private IJobsRepository _jobsRepository;
+        private ILocalEventsRepository _localEventsRepository;
         private IEmailService _emailService;
-        public ScheduledTasksController(IJobsRepository jobsRepository, IEmailService emailService)
+        public ScheduledTasksController(IJobsRepository jobsRepository, IEmailService emailService, ILocalEventsRepository localEventsRepository)
         {
             _jobsRepository = jobsRepository;
             _emailService = emailService;
+            _localEventsRepository = localEventsRepository;
         }
 
         [HttpPost("addExpiredJobs")]
@@ -47,7 +49,22 @@ namespace cautious_waddle.Controllers
         {
             try
             {
-                RecurringJob.AddOrUpdate<EmailService>(e => e.MailingListWeekly(), "0 18 * * FRI");
+                RecurringJob.AddOrUpdate<EmailService>(e => e.MailingListWeekly(), CronExpression);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("addExpiredEvents")]
+        [Authorize(Roles="Admin")]
+        public IActionResult addExpiredEvents(string CronExpression = "* * * * *")
+        {
+            try
+            {
+                RecurringJob.AddOrUpdate<LocalEventsRepository>(e => e.expireEvents(), CronExpression);
                 return Ok();
             }
             catch(Exception ex)
