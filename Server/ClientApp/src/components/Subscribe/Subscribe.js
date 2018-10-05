@@ -1,6 +1,5 @@
 import React from 'react';
 import './Subscribe.css';
-import Header from '../Header/Header.js';
 
 const Subscribe = props => (
   <div>

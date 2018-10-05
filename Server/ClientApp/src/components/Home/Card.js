@@ -30,15 +30,17 @@ function ImgMediaCard(props) {
           alt="Contemplative Reptile"
           className={classes.media}
           height="140"
-          image={tempImage}
+          image={tempImage} // FIXME: im using a temp image here because API url was not working - event.imageURL.
           title="temp event"
         />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
-            {event.title}
+            {event.eventName}
           </Typography>
           <Typography component="p">
-            {event.info}
+            {event.eventDescription}
+            {event.startDate}
+            {event.eventLocation}
           </Typography>
         </CardContent>
       </CardActionArea>
