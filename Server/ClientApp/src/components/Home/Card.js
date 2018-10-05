@@ -92,7 +92,8 @@ class ImgMediaCard extends Component {
               </Typography>
               <Typography component="p">
                 {event.eventDescription}
-                {event.startDate}
+              </Typography>
+              <Typography component="p">
                 {event.eventLocation}
               </Typography>
             </CardContent>

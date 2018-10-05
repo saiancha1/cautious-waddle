@@ -50,6 +50,5 @@
 
 .full-date {
   font-size: 15px !important;
-  color: rgba(46,62,72,.6);
-
+  color: rgba(46, 62, 72, 0.6)!important;
 }
