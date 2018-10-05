@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -20,41 +20,76 @@ const styles = {
   },
 };
 
-function ImgMediaCard(props) {
-  const { classes, event } = props;
-  return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          className={classes.media}
-          height="140"
-          image={tempImage} // FIXME: im using a temp image here because API url was not working - event.imageURL.
-          title="temp event"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
-            {event.eventName}
-          </Typography>
-          <Typography component="p">
-            {event.eventDescription}
-            {event.startDate}
-            {event.eventLocation}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
+class ImgMediaCard extends Component {
+  // Extracts month from datetime and converts to month name
+  getMonth() {
+    const { event } = this.props;
+    const month = [];
+    month[0] = 'Jan';
+    month[1] = 'Feb';
+    month[2] = 'Mar';
+    month[3] = 'Apr';
+    month[4] = 'May';
+    month[5] = 'Jun';
+    month[6] = 'Jul';
+    month[7] = 'Aug';
+    month[8] = 'Sep';
+    month[9] = 'Oct';
+    month[10] = 'Nov';
+    month[11] = 'Dec';
+    let m = new Date(event.startDate);
+    m = month[m.getMonth()];
+    return (m);
+  }
+
+  getDay() {
+    const { event } = this.props;
+    const d = new Date(event.startDate);
+    return (d.getDate());
+  }
+
+  render() {
+    const { classes, event } = this.props;
+    return (
+      <Card className={classes.card}>
+        <CardActionArea>
+          <div>
+            {this.getDay()}
+            <br />
+            {this.getMonth()}
+          </div>
+          <CardMedia
+            component="img"
+            alt="Contemplative Reptile"
+            className={classes.media}
+            height="140"
+            image={tempImage} // FIXME: im using a temp image here because API url was not working - event.imageURL.
+            title="temp event"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="headline" component="h2">
+              {event.eventName}
+            </Typography>
+            <Typography component="p">
+              {event.eventDescription}
+              {event.startDate}
+              {event.eventLocation}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button size="small" color="primary">
           Find out more
-        </Button>
-      </CardActions>
-    </Card>
-  );
+          </Button>
+        </CardActions>
+      </Card>
+    );
+  }
 }
 
 ImgMediaCard.propTypes = {
   classes: PropTypes.object.isRequired,
+  event: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(ImgMediaCard);
