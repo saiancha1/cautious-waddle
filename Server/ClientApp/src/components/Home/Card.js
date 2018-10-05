@@ -42,6 +42,7 @@ class ImgMediaCard extends Component {
     return (m);
   }
 
+  // Extracts date from datetime
   getDay() {
     const { event } = this.props;
     const d = new Date(event.startDate);
