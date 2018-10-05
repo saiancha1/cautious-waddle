@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import tempImage from '../../images/temp-event.jpg';
+import './HomeFolder.css';
 
 const styles = {
   card: {
@@ -25,18 +26,18 @@ class ImgMediaCard extends Component {
   getMonth() {
     const { event } = this.props;
     const month = [];
-    month[0] = 'Jan';
-    month[1] = 'Feb';
-    month[2] = 'Mar';
-    month[3] = 'Apr';
-    month[4] = 'May';
-    month[5] = 'Jun';
-    month[6] = 'Jul';
-    month[7] = 'Aug';
-    month[8] = 'Sep';
-    month[9] = 'Oct';
-    month[10] = 'Nov';
-    month[11] = 'Dec';
+    month[0] = 'JAN';
+    month[1] = 'FEB';
+    month[2] = 'MAR';
+    month[3] = 'APR';
+    month[4] = 'MAY';
+    month[5] = 'JUN';
+    month[6] = 'JUL';
+    month[7] = 'AUG';
+    month[8] = 'SEP';
+    month[9] = 'OCT';
+    month[10] = 'NOV';
+    month[11] = 'DEC';
     let m = new Date(event.startDate);
     m = month[m.getMonth()];
     return (m);
@@ -54,10 +55,10 @@ class ImgMediaCard extends Component {
     return (
       <Card className={classes.card}>
         <CardActionArea>
-          <div>
-            {this.getDay()}
+          <div className="card-date">
+            <span className="card-date-day">{this.getDay()}</span>
             <br />
-            {this.getMonth()}
+            <span className="card-date-date">{this.getMonth()}</span>
           </div>
           <CardMedia
             component="img"
