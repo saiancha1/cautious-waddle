@@ -37,7 +37,7 @@ class AddJob extends Component {
         <div>
           <h1>Add Job</h1>
           <p>
-            {' '}
+            To add a new job listing please complete and submit the below form.
           </p>
           <form action={this.postDataHandler} formMethod="post">
                   Type:
@@ -71,10 +71,8 @@ class AddJob extends Component {
     } else {
       return (
         <div>
-          <p>
-            This page is only accessible for valid account holders.
-            If you have an account, please login to submit a new job posting.
-          </p>
+          <p>This function is only available to valid account holders.</p>
+          <p>If you have an account, please login to submit a new job posting. If you do not have an account you can sign up via the login option above.</p>
         </div>);
     }
   }
