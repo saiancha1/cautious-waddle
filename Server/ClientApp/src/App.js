@@ -14,8 +14,10 @@ import SummerTech from './components/SummerTech/SummerTech';
 import AdminComponent from './components/Admin/AdminComponent';
 import Addconsultant from './components/Consultants/Addconsultant';
 import Login from './components/Authentication/Login';
+import AddJob from './components/AddJob/AddJob';
 import logo from './images/logoV2.png';
 import Header from './components/Header/Header'
+
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {
@@ -40,9 +42,9 @@ class App extends Component {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/subscribe" component={Subscribe} />
           <Route exact path="/summerTech" component={SummerTech} />
-          <Route exact path="/admin" component={AdminComponent} />         
+          <Route exact path="/admin" component={AdminComponent} />
           <Route exact path="/addconsultant" component={Addconsultant} />
-
+          <Route exact path="/addjob" component={AddJob} />
 
           {/* <Footer /> */}
         </div>
