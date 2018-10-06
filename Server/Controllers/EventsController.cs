@@ -37,6 +37,20 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("adminGetEvents")]
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminGetEvents([FromQuery] bool? expired, [FromQuery] bool? approved)
+        {
+            try
+            {
+                return Ok(_localEventsRepository.AdminGetEvents(expired, approved));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addEvent")]
         [Authorize]
         public IActionResult AddEvent([FromBody] LocalEventsViewModel eventViewModel)
@@ -146,6 +160,36 @@ namespace cautious_waddle.Controllers
                 lEvents.Add(Nevent);
             }
             return Ok(lEvents);
+        }
+
+        [HttpPost("approveEvent")]
+        [Authorize(Roles="Admin")]
+        public IActionResult ApproveEvent([FromBody] int id)
+        {
+            try
+            {
+                _localEventsRepository.approveEvent(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("disapproveEvent")]
+        [Authorize(Roles="Admin")]
+        public IActionResult DisapproveEvent([FromBody] int id)
+        {
+            try
+            {
+                _localEventsRepository.disapproveEvent(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -35,9 +35,24 @@ namespace cautious_waddle.Controllers
             } 
             catch 
             {
-                return NotFound();
+                return BadRequest();
             }
         }
+
+        [HttpGet("getDisapprovedCompanies")]
+        [Authorize(Roles="Admin")]
+        public IActionResult GetDisapprovedCompanies()
+        {
+            try
+            {
+                return Ok(_companiesRepository.GetDisapprovedCompanies());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addCompany")]
         [Authorize]    
         public IActionResult AddCompany([FromBody]CompaniesViewModel companyViewModel)
@@ -59,7 +74,7 @@ namespace cautious_waddle.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest();
             }
         }       
          [HttpPost("removeCompany")]
@@ -84,13 +99,13 @@ namespace cautious_waddle.Controllers
                 }      
                 else
                 {
-                    return NotFound();
+                    return BadRequest();
                 }       
                 
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest();
             }
         }
         [HttpPost("editCompany")]
@@ -122,6 +137,36 @@ namespace cautious_waddle.Controllers
             {
                 return BadRequest();
             }
-        }       
+        }
+
+        [HttpPost("approveCompany")]
+        [Authorize(Roles="Admin")]
+        public IActionResult ApproveCompany([FromBody] int id)
+        {
+            try
+            {
+                _companiesRepository.approveCompany(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("disapproveCompany")]
+        [Authorize(Roles="Admin")]
+        public IActionResult DisapproveCompany([FromBody] int id)
+        {
+            try
+            {
+                _companiesRepository.disapproveCompany(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }           
     }
 }

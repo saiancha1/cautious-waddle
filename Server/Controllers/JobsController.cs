@@ -37,6 +37,20 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("adminGetJobs")]
+        [Authorize(Roles="Admin")]
+        public IActionResult adminGetJobs([FromQuery] bool? expired, [FromQuery] bool? approved)
+        {
+            try 
+            {
+                return Ok(_jobsRespository.AdminGetJobs(expired, approved));
+            } 
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost("addJob")]
         [Authorize]
         public IActionResult AddJob([FromBody] JobsViewModel jobViewModel) {
@@ -206,9 +220,34 @@ namespace cautious_waddle.Controllers
             }
         }
 
-        public void expiredJobs()
+        [HttpPost("approveJob")]
+        [Authorize(Roles="Admin")]
+        public IActionResult ApproveJob([FromBody] int id)
         {
-            _jobsRespository.ExpiredJobs();
+            try
+            {
+                _jobsRespository.approveJob(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("disapproveJob")]
+        [Authorize(Roles="Admin")]
+        public IActionResult DisapproveJob([FromBody] int id)
+        {
+            try
+            {
+                _jobsRespository.disapproveJob(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }
