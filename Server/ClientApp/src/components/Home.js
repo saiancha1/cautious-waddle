@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Grid, Row, Col } from 'react-bootstrap';
+import FlipCard from './Home/FlipCard';
 import background from '../images/homepage-image.jpg';
 import CardSlide from './Home/CardSlide';
 import './Home.css';
@@ -17,6 +19,20 @@ class Home extends Component {
             </h3>
           </div>
         </div>
+        <h3>About Us</h3>
+        <Grid>
+          <Row className="show-grid">
+            <Col xs={12} md={4}>
+              <FlipCard />
+            </Col>
+            <Col xs={12} md={4}>
+              <FlipCard />
+            </Col>
+            <Col xs={12} md={4}>
+              <FlipCard />
+            </Col>
+          </Row>
+        </Grid>
         <div className="cardSlide-wrapper">
           <CardSlide />
         </div>
