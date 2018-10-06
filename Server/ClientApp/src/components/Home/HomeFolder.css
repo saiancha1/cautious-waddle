@@ -10,6 +10,11 @@
   max-width: 1000px
 }
 
+.home-heading {
+  font-size: 50px;
+  font-family: "Comfortaa", cursive;
+}
+
 .slider-cards div h3 {
   border: 1px black solid;
 }

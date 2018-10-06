@@ -4,7 +4,7 @@
   z-index: 1;
   margin: 10px 0 10px 0;
   max-width: 225px !important;
-  height: 370px !important;
+  height: 326px !important;
   -webkit-perspective: 1000px;
           perspective: 1000px;
 }
@@ -35,7 +35,7 @@
 }
 
 .container-front {
-  padding-top: 63px;
+  padding-top: 50px;
 }
 
 /*- Card sides -*/

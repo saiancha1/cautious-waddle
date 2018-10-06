@@ -21,20 +21,22 @@ class Home extends Component {
             </h3>
           </div>
         </div>
-        <h3>About Us</h3>
-        <Grid className="card-grid">
-          <Row className="show-grid flip-cards">
-            <Col xs={12} sm={6} md={4}>
-              <FlipCardAbout />
-            </Col>
-            <Col xs={12} sm={6} md={4}>
-              <FlipCardMem />
-            </Col>
-            <Col xs={12} sm={12} md={4}>
-              <FlipCardServ />
-            </Col>
-          </Row>
-        </Grid>
+        <div className="about-block">
+          <h3 className="home-heading">About Us</h3>
+          <Grid className="card-grid">
+            <Row className="show-grid flip-cards">
+              <Col xs={12} sm={6} md={4}>
+                <FlipCardAbout />
+              </Col>
+              <Col xs={12} sm={6} md={4}>
+                <FlipCardMem />
+              </Col>
+              <Col xs={12} sm={12} md={4}>
+                <FlipCardServ />
+              </Col>
+            </Row>
+          </Grid>
+        </div>
         <div className="cardSlide-wrapper">
           <CardSlide />
         </div>
