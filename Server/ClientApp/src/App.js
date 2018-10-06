@@ -16,7 +16,8 @@ import Addconsultant from './components/Consultants/Addconsultant';
 import Login from './components/Authentication/Login';
 import AddJob from './components/AddJob/AddJob';
 import logo from './images/logoV2.png';
-import Header from './components/Header/Header'
+import Header from './components/Header/Header';
+import AddCompany from './components/AddCompany/AddCompany';
 
 
 // Changed this simple function into a class so that we can manipulate state on this page
@@ -45,6 +46,7 @@ class App extends Component {
           <Route exact path="/admin" component={AdminComponent} />
           <Route exact path="/addconsultant" component={Addconsultant} />
           <Route exact path="/addjob" component={AddJob} />
+          <Route exact path="/addcompany" component={AddCompany} />
 
           {/* <Footer /> */}
         </div>
