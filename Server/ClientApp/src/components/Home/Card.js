@@ -52,16 +52,15 @@ class ImgMediaCard extends Component {
 
   // Converts datetime to date string
   getFullDate() {
-    function addZero(j) { // TODO: get that extra zero there
-      if (j < 10) {
-        const j = `0${j}`;
-      }
-      return j;
-    }
     const { event } = this.props;
     const d = new Date(event.startDate);
-    // return (d.toDateString() + d.getHours + ":" + d.getMinutes);
-    return (`${d.toDateString()}, ${addZero(d.getHours())}:${addZero(d.getMinutes())}`);
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    };
+    const hour = d.toLocaleString('en-US', options);
+    return (`${d.toDateString()}, ${hour}`);
   }
 
   render() {
@@ -87,7 +86,7 @@ class ImgMediaCard extends Component {
               <Typography className="full-date">
                 {this.getFullDate()}
               </Typography>
-              <Typography gutterBottom variant="headline" component="h2">
+              <Typography gutterBottom constiant="headline" component="h2">
                 {event.eventName}
               </Typography>
               <Typography component="p">
