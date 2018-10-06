@@ -9,6 +9,8 @@ namespace cautious_waddle.ViewModels
         public int? EventId { get; set; }
         [JsonProperty("eventName")]
         public string EventName { get; set; }
+        [JsonProperty("hostedBy")]
+        public string HostedBy { get; set; }
         [JsonProperty("startDate")]
         public DateTime StartDate { get; set; }
         [JsonProperty("duration")]
