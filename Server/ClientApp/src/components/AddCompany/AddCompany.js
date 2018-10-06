@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import AuthService from '../Authentication/AuthService';
+
 
 class AddCompany extends Component {
   constructor(props) {
@@ -23,7 +25,7 @@ class AddCompany extends Component {
       country: '',
       summerJobs: '',
     };
-  }
+    Auth = new AuthService();
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -73,26 +75,17 @@ class AddCompany extends Component {
         summerJobs: summerJobs,
       }),
     });
+
     const PostingCompany = () => res.JSON();
     res();
     console.log(PostingCompany);
     console.log(res);
-  }
+    
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-
-  postDataHandler = () => {
-    const post = {
-      type: this.state.type,
-      position: this.state.position,
-      location: this.state.location,
-      description: this.state.description,
-    };
-  }
-
+    handleChange = (e) => {
+      this.setState({ [e.target.name]: e.target.value })
+    }
+  
   render() {
     const login = this.props;
     if (login.auth) {
@@ -169,16 +162,16 @@ class AddCompany extends Component {
             <input id="submit" name="submit" type="submit" value="Submit" />
           </form>
         </div>
-      );
+      )
     } else {
       return (
         <div>
           <p>This page is accessible only to valid account holders.</p>
           <p>If you have an account, please login to submit a new company listing.</p>
         </div>);
+      }
     }
   }
-}
 
 const mapStateToProps = state => (
   {
