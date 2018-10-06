@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import AuthService from '../Authentication/AuthService';
+
 
 class ConForm extends Component {
     state = {
@@ -8,10 +10,17 @@ class ConForm extends Component {
       website: '',
       email: '',
       phone: '',
-      address: '',
+      address1: '',
+      address2: '',
+      suburb: '',
+      city: '',
+      country: '',
+      postalcode: '',
       desc: '',
       exp: '',
     }
+
+    Auth = new AuthService();
 
     handleSubmit = (e) => {
       e.preventDefault();
@@ -19,13 +28,18 @@ class ConForm extends Component {
       const {
         fname,
         lname,
-        exp,
-        email,
         company,
         website,
+        email,
         phone,
-        address,
+        address1,
+        address2,
+        suburb,
+        city,
+        country,
+        postalcode,
         desc,
+        exp,
       } = this.state;
 
       const res = () => fetch('api/Consultants/addConsultant', {
@@ -33,18 +47,26 @@ class ConForm extends Component {
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          'Authorization' : 'Token' + localStorage.getItem('id_token'),
+          // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
+          Authorization : `Bearer ${this.Auth.getToken()}`,
         },
         body: JSON.stringify({
-          ConsultantFirstName: fname,
-          ConsultantLastName: lname,
-          Expertise: exp,
-          Email: email,
+// I want one email only consultant first name and last name separate
+          consultantName: fname,
+          // ConsultantLastName: '',
+          specialistArea: exp,
+          email: email,
+          contactemail: email,
           Company: company,
-          Website: website,
-          Phone: phone,
-          Address: address,
-          Description: desc,
+          website: website,
+          phone: phone,
+          address1: address1,
+          address2: address2,
+          consultantDesc: desc,
+          suburb: suburb,
+          postalcode: postalcode,
+          city: city,
+          country: country,
         }),
       });
       const PostingConsultantInfo = () => res.JSON();
@@ -65,8 +87,8 @@ class ConForm extends Component {
                     Name
           </label>
           <br />
-          <input name="fname" placeholder="First Name" value={this.state.name} onChange={this.handleChange} required />
-          <input name="lname" placeholder="Last Name" value={this.state.name} onChange={this.handleChange} required />
+          <input name="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleChange} required />
+          <input name="lname" placeholder="Last Name" value={this.state.lname} onChange={this.handleChange} required />
           <br />
           <br />
           <label>
@@ -109,14 +131,22 @@ class ConForm extends Component {
                     Address
           </label>
           <br />
-          <input name="address" placeholder="Address" value={this.state.address} onChange={this.handleChange} />
+          <input name="address1" placeholder="Street Number" value={this.state.address1} onChange={this.handleChange} />
+          <input name="address2" placeholder="Street Name" value={this.state.address2} onChange={this.handleChange} />
+          <br />
+          <input name="suburb" placeholder="Suburb" value={this.state.suburb} onChange={this.handleChange} />
+          <input name="city" placeholder="City" value={this.state.city} onChange={this.handleChange} />
+          <br />
+          <input name="country" placeholder="Country" value={this.state.country} onChange={this.handleChange} />
+          <input name="postalcode" placeholder="Postal Code" value={this.state.postalcode} onChange={this.handleChange} />
+
           <br />
           <br />
           <label>
                     Description
           </label>
           <br />
-          <textarea name="desc" placeholder="Say a few things about yourself" value={this.state.desc} onChange={this.handleChange} />
+          <textarea rows="4" cols="40" name="desc" placeholder="Say a few things about yourself" value={this.state.desc} onChange={this.handleChange} />
           <br />
           <input id="submit" name="submit" type="submit" value="Submit" />
         </form>

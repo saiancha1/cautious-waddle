@@ -6,10 +6,12 @@ namespace cautious_waddle.ViewModels
     {
         [JsonProperty("consultantId")]
         public int? ConsultantId { get; set; }
-        [JsonProperty("contactEmail")]
-        public string ContactEmail { get; set; }
-        [JsonProperty("consultantName")]
-        public string ConsultantName { get; set; }
+        [JsonProperty("firstName")]
+        public string FirstName { get; set; }
+        [JsonProperty("lastName")]
+        public string LastName { get; set; }
+        [JsonProperty("imageURL")]
+        public string ImageURL { get; set; }
         [JsonProperty("specialistArea")]
         public string SpecialistArea { get; set; }
         [JsonProperty("consultantDesc")]

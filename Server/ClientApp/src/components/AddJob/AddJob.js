@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { connect } from 'react-redux';
 //import AuthService from '../Authentication/AuthService';
 
@@ -16,6 +17,7 @@ class AddJob extends Component {
     //this.Auth = new AuthService();
   }
 
+
   postDataHandler = () => {
     const post = {
       type: this.state.type,
@@ -23,10 +25,14 @@ class AddJob extends Component {
       location: this.state.location,
       description: this.state.description,
     };
+
+    // TODO: Change this for a fetch call instead of Axios
+
     // Axios.post('https://capstone1.azurewebsites.net/api/jobs/addJob',post);
   }
 
   render() {
+
     const login = this.props;
     if (login.auth) {
       return (

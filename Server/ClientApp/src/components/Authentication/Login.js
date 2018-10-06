@@ -4,6 +4,7 @@ import AuthService from './AuthService';
 import LoginModal from './LoginModal';
 import { connect } from 'react-redux';
 import { compLoggedOut } from '../../store/reducer';
+import '../../App.css';
 
 
 class Login extends Component {
@@ -36,7 +37,7 @@ class Login extends Component {
 
     if (loggedIn === true) {
       return (
-        <button href="#" onClick={this.handleLogout}>Log out</button>
+        <button className="button-sign" href="#" onClick={this.handleLogout}>Log out</button>
       );
     } else {
       return (
