@@ -37,9 +37,7 @@ class AddJob extends Component {
         <div>
           <h1>Add Job</h1>
           <p>
-           To add a new job listing please complete the form below and submit.
             {' '}
-
           </p>
           <form action={this.postDataHandler} formMethod="post">
                   Type:

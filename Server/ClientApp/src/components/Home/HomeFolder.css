@@ -1,0 +1,54 @@
+.slider-cards {
+  font-family: "Open Sans Condensed", sans-serif;
+}
+.individual-card {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.slide-div {
+  max-width: 1000px
+}
+
+.slider-cards div h3 {
+  border: 1px black solid;
+}
+
+.slick-next:before, .slick-prev:before {
+  font-size: 40px;
+  color: #000 !important;
+}
+
+.slick-prev {
+  left: -50px;
+}
+
+.slick-next {
+  right: -50px;
+}
+
+.card-date {
+  min-height: 36px;
+  min-width: 36px;
+  padding: 8px;
+  border: 1px solid rgba(46,62,72,.12);
+  float: left;
+  position: absolute;
+  z-index: 2;
+  background: #f6f7f8;
+  text-align: center;
+  margin: 20px;
+  border-radius: 8px;
+  line-height: 1;
+}
+
+.card-date-day {
+  color:#f13a59;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.full-date {
+  font-size: 15px !important;
+  color: rgba(46, 62, 72, 0.6)!important;
+}

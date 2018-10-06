@@ -279,3 +279,6 @@ ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.README.md.icl
 ClientApp/node_modules/react-scripts 2/node_modules/jsx-ast-utils/.yarn.lock.icloud
 ClientApp/node_modules/util/..travis.yml.icloud
 .gitignore
+Server/.vscode/launch.json
+Server/.vscode/tasks.json
+.gitignore

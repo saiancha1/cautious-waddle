@@ -17,5 +17,7 @@ namespace cautious_waddle.ViewModels
         public string EventDescription { get; set; }
         [JsonProperty("eventLocation")]
         public string EventLocation { get; set; }
+        [JsonProperty("imageURL")]
+        public string ImageURL { get; set; }
     }
 }

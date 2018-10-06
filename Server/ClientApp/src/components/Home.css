@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css?family=Comfortaa:700");
+
+.home-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered-text h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered-text h3 {
+  margin: 0;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 3em;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+}
+
+.centered-text h3 span {
+  font-family: "Comfortaa", cursive;
+  font-size: 2em;
+}
+
+.background-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: -90px;
+}
+
+.cardSlide-wrapper {
+  text-align: -webkit-center;
+}

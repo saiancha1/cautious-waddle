@@ -3,10 +3,14 @@ import {
   Modal,
   NavItem,
 } from 'react-bootstrap';
+import { compLoggedIn } from '../../store/reducer';
 import AuthService from './AuthService';
 import SignupForm from './SignupForm';
+import { connect } from 'react-redux'; 
+import '../../App.css';
 
-export default class LoginModal extends React.Component {
+
+class LoginModal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -31,6 +35,8 @@ export default class LoginModal extends React.Component {
     await this.Auth.handleSubmit(event, userEmail, userPass)
       .then((res) => {
         if (res === true) {
+          const sync = this.props;
+          sync.syncLoggedIn();
           this.setState({ loggedIn: true });
         }
       });
@@ -69,17 +75,18 @@ export default class LoginModal extends React.Component {
 
     if (this.Auth.loggedIn()) {
       return (
-        <button
+        <button 
+          className="button-sign"
           type="button"
           onClick={this.props.handleLogout}
         >
-          Logout
+          Log out
         </button>
       );
     } else {
       return (
         <div>
-          <button  onClick={this.handleShow}>Login</button>
+          <button className="button-sign" onClick={this.handleShow}>Login</button>
 
           <Modal show={show} onHide={this.handleClose}>
             <Modal.Header closeButton>
@@ -114,3 +121,13 @@ export default class LoginModal extends React.Component {
     }
   }
 }
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
+
+const mapDispatchToProps = dispatch => ({
+  syncLoggedIn: () => dispatch(compLoggedIn()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
