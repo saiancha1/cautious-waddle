@@ -6,13 +6,24 @@ class AddCompany extends Component {
     super(props);
 
     this.state = {
-      type: '',
-      position: '',
-      location: '',
-      description: '',
+      contactEmail: '',
+      companyName: '',
+      logo: '',
+      size:'',
+      businessType:'',
+      specialistArea:'',
+      companyDesc:'',
+      phone:'',
+      email:'',
+      address1:'',
+      address2:'',
+      suburb:'',
+      postalCode:'',
+      city:'',
+      country:'',
+      summerJobs:'',
     };
   }
-
 
   postDataHandler = () => {
     const post = {
@@ -24,7 +35,7 @@ class AddCompany extends Component {
 
     // TODO: Change this for a fetch call instead of Axios
 
-    // Axios.post('https://capstone1.azurewebsites.net/api/jobs/addJob',post);
+    // Axios.post('https://capstone1.azurewebsites.net/api/companies/addCompany',post);
   }
 
   render() {
