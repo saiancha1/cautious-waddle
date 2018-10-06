@@ -31,22 +31,20 @@ class AddJob extends Component {
   }
 
   render() {
-
     const login = this.props;
     if (login.auth) {
       return (
         <div>
           <h1>Add Job</h1>
           <p>
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec,
-                mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id.
+           To add a new job listing please complete the form below and submit.
             {' '}
 
           </p>
           <form action={this.postDataHandler} formMethod="post">
                   Type:
             {' '}
-            <select name="cars">
+            <select name="jobs">
               <option value="Full Time">Full Time</option>
               <option value="Part Time">Part Time</option>
               <option value="Contract">Contract</option>
@@ -75,7 +73,10 @@ class AddJob extends Component {
     } else {
       return (
         <div>
-        This page is accessible to valid account holders. If you have an account, please login to submit a new job posting.
+          <p>
+            This page is only accessible for valid account holders.
+            If you have an account, please login to submit a new job posting.
+          </p>
         </div>);
     }
   }
