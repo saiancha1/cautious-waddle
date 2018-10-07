@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import './AuthStyle.css';
 
 export default class SignupForm extends Component {
   constructor(props) {
@@ -61,48 +62,68 @@ export default class SignupForm extends Component {
 
     return (
       <div>
-        <ExpansionPanel>
+        <ExpansionPanel className="expan-panel">
           <ExpansionPanelSummary>
-            <h4>Create an account</h4>
+            <h4>Create An Account</h4>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <form onSubmit={this.handleSubmit}>
+            <form className="signup-form" onSubmit={this.handleSubmit}>
               <div>
-                <label>
-                  First Name:
-                  <input type="text" name="firstName" value={firstName} onChange={this.handleChange} />
-                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  value={firstName}
+                  onChange={this.handleChange}
+                />
               </div>
               <div>
-                <label htmlFor="lastName">
-                  Last Name:
-                  <input type="text" name="lastName" value={lastName} onChange={this.handleChange} />
-                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChange={this.handleChange}
+                />
               </div>
               <div>
-                <label htmlFor="userName">
-                  User Name:
-                  <input type="text" name="userName" value={userName} onChange={this.handleChange} />
-                </label>
+                <input
+                  type="text"
+                  name="userName"
+                  placeholder="User Name"
+                  value={userName}
+                  onChange={this.handleChange}
+                />
               </div>
               <div>
-                <label htmlFor="email1">
-                  Email:
-                  <input type="text" name="email1" value={email1} onChange={this.handleChange} />
-                </label>
+                <input
+                  type="text"
+                  name="email1"
+                  placeholder="Email"
+                  value={email1}
+                  onChange={this.handleChange}
+                />
               </div>
               <div>
-                <label htmlFor="email2">
-                  Re-enter Email:
-                  <input type="text" name="email2" value={email2} onChange={this.handleChange} />
-                </label>
+                <input
+                  type="text"
+                  name="email2"
+                  placeholder="Re-enter Email"
+                  value={email2}
+                  onChange={this.handleChange}
+                />
               </div>
               <div>
-                <label htmlFor="password">
-                  Password:
-                  <input type="password" name="password" value={password} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Sign Up" />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div>
+                <input className="signup-button" type="submit" value="SIGN UP" />
               </div>
             </form>
           </ExpansionPanelDetails>
