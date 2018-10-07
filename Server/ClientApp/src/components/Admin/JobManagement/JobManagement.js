@@ -194,29 +194,6 @@ class JobManagement extends Component {
               handleDelete={this.handleDelete}
               handleIsApproved={this.handleIsApproved}
             />
-
-            <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">Use Google's location service?</DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-              Are you sure you would like to delete this user?
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.handleDialogClose} color="primary">
-              No
-                </Button>
-                <Button onClick={(e) => { this.handleUserDelete(this.state.delUserId, e); }} color="primary">
-              Yes
-                </Button>
-              </DialogActions>
-            </Dialog>
-            
           </div>
         );
       } else {

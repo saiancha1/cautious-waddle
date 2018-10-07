@@ -8,6 +8,7 @@ using cautious_waddle.Models;
 using cautious_waddle.Helpers;
 using cautious_waddle.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace cautious_waddle.Controllers
 {
@@ -46,7 +47,12 @@ namespace cautious_waddle.Controllers
         {
             try 
             {
-                return Ok(_jobsRespository.AdminGetJobs(expired, approved));
+                List<JobsViewModel> jobs = _jobsRespository.AdminGetJobs(expired, approved).ToList();
+                if (jobs.Count > 0)
+                {
+                    jobs = jobs.OrderBy(j => j.IsApproved).ToList();
+                }
+                return Ok(jobs);
             } 
             catch(Exception ex)
             {
