@@ -5,7 +5,7 @@ import Navbar from './components/NavBar/NavBar';
 import Home from './components/Home';
 import Companies from './components/Companies';
 import Consultants from './components/Consultants';
-import Work from './components/Work';
+import Jobs from './components/Jobs';
 import Events from './components/Events';
 import Contact from './components/Contact/Contact';
 import Subscribe from './components/Subscribe/Subscribe';
@@ -14,7 +14,7 @@ import SummerTech from './components/SummerTech/SummerTech';
 import AdminComponent from './components/Admin/AdminComponent';
 import Addconsultant from './components/Consultants/Addconsultant';
 import Login from './components/Authentication/Login';
-import AddJob from './components/AddJob/AddJob';
+import AddJob from './components/Jobs/AddJob';
 import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 
@@ -31,7 +31,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/companies" component={Companies} />
             <Route exact path="/consultants" component={Consultants} />
-            <Route exact path="/work" component={Work} />
+            <Route exact path="/jobs" component={Jobs} />
             <Route exact path="/events" component={Events} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/subscribe" component={Subscribe} />

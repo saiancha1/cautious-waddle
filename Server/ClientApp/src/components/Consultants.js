@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Consultant from './Consultants/Consultant';
 // Creating initial state and setting it to empty
 class Consultants extends Component {
