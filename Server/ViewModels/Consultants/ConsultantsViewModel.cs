@@ -6,6 +6,8 @@ namespace cautious_waddle.ViewModels
     {
         [JsonProperty("consultantId")]
         public int? ConsultantId { get; set; }
+        [JsonProperty("userId")]
+        public string UserId { get; set; }
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
         [JsonProperty("lastName")]

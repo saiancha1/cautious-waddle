@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using cautious_waddle.Models;
 
 namespace cautious_waddle.ViewModels
 {
@@ -6,6 +8,8 @@ namespace cautious_waddle.ViewModels
     {
         [JsonProperty("companyId")]
         public int? CompanyId { get; set; }
+        [JsonProperty("users")]
+        public List<CompanyUser> Users { get; set; }
         [JsonProperty("contactEmail")]
         public string ContactEmail { get; set; }
         [JsonProperty("companyName")]

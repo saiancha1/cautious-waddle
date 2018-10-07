@@ -9,8 +9,11 @@ namespace cautious_waddle.Models
         string GetUserId(int id);
         Consultant GetConsultantById(int id);
         IEnumerable<ConsultantsViewModel> GetConsultants();
+        IEnumerable<Consultant> GetDisapprovedConsultants();
         void AddConsultant(Consultant consultant, string userId);
         void EditConsultant(ConsultantsViewModel consultant);
         void RemoveConsultant(Consultant consultant, string userId);
+        void ApproveConsultant(int id);
+        void DisapproveConsultant(int id);
     }
 }
