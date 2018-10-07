@@ -52,6 +52,7 @@ namespace cautious_waddle.Models
 
             oldEvent.LastUpdate       = DateTime.Now;
             oldEvent.EventName        = newEvent.EventName;
+            oldEvent.hostedBy         = newEvent.HostedBy;
             oldEvent.StartDate        = newEvent.StartDate;
             oldEvent.Duration         = newEvent.Duration;
             oldEvent.EventDescription = newEvent.EventDescription;

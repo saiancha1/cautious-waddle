@@ -32,3 +32,26 @@
   padding: 0;
   color: #454645 !important;
 }
+
+@media screen and (max-width: 1090px) { 
+  .navItem {
+    font-size: 14px;
+  }
+  .navbar-collapse {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 890px;
+  }
+}
+
+@media screen and (max-width: 900px) { 
+  .navItem {
+    font-size: 12px;
+  }
+  .navbar-collapse {
+    margin-left: auto;
+    margin-right: auto;
+    width: 890px;
+  }
+
+}

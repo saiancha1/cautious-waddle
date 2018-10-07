@@ -3,11 +3,12 @@ import {
   Modal,
   NavItem,
 } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { compLoggedIn } from '../../store/reducer';
 import AuthService from './AuthService';
 import SignupForm from './SignupForm';
-import { connect } from 'react-redux'; 
-import '../../App.css';
+// import '../../App.css';
+import './AuthStyle.css';
 
 
 class LoginModal extends React.Component {
@@ -67,7 +68,6 @@ class LoginModal extends React.Component {
       this.setState({ panel: 'none' });
     }
   }
- 
 
 
   render() {
@@ -75,7 +75,7 @@ class LoginModal extends React.Component {
 
     if (this.Auth.loggedIn()) {
       return (
-        <button 
+        <button
           className="button-sign"
           type="button"
           onClick={this.props.handleLogout}
@@ -88,13 +88,12 @@ class LoginModal extends React.Component {
         <div>
           <button className="button-sign" onClick={this.handleShow}>Login</button>
 
-          <Modal show={show} onHide={this.handleClose}>
+          <Modal className="modal-container" show={show} onHide={this.handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Login</Modal.Title>
+              <Modal.Title className="modal-header">Log In To Tech Palmy</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <h4>Login</h4>
-              <form onSubmit={this.handleSubmit}>
+              <form className="login-form" onSubmit={this.handleSubmit}>
                 <input
                   placeholder="Email"
                   name="userEmail"
@@ -109,7 +108,7 @@ class LoginModal extends React.Component {
                   value={userPass}
                   onChange={this.handleChange}
                 />
-                <button type="submit" value="">Login</button>
+                <button type="submit" value="">LOG IN</button>
               </form>
 
               <SignupForm />

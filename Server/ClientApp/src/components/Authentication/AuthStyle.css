@@ -1,0 +1,82 @@
+.modal-content {
+  border-radius: 0;
+  text-align: center;
+  max-width: 450px;
+
+}
+
+.modal-header {
+  font-size: 23px;
+  border: none;
+  padding-bottom: 0;
+}
+
+.modal-dialog {
+  max-width: 450px;
+}
+
+.login-form {
+  display: inline-grid;
+  width: 300px;
+}
+
+.login-form input{
+  margin: 10px 0 10px;
+  text-align: center;
+}
+
+.login-form input:focus{
+  border-color: #d9534f;
+}
+
+.login-form button {
+  background: #150754;
+  color: #ede8e8;
+  font-weight: 500;
+}
+
+.login-form button:hover {
+  color: #d9534f;
+}
+
+.expan-panel {
+  text-align: center;
+  border: none !important;
+  display: inherit !important;
+}
+
+.expan-panel h4 {
+  font-size: 16px;
+  text-align: center !important;
+  width: 100%;
+  padding: 0 !important;
+  text-decoration: underline;
+}
+
+.expan-panel h4:hover {
+  color: #d9534f;
+}
+
+.MuiPaper-elevation1-7 {
+  box-shadow: none !important;
+}
+
+div[class^='MuiExpansionPanelDetails-root-']{
+  display: inherit !important;
+}
+
+.signup-form input {
+  width: 300px;
+  margin: 10px 0 10px;
+  text-align: center;
+}
+
+.signup-form input:hover {
+  color: #d9534f;
+}
+
+.signup-button {
+  background: #150754;
+  color: #ede8e8;
+  font-weight: 500;
+}
