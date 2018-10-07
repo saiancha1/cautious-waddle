@@ -38,6 +38,20 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("getDisapprovedConsultants")]
+        [Authorize(Roles="Admin")]
+        public IActionResult GetDisapprovedConsultants()
+        {
+            try
+            {
+                return Ok(_consultantsRepository.GetDisapprovedConsultants());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addConsultant")]
         [Authorize]
         public IActionResult AddConsultant([FromBody] ConsultantsViewModel consultantViewModel)
@@ -121,6 +135,36 @@ namespace cautious_waddle.Controllers
                 }
             }
             catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("approveConsultant")]
+        [Authorize(Roles="Admin")]
+        public IActionResult ApproveConsultant([FromBody] int id)
+        {
+            try
+            {
+                _consultantsRepository.ApproveConsultant(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("disapproveConsultant")]
+        [Authorize(Roles="Admin")]
+        public IActionResult DisapproveConsultant([FromBody] int id)
+        {
+            try
+            {
+                _consultantsRepository.DisapproveConsultant(id);
+                return Ok();
+            }
+            catch
             {
                 return BadRequest();
             }

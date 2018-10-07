@@ -18,16 +18,26 @@ namespace cautious_waddle.Models
 
         public IEnumerable<LocalEventsViewModel> GetEvents()
         {
-            IEnumerable<LocalEvent> events = _context.LocalEvents.Where(e => e.Expired == 0);
+            IEnumerable<LocalEvent> events = _context.LocalEvents.Where(e => e.Expired == 0 && e.IsApproved == 1);
 
             IEnumerable<LocalEventsViewModel> eventsViewModel = Mapper.Map<IEnumerable<LocalEvent>, IEnumerable<LocalEventsViewModel>>(events);
 
             return eventsViewModel;
         }
 
-        public IEnumerable<LocalEventsViewModel> GetExpiredEvents()
+        public IEnumerable<LocalEventsViewModel> AdminGetEvents(bool? expired, bool? approved)
         {
-            IEnumerable<LocalEvent> events = _context.LocalEvents.Where(e => e.Expired == 1);
+            IEnumerable<LocalEvent> events = _context.LocalEvents;
+
+            // Filtering
+            if(expired != null)
+            {
+                events = expired == true ? events.Where(e => e.Expired == 1) : events.Where(e => e.Expired == 0);
+            }
+            if(approved != null)
+            {
+                events = approved == true ? events.Where(e => e.IsApproved == 1) : events.Where(e => e.IsApproved == 0);
+            }
 
             IEnumerable<LocalEventsViewModel> eventsViewModel = Mapper.Map<IEnumerable<LocalEvent>, IEnumerable<LocalEventsViewModel>>(events);
 
@@ -102,6 +112,22 @@ namespace cautious_waddle.Models
                     expireEvent(localEvent);
                 }
             }
+        }
+
+        public void approveEvent(int id)
+        {
+            LocalEvent localEvent = GetEventById(id);
+            _context.LocalEvents.Attach(localEvent);
+            localEvent.IsApproved = 1;
+            _context.SaveChanges();
+        }
+
+        public void disapproveEvent(int id)
+        {
+            LocalEvent localEvent = GetEventById(id);
+            _context.LocalEvents.Attach(localEvent);
+            localEvent.IsApproved = 0;
+            _context.SaveChanges();
         }
     }
 }

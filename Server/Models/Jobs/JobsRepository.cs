@@ -21,8 +21,8 @@ namespace cautious_waddle.Models
         {
             IEnumerable<Job> jobs = _context.Jobs;
 
-            // Only return jobs that are not expired
-            jobs = jobs.Where(j => j.Expired == 0);
+            // Only return jobs that are not expired and have been approved
+            jobs = jobs.Where(j => j.Expired == 0 && j.IsApproved == 1);
 
             // Search
             if(search != null) {
@@ -35,7 +35,25 @@ namespace cautious_waddle.Models
                 jobs = jobs.Where(j => j.Salary <= maxSalary);
             }
 
-            IEnumerable<JobsViewModel> jobsViewModel = Mapper.Map<IEnumerable<Job>, IEnumerable<JobsViewModel>>(_context.Jobs);
+            IEnumerable<JobsViewModel> jobsViewModel = Mapper.Map<IEnumerable<Job>, IEnumerable<JobsViewModel>>(jobs);
+
+            return jobsViewModel;
+        }
+
+        public IEnumerable<JobsViewModel> AdminGetJobs(bool? expired, bool? approved)
+        {
+            IEnumerable<Job> jobs = _context.Jobs;
+
+            if(expired != null)
+            {
+                jobs = expired == true ? jobs.Where(j => j.Expired == 1) : jobs.Where(j => j.Expired == 0);
+            }
+            if(approved != null)
+            {
+                jobs = approved == true ? jobs.Where(j => j.IsApproved == 1) : jobs.Where(j => j.IsApproved == 0);
+            }
+
+            IEnumerable<JobsViewModel> jobsViewModel = Mapper.Map<IEnumerable<Job>, IEnumerable<JobsViewModel>>(jobs);
 
             return jobsViewModel;
         }
@@ -95,16 +113,20 @@ namespace cautious_waddle.Models
             }
         }
 
-        public IEnumerable<Job> AdminGetExpiredJobs()
+        public void approveJob(int id)
         {
-            IEnumerable<Job> jobs = _context.Jobs.Where(j => j.Expired == 1);
-            return jobs;
+            Job job = GetJobById(id);
+            _context.Jobs.Attach(job);
+            job.IsApproved = 1;
+            _context.SaveChanges();
         }
 
-        public IEnumerable<Job> AdminGetActiveJobs()
+        public void disapproveJob(int id)
         {
-            IEnumerable<Job> jobs = _context.Jobs.Where(j => j.Expired == 0);
-            return jobs;
+            Job job = GetJobById(id);
+            _context.Jobs.Attach(job);
+            job.IsApproved = 0;
+            _context.SaveChanges();
         }
     }
 }
