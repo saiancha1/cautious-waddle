@@ -8,14 +8,17 @@ export default class Footer extends Component {
       <div className="footer-container">
         <Grid>
           <Row>
-            <Col xs={6}>
-              Roowwwwww11
+            <Col className="footer-col-l" xs={6}>
+              <a href="/">Something Here</a>
             </Col>
-            <Col xs={6}>
-              oowwwwww122
+            <Col className="footer-col-r" xs={6}>
+              <a href="/">Another thing</a>
             </Col>
           </Row>
         </Grid>
+        <div className="copyright">
+          &copy; 2018 Tech Palmy
+        </div>
       </div>
     );
   }
