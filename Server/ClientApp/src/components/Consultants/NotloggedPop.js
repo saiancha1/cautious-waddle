@@ -5,15 +5,18 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Consultants from '../Consultants';
+import { Link } from 'react-router-dom';
+
 
 class NotloggedPop extends React.Component {
   state = {
-    open: false,
+    open: true,
   };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  // handleClickOpen = () => {
+  //   this.setState({ open: true });
+  // };
 
   handleClose = () => {
     this.setState({ open: false });
@@ -22,7 +25,8 @@ class NotloggedPop extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleClickOpen}>Open alert dialog</Button>
+      <Consultants/>
+        {/* <Button onClick={this.handleClickOpen}>Open alert dialog</Button> */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -32,13 +36,15 @@ class NotloggedPop extends React.Component {
           <DialogTitle id="alert-dialog-title">{"You are not Logged in"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              You must be logged in to your user profile to add a Consultant.
+              You must be logged in to add a Consultant.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
+          <Link to="/consultants">
             <Button onClick={this.handleClose} color="primary">
               Ok
             </Button>
+            </Link>
             {/* <Button onClick={this.handleClose} color="primary" autoFocus>
               Login
             </Button> */}
