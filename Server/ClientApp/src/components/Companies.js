@@ -13,6 +13,7 @@ class Companies extends Component {
     fetch('api/Companies/getCompanies').then(res => res.json())
       .then((json) => {
         this.setState({ companies: json });
+        console.log(this.state);
       });
   }
 

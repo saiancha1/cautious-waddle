@@ -21,7 +21,8 @@
     "react-scripts": "^1.1.5",
     "react-slick": "latest",
     "redux": "^4.0.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "react-recaptcha": "^2.3.10"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
