@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import Recaptcha from 'react-recaptcha';
+import './contact.css';
 
 class Contact extends Component {
   constructor(props) {
@@ -15,7 +16,6 @@ class Contact extends Component {
     };
 
     this.handleSubscribe = this.handleSubscribe.bind(this);
-    this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this);
   }
 
@@ -26,8 +26,8 @@ class Contact extends Component {
 
     handleSubscribe() {
       if (this.state.isVerified) {
-        alert('You have successfully subscribed!');
-        // TODO: put sign up code here
+        alert('Your message has been sent, thank you.');
+        // TODO: put API call and redirect code here
       } else {
         alert('Please verify that you are a human!');
       }
@@ -39,10 +39,6 @@ class Contact extends Component {
           isVerified: true,
         });
       }
-    }
-
-    recaptchaLoaded() {
-      console.log('capcha successfully loaded');
     }
 
     // handleSubmit = (e) => {
@@ -60,8 +56,9 @@ class Contact extends Component {
             <h2>Contact Us</h2>
             <Grid>
               <Row>
-                <Col>
+                <Col className="contact-name" xs={12} sm={6}>
                   <input
+                    className="msg-name-r"
                     name="fName"
                     placeholder="First Name"
                     value={fName}
@@ -69,8 +66,9 @@ class Contact extends Component {
                     required
                   />
                 </Col>
-                <Col>
+                <Col className="contact-name" xs={12} sm={6}>
                   <input
+                    className="msg-name-l"
                     name="lName"
                     placeholder="Last Name"
                     value={lName}
@@ -80,8 +78,9 @@ class Contact extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col>
+                <Col xs={12}>
                   <input
+                    className="contact-email"
                     name="email"
                     placeholder="Email"
                     type="email"
@@ -92,8 +91,9 @@ class Contact extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col>
+                <Col xs={12}>
                   <textarea
+                    className="contact-msg"
                     name="message"
                     placeholder="Message"
                     value={message}
@@ -101,26 +101,31 @@ class Contact extends Component {
                   />
                 </Col>
               </Row>
-              <Row>
-                <Col>
-                  <input
-                    id="submit"
-                    name="submit"
-                    type="submit"
-                    value="Send"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Recaptcha
-                    sitekey="6Lf923MUAAAAAGtQ_ts1VylvPdByFvmltRwoEC5T"
-                    render="explicit"
-                    onloadCallback={this.recaptchaLoaded}
-                    verifyCallback={this.verifyCallback}
-                  />
-                </Col>
-              </Row>
+              <div className="contact-input-wrap">
+                <Row>
+                  <Col xs={12}>
+                    <Recaptcha
+                      className="recaptcha"
+                      sitekey="6Lf923MUAAAAAGtQ_ts1VylvPdByFvmltRwoEC5T"
+                      render="explicit"
+                      // onloadCallback={this.recaptchaLoaded}
+                      verifyCallback={this.verifyCallback}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12}>
+                    <input
+                      className="contact-send"
+                      id="submit"
+                      name="submit"
+                      type="submit"
+                      value="Send"
+                    />
+                  </Col>
+                </Row>
+              </div>
+
             </Grid>
           </form>
         </div>
