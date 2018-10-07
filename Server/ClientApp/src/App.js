@@ -14,22 +14,17 @@ import SummerTech from './components/SummerTech/SummerTech';
 import AdminComponent from './components/Admin/AdminComponent';
 import Addconsultant from './components/Consultants/Addconsultant';
 import Login from './components/Authentication/Login';
+import AddJob from './components/AddJob/AddJob';
 import logo from './images/logoV2.png';
-import Header from './components/Header/Header'
+import Header from './components/Header/Header';
+
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          {/* <div className="page-header">
-            <img className="logo" src={logo} alt="logo" />
-            <h2>Tech Palmy</h2>
-            <div className="login-button">
-              <Login />
-            </div>
-          </div> */}
+        <div className="app-root">
           <Header />
           <Navbar />
           <Route exact path="/" component={Home} />
@@ -40,11 +35,9 @@ class App extends Component {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/subscribe" component={Subscribe} />
           <Route exact path="/summerTech" component={SummerTech} />
-          <Route exact path="/admin" component={AdminComponent} />         
+          <Route exact path="/admin" component={AdminComponent} />
           <Route exact path="/addconsultant" component={Addconsultant} />
-
-
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
     );

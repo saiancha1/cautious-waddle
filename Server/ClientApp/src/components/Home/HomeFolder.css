@@ -1,5 +1,18 @@
+.slider-cards {
+  font-family: "Open Sans Condensed", sans-serif;
+}
+.individual-card {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 .slide-div {
   max-width: 1000px
+}
+
+.home-heading {
+  font-size: 50px;
+  font-family: "Comfortaa", cursive;
 }
 
 .slider-cards div h3 {
@@ -17,4 +30,57 @@
 
 .slick-next {
   right: -50px;
+}
+
+.card-content {
+  background-color: #f9f9f9;
+}
+
+.card-date {
+  min-height: 36px;
+  min-width: 36px;
+  padding: 8px;
+  border: 1px solid rgba(46,62,72,.12);
+  float: left;
+  position: absolute;
+  z-index: 2;
+  background: #f6f7f8;
+  text-align: center;
+  margin: 20px;
+  border-radius: 8px;
+  line-height: 1;
+}
+
+.event-title {
+  font-size: 20px !important;
+  margin-top: 10px !important;
+  color: #484848 !important;
+}
+
+.event-host {
+  color: rgba(46, 62, 72, 0.6)!important;
+  font-size: 15px!important;
+}
+
+.event-host span {
+  color: #484848;
+}
+
+.card-date-day {
+  color:#f13a59;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.full-date {
+  font-size: 15px !important;
+  color: rgba(46, 62, 72, 0.6)!important;
+}
+
+
+@media (min-width: 600px) {
+  .MuiCardContent-root-33 {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+  }
 }

@@ -44,16 +44,26 @@ namespace cautious_waddle.Controllers
         {
             try
             {
-                Consultant consultant = Mapper.Map<ConsultantsViewModel, Consultant>(consultantViewModel);
+                var userId = IdentityHelper.GetUserId(HttpContext);
 
-                consultant.UserId = IdentityHelper.GetUserId(HttpContext);
-                consultant.IsApproved = 0;
-                consultant.CreationDate = DateTime.Now;
-                consultant.LastUpdate = DateTime.Now;
-                consultant.ReminderDate = DateTime.Now.AddMonths(1);
+                if(_profilesRepository.IsProfileConsultant(userId) == false)
+                {
+                    Consultant consultant = Mapper.Map<ConsultantsViewModel, Consultant>(consultantViewModel);
 
-                _consultantsRepository.AddConsultant(consultant);
-                return Ok();
+                    consultant.UserId = userId;
+                    consultant.IsApproved = 0;
+                    consultant.CreationDate = DateTime.Now;
+                    consultant.LastUpdate = DateTime.Now;
+                    consultant.ReminderDate = DateTime.Now.AddMonths(1);
+
+                    _consultantsRepository.AddConsultant(consultant, userId);
+
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             catch(Exception ex)
             {
@@ -67,12 +77,13 @@ namespace cautious_waddle.Controllers
         {
             try
             {
+                string userId = IdentityHelper.GetUserId(HttpContext);
                 Consultant consultant = new Consultant();
                 consultant = _consultantsRepository.GetConsultantById(id);
 
-                if(consultant.UserId == IdentityHelper.GetUserId(HttpContext))
+                if(consultant.UserId == userId)
                 {
-                    _consultantsRepository.RemoveConsultant(consultant);
+                    _consultantsRepository.RemoveConsultant(consultant, userId);
                     return Ok();
                 }
                 else

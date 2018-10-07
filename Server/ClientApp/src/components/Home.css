@@ -8,7 +8,7 @@
 
 .centered-text h3 {
   position: absolute;
-  top: 50%;
+  top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -16,14 +16,14 @@
 .centered-text h3 {
   margin: 0;
   font-family: "Open Sans Condensed", sans-serif;
-  font-size: 3em;
+  font-size: 3vw;
   background: rgba(0, 0, 0, 0.4);
   padding: 20px;
 }
 
 .centered-text h3 span {
   font-family: "Comfortaa", cursive;
-  font-size: 2em;
+  font-size: 7vw;
 }
 
 .background-image {
@@ -32,6 +32,36 @@
   margin-top: -90px;
 }
 
+.about-block {
+  margin: 50px 0 50px 0;
+}
+
+.home-heading {
+  text-align: center;
+  font-size: 50px;
+  font-family: "Comfortaa", cursive;
+}
+
 .cardSlide-wrapper {
   text-align: -webkit-center;
+}
+
+.card-grid {
+  max-width: 800px;
+  text-align: -webkit-center;
+}
+.flip-cards {
+  max-width: 800px;
+}
+
+@media screen and (max-width: 500px) { 
+  .centered-text h3 span {
+    display: none;
+  }
+
+  .centered-text h3 {
+    top:0;
+    padding-bottom: 30px;
+  }
+
 }

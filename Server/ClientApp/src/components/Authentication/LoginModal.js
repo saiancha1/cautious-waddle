@@ -3,11 +3,15 @@ import {
   Modal,
   NavItem,
 } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { compLoggedIn } from '../../store/reducer';
 import AuthService from './AuthService';
 import SignupForm from './SignupForm';
-import '../../App.css';
+// import '../../App.css';
+import './AuthStyle.css';
 
-export default class LoginModal extends React.Component {
+
+class LoginModal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -32,6 +36,8 @@ export default class LoginModal extends React.Component {
     await this.Auth.handleSubmit(event, userEmail, userPass)
       .then((res) => {
         if (res === true) {
+          const sync = this.props;
+          sync.syncLoggedIn();
           this.setState({ loggedIn: true });
         }
       });
@@ -62,7 +68,6 @@ export default class LoginModal extends React.Component {
       this.setState({ panel: 'none' });
     }
   }
- 
 
 
   render() {
@@ -70,7 +75,7 @@ export default class LoginModal extends React.Component {
 
     if (this.Auth.loggedIn()) {
       return (
-        <button 
+        <button
           className="button-sign"
           type="button"
           onClick={this.props.handleLogout}
@@ -83,13 +88,12 @@ export default class LoginModal extends React.Component {
         <div>
           <button className="button-sign" onClick={this.handleShow}>Login</button>
 
-          <Modal show={show} onHide={this.handleClose}>
+          <Modal className="modal-container" show={show} onHide={this.handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Login</Modal.Title>
+              <Modal.Title className="modal-header">Log In To Tech Palmy</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <h4>Login</h4>
-              <form onSubmit={this.handleSubmit}>
+              <form className="login-form" onSubmit={this.handleSubmit}>
                 <input
                   placeholder="Email"
                   name="userEmail"
@@ -104,7 +108,7 @@ export default class LoginModal extends React.Component {
                   value={userPass}
                   onChange={this.handleChange}
                 />
-                <button type="submit" value="">Login</button>
+                <button type="submit" value="">LOG IN</button>
               </form>
 
               <SignupForm />
@@ -116,3 +120,13 @@ export default class LoginModal extends React.Component {
     }
   }
 }
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
+
+const mapDispatchToProps = dispatch => ({
+  syncLoggedIn: () => dispatch(compLoggedIn()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

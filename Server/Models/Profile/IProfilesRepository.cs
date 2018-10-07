@@ -10,5 +10,8 @@ namespace cautious_waddle.Models
         void AddProfile(Profile profile);
         void DeleteProfile(Profile profile);
         void EditProfile(Profile profile);
+        Profile GetProfileByUserId(string userId);
+        bool IsProfileConsultant(string userId);
+        void ToggleConsultant(string userId);
     }
 }
