@@ -74,31 +74,31 @@ export default class SignupForm extends Component {
                 </label>
               </div>
               <div>
-                <label>
+                <label htmlFor="lastName">
                   Last Name:
                   <input type="text" name="lastName" value={lastName} onChange={this.handleChange} />
                 </label>
               </div>
               <div>
-                <label>
+                <label htmlFor="userName">
                   User Name:
                   <input type="text" name="userName" value={userName} onChange={this.handleChange} />
                 </label>
               </div>
               <div>
-                <label>
+                <label htmlFor="email1">
                   Email:
                   <input type="text" name="email1" value={email1} onChange={this.handleChange} />
                 </label>
               </div>
               <div>
-                <label>
+                <label htmlFor="email2">
                   Re-enter Email:
                   <input type="text" name="email2" value={email2} onChange={this.handleChange} />
                 </label>
               </div>
               <div>
-                <label>
+                <label htmlFor="password">
                   Password:
                   <input type="password" name="password" value={password} onChange={this.handleChange} />
                 </label>
