@@ -17,6 +17,7 @@ namespace cautious_waddle.Models
         public string hostedBy { get; set; }
         public DateTime StartDate { get; set; }
         public int? Duration { get; set; }
+        public int? Recurring { get; set; }
         public string EventDescription { get; set; }
         public string EventLocation { get; set; }
 

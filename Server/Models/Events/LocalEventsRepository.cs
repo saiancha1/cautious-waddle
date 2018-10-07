@@ -68,11 +68,18 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
-        public void expireEvent(LocalEvent e)
+        public void expireEvent(LocalEvent localEvent)
         {
-            _context.LocalEvents.Attach(e);
+            _context.LocalEvents.Attach(localEvent);
 
-            e.Expired = 1;
+            if(localEvent.Recurring == null)
+            {
+                localEvent.Expired = 1;
+            }
+            else
+            {
+                localEvent.StartDate = localEvent.StartDate.AddDays(localEvent.Recurring.Value);
+            }
 
             _context.SaveChanges();
         }

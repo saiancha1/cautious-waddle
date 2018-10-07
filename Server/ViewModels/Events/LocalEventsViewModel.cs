@@ -15,6 +15,8 @@ namespace cautious_waddle.ViewModels
         public DateTime StartDate { get; set; }
         [JsonProperty("duration")]
         public int Duration { get; set; }
+        [JsonProperty("recurring")]
+        public int? Recurring { get; set; }
         [JsonProperty("eventDescription")]
         public string EventDescription { get; set; }
         [JsonProperty("eventLocation")]
