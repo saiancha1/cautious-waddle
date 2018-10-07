@@ -1,50 +1,134 @@
 import React, { Component } from 'react';
+import { Grid, Row, Col } from 'react-bootstrap';
+import Recaptcha from 'react-recaptcha';
+import './contact.css';
 
 class Contact extends Component {
-    state = {
-      fname: '',
-      lname: '',
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fName: '',
+      lName: '',
       email: '',
       message: '',
+      isVerified: false,
+    };
 
-    }
+    this.handleSubscribe = this.handleSubscribe.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
+  }
 
-    handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(this.state);
-    }
 
     handleChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
     }
 
+    handleSubscribe() {
+      if (this.state.isVerified) {
+        alert('Your message has been sent, thank you.');
+        // TODO: put API call and redirect code here
+      } else {
+        alert('Please verify that you are a human!');
+      }
+    }
+
+    verifyCallback(response) {
+      if (response) {
+        this.setState({
+          isVerified: true,
+        });
+      }
+    }
+
+    // handleSubmit = (e) => {
+    //   e.preventDefault();
+    //   console.log(this.state);
+    // }
+
     render() {
+      const {
+        fName, lName, email, message,
+      } = this.state;
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-                Name
-          </label>
-          <br />
-          <input name="fname" placeholder="First Name" value={this.state.name} onChange={this.handleChange} required />
-          <input name="lname" placeholder="Last Name" value={this.state.name} onChange={this.handleChange} required />
-          <br />
-          <br />
-          <label>
-                 Email
-          </label>
-          <br />
-          <input name="email" placeholder="Email" type="email" value={this.state.email} onChange={this.handleChange} required />
-          <br />
-          {' '}
-          <br />
-          <label>
-                Message
-          </label>
-          <br />
-          <textarea name="message" placeholder="Tell us what your message is" value={this.state.message} onChange={this.handleChange} />
-          <br />
-          <input id="submit" name="submit" type="submit" value="Submit" />
-        </form>
+        <div className="contact-wrapper">
+          <form onSubmit={this.handleSubscribe}>
+            <h2>Contact Us</h2>
+            <Grid>
+              <Row>
+                <Col className="contact-name" xs={12} sm={6}>
+                  <input
+                    className="msg-name-r"
+                    name="fName"
+                    placeholder="First Name"
+                    value={fName}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </Col>
+                <Col className="contact-name" xs={12} sm={6}>
+                  <input
+                    className="msg-name-l"
+                    name="lName"
+                    placeholder="Last Name"
+                    value={lName}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <input
+                    className="contact-email"
+                    name="email"
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <textarea
+                    className="contact-msg"
+                    name="message"
+                    placeholder="Message"
+                    value={message}
+                    onChange={this.handleChange}
+                  />
+                </Col>
+              </Row>
+              <div className="contact-input-wrap">
+                <Row>
+                  <Col xs={12}>
+                    <Recaptcha
+                      className="recaptcha"
+                      sitekey="6Lf923MUAAAAAGtQ_ts1VylvPdByFvmltRwoEC5T"
+                      render="explicit"
+                      // onloadCallback={this.recaptchaLoaded}
+                      verifyCallback={this.verifyCallback}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12}>
+                    <input
+                      className="contact-send"
+                      id="submit"
+                      name="submit"
+                      type="submit"
+                      value="Send"
+                    />
+                  </Col>
+                </Row>
+              </div>
+
+            </Grid>
+          </form>
+        </div>
       );
     }
 }

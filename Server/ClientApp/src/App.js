@@ -25,18 +25,20 @@ class App extends Component {
     return (
       <Router>
         <div className="app-root">
-          <Header />
-          <Navbar />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/companies" component={Companies} />
-          <Route exact path="/consultants" component={Consultants} />
-          <Route exact path="/work" component={Work} />
-          <Route exact path="/events" component={Events} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/subscribe" component={Subscribe} />
-          <Route exact path="/summerTech" component={SummerTech} />
-          <Route exact path="/admin" component={AdminComponent} />
-          <Route exact path="/addconsultant" component={Addconsultant} />
+          <div className="main-content">
+            <Header />
+            <Navbar />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/companies" component={Companies} />
+            <Route exact path="/consultants" component={Consultants} />
+            <Route exact path="/work" component={Work} />
+            <Route exact path="/events" component={Events} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/subscribe" component={Subscribe} />
+            <Route exact path="/summerTech" component={SummerTech} />
+            <Route exact path="/admin" component={AdminComponent} />
+            <Route exact path="/addconsultant" component={Addconsultant} />
+          </div>
           <Footer />
         </div>
       </Router>
