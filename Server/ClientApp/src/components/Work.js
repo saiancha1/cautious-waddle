@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Link } from 'react-router-dom';
+import { BrowserRouter as Route, Router, Link } from 'react-router-dom';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import SummerTech from './SummerTech/SummerTech';
+import AddJob from './AddJob/AddJob';
+
 
 class Work extends Component {
 state = {
@@ -16,8 +20,16 @@ async componentWillMount() {
 render() {
   return (
     <div className="jobs">
+     <Route exact path="/summerTech" component={SummerTech} />
+     <Route exact path="/addjob" component={AddJob} />
+
     <Link to="/summertech">
-          <button>Summer of Tech</button>
+          Summer of Tech
+          </Link>
+        <br/>
+        <br/>
+        <Link to="/addjob">
+          <button>Add Job Listing</button>
           </Link>
           <br/>
           <br/>
@@ -31,7 +43,7 @@ render() {
                   <p> Job Description: {job.jobDescription}</p>
                   <p>Annual Salary: ${job.salary}</p>
                 </li>
-              ))}
+        ))}
             </ul>
             <br/>
             <br/>
