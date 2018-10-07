@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -52,20 +53,20 @@ class ImgMediaCard extends Component {
 
   // Converts datetime to date string
   getFullDate() {
-    function addZero(j) { // TODO: get that extra zero there
-      if (j < 10) {
-        const j = `0${j}`;
-      }
-      return j;
-    }
     const { event } = this.props;
     const d = new Date(event.startDate);
-    // return (d.toDateString() + d.getHours + ":" + d.getMinutes);
-    return (`${d.toDateString()}, ${addZero(d.getHours())}:${addZero(d.getMinutes())}`);
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    };
+    const hour = d.toLocaleString('en-US', options);
+    return (`${d.toDateString()}, ${hour}`);
   }
 
   render() {
     const { classes, event } = this.props;
+    console.log(event);
     return (
       <div className="individual-card">
         <Card className={classes.card}>
@@ -83,26 +84,19 @@ class ImgMediaCard extends Component {
               image={tempImage} // FIXME: im using a temp image here because API url was not working - event.imageURL.
               title="temp event"
             />
-            <CardContent>
+            <CardContent className="card-content">
               <Typography className="full-date">
                 {this.getFullDate()}
               </Typography>
-              <Typography gutterBottom variant="headline" component="h2">
+              <Typography className="event-title" gutterBottom component="h2">
                 {event.eventName}
               </Typography>
-              <Typography component="p">
-                {event.eventDescription}
-              </Typography>
-              <Typography component="p">
-                {event.eventLocation}
+              <Typography className="event-host" component="p">
+                Hosted by
+                <span> Beta Solutions</span>
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-          Find out more
-            </Button>
-          </CardActions>
         </Card>
       </div>
     );
@@ -113,5 +107,6 @@ ImgMediaCard.propTypes = {
   classes: PropTypes.object.isRequired,
   event: PropTypes.object.isRequired,
 };
+
 
 export default withStyles(styles)(ImgMediaCard);

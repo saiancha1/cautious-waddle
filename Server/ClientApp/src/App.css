@@ -1,3 +1,8 @@
+.app-root {
+  color: #484848;
+  font-family: "Open Sans Condensed", sans-serif;
+}
+
 .button-sign {
   background: #fff;
   border: 1px black solid;
@@ -5,7 +10,9 @@
   font-size: 1.2em;
   color: #454645;
 }
+
 .button-sign:hover {
   background: #949494 !important;
   color: #fff;
   }
+  
