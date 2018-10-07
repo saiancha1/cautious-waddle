@@ -14,8 +14,6 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listitems';
-import UserManagement from './UserManagement/UserManagement';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -26,6 +24,11 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import JobManagement from './JobManagement/JobManagement';
+import UserManagement from './UserManagement/UserManagement';
+
+import { mainListItems, secondaryListItems } from './listitems';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -121,68 +124,71 @@ class Dashboard extends React.Component {
      if (this.state.dashboard === 'UserManagement') {
        return (
          <main className={classes.content}>
-         <div className={classes.appBarSpacer} />
+           <div className={classes.appBarSpacer} />
 
-         <Typography variant="display1" gutterBottom>
+           <Typography variant="display1" gutterBottom>
          User Management
-         </Typography>
-         <div className={classes.tableContainer}>
-           <UserManagement />
-         </div>
-       </main>
+           </Typography>
+           <div className={classes.tableContainer}>
+             <UserManagement />
+           </div>
+         </main>
        );
      }
      if (this.state.dashboard === 'Dashboard') {
        return (
-        <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-       <Typography variant="display1" gutterBottom>
+         <main className={classes.content}>
+           <div className={classes.appBarSpacer} />
+           <Typography variant="display1" gutterBottom>
         Main Dashboard
-      </Typography>
-        </main>
-      );
+           </Typography>
+         </main>
+       );
      }
-      if (this.state.dashboard === 'CompanyManagement') {
-        return (
-          <main className={classes.content}>
-         <div className={classes.appBarSpacer} />
-        <Typography variant="display1" gutterBottom>
+     if (this.state.dashboard === 'CompanyManagement') {
+       return (
+         <main className={classes.content}>
+           <div className={classes.appBarSpacer} />
+           <Typography variant="display1" gutterBottom>
         Company Management
-       </Typography>
-       </main>
- 
-       );
-      }
-       if (this.state.dashboard === 'EventManagement') {
-        return (
-          <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-        <Typography variant="display1" gutterBottom>
-        Event Management
-       </Typography>
-       </main>
- 
-       );
-       }
-       if (this.state.dashboard === 'JobManagement') {
+           </Typography>
+         </main>
 
-        return (
-          <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-        <Typography variant="display1" gutterBottom>
-        Job Management
-       </Typography>
-       </main>
- 
        );
-       }
      }
-   
+     if (this.state.dashboard === 'EventManagement') {
+       return (
+         <main className={classes.content}>
+           <div className={classes.appBarSpacer} />
+           <Typography variant="display1" gutterBottom>
+        Event Management
+           </Typography>
+         </main>
 
-   handleViewChange = (id,e) => {
-    this.setState({dashboard:id});
-   e.preventDefault;
+       );
+     }
+     if (this.state.dashboard === 'JobManagement') {
+       return (
+         <main className={classes.content}>
+           <div className={classes.appBarSpacer} />
+           <Typography variant="display1" gutterBottom>
+        Job Management
+           </Typography>
+           <div className={classes.tableContainer}>
+             <JobManagement />
+           </div>
+         </main>
+
+       );
+     }
    }
+
+
+   handleViewChange = (id, e) => {
+     this.setState({ dashboard: id });
+     e.preventDefault;
+   }
+
    render() {
      const { classes } = this.props;
      const board = this.dBoard();
@@ -207,36 +213,36 @@ class Dashboard extends React.Component {
              </div>
              <Divider />
              <List>
-             <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText onClick={(e) => this.handleViewChange('Dashboard',e)} primary="Dashboard" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText  onClick={(e) => this.handleViewChange('UserManagement',e)} primary="User Management" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText onClick={(e) => this.handleViewChange('CompanyManagement',e)} primary="Company Management" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText onClick={(e) => this.handleViewChange('EventManagement',e)} primary="Events Management" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText onClick={(e) => this.handleViewChange('JobManagement',e)} primary="Job Management" />
-    </ListItem>
+               <ListItem button>
+                 <ListItemIcon>
+                   <DashboardIcon />
+                 </ListItemIcon>
+                 <ListItemText onClick={e => this.handleViewChange('Dashboard', e)} primary="Dashboard" />
+               </ListItem>
+               <ListItem button>
+                 <ListItemIcon>
+                   <PeopleIcon />
+                 </ListItemIcon>
+                 <ListItemText onClick={e => this.handleViewChange('UserManagement', e)} primary="User Management" />
+               </ListItem>
+               <ListItem button>
+                 <ListItemIcon>
+                   <BarChartIcon />
+                 </ListItemIcon>
+                 <ListItemText onClick={e => this.handleViewChange('CompanyManagement', e)} primary="Company Management" />
+               </ListItem>
+               <ListItem button>
+                 <ListItemIcon>
+                   <LayersIcon />
+                 </ListItemIcon>
+                 <ListItemText onClick={e => this.handleViewChange('EventManagement', e)} primary="Events Management" />
+               </ListItem>
+               <ListItem button>
+                 <ListItemIcon>
+                   <LayersIcon />
+                 </ListItemIcon>
+                 <ListItemText onClick={e => this.handleViewChange('JobManagement', e)} primary="Job Management" />
+               </ListItem>
              </List>
              <Divider />
              <List>{secondaryListItems}</List>
@@ -245,10 +251,7 @@ class Dashboard extends React.Component {
          </div>
        </React.Fragment>
      );
-            
-   }                    
-   
-  
+   }
 }
 
 Dashboard.propTypes = {
