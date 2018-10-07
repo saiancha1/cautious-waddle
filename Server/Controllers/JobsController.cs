@@ -7,6 +7,8 @@ using AutoMapper;
 using cautious_waddle.Models;
 using cautious_waddle.Helpers;
 using cautious_waddle.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace cautious_waddle.Controllers
 {
@@ -16,12 +18,14 @@ namespace cautious_waddle.Controllers
         private readonly IJobsRepository _jobsRespository;
         private readonly ICompaniesRepository _companiesRepository;
         private readonly IProfilesRepository _profilesRepository;
-
-        public JobsController(IJobsRepository JobsRepository, ICompaniesRepository companiesRepository, IProfilesRepository profilesRepository) 
+        private readonly UserManager<AppUser> _userManager;
+        public JobsController(IJobsRepository JobsRepository, ICompaniesRepository companiesRepository, IProfilesRepository profilesRepository,
+        UserManager<AppUser>UserManager) 
         {
             _jobsRespository = JobsRepository;
             _companiesRepository = companiesRepository;
             _profilesRepository = profilesRepository;
+            _userManager = UserManager;
         }
 
         [HttpGet("getJobs")]
@@ -43,7 +47,12 @@ namespace cautious_waddle.Controllers
         {
             try 
             {
-                return Ok(_jobsRespository.AdminGetJobs(expired, approved));
+                List<JobsViewModel> jobs = _jobsRespository.AdminGetJobs(expired, approved).ToList();
+                if (jobs.Count > 0)
+                {
+                    jobs = jobs.OrderBy(j => j.IsApproved).ToList();
+                }
+                return Ok(jobs);
             } 
             catch(Exception ex)
             {
@@ -112,18 +121,24 @@ namespace cautious_waddle.Controllers
 
         [HttpPost("removeJob")]
         [Authorize]
-        public IActionResult RemoveJob([FromBody] int id) {
+        public async System.Threading.Tasks.Task<IActionResult> RemoveJobAsync([FromBody] int id) {
             try
             {
                 Job job = new Job();
                 job = _jobsRespository.GetJobById(id);
-
+            
                 if(job.CompanyId.HasValue)
                 {
                     Company company = new Company();
                     company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
+                    
+                    var userId =  IdentityHelper.GetUserId(HttpContext);
+                    var user = await _userManager.FindByIdAsync(userId);
 
-                    if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
+                    var roles = await _userManager.GetRolesAsync(user);
+                    
+                    if(company.Users.Any(Nuser => user.Id == IdentityHelper.GetUserId(HttpContext))
+                    || roles.Contains("Admin"))
                     {
                         _jobsRespository.DeleteJob(job);
                         return Ok();
