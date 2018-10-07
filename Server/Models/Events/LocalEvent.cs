@@ -14,6 +14,7 @@ namespace cautious_waddle.Models
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }
         public string EventName { get; set; }
+        public string hostedBy { get; set; }
         public DateTime StartDate { get; set; }
         public int? Duration { get; set; }
         public string EventDescription { get; set; }

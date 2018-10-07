@@ -52,6 +52,7 @@ namespace cautious_waddle.Models
 
             oldEvent.LastUpdate       = DateTime.Now;
             oldEvent.EventName        = newEvent.EventName;
+            oldEvent.hostedBy         = newEvent.HostedBy;
             oldEvent.StartDate        = newEvent.StartDate;
             oldEvent.Duration         = newEvent.Duration;
             oldEvent.EventDescription = newEvent.EventDescription;
@@ -65,6 +66,35 @@ namespace cautious_waddle.Models
         {
             _context.LocalEvents.Remove(e);
             _context.SaveChanges();
+        }
+
+        public void expireEvent(LocalEvent e)
+        {
+            _context.LocalEvents.Attach(e);
+
+            e.Expired = 1;
+
+            _context.SaveChanges();
+        }
+
+        public void expireEvents()
+        {
+            List<LocalEvent> events = _context.LocalEvents.ToList();
+            DateTime current = DateTime.Now;
+
+            foreach(LocalEvent localEvent in events)
+            {
+                DateTime end = localEvent.StartDate;
+                if(localEvent.Duration != null)
+                {
+                    end.AddMinutes((double) localEvent.Duration);
+                }
+
+                if(end < current)
+                {
+                    expireEvent(localEvent);
+                }
+            }
         }
     }
 }

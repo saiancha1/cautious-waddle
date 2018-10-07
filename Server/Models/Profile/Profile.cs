@@ -4,9 +4,12 @@ namespace cautious_waddle.Models
 {
     public class Profile
     {
+        [JsonProperty("profileId")]
         public int? ProfileId { get; set; }
         [JsonProperty("userId")]
         public string UserId { get; set; }
+        [JsonProperty("consultant")]
+        public int Consultant { get; set; }
         [JsonProperty("email")]
         public string Email { get; set; }
         [JsonProperty("firstName")]

@@ -10,10 +10,12 @@ namespace cautious_waddle.Models
     public class ConsultantsRepository : IConsultantsRepository
     {
         ConsultantsDbContext _context;
+        IProfilesRepository _profilesRepository;
 
-        public ConsultantsRepository(ConsultantsDbContext context)
+        public ConsultantsRepository(ConsultantsDbContext context, IProfilesRepository profilesRepository)
         {
             _context = context;
+            _profilesRepository = profilesRepository;
         }
 
         public string GetUserId(int id)
@@ -37,9 +39,12 @@ namespace cautious_waddle.Models
             return consultantsViewModel;
         }
 
-        public void AddConsultant(Consultant consultant)
+        public void AddConsultant(Consultant consultant, string userId)
         {
             _context.Consultants.Add(consultant);
+
+            _profilesRepository.ToggleConsultant(userId);
+
             _context.SaveChanges();
         }
 
@@ -68,9 +73,10 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
-        public void RemoveConsultant(Consultant consultant)
+        public void RemoveConsultant(Consultant consultant, string userId)
         {
             _context.Consultants.Remove(consultant);
+            _profilesRepository.ToggleConsultant(userId);
             _context.SaveChanges();
         }
     }
