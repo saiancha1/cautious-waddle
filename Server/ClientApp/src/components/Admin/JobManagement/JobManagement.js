@@ -32,11 +32,13 @@ class JobManagement extends Component {
           this.setState({ isAdmin: true });
         }
       });
-    fetch('api/auth/getJobs', {
+    fetch('api/jobs/adminGetJobs', {
       headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` },
     }).then(res => res.json())
       .then((json) => {
         json.map(v => v.isDisabled = true);
+        console.log(json);
+
         this.setState({ jobs: json });
       })
       .catch(() => { this.setState({ isAdmin: false }); });
@@ -94,6 +96,62 @@ class JobManagement extends Component {
           .catch(() => { alert('Failed To Update'); });
       }
     }
+    handleIsApproved = (n,e,val) => {
+       if (e.target.checked === true)
+       {
+        const data = this.state.jobs;
+        const index = data.indexOf(n);
+        fetch('api/jobs/approveJob', {
+          method: 'POST',
+
+          headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          },
+          body: n.jobId,
+        })
+          .then((res) => {
+            if (res.status === 200) {
+              n.isApproved = 1;
+              n.isDisabled = true;
+              data[index] = n;
+              this.setState({jobs:data});
+            } else {
+              alert('Not Done');
+            }
+          })
+          .catch(() => { alert('Failed To Update'); });
+      }
+      else 
+      {
+        const data = this.state.jobs;
+        const index = data.indexOf(n);
+        fetch('api/jobs/disapproveJob', {
+          method: 'POST',
+
+          headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          },
+          body: n.jobId,
+        })
+          .then((res) => {
+            if (res.status === 200) {
+              n.isApproved = 0;
+              n.isDisabled = true;
+              data[index] = n;
+              this.setState({jobs:data});
+            } else {
+              alert('Not Done');
+            }
+          })
+          .catch(() => { alert('Failed To Update'); });
+      }
+      e.preventDefault();
+
+       }
+      
+    
 
     handleDelete = (n, e) => {
       this.setState({ open: true });
@@ -134,6 +192,7 @@ class JobManagement extends Component {
               handleSave={this.handleSave}
               handleChange={this.handleChange}
               handleDelete={this.handleDelete}
+              handleIsApproved={this.handleIsApproved}
             />
 
             <Dialog

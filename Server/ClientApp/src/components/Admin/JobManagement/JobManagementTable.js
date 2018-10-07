@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const styles = {
   root: {
@@ -40,11 +41,11 @@ const JobManagementTable = (props) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Email</TableCell>
-            <TableCell>Username</TableCell>
-            <TableCell>FirstName</TableCell>
-            <TableCell>LastName</TableCell>
-            <TableCell>PhoneNumber</TableCell>
+            <TableCell>Job Id</TableCell>
+            <TableCell>Job Name</TableCell>
+            <TableCell>Job Description</TableCell>
+            <TableCell>Expiry Date</TableCell>
+            <TableCell>Is Approved</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -52,12 +53,12 @@ const JobManagementTable = (props) => {
             data.map(n => (
               <TableRow key={n.id}>
                 <TableCell component="th" scope="row">
-                  {n.email}
+                  {n.jobId}
                 </TableCell>
-                <TableCell><TextField key={n.id} type="text" value={n.userName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'userName')} /></TableCell>
-                <TableCell><TextField key={n.id} type="text" value={n.firstName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'firstName')} /></TableCell>
-                <TableCell><TextField type="text" value={n.lastName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'lastName')} /></TableCell>
-                <TableCell><TextField type="text" value={n.phoneNumber} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'phoneNumber')} /></TableCell>
+                <TableCell><TextField key={n.jobId} type="text" value={n.jobTitle} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'jobName')}/></TableCell>
+                <TableCell><TextField key={n.jobId} type="text" value={n.jobDescription} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'description')} /></TableCell>
+                <TableCell><TextField type="text" value={n.expiry} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'expiry')} /></TableCell>
+                <TableCell><Checkbox checked={(n.isApproved === 1) ? true : false} disabled={n.isDisabled} onChange={(e) => props.handleIsApproved(n, e, 'isApproved')} /></TableCell>
                 <TableCell>
 
                   <IconButton

@@ -19,5 +19,8 @@ namespace cautious_waddle.ViewModels
         public int Salary { get; set; }
         [JsonProperty("expiry")]
         public DateTime Expiry { get; set; }
+
+        [JsonProperty("isApproved")]
+        public int IsApproved {get; set;}
     }
 }
