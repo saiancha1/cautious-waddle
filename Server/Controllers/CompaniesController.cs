@@ -53,6 +53,28 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("getCompany")]
+        public IActionResult GetCompany([FromQuery] int id)
+        {
+            try
+            {
+                Company company = _companiesRepository.GetCompanyById(id);
+
+                if(company.IsApproved == 1)
+                {
+                    return Ok(company);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addCompany")]
         [Authorize]    
         public IActionResult AddCompany([FromBody]CompaniesViewModel companyViewModel)
