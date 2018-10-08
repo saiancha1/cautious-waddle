@@ -80,10 +80,17 @@ namespace cautious_waddle.Models
             Job oldJob = GetJobById(job.JobId.Value);
             _context.Jobs.Attach(oldJob);
 
-            oldJob.LastUpdate     = DateTime.Now;
-            oldJob.JobTitle       = job.JobTitle;
-            oldJob.JobDescription = job.JobDescription;
-            oldJob.Salary         = job.Salary;
+            oldJob.LastUpdate       = DateTime.Now;
+            oldJob.CompanyId        = job.CompanyId;
+            oldJob.JobTitle         = job.JobTitle;
+            oldJob.JobDescription   = job.JobDescription;
+            oldJob.Salary           = job.Salary;
+            oldJob.ContactFirstName = job.ContactFirstName;
+            oldJob.ContactLastName  = job.ContactLastName;
+            oldJob.ContactEmail     = job.ContactEmail;
+            oldJob.ContactPhone     = job.ContactPhone;
+            oldJob.CompanyName      = job.CompanyName;
+            oldJob.WorkType         = job.WorkType;
 
             _context.SaveChanges();
         }
