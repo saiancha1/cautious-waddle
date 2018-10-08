@@ -9,6 +9,8 @@ using cautious_waddle.Helpers;
 using cautious_waddle.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace cautious_waddle.Controllers
 {
@@ -19,13 +21,15 @@ namespace cautious_waddle.Controllers
         private readonly ICompaniesRepository _companiesRepository;
         private readonly IProfilesRepository _profilesRepository;
         private readonly UserManager<AppUser> _userManager;
+        private IBlobStorage _blobStorage;
         public JobsController(IJobsRepository JobsRepository, ICompaniesRepository companiesRepository, IProfilesRepository profilesRepository,
-        UserManager<AppUser>UserManager) 
+        UserManager<AppUser>UserManager, IBlobStorage blobStorage) 
         {
             _jobsRespository = JobsRepository;
             _companiesRepository = companiesRepository;
             _profilesRepository = profilesRepository;
             _userManager = UserManager;
+            _blobStorage = blobStorage;
         }
 
         [HttpGet("getJobs")]
@@ -198,5 +202,17 @@ namespace cautious_waddle.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("addJobImage")]
+        [Authorize]
+        public async  Task<IActionResult> AddJobImage(IFormFile file)
+        {
+            if(file != null)
+            {
+                   var storageAccount =  _blobStorage.GetStorageAccount();
+                   return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
+            }
+            return NotFound();
+        }       
     }
 }
