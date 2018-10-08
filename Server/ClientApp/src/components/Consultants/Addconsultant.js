@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import ConForm from './ConForm';
 import AuthService from '../Authentication/AuthService';
+import NotloggedPop from './NotloggedPop';
 
 class Addconsultant extends Component {
   constructor(props) {
     super(props);
     this.Auth = new AuthService();
     this.state = {
-      loginStatus: true,
+      loginStatus: false,
     };
   }
 
@@ -17,7 +18,7 @@ class Addconsultant extends Component {
         {' '}
         {this.state.loginStatus ? (
           <ConForm />
-        ) : (<h1>logged out</h1>)
+        ) : (<NotloggedPop />)
 }
       </div>);
   }
