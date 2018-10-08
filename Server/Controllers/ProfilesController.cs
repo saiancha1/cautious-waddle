@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 
 using cautious_waddle.Models;
 using cautious_waddle.Helpers;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace cautious_waddle.Controllers
 {
@@ -10,10 +12,12 @@ namespace cautious_waddle.Controllers
     public class ProfilesController : Controller
     {
         private IProfilesRepository _profileRepository;
+        private IBlobStorage _blobStorage;
 
-        public ProfilesController(IProfilesRepository profileRepository)
+        public ProfilesController(IProfilesRepository profileRepository, IBlobStorage blobStorage)
         {
             _profileRepository = profileRepository;
+            _blobStorage = blobStorage;
         }
 
         [HttpGet("getProfiles")]
@@ -83,5 +87,17 @@ namespace cautious_waddle.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost("addProfileImage")]
+        [Authorize]
+        public async  Task<IActionResult> AddProfileImage(IFormFile file)
+        {
+            if(file != null)
+            {
+                   var storageAccount =  _blobStorage.GetStorageAccount();
+                   return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
+            }
+            return NotFound();
+        }       
     }
 }

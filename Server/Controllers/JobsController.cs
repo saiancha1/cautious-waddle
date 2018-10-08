@@ -7,6 +7,10 @@ using AutoMapper;
 using cautious_waddle.Models;
 using cautious_waddle.Helpers;
 using cautious_waddle.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace cautious_waddle.Controllers
 {
@@ -16,12 +20,16 @@ namespace cautious_waddle.Controllers
         private readonly IJobsRepository _jobsRespository;
         private readonly ICompaniesRepository _companiesRepository;
         private readonly IProfilesRepository _profilesRepository;
-
-        public JobsController(IJobsRepository JobsRepository, ICompaniesRepository companiesRepository, IProfilesRepository profilesRepository) 
+        private readonly UserManager<AppUser> _userManager;
+        private IBlobStorage _blobStorage;
+        public JobsController(IJobsRepository JobsRepository, ICompaniesRepository companiesRepository, IProfilesRepository profilesRepository,
+        UserManager<AppUser>UserManager, IBlobStorage blobStorage) 
         {
             _jobsRespository = JobsRepository;
             _companiesRepository = companiesRepository;
             _profilesRepository = profilesRepository;
+            _userManager = UserManager;
+            _blobStorage = blobStorage;
         }
 
         [HttpGet("getJobs")]
@@ -43,7 +51,12 @@ namespace cautious_waddle.Controllers
         {
             try 
             {
-                return Ok(_jobsRespository.AdminGetJobs(expired, approved));
+                List<JobsViewModel> jobs = _jobsRespository.AdminGetJobs(expired, approved).ToList();
+                if (jobs.Count > 0)
+                {
+                    jobs = jobs.OrderBy(j => j.IsApproved).ToList();
+                }
+                return Ok(jobs);
             } 
             catch(Exception ex)
             {
@@ -57,9 +70,11 @@ namespace cautious_waddle.Controllers
             try 
             {
                 Job job = Mapper.Map<JobsViewModel, Job>(jobViewModel);
+                string UserId = IdentityHelper.GetUserId(HttpContext);
 
                 job.IsApproved = 0;
                 job.Expired = 0;
+                job.UserId = UserId;
                 job.CreationDate = DateTime.Now;
                 job.LastUpdate = DateTime.Now;
 
@@ -69,40 +84,25 @@ namespace cautious_waddle.Controllers
                     return BadRequest();
                 }
 
+                // If a companyId is passed, ensure the company exists and the user has access to it
                 if(job.CompanyId.HasValue)
                 {
-                    Company company = new Company();
-                    company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
-
-                    if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
+                    Company company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
+                    if(company == null)
                     {
-                        _jobsRespository.AddJob(job);
-                        return Ok();
-                    }
-                    else {
-                        return Unauthorized();
-                    }
-                }
-                else if(job.ProfileId.HasValue)
-                {
-                    // 'Profile' is also a class in AutoMapper, so must use namespace as well.
-                    cautious_waddle.Models.Profile profile = new cautious_waddle.Models.Profile();
-                    profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
-
-                    if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
-                    {
-                        _jobsRespository.AddJob(job);
-                        return Ok();
+                        return BadRequest();
                     }
                     else
                     {
-                        return Unauthorized();
+                        if(company.Users.Any(user => user.Id == UserId) == false)
+                        {
+                            return Unauthorized();
+                        }
                     }
                 }
-                else
-                {
-                    return BadRequest();
-                }
+
+                _jobsRespository.AddJob(job);
+                return Ok();
             }
             catch (Exception e)
             {
@@ -112,49 +112,26 @@ namespace cautious_waddle.Controllers
 
         [HttpPost("removeJob")]
         [Authorize]
-        public IActionResult RemoveJob([FromBody] int id) {
+        public async System.Threading.Tasks.Task<IActionResult> RemoveJobAsync([FromBody] int id) {
             try
             {
                 Job job = new Job();
                 job = _jobsRespository.GetJobById(id);
+                string UserId = IdentityHelper.GetUserId(HttpContext);
 
-                if(job.CompanyId.HasValue)
+                if(job.UserId == UserId)
                 {
-                    Company company = new Company();
-                    company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
-
-                    if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
-                    {
-                        _jobsRespository.DeleteJob(job);
-                        return Ok();
-                    }
-                    else
-                    {
-                        return Unauthorized();
-                    }
+                    _jobsRespository.DeleteJob(job);
+                    return Ok();
                 }
-                else if(job.ProfileId.HasValue)
+                else
                 {
-                    cautious_waddle.Models.Profile profile = new cautious_waddle.Models.Profile();
-                    profile = _profilesRepository.GetProfileById(job.ProfileId.Value);
-
-                    if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
-                    {
-                        _jobsRespository.DeleteJob(job);
-                        return Ok();
-                    }
-                    else
-                    {
-                        return Unauthorized();
-                    }
-                }
-                else {
-                    return NotFound();
+                    return Unauthorized();
                 }
             }
             catch (Exception ex)
             {
-                return NotFound(ex);
+                return BadRequest();
             }
         }
 
@@ -167,42 +144,18 @@ namespace cautious_waddle.Controllers
                 if(job.JobId.HasValue)
                 {
                     Job originalJob = _jobsRespository.GetJobById(job.JobId.Value);
+                    string UserId = IdentityHelper.GetUserId(HttpContext);
 
-                    // Ensure expiry is not set to an invalid date
-                    if(job.Expiry != originalJob.Expiry && job.Expiry < DateTime.Now)
+                    if(originalJob.UserId == UserId)
                     {
-                        return BadRequest();
-                    }
-
-                    if(originalJob.CompanyId.HasValue)
-                    {
-                        Company company = new Company();
-                        company = _companiesRepository.GetCompanyById(originalJob.CompanyId.Value);
-
-                        if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
+                        // Ensure expiry is not set to an invalid date
+                        if(job.Expiry != originalJob.Expiry && job.Expiry < DateTime.Now)
                         {
-                            _jobsRespository.EditJob(job);
-                            return Ok();
+                            return BadRequest();
                         }
-                        else
-                        {
-                            return Unauthorized();
-                        }
-                    }
-                    else if(originalJob.ProfileId.HasValue)
-                    {
-                        cautious_waddle.Models.Profile profile = new cautious_waddle.Models.Profile();
-                        profile = _profilesRepository.GetProfileById(originalJob.ProfileId.Value);
-
-                        if(profile.UserId == IdentityHelper.GetUserId(HttpContext))
-                        {
-                            _jobsRespository.EditJob(job);
-                            return Ok();
-                        }
-                        else
-                        {
-                            return Unauthorized();
-                        }
+                    
+                        _jobsRespository.EditJob(job);
+                        return Ok();
                     }
                     else
                     {
@@ -216,7 +169,7 @@ namespace cautious_waddle.Controllers
             }
             catch (Exception e)
             {
-                return NotFound(e);
+                return BadRequest();
             }
         }
 
@@ -249,5 +202,17 @@ namespace cautious_waddle.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("addJobImage")]
+        [Authorize]
+        public async  Task<IActionResult> AddJobImage(IFormFile file)
+        {
+            if(file != null)
+            {
+                   var storageAccount =  _blobStorage.GetStorageAccount();
+                   return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
+            }
+            return NotFound();
+        }       
     }
 }

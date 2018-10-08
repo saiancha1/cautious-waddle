@@ -69,6 +69,7 @@ namespace cautious_waddle
                 options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnectionString"]));
             services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddTransient<IEmailService, EmailService>();
+            services.AddSingleton<IBlobStorage, BlobStorageHelper>();
 
             services.AddHangfire(configuration =>
             {

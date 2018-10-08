@@ -11,6 +11,8 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace cautious_waddle.Controllers
 {
@@ -18,10 +20,12 @@ namespace cautious_waddle.Controllers
     public class EventsController : Controller
     {
         private ILocalEventsRepository _localEventsRepository;
+        private IBlobStorage _blobStorage;
 
-        public EventsController(ILocalEventsRepository EventsRepository)
+        public EventsController(ILocalEventsRepository EventsRepository, IBlobStorage blobStorage)
         {
             _localEventsRepository = EventsRepository;
+            _blobStorage = blobStorage;
         }
 
         [HttpGet("getEvents")]
@@ -191,5 +195,16 @@ namespace cautious_waddle.Controllers
                 return BadRequest();
             }
         }
+        [HttpPost("addEventImage")]
+        [Authorize]
+        public async  Task<IActionResult> AddEventImage(IFormFile file)
+        {
+            if(file != null)
+            {
+                   var storageAccount =  _blobStorage.GetStorageAccount();
+                   return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
+            }
+            return NotFound();
+        }       
     }
 }

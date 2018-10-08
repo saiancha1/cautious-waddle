@@ -3,6 +3,11 @@
   font-family: "Open Sans Condensed", sans-serif;
 }
 
+.main-content {
+  margin: 0 auto;
+}
+
+
 .button-sign {
   background: #fff;
   border: 1px black solid;
@@ -15,4 +20,6 @@
   background: #949494 !important;
   color: #fff;
   }
+
+
   
