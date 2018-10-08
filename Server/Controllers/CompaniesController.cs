@@ -75,6 +75,21 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("getMyCompanies")]
+        [Authorize]
+        public IActionResult GetMyCompanies()
+        {
+            try
+            {
+                string UserId = IdentityHelper.GetUserId(HttpContext);
+                return Ok(_companiesRepository.GetMyCompanies(UserId));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addCompany")]
         [Authorize]    
         public IActionResult AddCompany([FromBody]CompaniesViewModel companyViewModel)

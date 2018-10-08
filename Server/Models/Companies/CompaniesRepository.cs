@@ -49,6 +49,27 @@ namespace cautious_waddle.Models
             IEnumerable<Company> companies = _context.Companies.Include(a => a.Users).Where(c => c.IsApproved == 0);
             return companies;
         }
+
+        public IEnumerable<CompaniesViewModel> GetMyCompanies(string userId)
+        {
+            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
+            List<Company> myCompanies = new List<Company>();
+            int count = 0;
+
+            foreach(Company company in companies)
+            {
+                List<CompanyUser> users = GetUsers(company.CompanyId.Value);
+                if(users.Any(u => u.Id == userId))
+                {
+                    count++;
+                    myCompanies.Add(company);
+                }
+            }
+
+            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(myCompanies);
+            return companiesViewModel;
+        }
+
         public void AddCompany(Company company)
         {
             _context.Companies.Add(company);
