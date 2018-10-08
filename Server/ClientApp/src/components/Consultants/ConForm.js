@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from '../Authentication/AuthService';
+import ImgUpload from './ImgUpload';
 
 
 class ConForm extends Component {
@@ -18,6 +19,7 @@ class ConForm extends Component {
       postalcode: '',
       desc: '',
       exp: '',
+      imgu: '',
     }
 
     Auth = new AuthService();
@@ -28,7 +30,6 @@ class ConForm extends Component {
       const {
         fname,
         lname,
-        company,
         website,
         email,
         phone,
@@ -40,6 +41,7 @@ class ConForm extends Component {
         postalcode,
         desc,
         exp,
+        imgu,
       } = this.state;
 
       const res = () => fetch('api/Consultants/addConsultant', {
@@ -52,21 +54,20 @@ class ConForm extends Component {
         },
         body: JSON.stringify({
 // I want one email only consultant first name and last name separate
-          consultantName: fname,
-          // ConsultantLastName: '',
-          specialistArea: exp,
-          email: email,
-          contactemail: email,
-          Company: company,
-          website: website,
+          firstname: fname,
+          lastname: lname,
+          consultantDesc: desc,
           phone: phone,
+          email: email,
+          website: website,
           address1: address1,
           address2: address2,
-          consultantDesc: desc,
+          specialistArea: exp,
           suburb: suburb,
           postalcode: postalcode,
           city: city,
           country: country,
+          imageurl: imgu,
         }),
       });
       const PostingConsultantInfo = () => res.JSON();
@@ -99,13 +100,7 @@ class ConForm extends Component {
           <br />
           <br />
           <label>
-                    Company
-          </label>
-          <br />
-          <input name="company" value={this.state.company} onChange={this.handleChange} />
-          <br />
-          <br />
-          <label>
+            
                     Website
           </label>
           <br />
@@ -128,6 +123,17 @@ class ConForm extends Component {
           <br />
           <br />
           <label>
+
+                               Image Url
+          </label>
+          <br />
+          <ImgUpload value={this.state.imgu} onChange={this.handleChange} required  />
+
+          {/* <input name="imgu" placeholder="IMAGE URL" value={this.state.imgu} onChange={this.handleChange} required /> */}
+          <br />
+          <br />
+
+          <label>
                     Address
           </label>
           <br />
@@ -141,6 +147,7 @@ class ConForm extends Component {
           <input name="postalcode" placeholder="Postal Code" value={this.state.postalcode} onChange={this.handleChange} />
 
           <br />
+
           <br />
           <label>
                     Description

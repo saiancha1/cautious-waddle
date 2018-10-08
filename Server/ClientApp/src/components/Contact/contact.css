@@ -1,0 +1,67 @@
+.contact-wrapper {
+  text-align: center;
+
+}
+
+.contact-name {
+  padding: 2px !important;
+}
+
+.contact-email {
+  max-width: 484px;
+  width: 100%
+}
+
+.contact-msg {
+  max-width: 484px;
+  height: 200px;
+  width: 100%;
+  margin: 2px;
+}
+
+.msg-name-r {
+  max-width: 240px;
+  width: 100%;
+  float: right;
+  padding-right: 5px;
+}
+
+.msg-name-l {
+  max-width: 240px;
+  width: 100%;
+  float: left;
+  padding-left: 5px;
+
+}
+
+.contact-input-wrap {
+  width: 484px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-send {
+  float: left;
+  background: #fff;
+  border: 1px black solid;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 1.2em;
+  color: #454645;
+  height: 28px;
+  text-align: center;
+  width: 60px;
+}
+.contact-send:hover {
+  background: #949494 !important;
+  color: #fff;
+}
+
+.recaptcha {
+  max-width: 302px;
+  border-radius: 0 !important;
+}
+
+.rc-anchor-light.rc-anchor-normal.rc-anchor-light.rc-anchor{
+  border-radius: 0 !important;
+
+}

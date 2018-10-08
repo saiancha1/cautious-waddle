@@ -8,6 +8,8 @@ using AutoMapper;
 using cautious_waddle.Models;
 using cautious_waddle.Helpers;
 using cautious_waddle.ViewModels;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace cautious_waddle.Controllers
 {
@@ -18,11 +20,15 @@ namespace cautious_waddle.Controllers
         private IProfilesRepository _profilesRepository;
         private ConsultantsDbContext _context;
 
-        public ConsultantsController(IConsultantsRepository consultantsRepository, IProfilesRepository profilesRepository, ConsultantsDbContext context)
+        private IBlobStorage _blobStorage;
+
+        public ConsultantsController(IConsultantsRepository consultantsRepository, IProfilesRepository profilesRepository, ConsultantsDbContext context,
+        IBlobStorage blobStorage)
         {
             _consultantsRepository = consultantsRepository;
             _profilesRepository = profilesRepository;
             _context = context;
+            _blobStorage = blobStorage;
         }
 
         [HttpGet("getConsultants")]
@@ -31,6 +37,20 @@ namespace cautious_waddle.Controllers
             try
             {
                 return Ok(_consultantsRepository.GetConsultants());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("getDisapprovedConsultants")]
+        [Authorize(Roles="Admin")]
+        public IActionResult GetDisapprovedConsultants()
+        {
+            try
+            {
+                return Ok(_consultantsRepository.GetDisapprovedConsultants());
             }
             catch(Exception ex)
             {
@@ -125,5 +145,47 @@ namespace cautious_waddle.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("approveConsultant")]
+        [Authorize(Roles="Admin")]
+        public IActionResult ApproveConsultant([FromBody] int id)
+        {
+            try
+            {
+                _consultantsRepository.ApproveConsultant(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("disapproveConsultant")]
+        [Authorize(Roles="Admin")]
+        public IActionResult DisapproveConsultant([FromBody] int id)
+        {
+            try
+            {
+                _consultantsRepository.DisapproveConsultant(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+         [HttpPost("addConsultantImage")]
+        [Authorize]
+        public async  Task<IActionResult> AddConsultantImage(IFormFile file)
+        {
+            if(file != null)
+            {
+                   var storageAccount =  _blobStorage.GetStorageAccount();
+                   return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
+            }
+            return NotFound();
+        }       
     }
 }

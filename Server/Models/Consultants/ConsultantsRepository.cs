@@ -30,13 +30,19 @@ namespace cautious_waddle.Models
 
         public IEnumerable<ConsultantsViewModel> GetConsultants()
         {
-            IEnumerable<Consultant> consultants = _context.Consultants;
+            IEnumerable<Consultant> consultants = _context.Consultants.Where(c => c.IsApproved == 1);
 
             // Filtering here
 
             IEnumerable<ConsultantsViewModel> consultantsViewModel = Mapper.Map<IEnumerable<Consultant>, IEnumerable<ConsultantsViewModel>>(consultants);
 
             return consultantsViewModel;
+        }
+
+        public IEnumerable<Consultant> GetDisapprovedConsultants()
+        {
+            IEnumerable<Consultant> consultants = _context.Consultants.Where(c => c.IsApproved == 0);
+            return consultants;
         }
 
         public void AddConsultant(Consultant consultant, string userId)
@@ -77,6 +83,22 @@ namespace cautious_waddle.Models
         {
             _context.Consultants.Remove(consultant);
             _profilesRepository.ToggleConsultant(userId);
+            _context.SaveChanges();
+        }
+
+        public void ApproveConsultant(int id)
+        {
+            Consultant consultant = GetConsultantById(id);
+            _context.Consultants.Attach(consultant);
+            consultant.IsApproved = 1;
+            _context.SaveChanges();
+        }
+
+        public void DisapproveConsultant(int id)
+        {
+            Consultant consultant = GetConsultantById(id);
+            _context.Consultants.Attach(consultant);
+            consultant.IsApproved = 0;
             _context.SaveChanges();
         }
     }

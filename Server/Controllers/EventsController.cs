@@ -11,6 +11,8 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace cautious_waddle.Controllers
 {
@@ -18,10 +20,12 @@ namespace cautious_waddle.Controllers
     public class EventsController : Controller
     {
         private ILocalEventsRepository _localEventsRepository;
+        private IBlobStorage _blobStorage;
 
-        public EventsController(ILocalEventsRepository EventsRepository)
+        public EventsController(ILocalEventsRepository EventsRepository, IBlobStorage blobStorage)
         {
             _localEventsRepository = EventsRepository;
+            _blobStorage = blobStorage;
         }
 
         [HttpGet("getEvents")]
@@ -30,6 +34,20 @@ namespace cautious_waddle.Controllers
             try
             {
                 return Ok(_localEventsRepository.GetEvents());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("adminGetEvents")]
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminGetEvents([FromQuery] bool? expired, [FromQuery] bool? approved)
+        {
+            try
+            {
+                return Ok(_localEventsRepository.AdminGetEvents(expired, approved));
             }
             catch(Exception ex)
             {
@@ -147,5 +165,46 @@ namespace cautious_waddle.Controllers
             }
             return Ok(lEvents);
         }
+
+        [HttpPost("approveEvent")]
+        [Authorize(Roles="Admin")]
+        public IActionResult ApproveEvent([FromBody] int id)
+        {
+            try
+            {
+                _localEventsRepository.approveEvent(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("disapproveEvent")]
+        [Authorize(Roles="Admin")]
+        public IActionResult DisapproveEvent([FromBody] int id)
+        {
+            try
+            {
+                _localEventsRepository.disapproveEvent(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("addEventImage")]
+        [Authorize]
+        public async  Task<IActionResult> AddEventImage(IFormFile file)
+        {
+            if(file != null)
+            {
+                   var storageAccount =  _blobStorage.GetStorageAccount();
+                   return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
+            }
+            return NotFound();
+        }       
     }
 }

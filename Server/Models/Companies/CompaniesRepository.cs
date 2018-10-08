@@ -20,7 +20,7 @@ namespace cautious_waddle.Models
 
         public IEnumerable<CompaniesViewModel> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search)
         {
-            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
+            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users).Where(c => c.IsApproved == 1);
 
             // Search
             if(search != null) {
@@ -44,6 +44,32 @@ namespace cautious_waddle.Models
 
             return companiesViewModel;
         }
+        public IEnumerable<Company> GetDisapprovedCompanies()
+        {
+            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users).Where(c => c.IsApproved == 0);
+            return companies;
+        }
+
+        public IEnumerable<CompaniesViewModel> GetMyCompanies(string userId)
+        {
+            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
+            List<Company> myCompanies = new List<Company>();
+            int count = 0;
+
+            foreach(Company company in companies)
+            {
+                List<CompanyUser> users = GetUsers(company.CompanyId.Value);
+                if(users.Any(u => u.Id == userId))
+                {
+                    count++;
+                    myCompanies.Add(company);
+                }
+            }
+
+            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(myCompanies);
+            return companiesViewModel;
+        }
+
         public void AddCompany(Company company)
         {
             _context.Companies.Add(company);
@@ -94,6 +120,22 @@ namespace cautious_waddle.Models
         public List<CompanyUser> GetUsers(int id)
         {
             return _context.Companies.Include(a => a.Users).SingleOrDefault(c => c.CompanyId == id).Users;
+        }
+
+        public void approveCompany(int id)
+        {
+            Company company = GetCompanyById(id);
+            _context.Companies.Attach(company);
+            company.IsApproved = 1;
+            _context.SaveChanges();
+        }
+
+        public void disapproveCompany(int id)
+        {
+            Company company = GetCompanyById(id);
+            _context.Companies.Attach(company);
+            company.IsApproved = 0;
+            _context.SaveChanges();
         }
     }
 }

@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using AutoMapper;
 using System.Collections.Generic;
-
+using cautious_waddle.Helpers;
 using cautious_waddle.ViewModels;
 using cautious_waddle.Models;
-using cautious_waddle.Helpers;
+using System.Threading.Tasks;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.AspNetCore.Http;
 
 namespace cautious_waddle.Controllers
 {
@@ -18,10 +21,14 @@ namespace cautious_waddle.Controllers
     {
         private readonly ICompaniesRepository _companiesRepository;
         private readonly UserManager<AppUser> _userManager;
-        public CompaniesController(ICompaniesRepository CompaniesRepository, UserManager<AppUser> userManager)
+
+        private readonly IBlobStorage _blobStorage;
+
+        public CompaniesController(ICompaniesRepository CompaniesRepository, UserManager<AppUser> userManager, IBlobStorage blobStorage)
         {
             _companiesRepository = CompaniesRepository;
             _userManager = userManager;
+            _blobStorage = blobStorage;
         }
 
         [HttpGet("getCompanies")]
@@ -35,14 +42,67 @@ namespace cautious_waddle.Controllers
             } 
             catch 
             {
-                return NotFound();
+                return BadRequest();
             }
         }
+
+        [HttpGet("getDisapprovedCompanies")]
+        [Authorize(Roles="Admin")]
+        public IActionResult GetDisapprovedCompanies()
+        {
+            try
+            {
+                return Ok(_companiesRepository.GetDisapprovedCompanies());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("getCompany")]
+        public IActionResult GetCompany([FromQuery] int id)
+        {
+            try
+            {
+                Company company = _companiesRepository.GetCompanyById(id);
+
+                if(company.IsApproved == 1)
+                {
+                    return Ok(company);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("getMyCompanies")]
+        [Authorize]
+        public IActionResult GetMyCompanies()
+        {
+            try
+            {
+                string UserId = IdentityHelper.GetUserId(HttpContext);
+                return Ok(_companiesRepository.GetMyCompanies(UserId));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addCompany")]
         [Authorize]    
-        public IActionResult AddCompany([FromBody]CompaniesViewModel companyViewModel)
+        public  IActionResult AddCompany([FromBody]CompaniesViewModel companyViewModel)
         {
             try{
+
                 Company company = Mapper.Map<CompaniesViewModel, Company>(companyViewModel);
                 
                 company.Users = new List<CompanyUser>();
@@ -55,12 +115,25 @@ namespace cautious_waddle.Controllers
                 company.ReminderDate = DateTime.Now.AddMonths(1);
 
                 _companiesRepository.AddCompany(company);
+                
                 return Ok();
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest();
             }
+        }
+
+        [HttpPost("addCompanyImage")]
+        [Authorize]
+        public async  Task<IActionResult> AddCompanyImage(IFormFile file)
+        {
+            if(file != null)
+            {
+                   var storageAccount =  _blobStorage.GetStorageAccount();
+                   return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
+            }
+            return NotFound();
         }       
          [HttpPost("removeCompany")]
          [Authorize(Roles="Admin")]
@@ -84,13 +157,13 @@ namespace cautious_waddle.Controllers
                 }      
                 else
                 {
-                    return NotFound();
+                    return BadRequest();
                 }       
                 
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest();
             }
         }
         [HttpPost("editCompany")]
@@ -122,6 +195,36 @@ namespace cautious_waddle.Controllers
             {
                 return BadRequest();
             }
-        }       
+        }
+
+        [HttpPost("approveCompany")]
+        [Authorize(Roles="Admin")]
+        public IActionResult ApproveCompany([FromBody] int id)
+        {
+            try
+            {
+                _companiesRepository.approveCompany(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("disapproveCompany")]
+        [Authorize(Roles="Admin")]
+        public IActionResult DisapproveCompany([FromBody] int id)
+        {
+            try
+            {
+                _companiesRepository.disapproveCompany(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }           
     }
 }
