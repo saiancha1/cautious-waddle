@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using cautious_waddle.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace cautious_waddle.ViewModels
 {
@@ -42,5 +43,8 @@ namespace cautious_waddle.ViewModels
         public string Country { get; set; }
         [JsonProperty("summerJobs")]
         public int SummerJobs { get; set; }
+
+        [JsonProperty("logoFile")]
+        public IFormFile LogoFile {get;set;}
     }
 }
