@@ -47,9 +47,6 @@ render() {
             </ul>
             <br/>
             <br/>
-          <Link to="/addJob">
-          <button>Add Job Listing</button>
-          </Link>
     </div>
   );
 }
