@@ -44,7 +44,5 @@ namespace cautious_waddle.ViewModels
         [JsonProperty("summerJobs")]
         public int SummerJobs { get; set; }
 
-        [JsonProperty("logoFile")]
-        public IFormFile LogoFile {get;set;}
     }
 }
