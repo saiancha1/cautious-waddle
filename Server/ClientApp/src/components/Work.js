@@ -4,7 +4,6 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import SummerTech from './SummerTech/SummerTech';
 import AddJob from './AddJob/AddJob';
 
-
 class Work extends Component {
 state = {
   jobs: [],
