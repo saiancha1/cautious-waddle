@@ -55,8 +55,8 @@ class ConForm extends Component {
         },
         body: JSON.stringify({
 // I want one email only consultant first name and last name separate
-          firstname: fname,
-          lastname: lname,
+          firstName: fname,
+          lastName: lname,
           consultantDesc: desc,
           phone: phone,
           email: email,
@@ -65,16 +65,17 @@ class ConForm extends Component {
           address2: address2,
           specialistArea: exp,
           suburb: suburb,
-          postalcode: postalcode,
+          postalCode: postalcode,
           city: city,
           country: country,
-          imageurl: imgu,
+          imageURL: imgu,
         }),
       });
       const PostingConsultantInfo = () => res.JSON();
       res();
       console.log(PostingConsultantInfo);
       console.log(res);
+      console.log(`Bearer ${this.Auth.getToken()}`);
     }
 
     handleChange = (e) => {
@@ -128,7 +129,7 @@ class ConForm extends Component {
                                Image Url
           </label>
           <br />
-          <ImgUpload value={this.state.imgu} onChange={this.handleChange} required  />
+          <ImgUpload value={this.state.imgu} onChange={this.handleChange}  />
 
           {/* <input name="imgu" placeholder="IMAGE URL" value={this.state.imgu} onChange={this.handleChange} required /> */}
           <br />
