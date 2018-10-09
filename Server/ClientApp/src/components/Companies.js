@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 import CompanyList from './Companies/CompanyList';
 import CompanyView from './Companies/CompanyView';
-
+import CompanyFilter from './Companies/CompanyFilter';
 class Companies extends Component {
   state = {
     companies: [],
     selectedCompany: null,
     companyOpen: false,
+    filter: 'All',
+    menuItems:[],
+    originalCompanies:[]
   }
 
   async componentWillMount() {
     fetch('api/Companies/getCompanies').then(res => res.json())
       .then((json) => {
         this.setState({ companies: json });
+        this.setState({originalCompanies:this.state.companies});
+        const menuItems1 = [...new Set(this.state.companies.map(item => item.businessType))]
+        this.setState({menuItems:menuItems1});
         console.log(this.state);
+
       });
+      
   }
 
   handleModalOpen = (company, e) => {
@@ -28,6 +36,24 @@ class Companies extends Component {
     this.setState({ companyOpen: false });
   }
 
+  handleFilterChange = (e) => {
+    const val = e.target.value;
+    this.setState({filter:val});
+    if(val !== 'All')
+    {
+    let newArr = this.state.originalCompanies.filter(company => company.businessType == e.target.value);
+    this.setState({companies:newArr});
+    }
+    else {
+      fetch('api/Companies/getCompanies').then(res => res.json())
+      .then((json) => {
+        this.setState({ companies: json });
+        console.log(this.state);
+      });
+    }
+    
+  }
+
   render() {
     let company;
     if (this.state.selectedCompany !== null) {
@@ -36,7 +62,9 @@ class Companies extends Component {
     }
     return (
       <div>
-
+        <CompanyFilter filter={this.state.filter} 
+        handleFilterChange={this.handleFilterChange}
+        filterItems = {this.state.menuItems}/>
         <CompanyList companies={this.state.companies} handleModalOpen={this.handleModalOpen} />
         {company}
 
