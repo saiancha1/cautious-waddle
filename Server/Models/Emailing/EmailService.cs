@@ -60,6 +60,34 @@ namespace cautious_waddle.Models
             }
         }
 
+        public void ListingAdded(string subject, string content)
+        {
+            EmailMessage emailMessage = new EmailMessage();
+
+            // From email address
+            MailingList_EmailAddress from = new MailingList_EmailAddress();
+            from.FullName = "Admin@TechPalmy.com";
+            from.EmailAddress = _emailConfiguration.SmtpUsername;
+
+            // To email addresses (Admin email addresses)
+            List<MailingList_EmailAddress> addresses = new List<MailingList_EmailAddress>();
+            MailingList_EmailAddress admin1 = new MailingList_EmailAddress();
+            admin1.EmailAddress = "millar9819@gmail.com";
+            admin1.FullName = "Millar Calder";
+            MailingList_EmailAddress admin2 = new MailingList_EmailAddress();
+            admin2.EmailAddress = "millar.calder@outlook.com";
+            admin2.FullName = "Millar Calder";
+            addresses.Add(admin1);
+            addresses.Add(admin2);
+
+            emailMessage.FromAddresses.Add(from);
+            emailMessage.ToAddresses = addresses;
+            emailMessage.Subject = subject;
+            emailMessage.Content = content;
+
+            Send(emailMessage);
+        }
+
         public string formMessage()
         {
             string content = "";
@@ -89,8 +117,8 @@ namespace cautious_waddle.Models
 
             // From email address
             MailingList_EmailAddress from = new MailingList_EmailAddress();
-            from.FullName = "Mailgun";
-            from.EmailAddress = "postmaster@sandboxc33747215c0b494eb6618dd752641b33.mailgun.org";
+            from.FullName = "Admin@TechPalmy.com";
+            from.EmailAddress = _emailConfiguration.SmtpUsername;
 
             // Send email to all email addresses on the mailing list
             List<MailingList_EmailAddress> mailingList = _context.MailingList.ToList();
