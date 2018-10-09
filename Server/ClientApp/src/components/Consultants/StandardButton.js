@@ -14,9 +14,7 @@ function StandardButton(props) {
   const { classes } = props;
   return (
     <Fragment>
-        <Button variant="contained" component="span" className={classes.button}>
-          Add Consultant
-        </Button>
+        <Button variant="contained" component="span" className={classes.button} >Join Consultant Page</Button>
     </Fragment>
   );
 }

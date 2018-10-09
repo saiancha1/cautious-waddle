@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AuthService from '../Authentication/AuthService';
 import ImgUpload from './ImgUpload';
 
+//Add authentication Check before rendering page - if rerouting in
 
 class ConForm extends Component {
     state = {

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-} from 'react-router-dom';
 import Consultant from './Consultants/Consultant';
-import Button from '@material-ui/core/Button';
+import Addconsultant from './Consultants/Addconsultant';
 
 // Creating initial state and setting it to empty
 class Consultants extends Component {
+  
   state = {
     consultants: [],
   }
@@ -27,18 +23,14 @@ class Consultants extends Component {
     }
   }
 
-handleOnClick = (e) => {
-
-}
 
   render() {
     return (
         <div>
           <h1>Consultants</h1>
           <Consultant cl={this.state.consultants}/>
-          <Link to="/addconsultant">
-          <button onClick={this.handleOnClick}>Add Consultant</button>
-          </Link>
+          <Addconsultant />
+
         </div>
     );
   }
