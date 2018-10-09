@@ -3,39 +3,50 @@ import { connect } from 'react-redux';
 import AuthService from '../Authentication/AuthService';
 
 class AddJob extends Component {
-    state = {
+    constructor(props) {
+      super(props);
+
+    this.state = {
+      companyId: '',
       jobTitle: '',
       jobDescription: '',
       salary: '',
       expiry: '',
-    }
+    };
 
-    Auth = new AuthService();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
     handleSubmit = (e) => {
       e.preventDefault();
       console.log(this.state);
-      const {
-      jobTitleData,
-      jobDescriptionData,
-      salaryData,
-      expiryData,
-      } = this.state;
+      const Auth = new AuthService();
+      //const {
+      //companyIdData,
+      //jobTitleData,
+      //jobDescriptionData,
+      //salaryData,
+      //expiryData,
+      //} = this.state;
+      const formInput = this.state;
 
       const res = () => fetch('/api/jobs/addJob', {
         method: 'POST',
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.Auth.getToken()}`,
+          Authorization: `Bearer ${Auth.getToken()}`,
         },
         body: JSON.stringify({
-          jobTitle: 'Python Developer',
-          jobDescription: 'Machine Learning Python Development Role',
-          salary: 78000,
-          expiry: '12/1/2018 12:00:00',
+          //jobTitle: jobTitleData,
+          //jobDescription: jobDescriptionData,
+          //salary: salaryData,
+          //expiry: expiryData,
+          formInput,
         }),
-      });
+      })
+
       const PostingJobInfo = () => res.JSON();
       res();
       console.log(PostingJobInfo);
@@ -46,9 +57,18 @@ class AddJob extends Component {
       this.setState({ [e.target.name]: e.target.value });
     }
 
-    render() {
-      return (
+  render() {
+    return (
         <form onSubmit={this.handleSubmit}>
+        <h1>Add Job Listing</h1>
+        <label>
+            {' '}
+                    Company Id
+          </label>
+          <br />
+          <input name="companyId" value={this.state.companyId} onChange={this.handleChange} required />
+          <br />
+          <br />
           <label>
             {' '}
                     Job Title
@@ -88,8 +108,8 @@ class AddJob extends Component {
           <br />
           <input id="submit" name="submit" type="submit" value="Submit" />
         </form>
-      );
-    }
+    );
+  }
 }
 
 export default AddJob;

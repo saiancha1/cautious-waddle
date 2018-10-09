@@ -38,6 +38,8 @@ class App extends Component {
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
             <Route exact path="/addconsultant" component={Addconsultant} />
+            <Route exact path="/addJob" component={AddJob} />
+
           </div>
           <Footer />
         </div>
