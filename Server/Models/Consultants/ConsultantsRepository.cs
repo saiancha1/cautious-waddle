@@ -45,12 +45,9 @@ namespace cautious_waddle.Models
             return consultants;
         }
 
-        public void AddConsultant(Consultant consultant, string userId)
+        public void AddConsultant(Consultant consultant)
         {
             _context.Consultants.Add(consultant);
-
-            _profilesRepository.ToggleConsultant(userId);
-
             _context.SaveChanges();
         }
 
@@ -79,10 +76,9 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
-        public void RemoveConsultant(Consultant consultant, string userId)
+        public void RemoveConsultant(Consultant consultant)
         {
             _context.Consultants.Remove(consultant);
-            _profilesRepository.ToggleConsultant(userId);
             _context.SaveChanges();
         }
 

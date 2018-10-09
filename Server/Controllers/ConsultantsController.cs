@@ -65,25 +65,17 @@ namespace cautious_waddle.Controllers
             try
             {
                 var userId = IdentityHelper.GetUserId(HttpContext);
+                Consultant consultant = Mapper.Map<ConsultantsViewModel, Consultant>(consultantViewModel);
 
-                if(_profilesRepository.IsProfileConsultant(userId) == false)
-                {
-                    Consultant consultant = Mapper.Map<ConsultantsViewModel, Consultant>(consultantViewModel);
+                consultant.UserId = userId;
+                consultant.IsApproved = 0;
+                consultant.CreationDate = DateTime.Now;
+                consultant.LastUpdate = DateTime.Now;
+                consultant.ReminderDate = DateTime.Now.AddMonths(1);
 
-                    consultant.UserId = userId;
-                    consultant.IsApproved = 0;
-                    consultant.CreationDate = DateTime.Now;
-                    consultant.LastUpdate = DateTime.Now;
-                    consultant.ReminderDate = DateTime.Now.AddMonths(1);
+                _consultantsRepository.AddConsultant(consultant);
 
-                    _consultantsRepository.AddConsultant(consultant, userId);
-
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
-                }
+                return Ok();
             }
             catch(Exception ex)
             {
@@ -103,7 +95,7 @@ namespace cautious_waddle.Controllers
 
                 if(consultant.UserId == userId)
                 {
-                    _consultantsRepository.RemoveConsultant(consultant, userId);
+                    _consultantsRepository.RemoveConsultant(consultant);
                     return Ok();
                 }
                 else
