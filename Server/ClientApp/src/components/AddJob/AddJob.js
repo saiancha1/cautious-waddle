@@ -7,7 +7,6 @@ class AddJob extends Component {
       super(props);
 
     this.state = {
-      companyId: '',
       jobTitle: '',
       jobDescription: '',
       salary: '',
@@ -30,6 +29,7 @@ class AddJob extends Component {
       //expiryData,
       //} = this.state;
       const formInput = this.state;
+      console.log(formInput);
 
       const res = () => fetch('/api/jobs/addJob', {
         method: 'POST',
@@ -39,13 +39,9 @@ class AddJob extends Component {
           Authorization: `Bearer ${Auth.getToken()}`,
         },
         body: JSON.stringify({
-          //jobTitle: jobTitleData,
-          //jobDescription: jobDescriptionData,
-          //salary: salaryData,
-          //expiry: expiryData,
           formInput,
         }),
-      })
+      });
 
       const PostingJobInfo = () => res.JSON();
       res();
@@ -61,14 +57,6 @@ class AddJob extends Component {
     return (
         <form onSubmit={this.handleSubmit}>
         <h1>Add Job Listing</h1>
-        <label>
-            {' '}
-                    Company Id
-          </label>
-          <br />
-          <input name="companyId" value={this.state.companyId} onChange={this.handleChange} required />
-          <br />
-          <br />
           <label>
             {' '}
                     Job Title
@@ -89,13 +77,6 @@ class AddJob extends Component {
           </label>
           <br />
           <input name="salary" value={this.state.salary} onChange={this.handleChange} />
-          <br />
-          <br />
-          <label>
-                    Website
-          </label>
-          <br />
-          <input name="website" value={this.state.website} onChange={this.handleChange} />
           <br />
           <br />
           <label>
