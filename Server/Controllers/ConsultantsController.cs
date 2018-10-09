@@ -16,18 +16,15 @@ namespace cautious_waddle.Controllers
     [Route("/api/[controller]")]
     public class ConsultantsController : Controller
     {
-        private IConsultantsRepository _consultantsRepository;
-        private IProfilesRepository _profilesRepository;
-        private ConsultantsDbContext _context;
+        private readonly IConsultantsRepository _consultantsRepository;
+        private readonly IEmailService _emailService;
 
         private IBlobStorage _blobStorage;
 
-        public ConsultantsController(IConsultantsRepository consultantsRepository, IProfilesRepository profilesRepository, ConsultantsDbContext context,
-        IBlobStorage blobStorage)
+        public ConsultantsController(IConsultantsRepository consultantsRepository, IEmailService emailService, IBlobStorage blobStorage)
         {
             _consultantsRepository = consultantsRepository;
-            _profilesRepository = profilesRepository;
-            _context = context;
+            _emailService = emailService;
             _blobStorage = blobStorage;
         }
 
@@ -74,6 +71,14 @@ namespace cautious_waddle.Controllers
                 consultant.ReminderDate = DateTime.Now.AddMonths(1);
 
                 _consultantsRepository.AddConsultant(consultant);
+
+                string content = "A new consultant listing has been added\n" + 
+                "\nID: " + consultant.ConsultantId + 
+                "\nConsultant name: " + consultant.FirstName + " " + consultant.LastName + 
+                "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this consultant listing";
+                string subject = "New consultant listing";
+
+                _emailService.ListingAdded(subject, content);
 
                 return Ok();
             }

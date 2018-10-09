@@ -18,14 +18,14 @@ namespace cautious_waddle.Controllers
     public class EmailingController : Controller
     {
         private IEmailService _emailService;
-        private JobsDbContext _context2;
         private MailingListDbContext _context;
+        private IEmailConfiguration _emailConfiguration;
 
-        public EmailingController(IEmailService emailService, MailingListDbContext context, JobsDbContext context2)
+        public EmailingController(IEmailService emailService, MailingListDbContext context, IEmailConfiguration emailConfiguration)
         {
             _emailService = emailService;
             _context = context;
-            _context2 = context2;
+            _emailConfiguration = emailConfiguration;
         }
 
         [HttpPost("sendBulkEmail")]
@@ -35,8 +35,8 @@ namespace cautious_waddle.Controllers
             try
             {
                 MailingList_EmailAddress from = new MailingList_EmailAddress();
-                from.FullName = "Mailgun";
-                from.EmailAddress = "postmaster@sandboxc33747215c0b494eb6618dd752641b33.mailgun.org";
+                from.FullName = "Admin@TechPalmy.com";
+                from.EmailAddress = _emailConfiguration.SmtpUsername;
 
                 EmailMessage emailMessage = new EmailMessage();
 
