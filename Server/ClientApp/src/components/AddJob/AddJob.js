@@ -21,8 +21,13 @@ class AddJob extends Component {
       e.preventDefault();
       console.log(this.state);
       const Auth = new AuthService();
-      const formInput = this.state;
-      console.log(formInput);
+      const {
+        jobTitle,
+        jobDescription,
+        salary,
+        expiry,
+      } = this.state;
+      console.log(jobTitle);
 
       const res = () => fetch('/api/jobs/addJob', {
         method: 'POST',
@@ -32,7 +37,10 @@ class AddJob extends Component {
           Authorization: `Bearer ${Auth.getToken()}`,
         },
         body: JSON.stringify({
-          formInput,
+          jobTitle: jobTitle,
+          jobDescription: jobDescription,
+          salary: salary,
+          expiry: expiry,
         }),
       });
 
