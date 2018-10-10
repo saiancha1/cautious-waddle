@@ -92,5 +92,25 @@ namespace cautious_waddle.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("sendContactForm")]
+        public IActionResult sendContactForm([FromBody] ContactFormViewModel contactForm)
+        {
+            try
+            {
+                string subject = "Contact form message";
+                string content = "From: " + contactForm.FirstName + " " + contactForm.LastName 
+                + "\nAt: " + contactForm.EmailAddress
+                + "Message: " + "\n" + contactForm.Message;
+
+                _emailService.SendToAdmins(subject, content);
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

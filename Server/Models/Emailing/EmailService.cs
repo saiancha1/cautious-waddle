@@ -60,7 +60,7 @@ namespace cautious_waddle.Models
             }
         }
 
-        public void ListingAdded(string subject, string content)
+        public void SendToAdmins(string subject, string content)
         {
             EmailMessage emailMessage = new EmailMessage();
 
