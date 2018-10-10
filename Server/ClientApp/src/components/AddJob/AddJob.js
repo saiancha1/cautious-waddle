@@ -21,13 +21,6 @@ class AddJob extends Component {
       e.preventDefault();
       console.log(this.state);
       const Auth = new AuthService();
-      //const {
-      //companyIdData,
-      //jobTitleData,
-      //jobDescriptionData,
-      //salaryData,
-      //expiryData,
-      //} = this.state;
       const formInput = this.state;
       console.log(formInput);
 
