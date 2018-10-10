@@ -26,6 +26,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import JobManagement from './JobManagement/JobManagement';
 import UserManagement from './UserManagement/UserManagement';
+import Analytics from './MainDashboard/Analytics';
 
 import { mainListItems, secondaryListItems } from './listitems';
 
@@ -108,7 +109,7 @@ const styles = theme => ({
 class Dashboard extends React.Component {
   state = {
     open: true,
-    dashboard: 'UserManagement',
+    dashboard: 'Dashboard',
   };
 
   handleDrawerOpen = () => {
@@ -142,6 +143,7 @@ class Dashboard extends React.Component {
            <Typography variant="display1" gutterBottom>
         Main Dashboard
            </Typography>
+           <Analytics/>
          </main>
        );
      }
