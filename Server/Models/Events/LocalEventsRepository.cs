@@ -66,6 +66,7 @@ namespace cautious_waddle.Models
             oldEvent.Contact          = newEvent.Contact;
             oldEvent.Website          = newEvent.Website;
             oldEvent.StartDate        = newEvent.StartDate;
+            oldEvent.Duration         = newEvent.Duration;
             oldEvent.Recurring        = newEvent.Recurring;
             oldEvent.EventDescription = newEvent.EventDescription;
             oldEvent.EventType        = newEvent.EventType;
@@ -104,7 +105,8 @@ namespace cautious_waddle.Models
 
             foreach(LocalEvent localEvent in events)
             {
-                DateTime end = localEvent.StartDate;
+                // Then event ends duration days after the start date
+                DateTime end = localEvent.StartDate.AddDays(localEvent.Duration);
 
                 if(end < current)
                 {

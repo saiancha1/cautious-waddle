@@ -161,6 +161,7 @@ namespace cautious_waddle.Controllers
                 Nevent.CreationDate = DateTime.Now;
                 Nevent.LastUpdate = DateTime.Now;
                 Nevent.StartDate = DateTime.Now;
+                Nevent.Duration = 1;
                 Nevent.EventId = null;
                 Nevent.UserId = IdentityHelper.GetUserId(HttpContext);
                 Nevent.IsApproved = 0;
