@@ -80,7 +80,7 @@ namespace cautious_waddle.Controllers
                 "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this event listing";
                 string subject = "New event listing";
 
-                _emailService.ListingAdded(subject, content);
+                _emailService.SendToAdmins(subject, content);
 
                 return Ok();
             }
