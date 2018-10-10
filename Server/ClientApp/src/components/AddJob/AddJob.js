@@ -3,13 +3,19 @@ import { connect } from 'react-redux';
 import AuthService from '../Authentication/AuthService';
 
 class AddJob extends Component {
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
 
     this.state = {
       jobTitle: '',
       jobDescription: '',
       salary: '',
+      contactFirstName: '',
+      contactLastName: '',
+      contactEmail: '',
+      contactPhone: '',
+      companyName: '',
+      workType: '',
       expiry: '',
     };
 
@@ -25,6 +31,12 @@ class AddJob extends Component {
         jobTitle,
         jobDescription,
         salary,
+        contactFirstName,
+        contactLastName,
+        contactEmail,
+        contactPhone,
+        companyName,
+        workType,
         expiry,
       } = this.state;
       console.log(jobTitle);
@@ -40,6 +52,12 @@ class AddJob extends Component {
           jobTitle: jobTitle,
           jobDescription: jobDescription,
           salary: salary,
+          contactFirstName: contactFirstName,
+          contactLastName: contactLastName,
+          contactEmail: contactEmail,
+          contactPhone: contactPhone,
+          companyName: companyName,
+          workType: workType,
           expiry: expiry,
         }),
       });
@@ -56,50 +74,89 @@ class AddJob extends Component {
 
     render() {
       const login = this.props;
-      if (login.auth){
+      const state = this.state;
+      // if (login.auth) {
+      if (true) {
         return (
-        <form onSubmit={this.handleSubmit}>
-        <h1>Add Job Listing</h1>
-          <label>
-            {' '}
-                    Job Title
-          </label>
-          <br />
-          <input name="jobTitle" value={this.state.jobTitle} onChange={this.handleChange} required />
-          <br />
-          <br />
-          <label>
+          <form onSubmit={this.handleSubmit}>
+            <h1>Add Job Listing</h1>
+            <div className="form-group">
+              <label htmlFor="sel1">Work Type </label>
+              <select className="form" id="sel1">
+                <option>Full Time</option>
+                <option>Part Time</option>
+                <option>Contract</option>
+              </select>
+              <br />
+              <label htmlFor="companyName">
+                Company Name
+              </label>
+              <input name="companyName" id="companyName" value={state.companyName} onChange={this.handleChange} required />
+              <br />
+              <br />
+              <label htmlFor="jobTitle">
+                Job Title
+              </label>
+              <input name="jobTitle" id="jobTitle" value={state.jobTitle} onChange={this.handleChange} required />
+              <br />
+              <br />
+              <label>
                     Job Description
-          </label>
-          <br />
-          <input name="jobDescription" value={this.state.jobDescription} onChange={this.handleChange} required />
-          <br />
-          <br />
-          <label>
+              </label>
+              <input name="jobDescription" value={state.jobDescription} onChange={this.handleChange} required />
+              <br />
+              <br />
+              <label>
                     Salary
-          </label>
-          <br />
-          <input name="salary" value={this.state.salary} onChange={this.handleChange} />
-          <br />
-          <br />
-          <label>
+              </label>
+              <input name="salary" value={state.salary} onChange={this.handleChange} />
+              <br />
+              <br />
+              <label>
                     Expiry
-          </label>
-          <br />
-          <input name="expiry" type="datetime" value={this.state.expiry} onChange={this.handleChange} required />
-          <br />
-          {' '}
-          <br />
-          <input id="submit" name="submit" type="submit" value="Submit" />
-        </form>
-    );} else{
-      return (
-        <div>
-          <p>This function is only available to valid account holders.</p>
-          <p>If you have an account, please login to submit a new job posting.</p>
-          <p> If you do not have an account you can create and account via the login option above.</p>
-        </div>);
-      }  
+              </label>
+              <input name="expiry" type="datetime" value={state.expiry} onChange={this.handleChange} required />
+            </div>
+            <br />
+            <p>Contact Details</p>
+            <div className="form-group">
+              <label>
+                    First Name
+              </label>
+              <input name="contactFirstName" value={state.contactFirstName} onChange={this.handleChange} required />
+              <br />
+              <br />
+              <label>
+                    Last Name
+              </label>
+              <input name="contactLastName" value={state.contactLastName} onChange={this.handleChange} required />
+              <br />
+              <br />
+              <label>
+                    Email
+              </label>
+              <input name="contactEmail" value={state.contactEmail} onChange={this.handleChange} required />
+              <br />
+              <br />
+              <label>
+                    Phone
+              </label>
+              <input name="contactPhone" value={state.contactPhone} onChange={this.handleChange} required />
+              <br />
+              <br />
+            </div>
+            <br />
+            <input id="submit" name="submit" type="submit" value="Submit" />
+          </form>
+        );
+      } else {
+        return (
+          <div>
+            <p>This function is only available to valid account holders.</p>
+            <p>If you have an account, please login to submit a new job posting.</p>
+            <p> If you do not have an account you can create and account via the login option above.</p>
+          </div>);
+      }
     }
 }
 const mapStateToProps = state => (
