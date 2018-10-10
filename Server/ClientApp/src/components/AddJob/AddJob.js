@@ -54,8 +54,10 @@ class AddJob extends Component {
       this.setState({ [e.target.name]: e.target.value });
     }
 
-  render() {
-    return (
+    render() {
+      const login = this.props;
+      if (login.auth){
+        return (
         <form onSubmit={this.handleSubmit}>
         <h1>Add Job Listing</h1>
           <label>
@@ -90,8 +92,21 @@ class AddJob extends Component {
           <br />
           <input id="submit" name="submit" type="submit" value="Submit" />
         </form>
-    );
-  }
+    );} else{
+      return (
+        <div>
+          <p>This function is only available to valid account holders.</p>
+          <p>If you have an account, please login to submit a new job posting.</p>
+          <p> If you do not have an account you can create and account via the login option above.</p>
+        </div>);
+      }  
+    }
 }
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
 
-export default AddJob;
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddJob);
