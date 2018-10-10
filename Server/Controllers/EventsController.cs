@@ -163,7 +163,6 @@ namespace cautious_waddle.Controllers
                 Nevent.StartDate = DateTime.Now;
                 Nevent.EventId = null;
                 Nevent.UserId = IdentityHelper.GetUserId(HttpContext);
-                Nevent.Duration = null;
                 Nevent.IsApproved = 0;
                 Nevent.Expired = 0;
                 Regex regex = new Regex(@"(?<=\()(.*?)(?=\))");
