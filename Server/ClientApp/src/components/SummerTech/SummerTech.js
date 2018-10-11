@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './SummerTech.css';
+import SimpleModalWrapped from './SimpleModal';
 
 class SummerTech extends Component {
   state = {
@@ -35,7 +36,7 @@ class SummerTech extends Component {
                     <div className="media-body">
                       <h4 className="media-heading">{company.companyName}</h4>
                       <p>{company.companyDesc}</p>
-                      <a href="">More Info</a>
+                      <SimpleModalWrapped />
                     </div>
                   </li>
                 ))}
