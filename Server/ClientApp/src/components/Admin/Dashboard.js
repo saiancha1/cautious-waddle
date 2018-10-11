@@ -27,6 +27,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import JobManagement from './JobManagement/JobManagement';
 import UserManagement from './UserManagement/UserManagement';
 import Analytics from './MainDashboard/Analytics';
+import CompanyManagement from './CompanyManagement/CompanyManagement';
 
 import { mainListItems, secondaryListItems } from './listitems';
 
@@ -154,6 +155,7 @@ class Dashboard extends React.Component {
            <Typography variant="display1" gutterBottom>
         Company Management
            </Typography>
+           <CompanyManagement/>
          </main>
 
        );
