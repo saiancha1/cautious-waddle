@@ -18,6 +18,7 @@ import AddJob from './components/AddJob/AddJob';
 import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
+import SubForm from './components/Subscribe/SubscribeForm';
 
 
 // Changed this simple function into a class so that we can manipulate state on this page
@@ -35,7 +36,7 @@ class App extends Component {
             <Route exact path="/work" component={Work} />
             <Route exact path="/events" component={Events} />
             <Route exact path="/contact" component={Contact} />
-            <Route exact path="/subscribe" component={Subscribe} />
+            {/* <Route exact path="/subscribe" component={SubForm} /> */}
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
             <Route exact path="/addconsultant" component={ConForm} />
