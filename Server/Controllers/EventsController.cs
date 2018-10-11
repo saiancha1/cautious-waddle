@@ -19,12 +19,14 @@ namespace cautious_waddle.Controllers
     [Route("/api/[controller]")]
     public class EventsController : Controller
     {
-        private ILocalEventsRepository _localEventsRepository;
+        private readonly ILocalEventsRepository _localEventsRepository;
+        private readonly IEmailService _emailService;
         private IBlobStorage _blobStorage;
 
-        public EventsController(ILocalEventsRepository EventsRepository, IBlobStorage blobStorage)
+        public EventsController(ILocalEventsRepository EventsRepository, IEmailService emailService, IBlobStorage blobStorage)
         {
             _localEventsRepository = EventsRepository;
+            _emailService = emailService;
             _blobStorage = blobStorage;
         }
 
@@ -71,6 +73,14 @@ namespace cautious_waddle.Controllers
                 newEvent.LastUpdate = DateTime.Now;
 
                 _localEventsRepository.addEvent(newEvent);
+
+                string content = "A new event listing has been added\n" + 
+                "\nID: " + newEvent.EventId + 
+                "\nEvent name: " + newEvent.EventName + 
+                "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this event listing";
+                string subject = "New event listing";
+
+                _emailService.SendToAdmins(subject, content);
 
                 return Ok();
             }
@@ -151,9 +161,9 @@ namespace cautious_waddle.Controllers
                 Nevent.CreationDate = DateTime.Now;
                 Nevent.LastUpdate = DateTime.Now;
                 Nevent.StartDate = DateTime.Now;
+                Nevent.Duration = 1;
                 Nevent.EventId = null;
                 Nevent.UserId = IdentityHelper.GetUserId(HttpContext);
-                Nevent.Duration = null;
                 Nevent.IsApproved = 0;
                 Nevent.Expired = 0;
                 Regex regex = new Regex(@"(?<=\()(.*?)(?=\))");

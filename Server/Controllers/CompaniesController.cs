@@ -20,14 +20,14 @@ namespace cautious_waddle.Controllers
     public class CompaniesController : Controller 
     {
         private readonly ICompaniesRepository _companiesRepository;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly IEmailService _emailService;
 
         private readonly IBlobStorage _blobStorage;
 
-        public CompaniesController(ICompaniesRepository CompaniesRepository, UserManager<AppUser> userManager, IBlobStorage blobStorage)
+        public CompaniesController(ICompaniesRepository CompaniesRepository, IEmailService emailService, IBlobStorage blobStorage)
         {
             _companiesRepository = CompaniesRepository;
-            _userManager = userManager;
+            _emailService = emailService;
             _blobStorage = blobStorage;
         }
 
@@ -115,6 +115,14 @@ namespace cautious_waddle.Controllers
                 company.ReminderDate = DateTime.Now.AddMonths(1);
 
                 _companiesRepository.AddCompany(company);
+
+                string content = "A new company listing has been added\n" + 
+                "\nID: " + company.CompanyId + 
+                "\nCompany name: " + company.CompanyName + 
+                "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this company listing";
+                string subject = "New company listing";
+
+                _emailService.SendToAdmins(subject, content);
                 
                 return Ok();
             }

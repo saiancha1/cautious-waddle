@@ -23,7 +23,7 @@ const styles = {
     <Card className={classes.card}>
     <CardMedia
       className={classes.media}
-      image= 'https://www.betasolutions.co.nz/user/image/team/438/Aaron%20Fulton'
+      image= {props.consultimage}
       title= {props.lastName}
     />
     <CardContent>

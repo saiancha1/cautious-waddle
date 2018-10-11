@@ -16,18 +16,15 @@ namespace cautious_waddle.Controllers
     [Route("/api/[controller]")]
     public class ConsultantsController : Controller
     {
-        private IConsultantsRepository _consultantsRepository;
-        private IProfilesRepository _profilesRepository;
-        private ConsultantsDbContext _context;
+        private readonly IConsultantsRepository _consultantsRepository;
+        private readonly IEmailService _emailService;
 
         private IBlobStorage _blobStorage;
 
-        public ConsultantsController(IConsultantsRepository consultantsRepository, IProfilesRepository profilesRepository, ConsultantsDbContext context,
-        IBlobStorage blobStorage)
+        public ConsultantsController(IConsultantsRepository consultantsRepository, IEmailService emailService, IBlobStorage blobStorage)
         {
             _consultantsRepository = consultantsRepository;
-            _profilesRepository = profilesRepository;
-            _context = context;
+            _emailService = emailService;
             _blobStorage = blobStorage;
         }
 
@@ -65,25 +62,25 @@ namespace cautious_waddle.Controllers
             try
             {
                 var userId = IdentityHelper.GetUserId(HttpContext);
+                Consultant consultant = Mapper.Map<ConsultantsViewModel, Consultant>(consultantViewModel);
 
-                if(_profilesRepository.IsProfileConsultant(userId) == false)
-                {
-                    Consultant consultant = Mapper.Map<ConsultantsViewModel, Consultant>(consultantViewModel);
+                consultant.UserId = userId;
+                consultant.IsApproved = 0;
+                consultant.CreationDate = DateTime.Now;
+                consultant.LastUpdate = DateTime.Now;
+                consultant.ReminderDate = DateTime.Now.AddMonths(1);
 
-                    consultant.UserId = userId;
-                    consultant.IsApproved = 0;
-                    consultant.CreationDate = DateTime.Now;
-                    consultant.LastUpdate = DateTime.Now;
-                    consultant.ReminderDate = DateTime.Now.AddMonths(1);
+                _consultantsRepository.AddConsultant(consultant);
 
-                    _consultantsRepository.AddConsultant(consultant, userId);
+                string content = "A new consultant listing has been added\n" + 
+                "\nID: " + consultant.ConsultantId + 
+                "\nConsultant name: " + consultant.FirstName + " " + consultant.LastName + 
+                "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this consultant listing";
+                string subject = "New consultant listing";
 
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
-                }
+                _emailService.SendToAdmins(subject, content);
+
+                return Ok();
             }
             catch(Exception ex)
             {
@@ -103,7 +100,7 @@ namespace cautious_waddle.Controllers
 
                 if(consultant.UserId == userId)
                 {
-                    _consultantsRepository.RemoveConsultant(consultant, userId);
+                    _consultantsRepository.RemoveConsultant(consultant);
                     return Ok();
                 }
                 else

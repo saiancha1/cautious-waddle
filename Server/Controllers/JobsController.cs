@@ -19,16 +19,14 @@ namespace cautious_waddle.Controllers
     {
         private readonly IJobsRepository _jobsRespository;
         private readonly ICompaniesRepository _companiesRepository;
-        private readonly IProfilesRepository _profilesRepository;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly IEmailService _emailService;
         private IBlobStorage _blobStorage;
         public JobsController(IJobsRepository JobsRepository, ICompaniesRepository companiesRepository, IProfilesRepository profilesRepository,
-        UserManager<AppUser>UserManager, IBlobStorage blobStorage) 
+        UserManager<AppUser> UserManager, IEmailService emailService, IBlobStorage blobStorage) 
         {
             _jobsRespository = JobsRepository;
             _companiesRepository = companiesRepository;
-            _profilesRepository = profilesRepository;
-            _userManager = UserManager;
+            _emailService = emailService;
             _blobStorage = blobStorage;
         }
 
@@ -102,11 +100,19 @@ namespace cautious_waddle.Controllers
                 }
 
                 _jobsRespository.AddJob(job);
+
+                string content = "A new job listing has been added\n" + 
+                "\nID: " + job.JobId + 
+                "\nTitle: " + job.JobTitle + 
+                "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this job listing";
+                string subject = "New job listing";
+
+                _emailService.SendToAdmins(subject, content);
                 return Ok();
             }
             catch (Exception e)
             {
-                return NotFound(e);
+                return NotFound();
             }
         }
 
