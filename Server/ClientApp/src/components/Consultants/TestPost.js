@@ -3,7 +3,7 @@ import AuthService from '../Authentication/AuthService';
 
 class TestPost extends Component {
     state = {
-      fname: '',
+      name: '',
     }
 
     Auth = new AuthService();
@@ -12,10 +12,10 @@ class TestPost extends Component {
       e.preventDefault();
       console.log(this.state);
       const {
-        fname,
+        name,
       } = this.state;
 
-      const res = () => fetch('api/Consultants/addConsultant', {
+      const res = () => fetch('/api/jobs/AddJob', {
         method: 'POST',
         headers: {
           Accept: 'application/json, text/plain, */*',
@@ -25,25 +25,36 @@ class TestPost extends Component {
         },
         body: JSON.stringify({
 
-          firstName: fname,
-          lastName: "lname",
-          imageURL: "imgu",
-          specialistArea: "exp",
-          consultantDesc: "desc",
-          phone: "phone",
-          email: "email",
-          website: "website",
-          address1: "address1",
-          address2: "address2",
-          suburb: "suburb",
-          postalCode: "postalcode",
-          city: "city",
-          country: "country",
+          // firstName: fname,
+          // lastName: "lname",
+          // imageURL: "imgu",
+          // specialistArea: "exp",
+          // consultantDesc: "desc",
+          // phone: "phone",
+          // email: "email",
+          // website: "website",
+          // address1: "address1",
+          // address2: "address2",
+          // suburb: "suburb",
+          // postalCode: "postalcode",
+          // city: "city",
+          // country: "country",
+          JobTitle: 'Kus',
+          JobDescription: 'TEST',
+          Salary: 'NOMONEY',
+          ContactFirstName: name,
+          ContactLastName: '',
+          ContactEmail: '0000@gmail.ccc',
+          ContactPhone: '4444',
+          CompanyName: 'NUDDA',
+          WorkType: 'KUSSSIII',
+
         }),
-    }).then(res => res.json())
-    .then(response => console.log('Success', JSON.stringify(response)));
+    });
+    // .then(res => res.json())
+    // .then(response => console.log('Success', JSON.stringify(response)));
     // const PostingConsultantInfo = () => res.JSON();
-    // res();
+    res();
     // console.log(PostingConsultantInfo);
     // console.log(res);
 }
