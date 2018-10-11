@@ -26,7 +26,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import JobManagement from './JobManagement/JobManagement';
 import UserManagement from './UserManagement/UserManagement';
-
+import CompanyManagement from './CompanyManagement/CompanyManagement';
 import { mainListItems, secondaryListItems } from './listitems';
 
 const drawerWidth = 240;
@@ -152,6 +152,7 @@ class Dashboard extends React.Component {
            <Typography variant="display1" gutterBottom>
         Company Management
            </Typography>
+           <CompanyManagement/>
          </main>
 
        );
