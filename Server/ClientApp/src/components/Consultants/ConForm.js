@@ -67,13 +67,12 @@ class ConForm extends Component {
           city: city,
           country: country,
         }),
-      }).then(res => res.json())
-      .then(response => console.log('Success', JSON.stringify(response)));
-      // const PostingConsultantInfo = () => res.JSON();
-      // res();
-      // console.log(PostingConsultantInfo);
+      });
+      const PostingConsultantInfo = () => res.json();
+      res();
+      console.log(PostingConsultantInfo);
       console.log(res);
-      // console.log(`Bearer ${this.Auth.getToken()}`);
+      console.log(`Bearer ${this.Auth.getToken()}`);
     }
 
     handleChange = (e) => {
@@ -136,7 +135,7 @@ class ConForm extends Component {
                                Image Url
           </label>
           <br />
-          <ImgUpload name = "imgu" value={this.state.imgu} onChange={this.handleChange}  />
+          {/* <ImgUpload name = "imgu" value={this.state.imgu} onChange={this.handleChange}  /> */}
 
           {/* <input name="imgu" placeholder="IMAGE URL" value={this.state.imgu} onChange={this.handleChange} required /> */}
           <br />

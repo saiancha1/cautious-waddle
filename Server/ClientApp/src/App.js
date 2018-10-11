@@ -40,7 +40,7 @@ class App extends Component {
             {/* <Route exact path="/subscribe" component={SubForm} /> */}
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
-            <Route exact path="/addconsultant" component={TestPost} />
+            <Route exact path="/addconsultant" component={ConForm} />
           </div>
           <Footer />
         </div>
