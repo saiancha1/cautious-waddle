@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './SummerTech.css';
-import SimpleModalWrapped from './SimpleModal';
 import CompanyModal from './CompanyModal';
 import '../Companies/companyStyles.css';
+import background from '../../images/homepage-image.jpg';
 
 class SummerTech extends Component {
   state = {
@@ -20,11 +20,16 @@ class SummerTech extends Component {
 
   render() {
     return (
-      <div className="summer">
-        <div className="jumbotron text-center">
-          <h1>Summer Of Tech</h1>
-          <p>Lorem ipsum dolor sit amet..</p>
-        </div>
+      <div className="home-container">
+        <img className="background-image" src={background} alt="background" />
+          <div className="centered-text">
+            <h3>
+              <span>Summer Of Tech</span>
+              <br />
+              Lorem ipsum dolor sit amet
+            </h3>
+          </div>
+
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-3" />
