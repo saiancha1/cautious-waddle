@@ -30,7 +30,6 @@ class Consultants extends Component {
           <h1>Consultants</h1>
           <Consultant cl={this.state.consultants}/>
           <Addconsultant />
-
         </div>
     );
   }

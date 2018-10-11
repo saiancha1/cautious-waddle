@@ -23,13 +23,17 @@ const styles = {
     <Card className={classes.card}>
     <CardMedia
       className={classes.media}
-      image= {props.consultimage}
+      // image= {props.consultimage}
       title= {props.lastName}
     />
     <CardContent>
-      <Typography gutterBottom variant="headline" component="h2">
+      <Typography gutterBottom variant="headline" component="h4">
         {props.firstName} {props.lastName}
       </Typography>
+      <Typography gutterBottom variant="headline" component="h2">
+        {props.consultwebsite} 
+      </Typography>
+      <br></br>
       <Typography component="p" noWrap="true" paragraph="true">
         {props.consultDescription}
       </Typography>

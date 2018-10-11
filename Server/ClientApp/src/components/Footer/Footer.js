@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import './Footer.css';
+import SubscribeForm from '../Subscribe/SubscribeForm';
 
 export default class Footer extends Component {
   render() {
@@ -12,6 +13,7 @@ export default class Footer extends Component {
               <a href="/">Something Here</a>
             </Col>
             <Col className="footer-col-r" xs={6}>
+            <SubscribeForm/> 
               <a href="/">Another thing</a>
             </Col>
           </Row>

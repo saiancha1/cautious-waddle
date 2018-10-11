@@ -11,6 +11,9 @@ const styles = theme => ({
   typography: {
     padding: theme.spacing.unit * 2,
   },
+  button: {
+    margin: theme.spacing.unit
+  },
 });
 
 class SimplePopper extends React.Component {
@@ -34,7 +37,7 @@ class SimplePopper extends React.Component {
 
     return (
       <div>
-        <Button aria-describedby={id} variant="contained" onClick={this.handleClick}>
+        <Button aria-describedby={id} variant="contained" onClick={this.handleClick} className={classes.button}>
           Join Consultants Page
         </Button>
         <Popper id={id} open={open} anchorEl={anchorEl} transition>
