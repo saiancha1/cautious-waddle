@@ -67,10 +67,11 @@ class ConForm extends Component {
           city: city,
           country: country,
         }),
-      });
-      const PostingConsultantInfo = () => res.JSON();
-      res();
-      console.log(PostingConsultantInfo);
+      }).then(res => res.json())
+      .then(response => console.log('Success', JSON.stringify(response)));
+      // const PostingConsultantInfo = () => res.JSON();
+      // res();
+      // console.log(PostingConsultantInfo);
       console.log(res);
       // console.log(`Bearer ${this.Auth.getToken()}`);
     }

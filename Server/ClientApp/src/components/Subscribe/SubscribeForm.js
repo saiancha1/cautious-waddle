@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,7 +10,34 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 export default class SubForm extends React.Component {
   state = {
     open: false,
+    name: '',
+    email: '',
+
   };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    const {
+      name,
+      email,
+    } = this.state;
+
+    const res = () => fetch('/api/mailingList/subscribe', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
+  }).then(res => res.json())
+  .then(response => console.log('Success', JSON.stringify(response)));
+  this.setState({ open: false });
+
+}
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -49,6 +76,8 @@ export default class SubForm extends React.Component {
               id="name"
               label="Email Address"
               type="email"
+              name="email"
+              autoComplete="email"
               fullWidth
             />
           </DialogContent>
@@ -56,7 +85,7 @@ export default class SubForm extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleSubmit} color="primary">
               Subscribe
             </Button>
           </DialogActions>
