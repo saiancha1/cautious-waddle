@@ -17,6 +17,7 @@ import Login from './components/Authentication/Login';
 import AddJob from './components/AddJob/AddJob';
 import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
+import ConForm from './components/Consultants/ConForm';
 
 
 // Changed this simple function into a class so that we can manipulate state on this page
@@ -37,7 +38,7 @@ class App extends Component {
             <Route exact path="/subscribe" component={Subscribe} />
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
-            <Route exact path="/addconsultant" component={Addconsultant} />
+            <Route exact path="/addconsultant" component={ConForm} />
           </div>
           <Footer />
         </div>
