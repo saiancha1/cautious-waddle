@@ -19,6 +19,7 @@ import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
 import SubForm from './components/Subscribe/SubscribeForm';
+import TestPost from './components/Consultants/TestPost';
 
 
 // Changed this simple function into a class so that we can manipulate state on this page
@@ -39,7 +40,7 @@ class App extends Component {
             {/* <Route exact path="/subscribe" component={SubForm} /> */}
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
-            <Route exact path="/addconsultant" component={ConForm} />
+            <Route exact path="/addconsultant" component={TestPost} />
           </div>
           <Footer />
         </div>

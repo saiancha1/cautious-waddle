@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthService from '../Authentication/AuthService';
 import StandardButton from './StandardButton';
 import SimplePopper from './Popper';
-import Popper from './Popper';
+// import Popper from './Popper';
 import { Link } from 'react-router-dom'
 
 class Addconsultant extends Component {
@@ -20,7 +20,7 @@ class Addconsultant extends Component {
         {this.state.loginStatus ? (
       <Link  to="/addconsultant"> 
           <StandardButton/></Link>
-        ) : (<Popper />) }</div>
+        ) : (<SimplePopper />) }</div>
     )
 }
 }

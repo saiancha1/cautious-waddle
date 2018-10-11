@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import AuthService from '../Authentication/AuthService';
 import ImgUpload from './ImgUpload';
 
-//Add authentication Check before rendering page - if rerouting in
-
 class ConForm extends Component {
     state = {
       fname: '',
@@ -56,18 +54,18 @@ class ConForm extends Component {
 
           firstName: fname,
           lastName: lname,
+          imageURL: imgu,
+          specialistArea: exp,
           consultantDesc: desc,
           phone: phone,
           email: email,
           website: website,
           address1: address1,
           address2: address2,
-          specialistArea: exp,
           suburb: suburb,
           postalCode: postalcode,
           city: city,
           country: country,
-          imageURL: imgu,
         }),
       });
       const PostingConsultantInfo = () => res.JSON();

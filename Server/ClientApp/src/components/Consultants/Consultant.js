@@ -2,14 +2,15 @@ import React, { Fragment } from 'react';
 import ConST from './ConsultantStyledRender';
 
 const Consultant = (props) => {
-  const consultants = props.cl.map((consultant) => 
-    <ConST consultimage={consultant.imageurl} firstName= {consultant.firstName} lastName={consultant.lastName}  consultDescription={consultant.consultantDesc} 
-    hisemail={consultant.email} consultcity={consultant.city} consultwebsite={consultant.website}
+  const consultantz = props.cl.map((con) => 
+    <ConST consultimage={con.imageurl} firstName= {con.firstName} lastName={con.lastName}  consultDescription={con.consultantDesc} 
+    hisemail={con.email} consultcity={con.city} consultwebsite={con.website}
        />
+    // <h1> {con.firstName} {con.lastName}</h1>
   );
   return (
       <div className="row">
-      {consultants}
+      {consultantz}
       </div>
   );
 };
