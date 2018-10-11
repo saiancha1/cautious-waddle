@@ -50,6 +50,18 @@ namespace cautious_waddle.Models
             return companies;
         }
 
+        public IEnumerable<Company> AdminGetCompanies(bool? approved)
+        {
+            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
+
+            if(approved != null)
+            {
+                companies = approved == true ? companies.Where(c => c.IsApproved == 1) : companies.Where(c => c.IsApproved == 0);
+            }
+
+            return companies;
+        }
+
         public IEnumerable<CompaniesViewModel> GetMyCompanies(string userId)
         {
             IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);

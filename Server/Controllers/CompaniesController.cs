@@ -60,6 +60,20 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("adminGetCompanies")]
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminGetCompanies([FromQuery] bool? approved)
+        {
+            try
+            {
+                return Ok(_companiesRepository.AdminGetCompanies(approved));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet("getCompany")]
         public IActionResult GetCompany([FromQuery] int id)
         {

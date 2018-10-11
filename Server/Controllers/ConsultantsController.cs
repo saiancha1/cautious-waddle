@@ -41,13 +41,13 @@ namespace cautious_waddle.Controllers
             }
         }
 
-        [HttpGet("getDisapprovedConsultants")]
+        [HttpGet("adminGetConsultants")]
         [Authorize(Roles="Admin")]
-        public IActionResult GetDisapprovedConsultants()
+        public IActionResult GetDisapprovedConsultants([FromQuery] bool? approved)
         {
             try
             {
-                return Ok(_consultantsRepository.GetDisapprovedConsultants());
+                return Ok(_consultantsRepository.AdminGetConsultants(approved));
             }
             catch(Exception ex)
             {

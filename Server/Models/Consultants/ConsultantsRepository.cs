@@ -39,9 +39,15 @@ namespace cautious_waddle.Models
             return consultantsViewModel;
         }
 
-        public IEnumerable<Consultant> GetDisapprovedConsultants()
+        public IEnumerable<Consultant> AdminGetConsultants(bool? approved)
         {
-            IEnumerable<Consultant> consultants = _context.Consultants.Where(c => c.IsApproved == 0);
+            IEnumerable<Consultant> consultants = _context.Consultants;
+
+            if(approved != null)
+            {
+                consultants = approved == true ? consultants.Where(c => c.IsApproved == 1) : consultants.Where(c => c.IsApproved == 0);
+            }
+
             return consultants;
         }
 
