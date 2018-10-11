@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './SummerTech.css';
 import SimpleModalWrapped from './SimpleModal';
+import CompanyModal from './CompanyModal';
+import '../Companies/companyStyles.css';
 
 class SummerTech extends Component {
   state = {
@@ -36,7 +38,22 @@ class SummerTech extends Component {
                     <div className="media-body">
                       <h4 className="media-heading">{company.companyName}</h4>
                       <p>{company.companyDesc}</p>
-                      <SimpleModalWrapped />
+                      <CompanyModal
+                          size={company.size}
+                          companyName={company.companyName}
+                          logo={company.logo}
+                          size={company.size}
+                          businessType={company.businessType}
+                          specialistArea={company.specialistArea}
+                          companyDesc={company.companyDesc}
+                          phone={company.phone}
+                          email={company.email}
+                          address1={company.address1}
+                          address2={company.address2}
+                          suburb={company.suburb}
+                          postalCode={company.postalCode}
+                          city={company.city}
+                      />
                     </div>
                   </li>
                 ))}
