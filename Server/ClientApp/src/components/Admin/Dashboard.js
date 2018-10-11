@@ -28,7 +28,7 @@ import JobManagement from './JobManagement/JobManagement';
 import UserManagement from './UserManagement/UserManagement';
 import Analytics from './MainDashboard/Analytics';
 import CompanyManagement from './CompanyManagement/CompanyManagement';
-
+import EventManagement from './EventManagement/EventManagement';
 import { mainListItems, secondaryListItems } from './listitems';
 
 const drawerWidth = 240;
@@ -167,6 +167,7 @@ class Dashboard extends React.Component {
            <Typography variant="display1" gutterBottom>
         Event Management
            </Typography>
+          <EventManagement />
          </main>
 
        );
