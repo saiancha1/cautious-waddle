@@ -41,10 +41,9 @@ const CompanyManagementTable = (props) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Job Id</TableCell>
-            <TableCell>Job Name</TableCell>
-            <TableCell>Job Description</TableCell>
-            <TableCell>Expiry Date</TableCell>
+            <TableCell>Company Id</TableCell>
+            <TableCell>Company Name</TableCell>
+            <TableCell>Company Description</TableCell>
             <TableCell>Is Approved</TableCell>
           </TableRow>
         </TableHead>
@@ -53,11 +52,10 @@ const CompanyManagementTable = (props) => {
             data.map(n => (
               <TableRow key={n.id}>
                 <TableCell component="th" scope="row">
-                  {n.jobId}
+                  {n.id}
                 </TableCell>
-                <TableCell><TextField key={n.jobId} type="text" value={n.jobTitle} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'jobName')}/></TableCell>
-                <TableCell><TextField key={n.jobId} type="text" value={n.jobDescription} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'description')} /></TableCell>
-                <TableCell><TextField type="text" value={n.expiry} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'expiry')} /></TableCell>
+                <TableCell><TextField key={n.jobId} type="text" value={n.companyName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'companyName')}/></TableCell>
+                <TableCell><TextField key={n.jobId} type="text" value={n.companyDescription} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'description')} /></TableCell>
                 <TableCell><Checkbox checked={(n.isApproved === 1) ? true : false} disabled={n.isDisabled} onChange={(e) => props.handleIsApproved(n, e, 'isApproved')} /></TableCell>
                 <TableCell>
 

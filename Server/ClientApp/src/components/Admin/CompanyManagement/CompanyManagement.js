@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 
 class CompanyManagement extends Component {
   state = {
-    jobs: [],
+    companies: [],
     view: 'ViewUsers',
     open: false,
     isAdmin: false,
@@ -32,14 +32,14 @@ class CompanyManagement extends Component {
           this.setState({ isAdmin: true });
         }
       });
-    fetch('api/jobs/adminGetJobs', {
+    fetch('api/companies/getDisapprovedCompanies', {
       headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` },
     }).then(res => res.json())
       .then((json) => {
         json.map(v => v.isDisabled = true);
         console.log(json);
 
-        this.setState({ jobs: json });
+        this.setState({ companies: json });
       })
       .catch(() => { this.setState({ isAdmin: false }); });
   }
@@ -59,23 +59,23 @@ class CompanyManagement extends Component {
             this.setState({ isAdmin: false });
           }
         });
-      const data = this.state.jobs;
+      const data = this.state.companies;
       n[fieldName] = e.target.value;
       const index = data.indexOf(n);
       if (index !== null) {
         data[index] = n;
-        this.setState({ jobs: data });
+        this.setState({ companies: data });
       }
       e.preventDefault();
     }
 
     handleSave = (n) => {
-      const data = this.state.jobs;
+      const data = this.state.companies;
       const index = data.indexOf(n);
       if (index !== -1) {
         data[index] = n;
 
-        fetch('api/Auth/EditJob', {
+        fetch('api/companies/editCompany', {
           method: 'POST',
 
           headers: {
@@ -99,23 +99,23 @@ class CompanyManagement extends Component {
     handleIsApproved = (n,e,val) => {
        if (e.target.checked === true)
        {
-        const data = this.state.jobs;
+        const data = this.state.companies;
         const index = data.indexOf(n);
-        fetch('api/jobs/approveJob', {
+        fetch('api/companies/approveCompany', {
           method: 'POST',
 
           headers: {
             'content-type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('id_token')}`,
           },
-          body: n.jobId,
+          body: n.id,
         })
           .then((res) => {
             if (res.status === 200) {
               n.isApproved = 1;
               n.isDisabled = true;
               data[index] = n;
-              this.setState({jobs:data});
+              this.setState({companies:data});
             } else {
               alert('Not Done');
             }
@@ -124,9 +124,9 @@ class CompanyManagement extends Component {
       }
       else 
       {
-        const data = this.state.jobs;
+        const data = this.state.companies;
         const index = data.indexOf(n);
-        fetch('api/jobs/disapproveJob', {
+        fetch('api/companies/disapproveCompany', {
           method: 'POST',
 
           headers: {
@@ -140,7 +140,7 @@ class CompanyManagement extends Component {
               n.isApproved = 0;
               n.isDisabled = true;
               data[index] = n;
-              this.setState({jobs:data});
+              this.setState({companies:data});
             } else {
               alert('Not Done');
             }
@@ -187,7 +187,7 @@ class CompanyManagement extends Component {
         return (
           <div>
             <CompanyManagementTable
-              data={this.state.jobs}
+              data={this.state.companies}
               handleEdit={this.handleEdit}
               handleSave={this.handleSave}
               handleChange={this.handleChange}
