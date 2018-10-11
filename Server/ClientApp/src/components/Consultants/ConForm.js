@@ -8,7 +8,6 @@ class ConForm extends Component {
     state = {
       fname: '',
       lname: '',
-      company: '',
       website: '',
       email: '',
       phone: '',
@@ -54,7 +53,7 @@ class ConForm extends Component {
           Authorization : `Bearer ${this.Auth.getToken()}`,
         },
         body: JSON.stringify({
-// I want one email only consultant first name and last name separate
+
           firstName: fname,
           lastName: lname,
           consultantDesc: desc,
@@ -75,7 +74,7 @@ class ConForm extends Component {
       res();
       console.log(PostingConsultantInfo);
       console.log(res);
-      console.log(`Bearer ${this.Auth.getToken()}`);
+      // console.log(`Bearer ${this.Auth.getToken()}`);
     }
 
     handleChange = (e) => {
@@ -83,7 +82,8 @@ class ConForm extends Component {
     }
 
     render() {
-      return (
+      return (<div>
+        {this.Auth.loggedIn() ?  ( 
         <form onSubmit={this.handleSubmit}>
           <label>
             {' '}
@@ -101,12 +101,20 @@ class ConForm extends Component {
           <input name="exp" value={this.state.exp} onChange={this.handleChange} required />
           <br />
           <br />
+          {/* <label>
+
+           Company
+          </label>
+          <br />
+          <input name="company" value={this.state.company} onChange={this.handleChange}  />
+          <br />
+          <br /> */}
           <label>
             
                     Website
           </label>
           <br />
-          <input name="website" placeholder="www.company.com" value={this.state.website} onChange={this.handleChange} />
+          <input name="website" placeholder="www.companyname.com" value={this.state.website} onChange={this.handleChange} />
           <br />
           <br />
           <label>
@@ -129,7 +137,7 @@ class ConForm extends Component {
                                Image Url
           </label>
           <br />
-          <ImgUpload value={this.state.imgu} onChange={this.handleChange}  />
+          <ImgUpload name = "imgu" value={this.state.imgu} onChange={this.handleChange}  />
 
           {/* <input name="imgu" placeholder="IMAGE URL" value={this.state.imgu} onChange={this.handleChange} required /> */}
           <br />
@@ -157,9 +165,9 @@ class ConForm extends Component {
           <br />
           <textarea rows="4" cols="40" name="desc" placeholder="Say a few things about yourself" value={this.state.desc} onChange={this.handleChange} />
           <br />
-          <input id="submit" name="submit" type="submit" value="Submit" />
-        </form>
-      );
+          <input id="submit" name="submit" type="submit" value="Submit" onClick={this.handleSubmit}/>
+        </form>) : (<div> <h2>ERROR 401 - Not Authorized</h2></div>) }
+        </div> );
     }
 }
 

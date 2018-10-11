@@ -3,8 +3,8 @@ import ConST from './ConsultantStyledRender';
 
 const Consultant = (props) => {
   const consultants = props.cl.map((consultant) => 
-    <ConST firstName={consultant.firstName} lastName={consultant.lastName} consultimage={consultant.imageurl} consultDescription={consultant.consultantDesc} 
-    hisemail={consultant.email}
+    <ConST consultimage={consultant.imageurl} firstName= {consultant.firstName} lastName={consultant.lastName}  consultDescription={consultant.consultantDesc} 
+    hisemail={consultant.email} consultcity={consultant.city} consultwebsite={consultant.website}
        />
   );
   return (
