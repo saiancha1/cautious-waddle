@@ -282,3 +282,6 @@ ClientApp/node_modules/util/..travis.yml.icloud
 Server/.vscode/launch.json
 Server/.vscode/tasks.json
 .gitignore
+.vscode/launch.json
+.vscode/settings.json
+.vscode/launch.json
