@@ -64,35 +64,6 @@ namespace cautious_waddle.Controllers
             }
         }
 
-        [HttpPost("sendMailingListWeekly")]
-        [Authorize(Roles="Admin")]
-        public IActionResult sendMailingListWeekly()
-        {
-            try
-            {
-                _emailService.MailingListWeekly();
-                return Ok();
-            }
-            catch(Exception ex)
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet("getEmailAddresses")]
-        [Authorize(Roles="Admin")]
-        public IActionResult getEmailAddresses()
-        {
-            try
-            {
-                return Ok(_emailService.GetEmailAddresses());
-            }
-            catch(Exception ex)
-            {
-                return BadRequest();
-            }
-        }
-
         [HttpPost("sendContactForm")]
         public IActionResult sendContactForm([FromBody] ContactFormViewModel contactForm)
         {
