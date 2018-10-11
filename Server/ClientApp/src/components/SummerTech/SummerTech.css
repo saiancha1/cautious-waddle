@@ -17,6 +17,11 @@ width: 80px
   transform: translate(-50%, -50%);
 }
 
+.infotext p {
+    font-family: "Open Sans Condensed", sans-serif;
+    text-align: center;
+}
+
 .centered-text h3 {
   margin: 0;
   font-family: "Open Sans Condensed", sans-serif;

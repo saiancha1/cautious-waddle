@@ -9,8 +9,6 @@ class SummerTech extends Component {
     companies: [],
   };
 
-  // TODO: Update media img to responsive sizing, complete More Info link, possibly remove Login button from header, restore the navbar and router code.
-
   async componentWillMount() {
     fetch('api/Companies/getCompanies').then(res => res.json())
       .then((json) => {
@@ -20,20 +18,23 @@ class SummerTech extends Component {
 
   render() {
     return (
-      <div className="home-container">
-        <img className="background-image" src={background} alt="background" />
+      <div>
+        <div className="home-container">
+          <img className="background-image" src={background} alt="background" />
           <div className="centered-text">
             <h3>
-              <span>Summer Of Tech</span>
+              <span>Summer of Tech</span>
               <br />
-              Lorem ipsum dolor sit amet
+              Companies that often have summer work available
             </h3>
           </div>
-
+        </div>
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-3" />
             <div className="col-sm-6">
+            <p> </p>
+            <p> </p>
               <ul>
                 {this.state.companies.map(company => (
                   <li className="media">
