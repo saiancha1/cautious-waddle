@@ -165,7 +165,7 @@ class ConForm extends Component {
           <br />
           <textarea rows="4" cols="40" name="desc" placeholder="Say a few things about yourself" value={this.state.desc} onChange={this.handleChange} />
           <br />
-          <input id="submit" name="submit" type="submit" value="Submit" onClick={this.handleSubmit}/>
+          <input id="submit" name="submit" type="submit" value="Submit"/>
         </form>) : (<div> <h2>ERROR 401 - Not Authorized</h2></div>) }
         </div> );
     }
