@@ -36,6 +36,9 @@
 
 .card-content {
   background-color: #f9f9f9;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  min-height: 150px !important;
 }
 
 .card-date {
@@ -82,7 +85,7 @@
 
 @media (min-width: 600px) {
   .MuiCardContent-root-33 {
-      padding-left: 10px !important;
-      padding-right: 10px !important;
+      /* padding-left: 10px !important;
+      padding-right: 10px !important; */
   }
 }
