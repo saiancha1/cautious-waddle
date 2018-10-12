@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import Card from './Home/Card';
+import Card from './Events/Card';
 import './events.css';
 
 export default class Events extends Component {
