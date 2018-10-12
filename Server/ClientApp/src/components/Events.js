@@ -4,10 +4,15 @@ import Card from './Home/Card';
 import './events.css';
 
 export default class Events extends Component {
-  state = {
-    events: [],
-    events_selected: [],
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      events: [],
+      eventsSelected: [],
+    };
   }
+
 
   async componentDidMount() {
     try {
@@ -16,9 +21,20 @@ export default class Events extends Component {
 
       this.setState({
         events,
+        eventsSelected: events,
       });
     } catch (e) {
       console.log(e); // TODO: Add proper error hanlding here
+    }
+  }
+
+  handleFilterEvent(param) {
+    const { events } = this.state;
+    if (param === 'all') {
+      this.setState({ eventsSelected: events });
+    } else {
+      const newArr = events.filter(event => event.eventType === param);
+      this.setState({ eventsSelected: newArr });
     }
   }
 
@@ -36,15 +52,25 @@ export default class Events extends Component {
           </div>
         </div>
         <div>
-          <button>
+          <button type="submit" onClick={this.handleFilterEvent.bind(this, 'Course')}>
             Course
           </button>
-          <button>
+          <button type="submit" onClick={this.handleFilterEvent.bind(this, 'Meetup')}>
             MeetUp
           </button>
+          <button type="submit" onClick={this.handleFilterEvent.bind(this, 'Group')}>
+            Group
+          </button>
+          <button type="submit" onClick={this.handleFilterEvent.bind(this, 'Event')}>
+            Event
+          </button>
+          <button type="submit" onClick={this.handleFilterEvent.bind(this, 'all')}>
+            All
+          </button>
+
         </div>
         <div className="event-grid">
-          {this.state.events.map(event => (
+          {this.state.eventsSelected.map(event => (
             <div className="grid-item" key={event.eventId}>
               <Card event={event} />
             </div>
