@@ -6,6 +6,7 @@ import './events.css';
 export default class Events extends Component {
   state = {
     events: [],
+    events_selected: [],
   }
 
   async componentDidMount() {
@@ -33,6 +34,14 @@ export default class Events extends Component {
               Find out whats happening in technology around Palmerston North and start meeting like-minded people.
             </h3>
           </div>
+        </div>
+        <div>
+          <button>
+            Course
+          </button>
+          <button>
+            MeetUp
+          </button>
         </div>
         <div className="event-grid">
           {this.state.events.map(event => (
