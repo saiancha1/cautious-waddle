@@ -60,6 +60,10 @@
   box-shadow: none !important;
 }
 
+div[class^='MuiPaper-']{
+  box-shadow: none !important;
+}
+
 div[class^='MuiExpansionPanelDetails-root-']{
   display: inherit !important;
 }
