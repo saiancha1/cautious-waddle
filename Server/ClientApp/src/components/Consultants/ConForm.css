@@ -25,6 +25,20 @@
     float: right;
     padding-right: 5px;
   }
+
+  .add-name-r {
+    max-width: 200px;
+    width: 100%;
+    float: right;
+    padding-right: 5px;
+  }
+
+  .add-name-l {
+    max-width: 200px;
+    width: 100%;
+    float: left;
+    padding-right: 5px;
+  }
   
   .msg-name-l {
     max-width: 240px;
