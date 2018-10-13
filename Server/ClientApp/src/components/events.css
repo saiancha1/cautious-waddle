@@ -6,3 +6,10 @@
 .grid-item {
 
 }
+
+.card-link {
+  text-decoration: none !important;
+}
+.card-link:focus, :hover, :visited, :link, :active {
+  text-decoration: none !important;
+}

@@ -14,6 +14,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import '../Home/HomeFolder.css';
+import '../events.css';
 
 const styles = {
   card: {
@@ -71,49 +72,42 @@ class ImgMediaCard extends Component {
     const { classes, event } = this.props;
     console.log(event);
     return (
-      <ExpansionPanel>
-        <ExpansionPanelSummary>
-          <div className="individual-card">
-            <Card className={classes.card}>
-              <CardActionArea>
-                <div className="card-date">
-                  <span className="card-date-day">{this.getDay()}</span>
-                  <br />
-                  <span className="card-date-date">{this.getMonth()}</span>
-                </div>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  className={classes.media}
-                  height="140"
-                  image={event.imageURL} // FIXME: im using a temp image here because API url was not working - event.imageURL.
-                  title="temp event"
-                />
-                <CardContent className="card-content">
-                  <Typography className="full-date">
-                    {this.getFullDate()}
-                  </Typography>
-                  <Typography className="event-title" gutterBottom component="h2">
-                    {event.eventName}
-                  </Typography>
-                  <Typography className="event-host" component="p">
+      <Link className="card-link" to={{ pathname: '/events', state: { feature: event } }}>
+        <div className="individual-card">
+          <Card className={classes.card}>
+            <CardActionArea>
+              <div className="card-date">
+                <span className="card-date-day">{this.getDay()}</span>
+                <br />
+                <span className="card-date-date">{this.getMonth()}</span>
+              </div>
+              <CardMedia
+                component="img"
+                alt="Contemplative Reptile"
+                className={classes.media}
+                height="140"
+                image={event.imageURL} // FIXME: im using a temp image here because API url was not working - event.imageURL.
+                title="temp event"
+              />
+              <CardContent className="card-content">
+                <Typography className="full-date">
+                  {this.getFullDate()}
+                </Typography>
+                <Typography className="event-title" gutterBottom component="h2">
+                  {event.eventName}
+                </Typography>
+                <Typography className="event-host" component="p">
                 Hosted by
-                    <span>
-                      {' '}
-                      {event.hostedBy}
-                    </span>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </div>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Link to={{ pathname: '/events', state: { foo: event } }}>Events</Link>
-
-        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+                  <span>
+                    {' '}
+                    {event.hostedBy}
+                  </span>
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </div>
+      </Link>
     );
   }
 }

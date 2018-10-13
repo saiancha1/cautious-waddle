@@ -8,7 +8,7 @@ export default class Events extends Component {
     super(props);
 
     this.props.location.state = {
-      foo: 'nahh',
+      feature: 'none',
     };
 
     this.state = {
@@ -39,6 +39,9 @@ export default class Events extends Component {
   }
 
   handleFilterEvent(param) {
+    this.props.location.state = {
+      feature: 'none',
+    };
     const { events } = this.state;
     if (param === 'all') {
       this.setState({ eventsSelected: events });
@@ -49,8 +52,8 @@ export default class Events extends Component {
   }
 
   render() {
-    const { foo } = this.props.location.state;
-    console.log(foo);
+    const { feature } = this.props.location.state;
+    console.log(feature);
     return (
       <div>
         <div className="events-container">
@@ -79,9 +82,16 @@ export default class Events extends Component {
           <button type="submit" onClick={this.handleFilterEvent.bind(this, 'all')}>
             All
           </button>
-          {foo !== 'nahh' ? (<h3>{foo.eventName}</h3>) : (<h1>no</h1>)}
-
         </div>
+        {feature !== 'none' ? (
+          <div>
+            <h2>{feature.eventName}</h2>
+            <br />
+            <h3>{feature.eventDescription}</h3>
+            <br />
+            <h3>{feature.eventLocation}</h3>
+          </div>
+        ) : ('')}
         <div className="event-grid">
           {this.state.eventsSelected.map(event => (
             <div className="grid-item" key={event.eventId}>
