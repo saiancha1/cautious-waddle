@@ -4,6 +4,7 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import SummerTech from './SummerTech/SummerTech';
 import AddJob from './AddJob/AddJob';
 import './Work.css';
+import background from '../images/homepage-image.jpg';
 
 class Work extends Component {
 state = {
@@ -20,6 +21,16 @@ async componentWillMount() {
 render() {
   return (
     <div className="jobs">
+            <div className="home-container">
+          <img className="background-image" src={background} alt="background" />
+          <div className="centered-text">
+            <h3>
+              <span>Summer of Tech</span>
+              <br />
+              The premier IT internship programme for New Zealand
+            </h3>
+          </div>
+        </div>
      <Route exact path="/summerTech" component={SummerTech} />
      <Route exact path="/addjob" component={AddJob} />
 
