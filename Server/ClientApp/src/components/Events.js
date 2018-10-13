@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Card from './Events/Card';
+import AuthService from './Authentication/AuthService';
 import './events.css';
+
 
 export default class Events extends Component {
   constructor(props) {
     super(props);
+
+    this.Auth = new AuthService();
 
     this.props.location.state = {
       feature: 'none',
@@ -14,6 +18,7 @@ export default class Events extends Component {
     this.state = {
       events: [],
       eventsSelected: [],
+      loggedIn: this.Auth.loggedIn(),
     };
   }
 
@@ -53,7 +58,9 @@ export default class Events extends Component {
 
   render() {
     const { feature } = this.props.location.state;
-    console.log(feature);
+
+    console.log(this.state.loggedIn);
+
     return (
       <div>
         <div className="events-container">
@@ -82,6 +89,10 @@ export default class Events extends Component {
           <button type="submit" onClick={this.handleFilterEvent.bind(this, 'all')}>
             All
           </button>
+        </div>
+        <div>
+          {/* <Link /> */}
+
         </div>
         {feature !== 'none' ? (
           <div>
