@@ -72,13 +72,13 @@ namespace cautious_waddle.Controllers
 
                 _consultantsRepository.AddConsultant(consultant);
 
-                string content = "A new consultant listing has been added\n" + 
-                "\nID: " + consultant.ConsultantId + 
-                "\nConsultant name: " + consultant.FirstName + " " + consultant.LastName + 
-                "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this consultant listing";
-                string subject = "New consultant listing";
+                // string content = "A new consultant listing has been added\n" + 
+                // "\nID: " + consultant.ConsultantId + 
+                // "\nConsultant name: " + consultant.FirstName + " " + consultant.LastName + 
+                // "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this consultant listing";
+                // string subject = "New consultant listing";
 
-                _emailService.SendToAdmins(subject, content);
+                // _emailService.SendToAdmins(subject, content);
 
                 return Ok();
             }

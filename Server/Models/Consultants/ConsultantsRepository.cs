@@ -30,7 +30,7 @@ namespace cautious_waddle.Models
 
         public IEnumerable<ConsultantsViewModel> GetConsultants()
         {
-            IEnumerable<Consultant> consultants = _context.Consultants.Where(c => c.IsApproved == 1);
+            IEnumerable<Consultant> consultants = _context.Consultants;
 
             // Filtering here
 
