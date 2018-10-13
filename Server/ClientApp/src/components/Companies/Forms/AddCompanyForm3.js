@@ -8,7 +8,7 @@ const AddCompanyForm3 = props => (
   <div className="row">
     <div className="col-md-5 offset-md-4" />
     <div className="col-md-4 offset-md-4">
-      <h1>File Upload</h1>
+      <h1>Company Logo</h1>
       <input type="file" onChange={e => props.handleFileChange(e)} />
       <Button type="submit" onClick={e => props.handleImageUpload(e)}><CloudUploadIcon /></Button>
       <Fade in={props.imageUploaded}><DoneIcon color="primary" /></Fade>

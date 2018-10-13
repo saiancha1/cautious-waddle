@@ -25,8 +25,8 @@ const AddcompanyForm1 = (props) => {
   return (
     <div className="row">
     <div className="row">
-      <div className="col-md-5 offset-md-4" />
-      <div className="col-md-4 offset-md-4">
+      <div className="col-md-5" />
+      <div className="col-md-4">
         <TextField
           id="company-name"
           label="Company Name"

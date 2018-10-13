@@ -21,8 +21,9 @@ const AddCompanyForm2 = (props) => {
   const classes = styles;
   return (
     <div className="row">
-      <form className={classes.container} noValidate autoComplete="off">
-        <div>
+    <div className="row">
+        <div className="col-md-5"/>
+        <div className="col-md-4">
           <TextField
             id="company-email"
             label="Email"
@@ -40,7 +41,11 @@ const AddCompanyForm2 = (props) => {
             margin="normal"
           />
         </div>
-        <div className="col-md-6">
+        </div>
+
+        <div className="row">
+        <div className="col-md-5"/>
+        <div className="col-md-4">
           <TextField
             id="business-add1"
             label="Address Line 1"
@@ -90,8 +95,9 @@ const AddCompanyForm2 = (props) => {
             margin="normal"
           />
         </div>
-      </form>
-    </div>
+        </div>
+        </div>
+        
   );
 };
 export default AddCompanyForm2;
