@@ -6,20 +6,20 @@ import Input from '@material-ui/core/Input';
 
 
 const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    bye: {
-      display: 'none',
-    },
-  });
+  button: {
+    margin: theme.spacing.unit,
+  },
+  bye: {
+    display: 'none',
+  },
+});
 
 
-  const ImgUpload = (props) => {
-    const { classes } = props;
-      return (
-      <div>
-        <Input 
+const ImgUpload = (props) => {
+  const { classes } = props;
+  return (
+    <div>
+      <Input
         accept="image/*"
         className={classes.bye}
         id="contained-button-file"
@@ -31,13 +31,12 @@ const styles = theme => ({
           Upload
         </Button>
       </label>
-      </div>
-      );
-  }
-  
-  ImgUpload.propTypes = {
-    classes: PropTypes.object.isRequired
-  };
+    </div>
+  );
+};
 
-  export default withStyles(styles)(ImgUpload);
-  
+ImgUpload.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ImgUpload);

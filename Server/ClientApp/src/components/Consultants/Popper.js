@@ -12,17 +12,17 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
 });
 
 class SimplePopper extends React.Component {
   state = {
     anchorEl: null,
-    open: false, 
+    open: false,
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     const { currentTarget } = event;
     this.setState(state => ({
       anchorEl: currentTarget,

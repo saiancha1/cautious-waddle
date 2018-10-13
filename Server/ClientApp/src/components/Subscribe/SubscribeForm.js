@@ -10,8 +10,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 export default class SubForm extends React.Component {
   state = {
     open: false,
-    name: '',
+    fname: '',
     email: '',
+    pop: false,
 
   };
 
@@ -19,8 +20,9 @@ export default class SubForm extends React.Component {
     e.preventDefault();
     console.log(this.state);
     const {
-      name,
+      fname,
       email,
+      pop,
     } = this.state;
 
     const res = () => fetch('/api/mailingList/subscribe', {
@@ -30,22 +32,36 @@ export default class SubForm extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
+        fullName: fname,
+        emailAddress: email,
       }),
-  }).then(res => res.json())
-  .then(response => console.log('Success', JSON.stringify(response)));
-  this.setState({ open: false });
-
-}
+    });
+    // .then(res => res.json()).then(response => console.log('Success', JSON.stringify(response)));
+    this.setState({ open: false });
+    res();
+    this.handleSubscribe();
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  handleSubscribe() {
+    try {
+      alert('Thank you. You have been Subscribed.');
+    } catch (error) {
+      alert('There seems to be a problem!');
+    }
+  }
 
   render() {
     return (
@@ -68,6 +84,9 @@ export default class SubForm extends React.Component {
               id="name"
               label="Full Name"
               type="text"
+              name="fname"
+              value={this.state.fname}
+              onChange={this.handleChange}
               fullWidth
             />
             <TextField
@@ -77,6 +96,8 @@ export default class SubForm extends React.Component {
               label="Email Address"
               type="email"
               name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
               autoComplete="email"
               fullWidth
             />
