@@ -3,6 +3,7 @@ import { BrowserRouter as Route, Router, Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import SummerTech from './SummerTech/SummerTech';
 import AddJob from './AddJob/AddJob';
+import './Work.css';
 
 class Work extends Component {
 state = {
@@ -32,20 +33,23 @@ render() {
           </Link>
           <br/>
           <br/>
-
-      <h1>Work</h1>
-      <p>Lorem ipsum dolor sit amet..</p>
-      <ul>
-        {this.state.jobs.map(job => (
-                <li>
+        <div className="wrapper">
+          <div className="title">
+            <h1>Work</h1>
+            <p>Lorem ipsum dolor sit amet..</p>
+          </div>
+          <ul className="listing">
+            {this.state.jobs.map(job => (
+              <li>
                   <h1>{job.jobTitle}</h1>
                   <p> Job Description: {job.jobDescription}</p>
                   <p>Annual Salary: ${job.salary}</p>
                 </li>
-        ))}
-            </ul>
-            <br/>
-            <br/>
+            ))}
+          </ul>
+          <br/>
+          <br/>
+          </div>
     </div>
   );
 }
