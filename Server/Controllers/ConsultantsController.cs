@@ -55,6 +55,20 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("getMyConsultants")]
+        [Authorize]
+        public IActionResult GetMyConsultants([FromQuery] bool? approved)
+        {
+            try
+            {
+                return Ok(_consultantsRepository.GetMyConsultants(IdentityHelper.GetUserId(HttpContext), approved));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addConsultant")]
         [Authorize]
         public IActionResult AddConsultant([FromBody] ConsultantsViewModel consultantViewModel)

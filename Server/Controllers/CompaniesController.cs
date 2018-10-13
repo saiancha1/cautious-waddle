@@ -98,12 +98,12 @@ namespace cautious_waddle.Controllers
 
         [HttpGet("getMyCompanies")]
         [Authorize]
-        public IActionResult GetMyCompanies()
+        public IActionResult GetMyCompanies([FromQuery] bool? approved)
         {
             try
             {
                 string UserId = IdentityHelper.GetUserId(HttpContext);
-                return Ok(_companiesRepository.GetMyCompanies(UserId));
+                return Ok(_companiesRepository.GetMyCompanies(UserId, approved));
             }
             catch
             {

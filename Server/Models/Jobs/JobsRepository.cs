@@ -40,7 +40,7 @@ namespace cautious_waddle.Models
             return jobsViewModel;
         }
 
-        public IEnumerable<JobsViewModel> AdminGetJobs(bool? expired, bool? approved)
+        public IEnumerable<Job> AdminGetJobs(bool? expired, bool? approved)
         {
             IEnumerable<Job> jobs = _context.Jobs;
 
@@ -53,9 +53,23 @@ namespace cautious_waddle.Models
                 jobs = approved == true ? jobs.Where(j => j.IsApproved == 1) : jobs.Where(j => j.IsApproved == 0);
             }
 
-            IEnumerable<JobsViewModel> jobsViewModel = Mapper.Map<IEnumerable<Job>, IEnumerable<JobsViewModel>>(jobs);
+            return jobs;
+        }
 
-            return jobsViewModel;
+        public IEnumerable<Job> GetMyJobs(string userId, bool? expired, bool? approved)
+        {
+            IEnumerable<Job> jobs = _context.Jobs.Where(j => j.UserId == userId);
+
+            if(expired != null)
+            {
+                jobs = expired == true ? jobs.Where(j => j.Expired == 1) : jobs.Where(j => j.Expired == 0);
+            }
+            if(approved != null)
+            {
+                jobs = approved == true ? jobs.Where(j => j.IsApproved == 1) : jobs.Where(j => j.IsApproved == 0);
+            }
+
+            return jobs;
         }
 
         public void AddJob(Job job)

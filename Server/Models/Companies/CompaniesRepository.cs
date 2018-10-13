@@ -62,9 +62,15 @@ namespace cautious_waddle.Models
             return companies;
         }
 
-        public IEnumerable<CompaniesViewModel> GetMyCompanies(string userId)
+        public IEnumerable<Company> GetMyCompanies(string userId, bool? approved)
         {
             IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
+
+            if(approved != null)
+            {
+                companies = approved == true ? companies.Where(c => c.IsApproved == 1) : companies.Where(c => c.IsApproved == 0);
+            }
+
             List<Company> myCompanies = new List<Company>();
             int count = 0;
 
@@ -78,8 +84,7 @@ namespace cautious_waddle.Models
                 }
             }
 
-            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(myCompanies);
-            return companiesViewModel;
+            return myCompanies;
         }
 
         public void AddCompany(Company company)

@@ -57,6 +57,20 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("getMyEvents")]
+        [Authorize]
+        public IActionResult GetMyEvents([FromQuery] bool? expired, [FromQuery] bool? approved)
+        {
+            try
+            {
+                return Ok(_localEventsRepository.GetMyEvents(IdentityHelper.GetUserId(HttpContext), expired, approved));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addEvent")]
         [Authorize]
         public IActionResult AddEvent([FromBody] LocalEventsViewModel eventViewModel)
