@@ -41,7 +41,6 @@ export default class SignupForm extends Component {
     fetch('api/auth/addUser', {
       method: 'POST',
       header: {
-        Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -51,7 +50,8 @@ export default class SignupForm extends Component {
         Email: email1,
         Password: password,
       }),
-    }).then(res => res.JSON()).then(res => console.log(res));
+    }).then(res => res.json()).then(res => console.log(res))
+    .catch(alert('F'));
   }
 
 
