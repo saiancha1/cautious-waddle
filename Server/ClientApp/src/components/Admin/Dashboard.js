@@ -228,41 +228,41 @@ class Dashboard extends React.Component {
              
              <Divider />
              <List>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('Dashboard', e)} >
                  <ListItemIcon>
                    <DashboardIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('Dashboard', e)} primary="Dashboard" />
+                 <ListItemText primary="Dashboard" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('UserManagement', e)}>
                  <ListItemIcon>
                    <PeopleIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('UserManagement', e)} primary="User Management" />
+                 <ListItemText  primary="User Management" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('CompanyManagement', e)}>
                  <ListItemIcon>
                    <BarChartIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('CompanyManagement', e)} primary="Company Management" />
+                 <ListItemText  primary="Company Management" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('EventManagement', e)}>
                  <ListItemIcon>
                    <LayersIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('EventManagement', e)} primary="Events Management" />
+                 <ListItemText  primary="Events Management" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('JobManagement', e)}>
                  <ListItemIcon>
                    <BusinessIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('JobManagement', e)} primary="Job Management" />
+                 <ListItemText  primary="Job Management" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('ConsultantManagement', e)}>
                  <ListItemIcon>
                    <PersonIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('ConsultantManagement', e)} primary="Consultant Management" />
+                 <ListItemText  primary="Consultant Management" />
                </ListItem>
              </List>
              <Divider />
