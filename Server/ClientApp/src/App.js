@@ -17,7 +17,6 @@ import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
 import SubForm from './components/Subscribe/SubscribeForm';
-import TestPost from './components/Consultants/TestPost';
 import AddCompany from './components/Companies/AddCompany';
 
 
