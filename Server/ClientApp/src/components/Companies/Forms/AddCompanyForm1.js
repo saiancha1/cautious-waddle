@@ -24,8 +24,8 @@ const AddcompanyForm1 = (props) => {
     const classes = styles;
     return (
         <div classname="row">
-        <form className={classes.container} noValidate autoComplete="off">
-        <div>
+        <div className="col-md-5 offset-md-4"/>
+        <div className="col-md-4 offset-md-4" >
         <TextField
           id="company-name"
           label="Company Name"
@@ -72,7 +72,7 @@ const AddcompanyForm1 = (props) => {
         onEditorChange={(e) => props.handleEditorChange(e)}
       />
         </div>
-        </form>
+    
         </div>
     )
 }

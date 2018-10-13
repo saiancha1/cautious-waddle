@@ -51,6 +51,7 @@ class AddCompany extends React.Component {
       SummerJobs: 0,
     },
     file: null,
+    imageUploaded: false
 
   };
 
@@ -83,6 +84,7 @@ class AddCompany extends React.Component {
       const company = this.state.company;
       company.Logo = res.imageUrl;
       this.setState({company:company});
+      this.setState({imageUploaded:true});
       // Handle the success response object
     },
     ).catch(
@@ -97,7 +99,7 @@ class AddCompany extends React.Component {
        case 1:
          return <AddCompanyForm2 handleChange={this.handleForm1Change} company={this.state.company} />;
        case 2:
-         return <AddCompanyForm3 handleImageUpload={this.handleImageUpload} handleFileChange={this.handleFileChange} />;
+         return <AddCompanyForm3 handleImageUpload={this.handleImageUpload} handleFileChange={this.handleFileChange} imageUploaded= {this.state.imageUploaded} />;
        default:
          return 'Uknown stepIndex';
      }
@@ -183,7 +185,6 @@ class AddCompany extends React.Component {
           ) : (
             <div>
               <div className="Row">
-                <div className="col-md-2" />
                 {this.getStepContent(activeStep)}
               </div>
               <div>
