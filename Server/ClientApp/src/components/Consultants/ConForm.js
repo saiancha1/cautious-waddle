@@ -21,6 +21,7 @@ class ConForm extends Component {
       postalcode: '',
       desc: '',
       exp: '',
+      selectedFile: '',
       imgu: '',
     }
 
@@ -43,6 +44,7 @@ class ConForm extends Component {
         postalcode,
         desc,
         exp,
+        selectedFile,
         imgu,
       } = this.state;
 
@@ -80,6 +82,21 @@ class ConForm extends Component {
       this.handleSubscribe();
     }
 
+    // handleImage = (e) => {
+    //   e.preventDefault();
+    //   console.log(this.state);
+    //   const {
+    //     imgu,
+    // } = this.state
+
+    // const ires = () => fetch('api/Consultants/addConsultantImage', {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'image/*',
+    //     'Content-Type': 'application/json',
+    //     // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
+    //     Authorization: `Bearer ${this.Auth.getToken()}`,
+
 
     handleChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
@@ -93,6 +110,29 @@ class ConForm extends Component {
       }
     }
 
+    fileSelectedHandler = (event) => {
+      this.setState({
+        selectedFile: event.target.files[0],
+      });
+    }
+
+    fileUploadHandler = (e) => {
+      e.preventDefault();
+      console.log(this.state);
+
+      fetch('api/Consultants/addConsultantImage', {
+        method: 'POST',
+        body: this.state.selectedFile,
+        headers: {
+          Accept: 'image/*',
+          // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
+          Authorization: `Bearer ${this.Auth.getToken()}`,
+        },
+      }).then((res) => {
+        console.log(res);
+      });
+    }
+
     render() {
       return (
         <div div className="contact-wrapper">
@@ -101,6 +141,15 @@ class ConForm extends Component {
             <form onSubmit={this.handleSubmit}>
               <h2>Add Consultant</h2>
               <Grid>
+                <Row>
+                  {/* <ImgUpload name="imgu" value={this.state.imgu} onChange={this.handleImage} /> */}
+                  <Col xs={12}>
+                    <input type="file" onChange={this.fileSelectedHandler} required />
+                    <button onClick={this.fileUploadHandler}>Upload</button>
+                  </Col>
+                  {' '}
+
+                </Row>
                 <Row>
                   <label>
                     Name
@@ -171,11 +220,15 @@ class ConForm extends Component {
                                Image Url
                   </label>
                 </Row>
-                <Row>
-                  {/* <ImgUpload name = "imgu" value={this.state.imgu} onChange={this.handleChange}  /> */}
+                {/* <Row> */}
+                {/* <ImgUpload name="imgu" value={this.state.imgu} onChange={this.handleImage} /> */}
+                {/* <Col xs={12}>
+                    <input type="file" onChange={this.fileSelectedHandler} required />
+                    <button onClick={this.fileUploadHandler}>Upload</button>
+                  </Col>
+                  {' '} */}
 
-                  {/* <input name="imgu" placeholder="IMAGE URL" value={this.state.imgu} onChange={this.handleChange} required /> */}
-                </Row>
+                {/* </Row> */}
                 <br />
 
                 <Row>
