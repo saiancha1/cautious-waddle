@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from '../Authentication/AuthService';
 import ImgUpload from './ImgUpload';
-import '../Contact/contact.css';
+import './ConForm.css';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 
