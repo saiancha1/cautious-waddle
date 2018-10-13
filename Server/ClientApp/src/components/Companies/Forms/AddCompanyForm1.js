@@ -24,6 +24,7 @@ const AddcompanyForm1 = (props) => {
   const classes = styles;
   return (
     <div className="row">
+    <div className="row">
       <div className="col-md-5 offset-md-4" />
       <div className="col-md-4 offset-md-4">
         <TextField
@@ -60,10 +61,14 @@ const AddcompanyForm1 = (props) => {
           margin="normal"
         />
       </div>
-      <div className="col-md-12">
+      </div>
+      <div className="row">
+      <div className="col-md-2"></div>
+      <div className="col-md-8">
         <Editor
           initialValue="<p>This is the initial content of the editor</p>"
           apiKey="5d7hzleu874zjwed4vnwvsh5d4hsnnrmkkb80nvrl7w0z6v1"
+          
           init={{
             plugins: 'link image code',
             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
@@ -71,6 +76,7 @@ const AddcompanyForm1 = (props) => {
           value={props.company.CompanyDesc}
           onEditorChange={e => props.handleEditorChange(e)}
         />
+      </div>
       </div>
 
     </div>
