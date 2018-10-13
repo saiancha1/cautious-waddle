@@ -7,14 +7,18 @@ export default class Events extends Component {
   constructor(props) {
     super(props);
 
+    this.props.location.state = {
+      foo: 'nahh',
+    };
+
     this.state = {
       events: [],
       eventsSelected: [],
     };
   }
 
-
   async componentDidMount() {
+    window.scrollTo(0, 0);
     try {
       const res = await fetch('api/events/getEvents');
       const events = await res.json();
@@ -25,6 +29,12 @@ export default class Events extends Component {
       });
     } catch (e) {
       console.log(e); // TODO: Add proper error hanlding here
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0);
     }
   }
 
@@ -39,6 +49,8 @@ export default class Events extends Component {
   }
 
   render() {
+    const { foo } = this.props.location.state;
+    console.log(foo);
     return (
       <div>
         <div className="events-container">
@@ -67,6 +79,7 @@ export default class Events extends Component {
           <button type="submit" onClick={this.handleFilterEvent.bind(this, 'all')}>
             All
           </button>
+          {foo !== 'nahh' ? (<h3>{foo.eventName}</h3>) : (<h1>no</h1>)}
 
         </div>
         <div className="event-grid">

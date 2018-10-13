@@ -25,7 +25,7 @@ class NavBar extends Component {
                 <NavItem className="navItem" eventKey={4} componentClass={Link} href="/work" to="/work">
               Work
                 </NavItem>
-                <NavItem className="navItem" eventKey={5} componentClass={Link} href="/events" to="/events">
+                <NavItem className="navItem" eventKey={5} componentClass={Link} href="/events" to={{ pathname: '/events', state: { foo: 'nahh' } }}>
               Events
                 </NavItem>
                 <NavItem className="navItem" eventKey={6} componentClass={Link} href="/contact" to="/contact">
