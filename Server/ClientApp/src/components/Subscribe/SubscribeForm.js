@@ -12,7 +12,7 @@ export default class SubForm extends React.Component {
     open: false,
     fname: '',
     email: '',
-    pop:false,
+    pop: false,
 
   };
 
@@ -35,13 +35,12 @@ export default class SubForm extends React.Component {
         fullName: fname,
         emailAddress: email,
       }),
-  })
-  // .then(res => res.json()).then(response => console.log('Success', JSON.stringify(response)));
-  this.setState({ open: false });
-  res();
-  this.handleSubscribe();
-
-}
+    });
+    // .then(res => res.json()).then(response => console.log('Success', JSON.stringify(response)));
+    this.setState({ open: false });
+    res();
+    this.handleSubscribe();
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -51,18 +50,18 @@ export default class SubForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubscribe() {
-    try {
-      alert('Thank you. You have been Subscribed.');
-      // TODO: put API call and redirect code here
-    } catch (error) {
-      alert('There seems to be a problem!');
-    }
-  }
 
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  handleSubscribe() {
+    try {
+      alert('Thank you. You have been Subscribed.');
+    } catch (error) {
+      alert('There seems to be a problem!');
+    }
+  }
 
   render() {
     return (
@@ -86,7 +85,7 @@ export default class SubForm extends React.Component {
               label="Full Name"
               type="text"
               name="fname"
-              value={this.state.fname} 
+              value={this.state.fname}
               onChange={this.handleChange}
               fullWidth
             />
@@ -98,7 +97,7 @@ export default class SubForm extends React.Component {
               type="email"
               name="email"
               value={this.state.email}
-              onChange={this.handleChange} 
+              onChange={this.handleChange}
               autoComplete="email"
               fullWidth
             />
