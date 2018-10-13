@@ -73,10 +73,22 @@ class ConForm extends Component {
       console.log(PostingConsultantInfo);
       console.log(res);
       console.log(`Bearer ${this.Auth.getToken()}`);
+      this.handleSubscribe();
     }
+
+    
 
     handleChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
+    }
+
+    handleSubscribe() {
+      try {
+        alert('Thank you for your consultant submission. Your posting will appear after approval.');
+        // TODO: put API call and redirect code here
+      } catch (error) {
+        alert('There seems to be a problem!');
+      }
     }
 
     render() {

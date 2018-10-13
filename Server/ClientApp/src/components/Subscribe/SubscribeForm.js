@@ -12,6 +12,7 @@ export default class SubForm extends React.Component {
     open: false,
     fname: '',
     email: '',
+    pop:false,
 
   };
 
@@ -21,6 +22,7 @@ export default class SubForm extends React.Component {
     const {
       fname,
       email,
+      pop,
     } = this.state;
 
     const res = () => fetch('/api/mailingList/subscribe', {
@@ -37,6 +39,7 @@ export default class SubForm extends React.Component {
   // .then(res => res.json()).then(response => console.log('Success', JSON.stringify(response)));
   this.setState({ open: false });
   res();
+  this.handleSubscribe();
 
 }
 
@@ -46,6 +49,15 @@ export default class SubForm extends React.Component {
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubscribe() {
+    try {
+      alert('Thank you. You have been Subscribed.');
+      // TODO: put API call and redirect code here
+    } catch (error) {
+      alert('There seems to be a problem!');
+    }
   }
 
   handleClose = () => {
