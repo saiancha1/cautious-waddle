@@ -37,7 +37,7 @@ render() {
         <div className="">
           <Paper className="wrapper">
           <div className="title">
-          <ButtonAppBar button="Add Job">
+          <ButtonAppBar >
             Job Listings
             </ButtonAppBar>
           </div>
