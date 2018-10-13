@@ -31,7 +31,8 @@ import CompanyManagement from './CompanyManagement/CompanyManagement';
 import EventManagement from './EventManagement/EventManagement';
 import ConsultantManagement from './ConsultantManagement/ConsultantManagement';
 import { mainListItems, secondaryListItems } from './listitems';
-
+import BusinessIcon from '@material-ui/icons/Business';
+import PersonIcon from '@material-ui/icons/Person';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -224,11 +225,7 @@ class Dashboard extends React.Component {
              }}
              open={this.state.open}
            >
-             <div className={classes.toolbarIcon}>
-               <IconButton onClick={this.handleDrawerClose}>
-                 <ChevronLeftIcon />
-               </IconButton>
-             </div>
+             
              <Divider />
              <List>
                <ListItem button>
@@ -257,13 +254,13 @@ class Dashboard extends React.Component {
                </ListItem>
                <ListItem button>
                  <ListItemIcon>
-                   <LayersIcon />
+                   <BusinessIcon />
                  </ListItemIcon>
                  <ListItemText onClick={e => this.handleViewChange('JobManagement', e)} primary="Job Management" />
                </ListItem>
                <ListItem button>
                  <ListItemIcon>
-                   <LayersIcon />
+                   <PersonIcon />
                  </ListItemIcon>
                  <ListItemText onClick={e => this.handleViewChange('ConsultantManagement', e)} primary="Consultant Management" />
                </ListItem>
