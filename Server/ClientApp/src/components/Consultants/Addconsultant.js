@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import AuthService from '../Authentication/AuthService';
 import StandardButton from './StandardButton';
 import SimplePopper from './Popper';
 // import Popper from './Popper';
-import { Link } from 'react-router-dom'
+
 
 class Addconsultant extends Component {
   constructor(props) {
@@ -12,18 +14,28 @@ class Addconsultant extends Component {
     this.state = {
       loginStatus: this.Auth.loggedIn(),
     };
-      }
+  }
 
   render() {
     return (
       <div>
         {this.state.loginStatus ? (
-      <Link  to="/addconsultant"> 
-          <StandardButton/></Link>
-        ) : (<SimplePopper />) }</div>
-    )
-}
+          <Link to="/addconsultant">
+            <StandardButton />
+
+          </Link>
+        ) : (<SimplePopper />) }
+
+      </div>
+    );
+  }
 }
 
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
 
-export default Addconsultant;
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Addconsultant);

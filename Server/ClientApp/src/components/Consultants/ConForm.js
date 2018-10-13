@@ -3,6 +3,7 @@ import AuthService from '../Authentication/AuthService';
 import ImgUpload from './ImgUpload';
 import './ConForm.css';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 
 class ConForm extends Component {
@@ -233,4 +234,11 @@ class ConForm extends Component {
     }
 }
 
-export default ConForm;
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConForm);
