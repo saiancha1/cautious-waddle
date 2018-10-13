@@ -25,7 +25,7 @@ class SummerTech extends Component {
             <h3>
               <span>Summer of Tech</span>
               <br />
-              Companies that often have summer work available
+              The premier IT internship programme for New Zealand
             </h3>
           </div>
         </div>
