@@ -32,7 +32,7 @@ class CompanyManagement extends Component {
           this.setState({ isAdmin: true });
         }
       });
-    fetch('api/companies/getDisapprovedCompanies', {
+    fetch('api/companies/adminGetCompanies', {
       headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` },
     }).then(res => res.json())
       .then((json) => {
