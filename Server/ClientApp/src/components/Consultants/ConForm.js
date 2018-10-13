@@ -82,21 +82,6 @@ class ConForm extends Component {
       this.handleSubscribe();
     }
 
-    // handleImage = (e) => {
-    //   e.preventDefault();
-    //   console.log(this.state);
-    //   const {
-    //     imgu,
-    // } = this.state
-
-    // const ires = () => fetch('api/Consultants/addConsultantImage', {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'image/*',
-    //     'Content-Type': 'application/json',
-    //     // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
-    //     Authorization: `Bearer ${this.Auth.getToken()}`,
-
 
     handleChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
@@ -114,6 +99,7 @@ class ConForm extends Component {
       this.setState({
         selectedFile: event.target.files[0],
       });
+      console.log(this.state.selectedFile);
     }
 
     fileUploadHandler = (e) => {
@@ -142,7 +128,6 @@ class ConForm extends Component {
               <h2>Add Consultant</h2>
               <Grid>
                 <Row>
-                  {/* <ImgUpload name="imgu" value={this.state.imgu} onChange={this.handleImage} /> */}
                   <Col xs={12}>
                     <input type="file" onChange={this.fileSelectedHandler} required />
                     <button onClick={this.fileUploadHandler}>Upload</button>
@@ -160,7 +145,6 @@ class ConForm extends Component {
                     <input className="msg-name-r" name="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleChange} required />
                   </Col>
                   <Col className="contact-name" xs={12} sm={6}>
->
                     <input className="msg-name-l" name="lname" placeholder="Last Name" value={this.state.lname} onChange={this.handleChange} required />
                   </Col>
 
