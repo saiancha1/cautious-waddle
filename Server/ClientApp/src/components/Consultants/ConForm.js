@@ -99,19 +99,19 @@ class ConForm extends Component {
       this.setState({
         selectedFile: event.target.files[0],
       });
-      console.log(this.state.selectedFile);
     }
 
     fileUploadHandler = (e) => {
       e.preventDefault();
-      console.log(this.state);
+      console.log(this.state.selectedFile);
+      const fd = new FormData();
+      fd.append('ConsultantImage', this.state.selectedFile, this.state.selectedFile.name);
 
       fetch('api/Consultants/addConsultantImage', {
         method: 'POST',
-        body: this.state.selectedFile,
+        body: fd,
         headers: {
-          Accept: 'image/*',
-          // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${this.Auth.getToken()}`,
         },
       }).then((res) => {
