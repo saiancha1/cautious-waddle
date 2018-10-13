@@ -29,6 +29,7 @@ import UserManagement from './UserManagement/UserManagement';
 import Analytics from './MainDashboard/Analytics';
 import CompanyManagement from './CompanyManagement/CompanyManagement';
 import EventManagement from './EventManagement/EventManagement';
+import ConsultantManagement from './ConsultantManagement/ConsultantManagement';
 import { mainListItems, secondaryListItems } from './listitems';
 
 const drawerWidth = 240;
@@ -186,6 +187,18 @@ class Dashboard extends React.Component {
 
        );
      }
+     if (this.state.dashboard === 'ConsultantManagement') {
+      return (
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Typography variant="display1" gutterBottom>
+       Consultant Management
+          </Typography>
+          <ConsultantManagement/>
+        </main>
+
+      );
+    }
    }
 
 
@@ -247,6 +260,12 @@ class Dashboard extends React.Component {
                    <LayersIcon />
                  </ListItemIcon>
                  <ListItemText onClick={e => this.handleViewChange('JobManagement', e)} primary="Job Management" />
+               </ListItem>
+               <ListItem button>
+                 <ListItemIcon>
+                   <LayersIcon />
+                 </ListItemIcon>
+                 <ListItemText onClick={e => this.handleViewChange('ConsultantManagement', e)} primary="Consultant Management" />
                </ListItem>
              </List>
              <Divider />
