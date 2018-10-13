@@ -51,22 +51,22 @@ class AddCompany extends React.Component {
       SummerJobs: 0,
     },
     file: null,
-    imageUploaded: false
+    imageUploaded: false,
 
   };
 
-   handleForm1Change = (e, val) => {
-     const company = this.state.company;
-     company[val] = e.target.value;
-     this.setState({ company });
-   }
+  handleForm1Change = (e, val) => {
+    const company = this.state.company;
+    company[val] = e.target.value;
+    this.setState({ company });
+  }
 
   handleFileChange = (e) => {
     this.setState({ file: e.target.files[0] });
   }
 
   handleImageUpload = (e) => {
-    let data = new FormData();
+    const data = new FormData();
     const file = this.state.file;
     data.append('file', file);
     console.log(this.state.file);
@@ -74,17 +74,17 @@ class AddCompany extends React.Component {
     fetch('api/companies/addCompanyImage', { // Your POST endpoint
       method: 'POST',
       headers: {
-        //'Content-Type': 'multipart/formdata',
+        // 'Content-Type': 'multipart/formdata',
         Authorization: `Bearer ${localStorage.getItem('id_token')}`,
       },
-      body : data, // This is your file object
+      body: data, // This is your file object
     }).then(
       response => response.json(), // if the response is a JSON object
     ).then((res) => {
       const company = this.state.company;
       company.Logo = res.imageUrl;
-      this.setState({company:company});
-      this.setState({imageUploaded:true});
+      this.setState({ company });
+      this.setState({ imageUploaded: true });
       // Handle the success response object
     },
     ).catch(
@@ -92,18 +92,18 @@ class AddCompany extends React.Component {
     );
   }
 
-   getStepContent = (stepIndex) => {
-     switch (stepIndex) {
-       case 0:
-         return <AddCompanyForm1 handleChange={this.handleForm1Change} company={this.state.company} handleEditorChange={this.handleEditorChange} />;
-       case 1:
-         return <AddCompanyForm2 handleChange={this.handleForm1Change} company={this.state.company} />;
-       case 2:
-         return <AddCompanyForm3 handleImageUpload={this.handleImageUpload} handleFileChange={this.handleFileChange} imageUploaded= {this.state.imageUploaded} />;
-       default:
-         return 'Uknown stepIndex';
-     }
-   }
+  getStepContent = (stepIndex) => {
+    switch (stepIndex) {
+      case 0:
+        return <AddCompanyForm1 handleChange={this.handleForm1Change} company={this.state.company} handleEditorChange={this.handleEditorChange} />;
+      case 1:
+        return <AddCompanyForm2 handleChange={this.handleForm1Change} company={this.state.company} />;
+      case 2:
+        return <AddCompanyForm3 handleImageUpload={this.handleImageUpload} handleFileChange={this.handleFileChange} imageUploaded={this.state.imageUploaded} />;
+      default:
+        return 'Uknown stepIndex';
+    }
+  }
 
   handleNext = () => {
     this.setState(state => ({
@@ -133,17 +133,18 @@ class AddCompany extends React.Component {
     const company = this.state.company;
     const requiredFields = ['CompanyName', 'CompanyDescription', 'Company Email'];
     fetch('api/companies/addCompany', {
-      method:'POST',
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('id_token')}`,
-        'content-Type' : 'application/json'
+        'content-Type': 'application/json',
       },
-      body : JSON.stringify(company),
-      
+      body: JSON.stringify(company),
+
     })
-    .then (response => {(response.status === 200) ? alert("CompanyAdded") : alert("fail1")})
-    .catch();
+      .then((response) => { (response.status === 200) ? alert('CompanyAdded') : alert('fail1'); })
+      .catch();
   }
+
   render() {
     const { classes } = this.props;
     const steps = getSteps();
@@ -172,8 +173,8 @@ class AddCompany extends React.Component {
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => (
             <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
+              <StepLabel>{label}</StepLabel>
+            </Step>
           ))}
         </Stepper>
         <div>
@@ -184,22 +185,22 @@ class AddCompany extends React.Component {
             </div>
           ) : (
             <div>
-              <div className="Row">
-                {this.getStepContent(activeStep)}
+                <div className="Row">
+                  {this.getStepContent(activeStep)}
+                </div>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={classes.backButton}
+                  >
+                    Back
+                  </Button>
+                  <Button variant="contained" color="primary" onClick={this.handleNext}>
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </div>
               </div>
-              <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={this.handleBack}
-                  className={classes.backButton}
-                >
-                  Back
-                </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext}>
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </div>
-            </div>
           )}
         </div>
       </div>
