@@ -7,7 +7,7 @@
 }
 
 .title{
-    text-align: center;
+    text-align: center; 
     grid-row: 1;
     grid-column-start: 1;
     grid-column-end: 4;
@@ -38,7 +38,7 @@
   margin: 0;
   font-family: "Open Sans Condensed", sans-serif;
   font-size: 3vw;
-  background: rgba(0, 0, 0, 0.4);
+  background:rgba(0, 0, 0, 0.4);
   padding: 20px;
 }
 
@@ -84,5 +84,4 @@
     top:0;
     padding-bottom: 30px;
   }
-
 }

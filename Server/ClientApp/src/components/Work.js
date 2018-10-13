@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Route, Router, Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import SummerTech from './SummerTech/SummerTech';
-import AddJob from './AddJob/AddJob';
 import './Work.css';
 import background from '../images/homepage-image.jpg';
 import Paper from '@material-ui/core/Paper';
@@ -33,24 +30,15 @@ render() {
             </h3>
           </div>
         </div>
-     <Route exact path="/summerTech" component={SummerTech} />
-     <Route exact path="/addjob" component={AddJob} />
-
-    <Link to="/summertech">
-          Summer of Tech
-          </Link>
         <br/>
         <br/>
-        <Link to="/addjob">
-          <button>Add Job Listing</button>
-          </Link>
           <br/>
           <br/>
         <div className="">
           <Paper className="wrapper">
           <div className="title">
           <ButtonAppBar button="Add Job">
-            Work
+            Job Listings
             </ButtonAppBar>
           </div>
           <ul className="listing">
