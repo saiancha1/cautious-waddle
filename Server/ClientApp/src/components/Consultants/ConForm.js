@@ -88,7 +88,6 @@ class ConForm extends Component {
     handleSubscribe() {
       try {
         alert('Thank you for your consultant submission. Your posting will appear after approval.');
-        // TODO: put API call and redirect code here
       } catch (error) {
         alert('There seems to be a problem!');
       }

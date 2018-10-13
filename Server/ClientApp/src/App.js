@@ -8,18 +8,14 @@ import Consultants from './components/Consultants';
 import Work from './components/Work';
 import Events from './components/Events';
 import Contact from './components/Contact/Contact';
-import Subscribe from './components/Subscribe/Subscribe';
 import Footer from './components/Footer/Footer';
 import SummerTech from './components/SummerTech/SummerTech';
 import AdminComponent from './components/Admin/AdminComponent';
-import Addconsultant from './components/Consultants/Addconsultant';
 import Login from './components/Authentication/Login';
 import AddJob from './components/AddJob/AddJob';
 import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
-import SubForm from './components/Subscribe/SubscribeForm';
-import TestPost from './components/Consultants/TestPost';
 
 
 // Changed this simple function into a class so that we can manipulate state on this page
@@ -37,7 +33,6 @@ class App extends Component {
             <Route exact path="/work" component={Work} />
             <Route exact path="/events" component={Events} />
             <Route exact path="/contact" component={Contact} />
-            {/* <Route exact path="/subscribe" component={SubForm} /> */}
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
             <Route exact path="/addconsultant" component={ConForm} />

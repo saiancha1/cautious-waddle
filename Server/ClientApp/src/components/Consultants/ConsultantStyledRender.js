@@ -8,46 +8,50 @@ import PropTypes from 'prop-types';
 
 
 const styles = {
-    card: {
-      maxWidth: 345,      
-    },
-    media: {
-      height: 350,
-    },
-  };
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 350,
+  },
+};
 
- const ConST = (props) => {
-    const { classes } = props;
-    return(
+const ConST = (props) => {
+  const { classes } = props;
+  return (
     <div className="col-md-3">
-    <Card className={classes.card}>
-    <CardMedia
-      className={classes.media}
+      <Card className={classes.card}>
+        <CardMedia
+          className={classes.media}
       // image= {props.consultimage}
-      title= {props.lastName}
-    />
-    <CardContent>
-      <Typography gutterBottom variant="headline" component="h4">
-        {props.firstName} {props.lastName}
-      </Typography>
-      <Typography gutterBottom variant="headline" component="h2">
-        {props.consultwebsite} 
-      </Typography>
-      <br></br>
-      <Typography component="p" noWrap="true" paragraph="true">
-        {props.consultDescription}
-      </Typography>
-      <Typography component="p" noWrap="true" paragraph="true">
-        {props.hisemail}
-      </Typography>    
-      </CardContent>
-  </Card></div>
+          title={props.lastName}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="headline" component="h4">
+            {props.firstName}
+            {' '}
+            {props.lastName}
+          </Typography>
+          <Typography gutterBottom variant="headline" component="h2">
+            {props.consultwebsite}
+          </Typography>
+          <br />
+          <Typography component="p" noWrap="true" paragraph="true">
+            {props.consultDescription}
+          </Typography>
+          <Typography component="p" noWrap="true" paragraph="true">
+            {props.hisemail}
+          </Typography>
+        </CardContent>
+      </Card>
 
-      );
+    </div>
+
+  );
 };
 
 ConST.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(ConST);
