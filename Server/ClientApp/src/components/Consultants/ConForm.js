@@ -21,7 +21,7 @@ class ConForm extends Component {
       postalcode: '',
       desc: '',
       exp: '',
-      selectedFile: '',
+      selectedFile: null,
       imgu: '',
     }
 
