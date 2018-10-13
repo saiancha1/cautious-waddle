@@ -5,6 +5,8 @@ import SummerTech from './SummerTech/SummerTech';
 import AddJob from './AddJob/AddJob';
 import './Work.css';
 import background from '../images/homepage-image.jpg';
+import Paper from '@material-ui/core/Paper';
+import ButtonAppBar from './AppBar/ButtonAppBar';
 
 class Work extends Component {
 state = {
@@ -25,9 +27,9 @@ render() {
           <img className="background-image" src={background} alt="background" />
           <div className="centered-text">
             <h3>
-              <span>Summer of Tech</span>
+              <span>Work Opportunities</span>
               <br />
-              The premier IT internship programme for New Zealand
+              Current IT vacancies in Palmerston North
             </h3>
           </div>
         </div>
@@ -44,22 +46,25 @@ render() {
           </Link>
           <br/>
           <br/>
-        <div className="wrapper">
+        <div className="">
+          <Paper className="wrapper">
           <div className="title">
-            <h1>Work</h1>
-            <p>Lorem ipsum dolor sit amet..</p>
+          <ButtonAppBar button="Add Job">
+            Work
+            </ButtonAppBar>
           </div>
           <ul className="listing">
             {this.state.jobs.map(job => (
-              <li>
+              <Paper>
                   <h1>{job.jobTitle}</h1>
                   <p> Job Description: {job.jobDescription}</p>
                   <p>Annual Salary: ${job.salary}</p>
-                </li>
+              </Paper>
             ))}
           </ul>
           <br/>
           <br/>
+          </Paper>
           </div>
     </div>
   );
