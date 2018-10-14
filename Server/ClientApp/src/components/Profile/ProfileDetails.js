@@ -20,16 +20,25 @@ const styles = theme => ({
 });
 
 const ProfileDetails = props => (
-  <div>
+  <div className="row">
+  <div className="row">
+  <div className="col-md-5"/>
+  <div className="col-md-4">
     <TextField
       id="profile-email"
       label="Email"
-      className={styles.textField}
-      value={props.profile.email}
+      value={props.profile.email ? props.profile.email : null}
       onChange={e => props.handleChange(e, 'email')}
       margin="normal"
       variant="outlined"
+      floatingLabelFixed="true"
+      type="text"
     />
+    </div>
+    </div>
+    <div className="row">
+  <div className="col-md-5"/>
+  <div className="col-md-4">
     <TextField
       id="profile-firstName"
       label="First Name"
@@ -39,6 +48,12 @@ const ProfileDetails = props => (
       margin="normal"
       variant="outlined"
     />
+    </div>
+    
+    </div>
+    <div className="row">
+    <div className="col-md-5"/>
+    <div className="col-md-4">
     <TextField
       id="profile-lastName"
       label="Last Name"
@@ -48,6 +63,12 @@ const ProfileDetails = props => (
       margin="normal"
       variant="outlined"
     />
+    </div>
+    </div>
+
+    <div className="row">
+  <div className="col-md-5"/>
+  <div className="col-md-4">
     <TextField
       id="profile-bio"
       label="Bio"
@@ -58,6 +79,9 @@ const ProfileDetails = props => (
       variant="outlined"
       multiline = "true"
     />
+    </div>
+
+    </div>
   </div>
 );
 export default ProfileDetails;

@@ -102,7 +102,7 @@ namespace cautious_waddle.Controllers
 
         [HttpGet("getMyProfile")]
         [Authorize]
-        public async Task<IActionResult> GetMyProfile()
+        public  IActionResult GetMyProfile()
         {
             
             string userId = IdentityHelper.GetUserId(HttpContext);

@@ -41,7 +41,7 @@ class MyProfile extends React.Component {
       profileDetails: null,
     };
 
-    componentWillMount() {
+    componentDidMount() {
       fetch('api/profiles/getMyProfile', {
         method: 'GET',
         headers: {
@@ -67,6 +67,16 @@ class MyProfile extends React.Component {
 
     render() {
       const { value } = this.state;
+      if(this.state.profileDetails == null)
+      {
+          return (
+              <div>Loading</div>
+          )
+      }
+      else 
+      {
+
+      
       return (
         <div>
           <AppBar position="static" color="default">
@@ -96,6 +106,7 @@ class MyProfile extends React.Component {
           {value === 6 && <TabContainer>Item Seven</TabContainer>}
         </div>
       );
+      }
     }
 }
 export default MyProfile;
