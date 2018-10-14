@@ -32,7 +32,7 @@ class EventManagement extends Component {
           this.setState({ isAdmin: true });
         }
       });
-    fetch('api/events/getEvents', {
+    fetch('api/events/adminGetEvents', {
       headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` },
     }).then(res => res.json())
       .then((json) => {

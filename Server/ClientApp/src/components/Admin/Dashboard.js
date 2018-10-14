@@ -31,7 +31,9 @@ import CompanyManagement from './CompanyManagement/CompanyManagement';
 import EventManagement from './EventManagement/EventManagement';
 import ConsultantManagement from './ConsultantManagement/ConsultantManagement';
 import { mainListItems, secondaryListItems } from './listitems';
-
+import BusinessIcon from '@material-ui/icons/Business';
+import PersonIcon from '@material-ui/icons/Person';
+import MainDashboard from './MainDashboard/MainDashboard';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -145,7 +147,7 @@ class Dashboard extends React.Component {
            <Typography variant="display1" gutterBottom>
         Main Dashboard
            </Typography>
-           <Analytics/>
+           <MainDashboard/>
          </main>
        );
      }
@@ -224,48 +226,44 @@ class Dashboard extends React.Component {
              }}
              open={this.state.open}
            >
-             <div className={classes.toolbarIcon}>
-               <IconButton onClick={this.handleDrawerClose}>
-                 <ChevronLeftIcon />
-               </IconButton>
-             </div>
+             
              <Divider />
              <List>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('Dashboard', e)} >
                  <ListItemIcon>
                    <DashboardIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('Dashboard', e)} primary="Dashboard" />
+                 <ListItemText primary="Dashboard" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('UserManagement', e)}>
                  <ListItemIcon>
                    <PeopleIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('UserManagement', e)} primary="User Management" />
+                 <ListItemText  primary="User Management" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('CompanyManagement', e)}>
                  <ListItemIcon>
                    <BarChartIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('CompanyManagement', e)} primary="Company Management" />
+                 <ListItemText  primary="Company Management" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('EventManagement', e)}>
                  <ListItemIcon>
                    <LayersIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('EventManagement', e)} primary="Events Management" />
+                 <ListItemText  primary="Events Management" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('JobManagement', e)}>
                  <ListItemIcon>
-                   <LayersIcon />
+                   <BusinessIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('JobManagement', e)} primary="Job Management" />
+                 <ListItemText  primary="Job Management" />
                </ListItem>
-               <ListItem button>
+               <ListItem button onClick={e => this.handleViewChange('ConsultantManagement', e)}>
                  <ListItemIcon>
-                   <LayersIcon />
+                   <PersonIcon />
                  </ListItemIcon>
-                 <ListItemText onClick={e => this.handleViewChange('ConsultantManagement', e)} primary="Consultant Management" />
+                 <ListItemText  primary="Consultant Management" />
                </ListItem>
              </List>
              <Divider />
