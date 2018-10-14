@@ -22,7 +22,6 @@ class ConForm extends Component {
       desc: '',
       exp: '',
       selectedFile: null,
-      returnedUrlData: null,
       imgu: '',
     }
 
@@ -121,13 +120,9 @@ class ConForm extends Component {
               const iii = retrieveddata;
               console.log(iii);
               this.setState({
-                returnedUrlData: iii,
+                imgu: iii.imageUrl,
               });
-              console.log(this.state.returnedUrlData.imageUrl);
-              this.setState({
-                imageURL: this.state.returnedUrlData.imageUrl,
-              });
-              console.log(this.state.imageURL);
+              console.log(this.state.imgu);
             });
         });
       };
