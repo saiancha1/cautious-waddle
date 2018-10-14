@@ -5,7 +5,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+import AuthService from '../Authentication/AuthService';
 
+this.Auth = new AuthService();
 
 const styles = {
   card: {
@@ -14,6 +16,26 @@ const styles = {
   media: {
     height: 350,
   },
+};
+
+this.handleDelete = (e) => {
+  const connerId = e.target.value;
+  console.log(connerId);
+
+  const res = () => fetch('api/Consultants/removeConsultant', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.Auth.getToken()}`,
+    },
+    body: JSON.stringify({
+
+      consultantId: '79',
+    }),
+  });
+    // .then(res.json());
+  res();
 };
 
 const ConST = (props) => {
@@ -31,6 +53,10 @@ const ConST = (props) => {
             {props.firstName}
             {' '}
             {props.lastName}
+            {' '}
+            {props.conID}
+            {' '}
+            {props.nation}
           </Typography>
           <Typography gutterBottom variant="headline" component="h2">
             {props.consultwebsite}
@@ -43,6 +69,7 @@ const ConST = (props) => {
             {props.hisemail}
           </Typography>
         </CardContent>
+        <button name="consultantId" value={props.conID} onClick={this.handleDelete}>DELETE</button>
       </Card>
 
     </div>

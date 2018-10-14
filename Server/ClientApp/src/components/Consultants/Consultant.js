@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ConST from './ConsultantStyledRender';
 
@@ -12,6 +12,8 @@ const Consultant = (props) => {
       hisemail={con.email}
       consultcity={con.city}
       consultwebsite={con.website}
+      conID={con.consultantId}
+      nation={con.country}
     />
   ),
   );
