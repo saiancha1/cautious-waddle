@@ -98,6 +98,22 @@ namespace cautious_waddle.Controllers
                    return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
             }
             return NotFound();
-        }       
+        } 
+
+        [HttpGet("getMyProfile")]
+        [Authorize]
+        public async Task<IActionResult> GetMyProfile()
+        {
+            
+            string userId = IdentityHelper.GetUserId(HttpContext);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return NotFound();
+            }
+            Profile profile =  _profileRepository.GetProfileByUserId(userId);
+            return Ok(profile);
+
+
+        }      
     }
 }
