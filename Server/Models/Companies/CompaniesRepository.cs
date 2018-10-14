@@ -44,13 +44,8 @@ namespace cautious_waddle.Models
 
             return companiesViewModel;
         }
-        public IEnumerable<Company> GetDisapprovedCompanies()
-        {
-            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users).Where(c => c.IsApproved == 0);
-            return companies;
-        }
 
-        public IEnumerable<Company> AdminGetCompanies(bool? approved)
+        public IEnumerable<CompaniesViewModel> AdminGetCompanies(bool? approved)
         {
             IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
 
@@ -59,10 +54,12 @@ namespace cautious_waddle.Models
                 companies = approved == true ? companies.Where(c => c.IsApproved == 1) : companies.Where(c => c.IsApproved == 0);
             }
 
-            return companies;
+            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(companies);
+
+            return companiesViewModel;
         }
 
-        public IEnumerable<Company> GetMyCompanies(string userId, bool? approved)
+        public IEnumerable<CompaniesViewModel> GetMyCompanies(string userId, bool? approved)
         {
             IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
 
@@ -84,7 +81,9 @@ namespace cautious_waddle.Models
                 }
             }
 
-            return myCompanies;
+            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(companies);
+
+            return companiesViewModel;
         }
 
         public void AddCompany(Company company)
@@ -99,7 +98,7 @@ namespace cautious_waddle.Models
         }
         public void UpdateCompany(CompaniesViewModel company)
         {
-            Company oldCompany = GetCompanyById(company.CompanyId.Value);
+            Company oldCompany = GetCompanyById_model(company.CompanyId.Value);
             _context.Companies.Attach(oldCompany);
 
             oldCompany.LastUpdate     = DateTime.Now;
@@ -129,7 +128,15 @@ namespace cautious_waddle.Models
 
             _context.SaveChanges();
         }
-        public Company GetCompanyById(int id)
+        public CompaniesViewModel GetCompanyById_viewModel(int id)
+        {
+            Company company = _context.Companies.Include(a => a.Users).SingleOrDefault(x => x.CompanyId == id);
+            CompaniesViewModel viewModel = Mapper.Map<Company, CompaniesViewModel>(company);
+
+            return viewModel;
+        }
+
+        public Company GetCompanyById_model(int id)
         {
            return _context.Companies.Include(a => a.Users).SingleOrDefault(x => x.CompanyId == id);
         }
@@ -141,7 +148,7 @@ namespace cautious_waddle.Models
 
         public void approveCompany(int id)
         {
-            Company company = GetCompanyById(id);
+            Company company = GetCompanyById_model(id);
             _context.Companies.Attach(company);
             company.IsApproved = 1;
             _context.SaveChanges();
@@ -149,7 +156,7 @@ namespace cautious_waddle.Models
 
         public void disapproveCompany(int id)
         {
-            Company company = GetCompanyById(id);
+            Company company = GetCompanyById_model(id);
             _context.Companies.Attach(company);
             company.IsApproved = 0;
             _context.SaveChanges();

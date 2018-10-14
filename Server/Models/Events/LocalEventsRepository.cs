@@ -25,7 +25,7 @@ namespace cautious_waddle.Models
             return eventsViewModel;
         }
 
-        public IEnumerable<LocalEvent> AdminGetEvents(bool? expired, bool? approved)
+        public IEnumerable<LocalEventsViewModel> AdminGetEvents(bool? expired, bool? approved)
         {
             IEnumerable<LocalEvent> events = _context.LocalEvents;
 
@@ -39,10 +39,12 @@ namespace cautious_waddle.Models
                 events = approved == true ? events.Where(e => e.IsApproved == 1) : events.Where(e => e.IsApproved == 0);
             }
 
-            return events;
+            IEnumerable<LocalEventsViewModel> eventsViewModel = Mapper.Map<IEnumerable<LocalEvent>, IEnumerable<LocalEventsViewModel>>(events);
+
+            return eventsViewModel;
         }
 
-        public IEnumerable<LocalEvent> GetMyEvents(string userId, bool? expired, bool? approved)
+        public IEnumerable<LocalEventsViewModel> GetMyEvents(string userId, bool? expired, bool? approved)
         {
             IEnumerable<LocalEvent> events = _context.LocalEvents.Where(e => e.UserId == userId);
 
@@ -56,7 +58,9 @@ namespace cautious_waddle.Models
                 events = approved == true ? events.Where(e => e.IsApproved == 1) : events.Where(e => e.IsApproved == 0);
             }
 
-            return events;
+            IEnumerable<LocalEventsViewModel> eventsViewModel = Mapper.Map<IEnumerable<LocalEvent>, IEnumerable<LocalEventsViewModel>>(events);
+
+            return eventsViewModel;
         }
 
         public LocalEvent GetEventById(int id)
