@@ -35,7 +35,6 @@ render() {
           <br/>
           <br/>
         <div className="">
-          <Paper className="wrapper">
           <div className="title">
           <ButtonAppBar >
             Job Listings
@@ -52,7 +51,6 @@ render() {
           </ul>
           <br/>
           <br/>
-          </Paper>
           </div>
     </div>
   );

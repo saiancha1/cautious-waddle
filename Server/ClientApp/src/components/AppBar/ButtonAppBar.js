@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Route, Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import * as Colors from '@material-ui/core/colors';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -11,18 +13,36 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SummerTech from '../SummerTech/SummerTech';
 import AddJob from '../AddJob/AddJob';
 
+
 const styles = {
   root: {
     flexGrow: 1,
+    colorPrimary: 'white',
   },
   grow: {
-    flexGrow: 0,
+    flexGrow: 1,
   },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
   },
 };
+
+//const muiTheme = createMuiTheme({
+  //palette: {
+    //textColor: Colors.darkBlack,
+    //primary1Color: Colors.indigo700,
+    //primary2Color: Colors.indigo700,
+    //accent1Color: Colors.redA200,
+    //pickerHeaderColor: Colors.darkBlack,
+
+ // },
+  //appBar: {
+    //height: 60, 
+  //},
+    
+//});
+
 
 function ButtonAppBar(props) {
   const { classes, children } = props;
@@ -52,4 +72,5 @@ ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+//used to export styles instead of muiTheme
 export default withStyles(styles)(ButtonAppBar);

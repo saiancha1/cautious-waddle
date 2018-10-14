@@ -75,6 +75,25 @@
   max-width: 800px;
 }
 
+.app-bar{
+  background-color: dimgrey
+}
+
+.MuiAppBar-colorPrimary-21 {
+  color: #fff;
+  background-color: #757679!important;
+}
+
+.MuiAppBar-colorPrimary-11 {
+  color: #fff;
+  background-color: #75767e!important;
+}
+
+.MuiButton-containedPrimary-107 {
+	color: #fff;
+  background-color: #75767e!important;
+}
+
 @media screen and (max-width: 500px) { 
   .centered-text h3 span {
     display: none;
