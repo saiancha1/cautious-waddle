@@ -32,8 +32,8 @@ const styles = {
       <Typography gutterBottom variant="headline" component="h2">
         {props.companyName}
       </Typography>
-      <Typography component="p" noWrap="true" paragraph="true">
-        {props.companyDescription}
+      <Typography component="p" noWrap="true" paragraph="true" dangerouslySetInnerHTML={props.generateDesc}>
+        
       </Typography>
     </CardContent>
     <CardActions>
