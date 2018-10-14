@@ -14,7 +14,7 @@ namespace cautious_waddle.Models
         IEnumerable<CompaniesViewModel> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search);
         IEnumerable<Company> GetDisapprovedCompanies();
         IEnumerable<Company> AdminGetCompanies(bool? approved);
-        IEnumerable<CompaniesViewModel> GetMyCompanies(string userId);
+        IEnumerable<Company> GetMyCompanies(string userId, bool? approved);
         void approveCompany(int id);
         void disapproveCompany(int id);
     }

@@ -49,12 +49,26 @@ namespace cautious_waddle.Controllers
         {
             try 
             {
-                List<JobsViewModel> jobs = _jobsRespository.AdminGetJobs(expired, approved).ToList();
+                List<Job> jobs = _jobsRespository.AdminGetJobs(expired, approved).ToList();
                 if (jobs.Count > 0)
                 {
                     jobs = jobs.OrderBy(j => j.IsApproved).ToList();
                 }
                 return Ok(jobs);
+            } 
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("getMyJobs")]
+        [Authorize]
+        public IActionResult GetMyJobs([FromQuery] bool? expired, [FromQuery] bool? approved)
+        {
+            try 
+            {
+                return Ok(_jobsRespository.GetMyJobs(IdentityHelper.GetUserId(HttpContext), expired, approved));
             } 
             catch(Exception ex)
             {

@@ -42,6 +42,23 @@ namespace cautious_waddle.Models
             return events;
         }
 
+        public IEnumerable<LocalEvent> GetMyEvents(string userId, bool? expired, bool? approved)
+        {
+            IEnumerable<LocalEvent> events = _context.LocalEvents.Where(e => e.UserId == userId);
+
+            // Filtering
+            if(expired != null)
+            {
+                events = expired == true ? events.Where(e => e.Expired == 1) : events.Where(e => e.Expired == 0);
+            }
+            if(approved != null)
+            {
+                events = approved == true ? events.Where(e => e.IsApproved == 1) : events.Where(e => e.IsApproved == 0);
+            }
+
+            return events;
+        }
+
         public LocalEvent GetEventById(int id)
         {
             return _context.LocalEvents.SingleOrDefault(e => e.EventId == id);

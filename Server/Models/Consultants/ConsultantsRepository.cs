@@ -51,6 +51,18 @@ namespace cautious_waddle.Models
             return consultants;
         }
 
+        public IEnumerable<Consultant> GetMyConsultants(string userId, bool? approved)
+        {
+            IEnumerable<Consultant> consultants = _context.Consultants.Where(c => c.UserId == userId);
+
+            if(approved != null)
+            {
+                consultants = approved == true ? consultants.Where(c => c.IsApproved == 1) : consultants.Where(c => c.IsApproved == 0);
+            }
+
+            return consultants;
+        }
+
         public void AddConsultant(Consultant consultant)
         {
             _context.Consultants.Add(consultant);

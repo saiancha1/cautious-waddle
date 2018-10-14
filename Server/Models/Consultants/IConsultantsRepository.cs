@@ -10,6 +10,7 @@ namespace cautious_waddle.Models
         Consultant GetConsultantById(int id);
         IEnumerable<ConsultantsViewModel> GetConsultants();
         IEnumerable<Consultant> AdminGetConsultants(bool? approved);
+        IEnumerable<Consultant> GetMyConsultants(string userId, bool? approved);
         void AddConsultant(Consultant consultant);
         void EditConsultant(ConsultantsViewModel consultant);
         void RemoveConsultant(Consultant consultant);

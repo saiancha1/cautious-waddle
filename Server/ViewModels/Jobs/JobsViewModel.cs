@@ -31,8 +31,5 @@ namespace cautious_waddle.ViewModels
         public string WorkType { get; set; }
         [JsonProperty("expiry")]
         public DateTime Expiry { get; set; }
-
-        [JsonProperty("isApproved")]
-        public int IsApproved {get; set;}
     }
 }
