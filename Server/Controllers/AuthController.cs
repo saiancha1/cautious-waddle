@@ -70,7 +70,7 @@ namespace cautious_waddle.Controllers
         }
 
         [HttpPost("AddUser")]
-        public async Task<IActionResult> AddUser([FromBody]CredentialsViewModel userViewModel, bool isAdmin = false)
+        public async Task<IActionResult> AddUser([FromBody]CredentialsViewModel userViewModel, bool isAdmin = false, string role ="User")
         {
             AppUser user  = new AppUser{
                 UserName = userViewModel.UserName,
@@ -83,13 +83,17 @@ namespace cautious_waddle.Controllers
             {
                 return NotFound();
             }
+            if(userViewModel.Role == null)
+            {
+                userViewModel.Role = "User";
+            }
             var currentUser = await _userManager.FindByEmailAsync(user.Email);
             if(currentUser == null)
             {
                 var createUser = await _userManager.CreateAsync(user, userViewModel.Password);
                 if (createUser.Succeeded)
                 {
-                    string role = (isAdmin) ? "Admin" : userViewModel.Role;
+                    role = (isAdmin) ? "Admin" : userViewModel.Role;
                     await _userManager.AddToRoleAsync(user,role);
                 }                  
             }

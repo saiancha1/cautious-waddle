@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
 import './AuthStyle.css';
 
 export default class SignupForm extends Component {
@@ -14,6 +16,7 @@ export default class SignupForm extends Component {
       email1: '',
       email2: '',
       password: '',
+      userCreated: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,7 +43,7 @@ export default class SignupForm extends Component {
 
     fetch('api/auth/addUser', {
       method: 'POST',
-      header: {
+      headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -50,23 +53,35 @@ export default class SignupForm extends Component {
         Email: email1,
         Password: password,
       }),
-    }).then(res => res.json()).then(res => console.log(res))
-    .catch(alert('F'));
+    }).then((res) => {
+      if (res.status === 200) {
+        this.setState({
+          firstName: '',
+          lastName: '',
+          userName: '',
+          email1: '',
+          email2: '',
+          password: '',
+          userCreated: true,
+        });
+        alert('User Created Successfully');
+      }
+    })
+      .catch();
   }
+   render() {
+     const {
+       firstName, lastName, email1, email2, password, userName,
+     } = this.state;
 
+     return (
 
-  render() {
-    const {
-      firstName, lastName, email1, email2, password, userName,
-    } = this.state;
-
-    return (
-      <div>
-        <ExpansionPanel className="expan-panel">
-          <ExpansionPanelSummary>
+       <div>
+         <ExpansionPanel className="expan-panel">
+           <ExpansionPanelSummary>
             <h4>Create An Account</h4>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
+           <ExpansionPanelDetails>
             <form className="signup-form" onSubmit={this.handleSubmit}>
               <div>
                 <input
@@ -127,8 +142,10 @@ export default class SignupForm extends Component {
               </div>
             </form>
           </ExpansionPanelDetails>
-        </ExpansionPanel>
-      </div>
-    );
-  }
+         
+         </ExpansionPanel>
+       </div>
+
+     );
+   }
 }
