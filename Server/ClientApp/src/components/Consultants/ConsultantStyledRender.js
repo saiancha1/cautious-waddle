@@ -23,7 +23,7 @@ const ConST = (props) => {
       <Card className={classes.card}>
         <CardMedia
           className={classes.media}
-      // image= {props.consultimage}
+          image={props.consultimage}
           title={props.lastName}
         />
         <CardContent>

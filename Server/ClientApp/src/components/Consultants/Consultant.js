@@ -5,7 +5,7 @@ import ConST from './ConsultantStyledRender';
 const Consultant = (props) => {
   const consultantz = props.cl.map(con => (
     <ConST
-      consultimage={con.imageurl}
+      consultimage={con.imageURL}
       firstName={con.firstName}
       lastName={con.lastName}
       consultDescription={con.consultantDesc}
@@ -13,7 +13,7 @@ const Consultant = (props) => {
       consultcity={con.city}
       consultwebsite={con.website}
     />
-  ), // <h1> {con.firstName} {con.lastName}</h1>
+  ),
   );
   return (
     <div className="row">
