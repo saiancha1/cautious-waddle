@@ -35,24 +35,23 @@ class AddCompany extends React.Component {
     this.state = {
       activeStep: 0,
       company: {
-        companyId:'',
-        users:[],
+        companyId:null,
+        users:null,
         contactEmail:'',
         companyName:'',
         logo:'',
-        address1:'',
-        address2:'',
+        size:0,
         businessType:'',
-        city:'',
+        specialistArea:'',
         companyDesc:'',
         email:'',
-        phone:'',
-        postalCode:'',
-        size:'',
-        specialistArea:'',
+        address1:'',
+        address2:'',
         suburb:'',
-        summerJobs:0,
-        country:''
+        postalCode:'',
+        city:'',
+        country:'',
+        summerJobs:0
       },
       file: null,
       imageUploaded: false,
@@ -143,6 +142,21 @@ componentWillMount() {
   handleAddCompanySubmit = () => {
     const company = this.state.company;
     const requiredFields = ['CompanyName', 'CompanyDescription', 'Company Email'];
+    if(company.companyId !== null)
+    {
+      fetch('api/companies/editCompany', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          'content-Type': 'application/json',
+        },
+        body: JSON.stringify(company),
+  
+      })
+        .then((response) => { (response.status === 200) ? alert('CompanyAdded') : alert('fail1'); })
+        .catch();
+    }
+    else{
     fetch('api/companies/addCompany', {
       method: 'POST',
       headers: {
@@ -154,6 +168,7 @@ componentWillMount() {
     })
       .then((response) => { (response.status === 200) ? alert('CompanyAdded') : alert('fail1'); })
       .catch();
+  }
   }
 
   render() {
