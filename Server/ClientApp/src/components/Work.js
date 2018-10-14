@@ -18,6 +18,7 @@ async componentWillMount() {
 }
 
 render() {
+  console.log(this.state.jobs);
   return (
     <div className="jobs">
             <div className="home-container">
@@ -37,20 +38,24 @@ render() {
         <div className="">
           <div className="title">
           <ButtonAppBar >
-            Job Listings
+            <h2>Job Listings</h2>
             </ButtonAppBar>
           </div>
+          <div className="wrapper">
           <ul className="listing">
             {this.state.jobs.map(job => (
-              <Paper>
-                  <h1>{job.jobTitle}</h1>
-                  <p> Job Description: {job.jobDescription}</p>
-                  <p>Annual Salary: ${job.salary}</p>
+              <Paper >
+                  <h3>{job.jobTitle}</h3>
+                  <p className="compName">{job.companyName}</p>
+                  <p>{job.workType} ${job.salary}</p>
+                  <p>{job.jobDescription}</p>
+                  To Apply contact: {job.contactFirstName}{job.contactLastName}
+                  T: {job.contactPhone} 
+                  E: {job.contactEmail} 
               </Paper>
             ))}
           </ul>
-          <br/>
-          <br/>
+          </div>
           </div>
     </div>
   );

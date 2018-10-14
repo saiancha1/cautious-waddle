@@ -2,8 +2,12 @@
 
 .wrapper {
     display: grid;
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 20% 40% 20%;
     grid-template-rows: auto auto
+}
+
+.compName {
+  color: blue;
 }
 
 .title{
