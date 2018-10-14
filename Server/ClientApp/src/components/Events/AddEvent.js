@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
+import NumericInput from 'react-numeric-input';
 import AuthService from '../Authentication/AuthService';
+
 
 export default class AddEvent extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ export default class AddEvent extends Component {
       startTime: '7:00',
       contact: '',
       website: null,
+      durationBool: false,
       duration: 1,
       recurring: null,
       hostedBy: '',
@@ -29,6 +32,8 @@ export default class AddEvent extends Component {
 
   onChangeTime = time => this.setState({ startTime: time })
 
+  onChangeDur = dur => this.setState({ duration: dur })
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -40,7 +45,7 @@ export default class AddEvent extends Component {
 
   render() {
     const {
-      eventName, eventDescription, eventLocation, eventType,
+      eventName, eventDescription, eventLocation, eventType, durationBool,
       startDate, startTime, contact, website, duration, recurring, hostedBy,
     } = this.state;
 
@@ -62,6 +67,15 @@ export default class AddEvent extends Component {
             <textarea
               name="eventDescription"
               value={eventDescription}
+              onChange={this.handleChange}
+              required
+            />
+          </label>
+          <label>
+          Hosted By
+            <input
+              name="hostedBy"
+              value={hostedBy}
               onChange={this.handleChange}
               required
             />
@@ -123,10 +137,32 @@ export default class AddEvent extends Component {
               onChange={this.onChangeTime}
               value={startTime}
               disableClock="true"
+              required
             />
           </label>
+          <label>
+          Is The Event Longer Than One Day?
+            <select
+              name="durationBool"
+              value={durationBool}
+              onChange={this.handleChange}
+              required
+            >
+              <option selected value={false}>No</option>
+              <option>Yes</option>
+            </select>
+          </label>
+          <label>
+          Number Of Days
+            <NumericInput
+              min={0}
+              max={20}
+              name="duration"
+              value={duration}
+              onChange={this.onChangeDur}
+            />
 
-
+          </label>
         </form>
       </div>
     );
