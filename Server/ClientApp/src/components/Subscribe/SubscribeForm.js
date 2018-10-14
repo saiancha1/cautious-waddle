@@ -41,7 +41,7 @@ export default class SubForm extends React.Component {
     res();
     this.handleSubscribe();
     this.setState({
-      fullName: '',
+      fname: '',
       email: '',
     });
   }
@@ -58,7 +58,7 @@ export default class SubForm extends React.Component {
   handleClose = () => {
     this.setState({
       open: false,
-      fullName: '',
+      fname: '',
       email: '',
     });
   };
