@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Work.css';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import background from '../images/homepage-image.jpg';
+import Paper from '@material-ui/core/Paper';
 import ButtonAppBar from './AppBar/ButtonAppBar';
-import ComplexGrid from './ComplexGrid/ComplexGrid';
-
 
 class Work extends Component {
 state = {
@@ -39,7 +35,7 @@ render() {
         <br/>
           <br/>
           <br/>
-        <div className="classesRoot">
+        <div className="">
           <div className="title">
           <ButtonAppBar >
             <h2>Job Listings</h2>
@@ -48,15 +44,15 @@ render() {
           <div className="wrapper">
           <ul className="listing">
             {this.state.jobs.map(job => (
-              <div>
-              <Paper>
-                <ComplexGrid jobTitle={job.jobTitle} jobId={job.jobId} company={job.companyName} desc={job.jobDescription} salary={job.salary} type={job.workType} email={job.contactEmail}>                 
-                  <p>To apply contact: {job.contactFirstName}{job.contactLastName}</p>
-                  T: {job.contactPhone}  
-                  E: <a href={"mailto:"+job.contactEmail}></a>
-                </ComplexGrid>            
+              <Paper >
+                  <h3>{job.jobTitle}</h3>
+                  <p className="compName">{job.companyName}</p>
+                  <p>{job.workType} ${job.salary}</p>
+                  <p>{job.jobDescription}</p>
+                  To Apply contact: {job.contactFirstName}{job.contactLastName}
+                  T: {job.contactPhone} 
+                  E: {job.contactEmail} 
               </Paper>
-              </div>
             ))}
           </ul>
           </div>

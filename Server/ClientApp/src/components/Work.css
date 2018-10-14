@@ -2,7 +2,7 @@
 
 .wrapper {
     display: grid;
-    grid-template-columns: 20% 40% 20%;
+    grid-template-columns: 30% 30% 30%;
     grid-template-rows: auto auto
 }
 
@@ -36,6 +36,11 @@
   top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+ul, ol {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .centered-text h3 {
