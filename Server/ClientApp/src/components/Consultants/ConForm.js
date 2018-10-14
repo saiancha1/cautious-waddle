@@ -122,7 +122,11 @@ class ConForm extends Component {
           },
           body: mydata,
         }).then((res) => {
-          console.log(res);
+          res.json()
+            .then((retrieveddata) => {
+              const iii = retrieveddata;
+              console.log(iii);
+            });
         });
       };
 
@@ -140,151 +144,151 @@ class ConForm extends Component {
 
       render() {
         return (
-        <div div className="contact-wrapper">
-          {this.Auth.loggedIn() ? (
+          <div div className="contact-wrapper">
+            {this.Auth.loggedIn() ? (
 
-            <form onSubmit={this.handleSubmit}>
-              <h2>Add Consultant</h2>
-              <Grid>
-                <Row>
-                  <Col xs={12}>
-                    <input type="file" onChange={this.fileSelectedHandler} required />
-                    <button onClick={this.handleImageUpload}>Upload</button>
-                  </Col>
-                  {' '}
+              <form onSubmit={this.handleSubmit}>
+                <h2>Add Consultant</h2>
+                <Grid>
+                  <Row>
+                    <Col xs={12}>
+                      <input type="file" onChange={this.fileSelectedHandler} required />
+                      <button onClick={this.handleImageUpload}>Upload</button>
+                    </Col>
+                    {' '}
 
-                </Row>
-                <Row>
-                  <label>
+                  </Row>
+                  <Row>
+                    <label>
                     Name
-                  </label>
-                </Row>
-                <Row>
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-r" name="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleChange} required />
-                  </Col>
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-l" name="lname" placeholder="Last Name" value={this.state.lname} onChange={this.handleChange} required />
-                  </Col>
+                    </label>
+                  </Row>
+                  <Row>
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-r" name="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleChange} required />
+                    </Col>
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-l" name="lname" placeholder="Last Name" value={this.state.lname} onChange={this.handleChange} required />
+                    </Col>
 
-                </Row>
-                <br />
-                <Row>
-                  <label>
+                  </Row>
+                  <br />
+                  <Row>
+                    <label>
                     Area of Expertise
-                  </label>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <input className="contact-email" name="exp" value={this.state.exp} onChange={this.handleChange} required />
-                  </Col>
+                    </label>
+                  </Row>
+                  <Row>
+                    <Col xs={12}>
+                      <input className="contact-email" name="exp" value={this.state.exp} onChange={this.handleChange} required />
+                    </Col>
 
-                </Row>
-                <br />
-                <Row>
-                  <label>
+                  </Row>
+                  <br />
+                  <Row>
+                    <label>
 
                     Website
-                  </label>
-                </Row>
-                <Row>
-                  {' '}
-                  <Col xs={12}>
+                    </label>
+                  </Row>
+                  <Row>
                     {' '}
-                    <input className="contact-email" name="website" value={this.state.website} onChange={this.handleChange} />
-                  </Col>
-                  {' '}
+                    <Col xs={12}>
+                      {' '}
+                      <input className="contact-email" name="website" value={this.state.website} onChange={this.handleChange} />
+                    </Col>
+                    {' '}
 
-                </Row>
-                {' '}
-                <br />
-                <Row>
-                  <label>Email </label>
+                  </Row>
                   {' '}
-                  <label>Phone</label>
-                </Row>
-                <Row>
-                  {' '}
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-r" name="email" placeholder="Email" type="email" value={this.state.email} onChange={this.handleChange} required />
-                  </Col>
+                  <br />
+                  <Row>
+                    <label>Email </label>
+                    {' '}
+                    <label>Phone</label>
+                  </Row>
+                  <Row>
+                    {' '}
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-r" name="email" placeholder="Email" type="email" value={this.state.email} onChange={this.handleChange} required />
+                    </Col>
 
 
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-l" name="phone" placeholder="+64 xxx-xxx-xxxx" value={this.state.phone} onChange={this.handleChange} required />
-                  </Col>
-                  {' '}
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-l" name="phone" placeholder="+64 xxx-xxx-xxxx" value={this.state.phone} onChange={this.handleChange} required />
+                    </Col>
+                    {' '}
 
-                </Row>
-                <br />
-                <Row>
-                  <label>
+                  </Row>
+                  <br />
+                  <Row>
+                    <label>
 
                                Image Url
-                  </label>
-                </Row>
-                {/* <Row> */}
-                {/* <ImgUpload name="imgu" value={this.state.imgu} onChange={this.handleImage} /> */}
-                {/* <Col xs={12}>
+                    </label>
+                  </Row>
+                  {/* <Row> */}
+                  {/* <ImgUpload name="imgu" value={this.state.imgu} onChange={this.handleImage} /> */}
+                  {/* <Col xs={12}>
                     <input type="file" onChange={this.fileSelectedHandler} required />
                     <button onClick={this.fileUploadHandler}>Upload</button>
                   </Col>
                   {' '} */}
 
-                {/* </Row> */}
-                <br />
+                  {/* </Row> */}
+                  <br />
 
-                <Row>
-                  <label>
+                  <Row>
+                    <label>
                     Address
-                  </label>
-                </Row>
-                <Row>
-                  {' '}
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-r" name="address1" placeholder="Street Number" value={this.state.address1} onChange={this.handleChange} />
-                  </Col>
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-l" name="address2" placeholder="Street Name" value={this.state.address2} onChange={this.handleChange} />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className="contact-name" xs={12} sm={6}>
+                    </label>
+                  </Row>
+                  <Row>
+                    {' '}
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-r" name="address1" placeholder="Street Number" value={this.state.address1} onChange={this.handleChange} />
+                    </Col>
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-l" name="address2" placeholder="Street Name" value={this.state.address2} onChange={this.handleChange} />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="contact-name" xs={12} sm={6}>
 
-                    <input className="msg-name-r" name="suburb" placeholder="Suburb" value={this.state.suburb} onChange={this.handleChange} />
-                  </Col>
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-l" name="city" placeholder="City" value={this.state.city} onChange={this.handleChange} />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-r" name="country" placeholder="Country" value={this.state.country} onChange={this.handleChange} />
-                  </Col>
-                  <Col className="contact-name" xs={12} sm={6}>
-                    <input className="msg-name-l" name="postalcode" placeholder="Postal Code" value={this.state.postalcode} onChange={this.handleChange} />
-                  </Col>
-                </Row>
-                <br />
+                      <input className="msg-name-r" name="suburb" placeholder="Suburb" value={this.state.suburb} onChange={this.handleChange} />
+                    </Col>
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-l" name="city" placeholder="City" value={this.state.city} onChange={this.handleChange} />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-r" name="country" placeholder="Country" value={this.state.country} onChange={this.handleChange} />
+                    </Col>
+                    <Col className="contact-name" xs={12} sm={6}>
+                      <input className="msg-name-l" name="postalcode" placeholder="Postal Code" value={this.state.postalcode} onChange={this.handleChange} />
+                    </Col>
+                  </Row>
+                  <br />
 
-                <Row>
-                  <label>
+                  <Row>
+                    <label>
                     Description
-                  </label>
-                </Row>
-                <Row>
-                  <textarea className="contact-msg" name="desc" placeholder="Say a few things about yourself" value={this.state.desc} onChange={this.handleChange} />
-                </Row>
-                <input id="submit" name="submit" type="submit" value="Submit" />
-              </Grid>
+                    </label>
+                  </Row>
+                  <Row>
+                    <textarea className="contact-msg" name="desc" placeholder="Say a few things about yourself" value={this.state.desc} onChange={this.handleChange} />
+                  </Row>
+                  <input id="submit" name="submit" type="submit" value="Submit" />
+                </Grid>
 
-            </form>) : (
-              <div>
-                {' '}
-                <h2>ERROR 401 - Not Authorized</h2>
-              </div>
-          ) }
-        </div>
+              </form>) : (
+                <div>
+                  {' '}
+                  <h2>ERROR 401 - Not Authorized</h2>
+                </div>
+            ) }
+          </div>
         );
       }
 }
