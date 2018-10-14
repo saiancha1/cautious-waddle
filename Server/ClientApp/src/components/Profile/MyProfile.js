@@ -14,6 +14,8 @@ import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 import ProfileDetails from './ProfileDetails';
 import MyCompanies from './Companies/MyCompanies';
+import AuthService from '../Authentication/AuthService';
+import AddCompany from '../Companies/AddCompany';
 
 function TabContainer(props) {
   return (
@@ -44,7 +46,10 @@ class MyProfile extends React.Component {
       events: null,
       consultants: null,
       Jobs: null,
+      editCompany: null,
     };
+
+    Auth = new AuthService();
 
     componentDidMount() {
       fetch('api/profiles/getMyProfile', {
@@ -59,17 +64,17 @@ class MyProfile extends React.Component {
         })
         .catch(alert('An Error has occured. Please Try again'));
 
-        fetch('api/companies/getMyCompanies', {
-          method: 'GET',
-          headers: {
+      fetch('api/companies/getMyCompanies', {
+        method: 'GET',
+        headers: {
           // 'Content-Type': 'multipart/formdata',
-            Authorization: `Bearer ${localStorage.getItem('id_token')}`,
-          },
-        }).then(res => res.json())
-          .then((json) => {
-            this.setState({ companies: json });
-          })
-          .catch(alert('An Error has occured. Please Try again'));
+          Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+        },
+      }).then(res => res.json())
+        .then((json) => {
+          this.setState({ companies: json });
+        })
+        .catch(alert('An Error has occured. Please Try again'));
     }
 
 
@@ -83,12 +88,16 @@ class MyProfile extends React.Component {
       this.setState({ profileDetails: profile });
     };
 
+     editCompany = (e) => {
+       this.setState({editCompany:e})
+     };
+
     handleProfileSubmit = () => {
       fetch('api/profiles/editProfile', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
-          "Content-Type":"application/json",
+          'Content-Type': 'application/json',
 
         },
         body: JSON.stringify(this.state.profileDetails),
@@ -104,12 +113,12 @@ class MyProfile extends React.Component {
       const { value } = this.state;
       if (this.state.profileDetails == null) {
         return (
-            <div>Loading</div>
+          <div>Loading</div>
         );
-      } else
-      {
+      } else {
+        const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany} /> : null;
         return (
-        <div>
+          <div>
           <AppBar position="static" color="default">
             <Tabs
               value={value}
@@ -126,10 +135,16 @@ class MyProfile extends React.Component {
             </Tabs>
           </AppBar>
           {value === 0 && (
-<TabContainer><ProfileDetails handleChange={this.handleProfileDetailsChange} profile={this.state.profileDetails}
-          handleProfileSubmit={this.handleProfileSubmit}/></TabContainer>
-)}
-          {value === 1 && <TabContainer><MyCompanies companies={this.state.companies}/></TabContainer>}
+          <TabContainer>
+<ProfileDetails handleChange={this.handleProfileDetailsChange} profile={this.state.profileDetails}
+          handleProfileSubmit={this.handleProfileSubmit}/>
+
+</TabContainer>
+          )}
+          {value === 1 && <TabContainer><MyCompanies companies={this.state.companies} 
+          editCompany= {this.editCompany}/>
+          {addCompany}
+          </TabContainer>}
           {value === 2 && <TabContainer>Item Three</TabContainer>}
           {value === 3 && <TabContainer>Item Four</TabContainer>}
           {value === 4 && <TabContainer>Item Five</TabContainer>}
