@@ -9,7 +9,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/bin/Debug/netcoreapp2.1/cautious-waddle.dll",
+      "program": "${workspaceRoot}/Server/bin/Debug/netcoreapp2.1/cautious-waddle.dll",
       "args": [],
       "cwd": "${workspaceFolder}",
       "console": "internalConsole",
