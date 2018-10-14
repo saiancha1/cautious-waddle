@@ -19,12 +19,12 @@ const GeneralMetrics = props => (
                 </Typography>
                 <div className="row">
                   <div className="col-md-6">
-                          {props.newCompanies}
+                          <strong> {props.newCompanies} </strong>
                           <br />
                     New Companies
                         </div>
                   <div className="col-md-6">
-                          {props.totalCompanies}
+                          <strong>{props.totalCompanies}</strong>
                           {' '}
                           <br />
                     Total Companies
@@ -41,13 +41,13 @@ const GeneralMetrics = props => (
                 </Typography>
                 <div className="row">
                   <div className="col-md-6">
-                          {props.newEvents}
+                          <strong>{props.newEvents}</strong>
                           {' '}
                           <br />
                     New Events
                         </div>
                   <div className="col-md-6">
-                          {props.totalEvents}
+                          <strong>{props.totalEvents}</strong>
                           {' '}
                           <br />
                     Total Events
@@ -64,13 +64,13 @@ const GeneralMetrics = props => (
                 </Typography>
                 <div className="row">
                   <div className="col-md-6">
-                          {props.newJobs}
+                          <strong>{props.newJobs}</strong>
                           {' '}
                           <br />
                     New Jobs
                         </div>
                   <div className="col-md-6">
-                          {props.totalJobs}
+                          <strong>{props.totalJobs}</strong>
                           {' '}
                           <br />
                     Total Jobs
@@ -87,13 +87,13 @@ const GeneralMetrics = props => (
                 </Typography>
                 <div className="row">
                   <div className="col-md-6">
-                          {props.newConsultants}
+                          <strong>{props.newConsultants}</strong>
                           {' '}
                           <br />
                     New Consultants
                         </div>
                   <div className="col-md-6">
-                          {props.totalConsultants}
+                          <strong>{props.totalConsultants}</strong>
                           {' '}
                           <br />
                     Total Consultants

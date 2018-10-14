@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Moment from 'react-moment';
 import Analytics from './Analytics';
 import GeneralMetrics from './GeneralMetrics';
+import ExpiringSoon from './ExpiringSoon';
 
 function TabContainer(props) {
   return (
@@ -118,9 +119,30 @@ class MainDashboard extends React.Component {
      }
 
      getTotalEvents = () => this.state.events.length;
-    
+
 
      getTotalConsultants = () => this.state.consultants.length;
+
+     getExpiringEvents = () => {
+       const date = new Date();
+       date.setDate(date.getDate() + 7);
+       const newEvents = this.state.events.filter((event) => {
+         const currDate = new Date(event.creationDate);
+         currDate.setDate(currDate.getDate() + event.duration);
+         return currDate < date;
+       });
+       return newEvents.length;
+     }
+
+     getExpiringJobs = () => {
+       const date = new Date();
+       date.setDate(date.getDate() + 7);
+       const newJobs = this.state.events.filter((job) => {
+         const currDate = new Date(job.expiry);
+         return currDate < date;
+       });
+       return newJobs.length;
+     }
 
      render() {
        const classes = this.styles;
@@ -133,6 +155,8 @@ class MainDashboard extends React.Component {
        const totalConsultants = this.getTotalConsultants();
        const newEvents = this.getNewEvents();
        const totalEvents = this.getTotalEvents();
+       const expiringEvents = this.getExpiringEvents();
+       const expiringJobs = this.getExpiringJobs();
        return (
          <div className={classes.root}>
            <AppBar position="static">
@@ -158,7 +182,7 @@ class MainDashboard extends React.Component {
 
            </TabContainer>
            )}
-           {value === 2 && <TabContainer>Item Three</TabContainer>}
+           {value === 2 && <TabContainer><ExpiringSoon expiringJobs={expiringJobs} expiringEvents={expiringEvents} /></TabContainer>}
          </div>
        );
      }
