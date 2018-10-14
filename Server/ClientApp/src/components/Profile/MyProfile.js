@@ -65,19 +65,32 @@ class MyProfile extends React.Component {
       this.setState({ profileDetails: profile });
     };
 
+    handleProfileSubmit = () => {
+      fetch('api/profiles/editProfile', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          "Content-Type":"application/json",
+
+        },
+        body: JSON.stringify(this.state.profileDetails),
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            alert('Profile Successfully Updated');
+          }
+        }).catch();
+    }
+
     render() {
       const { value } = this.state;
-      if(this.state.profileDetails == null)
+      if (this.state.profileDetails == null) {
+        return (
+            <div>Loading</div>
+        );
+      } else
       {
-          return (
-              <div>Loading</div>
-          )
-      }
-      else 
-      {
-
-      
-      return (
+        return (
         <div>
           <AppBar position="static" color="default">
             <Tabs
@@ -88,16 +101,16 @@ class MyProfile extends React.Component {
               indicatorColor="primary"
               textColor="primary"
             >
-              <Tab label="Item One" icon={<PhoneIcon />} />
-              <Tab label="Item Two" icon={<FavoriteIcon />} />
+              <Tab label="Profile Edit" icon={<PersonPinIcon />} />
+              <Tab label="My Listings" icon={<HelpIcon />} />
               <Tab label="Item Three" icon={<PersonPinIcon />} />
               <Tab label="Item Four" icon={<HelpIcon />} />
-              <Tab label="Item Five" icon={<ShoppingBasket />} />
-              <Tab label="Item Six" icon={<ThumbDown />} />
-              <Tab label="Item Seven" icon={<ThumbUp />} />
             </Tabs>
           </AppBar>
-          {value === 0 && <TabContainer><ProfileDetails handleChange={this.handleProfileDetailsChange} profile={this.state.profileDetails}/></TabContainer>}
+          {value === 0 && (
+<TabContainer><ProfileDetails handleChange={this.handleProfileDetailsChange} profile={this.state.profileDetails}
+          handleProfileSubmit={this.handleProfileSubmit}/></TabContainer>
+)}
           {value === 1 && <TabContainer>Item Two</TabContainer>}
           {value === 2 && <TabContainer>Item Three</TabContainer>}
           {value === 3 && <TabContainer>Item Four</TabContainer>}
@@ -105,7 +118,7 @@ class MyProfile extends React.Component {
           {value === 5 && <TabContainer>Item Six</TabContainer>}
           {value === 6 && <TabContainer>Item Seven</TabContainer>}
         </div>
-      );
+        );
       }
     }
 }

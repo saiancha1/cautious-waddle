@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-
+import Button from '@material-ui/core/Button';
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -10,6 +10,12 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+  },
+  multitextField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    height:"300px",
+    width:"300px"
   },
   dense: {
     marginTop: 16,
@@ -72,16 +78,23 @@ const ProfileDetails = props => (
     <TextField
       id="profile-bio"
       label="Bio"
-      className={styles.textField}
+      className={styles.multitextField}
     value={props.profile.bio}
       onChange={e => props.handleChange(e, 'bio')}
       margin="normal"
       variant="outlined"
       multiline = "true"
+      
     />
     </div>
 
     </div>
+    <div className="row">
+  <div className="col-md-5"/>
+  <div className="col-md-4">
+  <Button onClick={props.handleProfileSubmit}>Save Profile</Button>
+  </div>
+  </div>
   </div>
 );
 export default ProfileDetails;
