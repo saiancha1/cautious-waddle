@@ -101,26 +101,45 @@ class ConForm extends Component {
       });
     }
 
-    fileUploadHandler = (e) => {
-      e.preventDefault();
-      console.log(this.state.selectedFile);
-      const fd = new FormData();
-      fd.append('ConsultantImage', this.state.selectedFile, this.state.selectedFile.name);
+    // fileUploadHandler = (e) => {
+    //   e.preventDefault();
+    //   console.log(this.state.selectedFile);
+    //   // const fd = new FormData();
+    //   // fd.append('ConsultantImage', this.state.selectedFile, this.state.selectedFile.name);
+    // }
 
-      fetch('api/Consultants/addConsultantImage', {
-        method: 'POST',
-        body: fd,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${this.Auth.getToken()}`,
-        },
-      }).then((res) => {
-        console.log(res);
-      });
-    }
+      handleImageUpload = (e) => {
+        e.preventDefault();
+        const mydata = new FormData();
+        const file = this.state.selectedFile;
 
-    render() {
-      return (
+        mydata.append('file', file);
+        console.log(this.state.selectedFile);
+        fetch('api/Consultants/addConsultantImage', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          },
+          body: mydata,
+        }).then((res) => {
+          console.log(res);
+        });
+      };
+
+      // // fetch('api/Consultants/addConsultantImage', {
+      // //   method: 'POST',
+      // //   body: this.state.selectedFile,
+      // //   headers: {
+      //     // 'Content-Type': 'multipart/form-data',
+      //     Authorization: `Bearer ${this.Auth.getToken()}`,
+      //   },
+      //   }).then((res) => {
+      //     console.log(res);
+      //   });
+      // }
+
+      render() {
+        return (
         <div div className="contact-wrapper">
           {this.Auth.loggedIn() ? (
 
@@ -130,7 +149,7 @@ class ConForm extends Component {
                 <Row>
                   <Col xs={12}>
                     <input type="file" onChange={this.fileSelectedHandler} required />
-                    <button onClick={this.fileUploadHandler}>Upload</button>
+                    <button onClick={this.handleImageUpload}>Upload</button>
                   </Col>
                   {' '}
 
@@ -266,8 +285,8 @@ class ConForm extends Component {
               </div>
           ) }
         </div>
-      );
-    }
+        );
+      }
 }
 
 const mapStateToProps = state => (
