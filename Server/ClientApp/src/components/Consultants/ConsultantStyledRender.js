@@ -29,10 +29,7 @@ this.handleDelete = (e) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.Auth.getToken()}`,
     },
-    body: JSON.stringify({
-
-      consultantId: '79',
-    }),
+    body: connerId,
   });
     // .then(res.json());
   res();
