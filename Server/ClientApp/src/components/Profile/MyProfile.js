@@ -13,6 +13,7 @@ import ThumbDown from '@material-ui/icons/ThumbDown';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 import ProfileDetails from './ProfileDetails';
+import MyCompanies from './Companies/MyCompanies';
 
 function TabContainer(props) {
   return (
@@ -39,6 +40,10 @@ class MyProfile extends React.Component {
     state = {
       value: 0,
       profileDetails: null,
+      companies: null,
+      events: null,
+      consultants: null,
+      Jobs: null,
     };
 
     componentDidMount() {
@@ -53,7 +58,20 @@ class MyProfile extends React.Component {
           this.setState({ profileDetails: json });
         })
         .catch(alert('An Error has occured. Please Try again'));
+
+        fetch('api/companies/getMyCompanies', {
+          method: 'GET',
+          headers: {
+          // 'Content-Type': 'multipart/formdata',
+            Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          },
+        }).then(res => res.json())
+          .then((json) => {
+            this.setState({ companies: json });
+          })
+          .catch(alert('An Error has occured. Please Try again'));
     }
+
 
     handleChange = (event, value) => {
       this.setState({ value });
@@ -111,7 +129,7 @@ class MyProfile extends React.Component {
 <TabContainer><ProfileDetails handleChange={this.handleProfileDetailsChange} profile={this.state.profileDetails}
           handleProfileSubmit={this.handleProfileSubmit}/></TabContainer>
 )}
-          {value === 1 && <TabContainer>Item Two</TabContainer>}
+          {value === 1 && <TabContainer><MyCompanies companies={this.state.companies}/></TabContainer>}
           {value === 2 && <TabContainer>Item Three</TabContainer>}
           {value === 3 && <TabContainer>Item Four</TabContainer>}
           {value === 4 && <TabContainer>Item Five</TabContainer>}
