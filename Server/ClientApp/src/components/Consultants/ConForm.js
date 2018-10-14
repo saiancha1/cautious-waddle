@@ -22,6 +22,7 @@ class ConForm extends Component {
       desc: '',
       exp: '',
       selectedFile: null,
+      returnedUrlData: null,
       imgu: '',
     }
 
@@ -44,7 +45,6 @@ class ConForm extends Component {
         postalcode,
         desc,
         exp,
-        selectedFile,
         imgu,
       } = this.state;
 
@@ -101,12 +101,6 @@ class ConForm extends Component {
       });
     }
 
-    // fileUploadHandler = (e) => {
-    //   e.preventDefault();
-    //   console.log(this.state.selectedFile);
-    //   // const fd = new FormData();
-    //   // fd.append('ConsultantImage', this.state.selectedFile, this.state.selectedFile.name);
-    // }
 
       handleImageUpload = (e) => {
         e.preventDefault();
@@ -126,21 +120,17 @@ class ConForm extends Component {
             .then((retrieveddata) => {
               const iii = retrieveddata;
               console.log(iii);
+              this.setState({
+                returnedUrlData: iii,
+              });
+              console.log(this.state.returnedUrlData.imageUrl);
+              this.setState({
+                imageURL: this.state.returnedUrlData.imageUrl,
+              });
+              console.log(this.state.imageURL);
             });
         });
       };
-
-      // // fetch('api/Consultants/addConsultantImage', {
-      // //   method: 'POST',
-      // //   body: this.state.selectedFile,
-      // //   headers: {
-      //     // 'Content-Type': 'multipart/form-data',
-      //     Authorization: `Bearer ${this.Auth.getToken()}`,
-      //   },
-      //   }).then((res) => {
-      //     console.log(res);
-      //   });
-      // }
 
       render() {
         return (
