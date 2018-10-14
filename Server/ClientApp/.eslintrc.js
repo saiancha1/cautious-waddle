@@ -27,5 +27,7 @@ module.exports = {
       "implicit-arrow-linebreak": 0,
       "react/prefer-stateless-function": 0,
       "no-else-return": 0,
+      "jsx-a11y/label-has-associated-control": 0,
+      "jsx-a11y/label-has-for": 0,
     }
   };
