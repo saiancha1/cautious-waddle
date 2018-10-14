@@ -33,6 +33,7 @@ import ConsultantManagement from './ConsultantManagement/ConsultantManagement';
 import { mainListItems, secondaryListItems } from './listitems';
 import BusinessIcon from '@material-ui/icons/Business';
 import PersonIcon from '@material-ui/icons/Person';
+import MainDashboard from './MainDashboard/MainDashboard';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -146,7 +147,7 @@ class Dashboard extends React.Component {
            <Typography variant="display1" gutterBottom>
         Main Dashboard
            </Typography>
-           <Analytics/>
+           <MainDashboard/>
          </main>
        );
      }
