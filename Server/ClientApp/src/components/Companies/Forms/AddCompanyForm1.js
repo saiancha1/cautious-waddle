@@ -31,8 +31,8 @@ const AddcompanyForm1 = (props) => {
           id="company-name"
           label="Company Name"
           className={classes.textField}
-          value={props.company.CompanyName}
-          onChange={e => props.handleChange(e, 'CompanyName')}
+          value={props.company.companyName}
+          onChange={e => props.handleChange(e, 'companyName')}
           margin="normal"
           required
         />
@@ -40,24 +40,25 @@ const AddcompanyForm1 = (props) => {
           id="company-size"
           label="Company Size"
           className={classes.textField}
-          value={props.company.CompanySize}
-          onChange={e => props.handleChange(e, 'CompanySize')}
+          value={props.company.companySize}
+          onChange={e => props.handleChange(e, 'companySize')}
           margin="normal"
+          type="number"
         />
         <TextField
           id="business-type"
           label="Business Type"
           className={classes.textField}
-          value={props.company.BusinessType}
-          onChange={e => props.handleChange(e, 'BusinessType')}
+          value={props.company.businessType}
+          onChange={e => props.handleChange(e, 'businessType')}
           margin="normal"
         />
         <TextField
           id="specialist-area"
           label="Specialist Area"
           className={classes.textField}
-          value={props.company.SpecialistArea}
-          onChange={e => props.handleChange(e, 'SpecialistArea')}
+          value={props.company.specialistArea}
+          onChange={e => props.handleChange(e, 'specialistArea')}
           margin="normal"
         />
       </div>
@@ -73,7 +74,7 @@ const AddcompanyForm1 = (props) => {
             plugins: 'link image code',
             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
           }}
-          value={props.company.CompanyDesc}
+          value={props.company.companyDesc}
           onEditorChange={e => props.handleEditorChange(e)}
         />
       </div>

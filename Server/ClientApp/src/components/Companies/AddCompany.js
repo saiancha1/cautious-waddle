@@ -29,32 +29,42 @@ function getSteps() {
 
 
 class AddCompany extends React.Component {
-  state = {
-    activeStep: 0,
-    company: {
-      CompanyId: null,
-      ContactEmail: null,
-      CompanyName: null,
-      Logo: null,
-      Size: 0,
-      BusinessType: null,
-      SpecialistArea: null,
-      CompanyDesc: null,
-      Phone: null,
-      Email: null,
-      Address1: null,
-      Address2: null,
-      Suburb: null,
-      PostalCode: null,
-      City: null,
-      Country: null,
-      SummerJobs: 0,
-    },
-    file: null,
-    imageUploaded: false,
+  constructor(props) {
+    super(props);
 
-  };
-
+    this.state = {
+      activeStep: 0,
+      company: {
+        companyId:null,
+        users:null,
+        contactEmail:'',
+        companyName:'',
+        logo:'',
+        size:0,
+        businessType:'',
+        specialistArea:'',
+        companyDesc:'',
+        email:'',
+        address1:'',
+        address2:'',
+        suburb:'',
+        postalCode:'',
+        city:'',
+        country:'',
+        summerJobs:0
+      },
+      file: null,
+      imageUploaded: false,
+  
+    };
+  }
+  
+componentWillMount() {
+  if(this.props.company)
+  {
+  this.setState({company:this.props.company});
+  }
+}
   handleForm1Change = (e, val) => {
     const company = this.state.company;
     company[val] = e.target.value;
@@ -82,7 +92,7 @@ class AddCompany extends React.Component {
       response => response.json(), // if the response is a JSON object
     ).then((res) => {
       const company = this.state.company;
-      company.Logo = res.imageUrl;
+      company.logo = res.imageUrl;
       this.setState({ company });
       this.setState({ imageUploaded: true });
       // Handle the success response object
@@ -125,13 +135,28 @@ class AddCompany extends React.Component {
 
   handleEditorChange = (content) => {
     const company = this.state.company;
-    company.CompanyDesc = content;
+    company.companyDesc = content;
     this.setState({ company });
   }
 
   handleAddCompanySubmit = () => {
     const company = this.state.company;
     const requiredFields = ['CompanyName', 'CompanyDescription', 'Company Email'];
+    if(company.companyId !== null)
+    {
+      fetch('api/companies/editCompany', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          'content-Type': 'application/json',
+        },
+        body: JSON.stringify(company),
+  
+      })
+        .then((response) => { (response.status === 200) ? alert('CompanyAdded') : alert('fail1'); })
+        .catch();
+    }
+    else{
     fetch('api/companies/addCompany', {
       method: 'POST',
       headers: {
@@ -143,6 +168,7 @@ class AddCompany extends React.Component {
     })
       .then((response) => { (response.status === 200) ? alert('CompanyAdded') : alert('fail1'); })
       .catch();
+  }
   }
 
   render() {

@@ -18,7 +18,7 @@ import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
 import SubForm from './components/Subscribe/SubscribeForm';
 import AddCompany from './components/Companies/AddCompany';
-
+import MyProfile from './components/Profile/MyProfile';
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {
@@ -39,6 +39,7 @@ class App extends Component {
             <Route exact path="/admin" component={AdminComponent} />
             <Route exact path="/addCompany" component={AddCompany} />
             <Route exact path="/addconsultant" component={ConForm} />
+            <Route exact path="/myProfile" component={MyProfile} />
           </div>
           <Footer />
         </div>

@@ -20,6 +20,8 @@ const styles = {
  const Company = (props) => {
     const { classes } = props;
     let modal;
+    let companyEdit;
+    const edit = (props.canEdit) ? <Button onClick={this.companyEdit = props.editCompany}>Edit</Button> : null;
     return(
     <div className="col-md-4">
     <Card className={classes.card}>
@@ -41,9 +43,11 @@ const styles = {
       <Button size="small" color="primary" onClick={this.modal = props.handleModalOpen}>
         More...
       </Button>
+      {edit}
     </CardActions>
   </Card>
   {this.modal}
+  {this.companyEdit}
   </div>    
     );
 };

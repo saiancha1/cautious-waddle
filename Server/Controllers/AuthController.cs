@@ -21,11 +21,14 @@ namespace cautious_waddle.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
-        public AuthController(UserManager<AppUser> userManager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
+        private readonly IProfilesRepository _profileRepo;
+        public AuthController(UserManager<AppUser> userManager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions,
+        IProfilesRepository profileRepo)
         {
             _userManager = userManager;
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
+            _profileRepo = profileRepo;
         }
         [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody]CredentialsViewModel credentials)
@@ -88,6 +91,8 @@ namespace cautious_waddle.Controllers
                 userViewModel.Role = "User";
             }
             var currentUser = await _userManager.FindByEmailAsync(user.Email);
+            try 
+            {
             if(currentUser == null)
             {
                 var createUser = await _userManager.CreateAsync(user, userViewModel.Password);
@@ -95,9 +100,24 @@ namespace cautious_waddle.Controllers
                 {
                     role = (isAdmin) ? "Admin" : userViewModel.Role;
                     await _userManager.AddToRoleAsync(user,role);
+                    string uId = user.Id;
+                    Profile profile = new Profile {
+                        UserId = uId,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        Bio = ""
+                    };
+                    _profileRepo.AddProfile(profile);
+                    return Ok();
                 }                  
             }
-            return Ok();
+            return NotFound();
+            }
+            catch {
+                return NotFound();
+            }
+            
         }
         
         [HttpPost("UpdateUser")]

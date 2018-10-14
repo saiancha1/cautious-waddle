@@ -28,16 +28,16 @@ const AddCompanyForm2 = (props) => {
             id="company-email"
             label="Email"
             className={classes.textField}
-            value={props.company.ContactEmail}
-            onChange={e => props.handleChange(e, 'ContactEmail')}
+            value={props.company.contactEmail}
+            onChange={e => props.handleChange(e, 'contactEmail')}
             margin="normal"
           />
           <TextField
             id="company-phone"
             label="Phone No."
             className={classes.textField}
-            value={props.company.Phone}
-            onChange={e => props.handleChange(e, 'Phone')}
+            value={props.company.phone}
+            onChange={e => props.handleChange(e, 'phone')}
             margin="normal"
           />
         </div>
@@ -50,48 +50,48 @@ const AddCompanyForm2 = (props) => {
             id="business-add1"
             label="Address Line 1"
             className={classes.textField}
-            value={props.company.Address1}
-            onChange={e => props.handleChange(e, 'Address1')}
+            value={props.company.address1}
+            onChange={e => props.handleChange(e, 'address1')}
             margin="normal"
           />
           <TextField
             id="business-add2"
             label="Address Line 2"
             className={classes.textField}
-            value={props.company.Address2}
-            onChange={e => props.handleChange(e, 'Address2')}
+            value={props.company.address2}
+            onChange={e => props.handleChange(e, 'address2')}
             margin="normal"
           />
           <TextField
             id="business-suburb"
             label="Suburb"
             className={classes.textField}
-            value={props.company.Suburb}
-            onChange={e => props.handleChange(e, 'Suburb')}
+            value={props.company.suburb}
+            onChange={e => props.handleChange(e, 'suburb')}
             margin="normal"
           />
           <TextField
             id="business-City"
             label="City"
             className={classes.textField}
-            value={props.company.City}
-            onChange={e => props.handleChange(e, 'City')}
+            value={props.company.city}
+            onChange={e => props.handleChange(e, 'city')}
             margin="normal"
           />
           <TextField
             id="business-PostalCode"
             label="Postal Code"
             className={classes.textField}
-            value={props.company.PostalCode}
-            onChange={e => props.handleChange(e, 'PostalCode')}
+            value={props.company.postalCode}
+            onChange={e => props.handleChange(e, 'postalCode')}
             margin="normal"
           />
           <TextField
             id="business-country"
             label="Country"
             className={classes.textField}
-            value={props.company.Country}
-            onChange={e => props.handleChange(e, 'Country')}
+            value={props.company.country}
+            onChange={e => props.handleChange(e, 'country')}
             margin="normal"
           />
         </div>
