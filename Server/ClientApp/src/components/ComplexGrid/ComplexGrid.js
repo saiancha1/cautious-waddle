@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import Avatar from '@material-ui/core/Avatar';
 
 const styles = theme => ({
   root: {
@@ -28,7 +27,6 @@ const styles = theme => ({
 function ComplexGrid(props) {
   const { classes, jobTitle , jobId, company, desc, salary, type, email} = props;
   return (
-    <Paper className={classes.root}>
       <Grid container spacing={16}>
         <Grid item>
         </Grid>
@@ -56,7 +54,7 @@ function ComplexGrid(props) {
           </Grid>
         </Grid>
       </Grid>
-    </Paper>
+    
   );
 }
 

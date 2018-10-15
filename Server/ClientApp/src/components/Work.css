@@ -3,7 +3,6 @@
 .wrapper {
     display: grid;
     grid-template-columns: auto 40% auto;
-    grid-template-rows: auto auto;
     justify-items: center;
 }
 
@@ -44,28 +43,6 @@ ul, ol {
   margin-bottom: 10px;
 }
 
-.centered-text h3 {
-  margin: 0;
-  font-family: "Open Sans Condensed", sans-serif;
-  font-size: 3vw;
-  background:rgba(0, 0, 0, 0.4);
-  padding: 20px;
-}
-
-.centered-text h3 span {
-  font-family: "Comfortaa", cursive;
-  font-size: 7vw;
-}
-
-.background-image {
-  max-width: 100%;
-  height: auto;
-  margin-top: -90px;
-}
-
-.about-block {
-  margin: 50px 0 50px 0;
-}
 
 .home-heading {
   text-align: center;
@@ -73,17 +50,6 @@ ul, ol {
   font-family: "Comfortaa", cursive;
 }
 
-.cardSlide-wrapper {
-  text-align: -webkit-center;
-}
-
-.card-grid {
-  max-width: 800px;
-  text-align: -webkit-center;
-}
-.flip-cards {
-  max-width: 800px;
-}
 
 .app-bar{
   background-color: dimgrey
@@ -102,15 +68,4 @@ ul, ol {
 .MuiButton-containedPrimary-107 {
 	color: #fff;
   background-color: #75767e!important;
-}
-
-@media screen and (max-width: 500px) { 
-  .centered-text h3 span {
-    display: none;
-  }
-
-  .centered-text h3 {
-    top:0;
-    padding-bottom: 30px;
-  }
 }
