@@ -81,7 +81,7 @@ namespace cautious_waddle.Models
                 }
             }
 
-            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(companies);
+            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(myCompanies);
 
             return companiesViewModel;
         }
