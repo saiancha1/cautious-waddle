@@ -35,7 +35,7 @@ function ComplexGrid(props) {
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={16}>
             <Grid item xs>
-              <Typography gutterBottom variant="title">
+              <Typography gutterBottom variant="display3">
                 {jobTitle}
               </Typography>
               <Typography gutterBottom variant="subtitle2">

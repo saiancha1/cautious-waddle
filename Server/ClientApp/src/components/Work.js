@@ -8,11 +8,20 @@ import background from '../images/homepage-image.jpg';
 import ButtonAppBar from './AppBar/ButtonAppBar';
 import ComplexGrid from './ComplexGrid/ComplexGrid';
 
+const style = {
+  Paper: {
+    marginTop: 30,
+    marginBottom: 30,
+    gutterBottom: true
+  },
+};
 
 class Work extends Component {
 state = {
   jobs: [],
 };
+
+
 
 async componentWillMount() {
   fetch('api/jobs/getJobs').then(res => res.json())
@@ -20,6 +29,7 @@ async componentWillMount() {
       this.setState({ jobs: json });
     });
 }
+
 
 render() {
   console.log(this.state.jobs);
@@ -49,7 +59,7 @@ render() {
           <ul className="listing">
             {this.state.jobs.map(job => (
               <div>
-              <Paper>
+              <Paper style={style.paper}>
                 <ComplexGrid jobTitle={job.jobTitle} jobId={job.jobId} company={job.companyName} desc={job.jobDescription} salary={job.salary} type={job.workType} email={job.contactEmail}>                 
                   <p>To apply contact: {job.contactFirstName}{job.contactLastName}</p>
                   T: {job.contactPhone}  
