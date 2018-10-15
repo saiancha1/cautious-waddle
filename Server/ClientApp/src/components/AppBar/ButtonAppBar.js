@@ -47,14 +47,13 @@ function ButtonAppBar(props) {
         <FormControl>
         <TextField
             label="Search"
-              id="outlined-bare"
-              margin="normal"
+              id="search-outlined"
               variant="outlined"
             />
             </FormControl>
             </div>            
-            <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel>
+            <FormControl variant="outlined">
+            <InputLabel>
             Type
           </InputLabel>
           <Select
