@@ -68,8 +68,13 @@ class Companies extends Component {
       
     }
   }
+  editCompany = (e) => {
+    this.setState({editCompany:e})
+  };
   render() {
     let company;
+    const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany} /> : null;
+
     if (this.state.selectedCompany !== null) {
       const selectedCompany = this.state.selectedCompany;
       company = <CompanyView companyToRender={selectedCompany} handleClose={this.handleClose} companyOpen={this.state.companyOpen}
@@ -80,8 +85,10 @@ class Companies extends Component {
         <CompanyFilter filter={this.state.filter} 
         handleFilterChange={this.handleFilterChange}
         filterItems = {this.state.menuItems}/>
-        <CompanyList companies={this.state.companies} handleModalOpen={this.handleModalOpen} generateDesc={this.createMarkup}/>
+        <CompanyList companies={this.state.companies} handleModalOpen={this.handleModalOpen} generateDesc={this.createMarkup}
+        editCompany= {this.editCompany}/>
         {company}
+        {addCompany}
 
       </div>
     );

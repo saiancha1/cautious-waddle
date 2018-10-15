@@ -5,6 +5,8 @@ import AuthService from '../Authentication/AuthService';
 const createMarkup = htmlData => ({ __html: htmlData });
 const userCanEdit = (company) => {
   const authService = new AuthService();
+  if(authService.loggedIn())
+  {
   const token = authService.getProfile();
   const userId = token.id;
   for (let i = 0; i < company.users.length; i++) {
@@ -14,6 +16,11 @@ const userCanEdit = (company) => {
     }
   // Do something
   }
+}
+else
+{
+  return false;
+}
 };
 const CompanyList = (props) => {
   const companies = props.companies.map(company => (
