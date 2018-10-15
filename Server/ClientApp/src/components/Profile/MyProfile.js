@@ -47,11 +47,18 @@ class MyProfile extends React.Component {
       consultants: null,
       Jobs: null,
       editCompany: null,
+      fullyLoaded:false,
     };
 
     Auth = new AuthService();
 
     componentDidMount() {
+      
+        this.preInitData();
+        
+    }
+
+    preInitData = () => {
       fetch('api/profiles/getMyProfile', {
         method: 'GET',
         headers: {
@@ -62,7 +69,7 @@ class MyProfile extends React.Component {
         .then((json) => {
           this.setState({ profileDetails: json });
         })
-        .catch(alert('An Error has occured. Please Try again'));
+        .catch();
 
       fetch('api/companies/getMyCompanies', {
         method: 'GET',
@@ -73,11 +80,10 @@ class MyProfile extends React.Component {
       }).then(res => res.json())
         .then((json) => {
           this.setState({ companies: json });
+          this.setState({fullyLoaded:true});
         })
-        .catch(alert('An Error has occured. Please Try again'));
+        .catch();
     }
-
-
     handleChange = (event, value) => {
       this.setState({ value });
     };
@@ -111,7 +117,7 @@ class MyProfile extends React.Component {
 
     render() {
       const { value } = this.state;
-      if (this.state.profileDetails == null) {
+      if (this.state.fullyLoaded == false) {
         return (
           <div>Loading</div>
         );
