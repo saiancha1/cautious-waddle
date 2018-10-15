@@ -31,7 +31,6 @@ const styles = {
 };
 
 function ButtonAppBar(props) {
-
   const handleChange = () => {
   };
 
@@ -43,42 +42,42 @@ function ButtonAppBar(props) {
         <Route exact path="/summerTech" component={SummerTech} />
         <Route exact path="/addjob" component={AddJob} />
         <Toolbar>
-        <div>
-        <FormControl>
-        <TextField
-            label="Search"
-              id="search-outlined"
-              variant="outlined"
-            />
+          <div>
+            <FormControl>
+              <TextField
+                label="Search"
+                id="search-outlined"
+                variant="outlined"
+              />
             </FormControl>
-            </div>            
-            <FormControl variant="outlined">
+          </div>            
+          <FormControl variant="outlined">
             <InputLabel>
             Type
-          </InputLabel>
-          <Select
-            onChange={ handleChange }
-            input={
-              <OutlinedInput
-                name="Type"
-                id="type"
-              />
-            }
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Full Time</MenuItem>
-            <MenuItem value={20}>Part Time</MenuItem>
-            <MenuItem value={30}>Contract</MenuItem>
-          </Select>
-        </FormControl>
+            </InputLabel>
+            <Select
+              onChange={handleChange}
+              input={(
+                <OutlinedInput
+                  name="Type"
+                  id="type"
+                />
+              )}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Full Time</MenuItem>
+              <MenuItem value={20}>Part Time</MenuItem>
+              <MenuItem value={30}>Contract</MenuItem>
+            </Select>
+          </FormControl>
           <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
             {children}
           </Typography>
-            <Button component={Link} to="/addJob" variant="contained" color="inherit" className={classes.button}>
+          <Button component={Link} to="/addJob" variant="contained" color="inherit" className={classes.button}>
                 Add Listing
-            </Button>
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
