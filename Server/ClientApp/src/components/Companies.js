@@ -71,9 +71,12 @@ class Companies extends Component {
   editCompany = (e) => {
     this.setState({editCompany:e})
   };
+  hideComponent = (e) => {
+    this.setState({editCompany:undefined});
+  }
   render() {
     let company;
-    const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany} /> : null;
+    const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany} hide={this.hideComponent} /> : null;
 
     if (this.state.selectedCompany !== null) {
       const selectedCompany = this.state.selectedCompany;

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import AddCompanyForm1 from './Forms/AddCompanyForm1';
 import AddCompanyForm2 from './Forms/AddCompanyForm2';
 import AddCompanyForm3 from './Forms/AddCompanyForm3';
+import { Redirect } from 'react-router';
 
 const styles = theme => ({
   root: {
@@ -57,6 +58,7 @@ class AddCompany extends React.Component {
       imageUploaded: false,
   
     };
+    this.hide = this.hide.bind(this);
   }
   
 componentWillMount() {
@@ -138,7 +140,13 @@ componentWillMount() {
     company.companyDesc = content;
     this.setState({ company });
   }
-
+  hide = () => {
+    if(this.props.hide)
+    {
+    this.props.hide();
+    }
+    return <Redirect to='/'/>;
+  }
   handleAddCompanySubmit = () => {
     const company = this.state.company;
     const requiredFields = ['CompanyName', 'CompanyDescription', 'Company Email'];
@@ -153,7 +161,7 @@ componentWillMount() {
         body: JSON.stringify(company),
   
       })
-        .then((response) => { (response.status === 200) ? alert('CompanyAdded') : alert('fail1'); })
+        .then((response) => { (response.status === 200) ? this.hide() : alert('fail1'); })
         .catch();
     }
     else{
@@ -166,7 +174,7 @@ componentWillMount() {
       body: JSON.stringify(company),
 
     })
-      .then((response) => { (response.status === 200) ? alert('CompanyAdded') : alert('fail1'); })
+      .then((response) => { (response.status === 200) ? this.setState({redirect:true}): alert('fail1'); })
       .catch();
   }
   }
@@ -194,6 +202,12 @@ componentWillMount() {
       Country: null,
       SummerJobs: 0,
     };
+    if(this.state.redirect)
+    {
+      return (
+        <Redirect to='/companies'/>
+      )
+    }
     return (
       <div className={classes.root}>
         <Stepper activeStep={activeStep} alternativeLabel>
@@ -208,6 +222,7 @@ componentWillMount() {
             <div>
               <Typography className={classes.instructions}>All steps completed. Click Submit</Typography>
               <Button onClick={this.handleAddCompanySubmit}>Submit Company</Button>
+              <Button onClick={this.props.hide}>Close Form</Button>
             </div>
           ) : (
             <div>

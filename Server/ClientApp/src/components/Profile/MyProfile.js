@@ -114,7 +114,10 @@ class MyProfile extends React.Component {
           }
         }).catch();
     }
-
+    hide = () => {
+      
+      this.setState({editCompany:undefined})
+    }
     render() {
       const { value } = this.state;
       if (this.state.fullyLoaded == false) {
@@ -122,7 +125,8 @@ class MyProfile extends React.Component {
           <div>Loading</div>
         );
       } else {
-        const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany} /> : null;
+        const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany}
+        hide= {this.hide} /> : null;
         return (
           <div>
           <AppBar position="static" color="default">
