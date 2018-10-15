@@ -25,7 +25,7 @@ const styles = theme => ({
 });
 
 function ComplexGrid(props) {
-  const { classes, jobTitle , jobId, company, desc, salary, type, email} = props;
+  const { classes, firstName, secondName, jobTitle , jobId, company, desc, salary, type, email} = props;
   return (
       <Grid container spacing={16}>
         <Grid item>
@@ -33,24 +33,26 @@ function ComplexGrid(props) {
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={16}>
             <Grid item xs>
-              <Typography gutterBottom variant="display3">
+              <Typography gutterBottom variant="display2">
                 {jobTitle}
               </Typography>
-              <Typography gutterBottom variant="subtitle2">
+              <Typography gutterBottom variant="display1">
                 {company}
               </Typography>
-              <Typography gutterBottom>{type}</Typography>
-              <Typography color="textSecondary">{"ID:"+jobId }</Typography>
-              <Typography color="textSecondary">{desc}</Typography>
+              <Typography variant="headline" >{type}</Typography>
+              <Typography variant="headline" color="textSecondary" gutterBottom>{"$"+salary}</Typography>
+              <Typography variant="headline" color="textSecondary">{desc}</Typography>
             </Grid>
             <Grid item>
-              <Typography style={{ cursor: 'pointer' }}>
+            <Typography variant="headline" color="textSecondary">{"Contact:" +firstName+" "+secondName}</Typography>
+            
+              <Typography variant="headline" style={{ cursor: 'pointer' }}>
               <a href={"mailto:"+ email}>Apply</a>
               </Typography>
             </Grid>
           </Grid>
           <Grid item>
-            <Typography variant="subtitle1">{"$"+salary}</Typography>
+            <Typography variant="subtitle1">{"ID:"+jobId }</Typography>
           </Grid>
         </Grid>
       </Grid>

@@ -45,6 +45,7 @@ function ButtonAppBar(props) {
           <div>
             <FormControl>
               <TextField
+              color="default"
                 label="Search"
                 id="search-outlined"
                 variant="outlined"
@@ -56,6 +57,7 @@ function ButtonAppBar(props) {
             Type
             </InputLabel>
             <Select
+              color="default"
               onChange={handleChange}
               input={(
                 <OutlinedInput
@@ -64,18 +66,18 @@ function ButtonAppBar(props) {
                 />
               )}
             >
-              <MenuItem value="">
+              <MenuItem value="" color='default'>
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Full Time</MenuItem>
-              <MenuItem value={20}>Part Time</MenuItem>
-              <MenuItem value={30}>Contract</MenuItem>
+              <MenuItem value="Full Time">Full Time</MenuItem>
+              <MenuItem value="Part Time">Part Time</MenuItem>
+              <MenuItem value="Contract">Contract</MenuItem>
             </Select>
           </FormControl>
           <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
             {children}
           </Typography>
-          <Button component={Link} to="/addJob" variant="contained" color="inherit" className={classes.button}>
+          <Button component={Link} to="/addJob" variant="contained" color="default" className={classes.button}>
                 Add Listing
           </Button>
         </Toolbar>
@@ -87,6 +89,4 @@ function ButtonAppBar(props) {
 ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-//used to export styles instead of muiTheme
 export default withStyles(styles)(ButtonAppBar);

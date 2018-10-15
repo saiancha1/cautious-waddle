@@ -61,17 +61,26 @@ render() {
         <Grid item sm={6}>
         <Paper>
         <AppBar  style={style.AppBar} variant="primary" position="static">
-        <Typography color="white" variant="display2" align="center">
+        <Typography color="inherit" variant="display2" align="center">
           Latest Jobs
         </Typography>
             </AppBar>
         <List className="listing" >
           {this.state.jobs.map(job => (
             <div>
-            <ListItem>
-              <ComplexGrid jobTitle={job.jobTitle} jobId={job.jobId} company={job.companyName} desc={job.jobDescription} salary={job.salary} type={job.workType} email={job.contactEmail}>                 
-              </ComplexGrid>            
-            </ListItem>
+              <ListItem>
+                <ComplexGrid
+                  jobTitle={job.jobTitle} 
+                  jobId={job.jobId} 
+                  firstName={job.contactFirstName} 
+                  secondName={job.contactLastName} 
+                  company={job.companyName} 
+                  desc={job.jobDescription} 
+                  salary={job.salary} 
+                  type={job.workType} 
+                  email={job.contactEmail}
+                />           
+              </ListItem>
             <Divider />
             </div>
           ))}
