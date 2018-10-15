@@ -16,7 +16,7 @@ import ProfileDetails from './ProfileDetails';
 import MyCompanies from './Companies/MyCompanies';
 import AuthService from '../Authentication/AuthService';
 import AddCompany from '../Companies/AddCompany';
-
+import Spinner from '../Spinner';
 function TabContainer(props) {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -115,14 +115,14 @@ class MyProfile extends React.Component {
         }).catch();
     }
     hide = () => {
-      
+
       this.setState({editCompany:undefined})
     }
     render() {
       const { value } = this.state;
       if (this.state.fullyLoaded == false) {
         return (
-          <div>Loading</div>
+          <div><Spinner/></div>
         );
       } else {
         const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany}
