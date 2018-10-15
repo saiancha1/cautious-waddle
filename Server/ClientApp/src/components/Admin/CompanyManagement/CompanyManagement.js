@@ -133,7 +133,7 @@ class CompanyManagement extends Component {
             'content-type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('id_token')}`,
           },
-          body: n.jobId,
+          body: n.companyId,
         })
           .then((res) => {
             if (res.status === 200) {
