@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import AuthService from '../Authentication/AuthService';
-import ImgUpload from './ImgUpload';
 import './ConForm.css';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import AuthService from '../Authentication/AuthService';
 
 class ConForm extends Component {
     state = {
@@ -25,7 +26,9 @@ class ConForm extends Component {
       imgu: '',
     }
 
+
     Auth = new AuthService();
+
 
     handleSubmit = (e) => {
       e.preventDefault();
@@ -108,26 +111,37 @@ class ConForm extends Component {
 
         mydata.append('file', file);
         console.log(this.state.selectedFile);
-        fetch('api/Consultants/addConsultantImage', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('id_token')}`,
-          },
-          body: mydata,
-        }).then((res) => {
-          res.json()
-            .then((retrieveddata) => {
-              const iii = retrieveddata;
-              console.log(iii);
-              this.setState({
-                imgu: iii.imageUrl,
-              });
-              console.log(this.state.imgu);
-            });
-        });
+
+          <div>
+            {file == null ? (console.log('do nothing'))
+              : (fetch('api/Consultants/addConsultantImage', {
+                method: 'POST',
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+                },
+                body: mydata,
+              }).then((res) => {
+                res.json()
+                  .then((retrieveddata) => {
+                    const iii = retrieveddata;
+                    console.log(iii);
+                    this.setState({
+                      imgu: iii.imageUrl,
+                    });
+                    console.log(this.state.imgu);
+                  });
+              })
+
+              )
+
+      }
+
+          </div>;
       };
 
-      render() {
+      render(props) {
+        const { classes } = this.props;
+
         return (
           <div div className="contact-wrapper">
             {this.Auth.loggedIn() ? (
@@ -135,14 +149,6 @@ class ConForm extends Component {
               <form onSubmit={this.handleSubmit}>
                 <h2>Add Consultant</h2>
                 <Grid>
-                  <Row>
-                    <Col xs={12}>
-                      <input type="file" onChange={this.fileSelectedHandler} required />
-                      <button onClick={this.handleImageUpload}>Upload</button>
-                    </Col>
-                    {' '}
-
-                  </Row>
                   <Row>
                     <label>
                     Name
@@ -212,15 +218,16 @@ class ConForm extends Component {
                                Image Url
                     </label>
                   </Row>
-                  {/* <Row> */}
-                  {/* <ImgUpload name="imgu" value={this.state.imgu} onChange={this.handleImage} /> */}
-                  {/* <Col xs={12}>
-                    <input type="file" onChange={this.fileSelectedHandler} required />
-                    <button onClick={this.fileUploadHandler}>Upload</button>
-                  </Col>
-                  {' '} */}
-
-                  {/* </Row> */}
+                  <Row>
+                    <Col xs={12}>
+                      <Input type="file" onChange={this.fileSelectedHandler} required />
+                      <Button onClick={this.handleImageUpload} variant="contained" color="default" required>
+Submit
+                        <CloudUploadIcon />
+                      </Button>
+                    </Col>
+                    {' '}
+                  </Row>
                   <br />
 
                   <Row>
