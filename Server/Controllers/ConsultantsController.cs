@@ -128,6 +128,23 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpPost("adminRemoveConsultant")]
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminRemoveConsultant([FromBody] int id)
+        {
+            try
+            {
+                Consultant consultant = new Consultant();
+                consultant = _consultantsRepository.GetConsultantById(id);
+                _consultantsRepository.RemoveConsultant(consultant);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("editConsultant")]
         [Authorize]
         public IActionResult EditConsultant([FromBody] ConsultantsViewModel consultant)

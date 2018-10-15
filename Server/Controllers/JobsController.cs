@@ -49,7 +49,7 @@ namespace cautious_waddle.Controllers
         {
             try 
             {
-                List<Job> jobs = _jobsRespository.AdminGetJobs(expired, approved).ToList();
+                List<JobsViewModel> jobs = _jobsRespository.AdminGetJobs(expired, approved).ToList();
                 if (jobs.Count > 0)
                 {
                     jobs = jobs.OrderBy(j => j.IsApproved).ToList();
@@ -99,7 +99,7 @@ namespace cautious_waddle.Controllers
                 // If a companyId is passed, ensure the company exists and the user has access to it
                 if(job.CompanyId.HasValue)
                 {
-                    Company company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
+                    Company company = _companiesRepository.GetCompanyById_model(job.CompanyId.Value);
                     if(company == null)
                     {
                         return BadRequest();
@@ -132,7 +132,7 @@ namespace cautious_waddle.Controllers
 
         [HttpPost("removeJob")]
         [Authorize]
-        public async System.Threading.Tasks.Task<IActionResult> RemoveJobAsync([FromBody] int id) {
+        public IActionResult RemoveJobAsync([FromBody] int id) {
             try
             {
                 Job job = new Job();
@@ -148,6 +148,22 @@ namespace cautious_waddle.Controllers
                 {
                     return Unauthorized();
                 }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("adminRemoveJob")]
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminRemoveJobAsync([FromBody] int id) {
+            try
+            {
+                Job job = new Job();
+                job = _jobsRespository.GetJobById(id);
+                _jobsRespository.DeleteJob(job);
+                return Ok();
             }
             catch (Exception ex)
             {

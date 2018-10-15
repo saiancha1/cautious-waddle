@@ -7,8 +7,8 @@ namespace cautious_waddle.Models
     public interface IJobsRepository
     {
         IEnumerable<JobsViewModel> GetJobsList(int minSalary, int maxSalary, string search);
-        IEnumerable<Job> AdminGetJobs(bool? expired, bool? approved);
-        IEnumerable<Job> GetMyJobs(string userId, bool? expired, bool? approved);
+        IEnumerable<JobsViewModel> AdminGetJobs(bool? expired, bool? approved);
+        IEnumerable<JobsViewModel> GetMyJobs(string userId, bool? expired, bool? approved);
         Job GetJobById(int id);
         void AddJob(Job job);
         void DeleteJob(Job job);

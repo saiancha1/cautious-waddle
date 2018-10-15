@@ -157,6 +157,23 @@ namespace cautious_waddle.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("adminRemoveEvent")]
+        [Authorize(Roles="Admin")]
+        public IActionResult adminRemoveEvent([FromBody] int eventId)
+        {
+            try
+            {
+                LocalEvent localEvent = _localEventsRepository.GetEventById(eventId);
+                _localEventsRepository.removeEvent(localEvent);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet("getEventsFromFeed")]
         [Authorize(Roles="Admin")]
         public IActionResult GetEventsFromFeed()
