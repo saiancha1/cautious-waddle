@@ -39,7 +39,7 @@ namespace cautious_waddle.Models
             return consultantsViewModel;
         }
 
-        public IEnumerable<Consultant> AdminGetConsultants(bool? approved)
+        public IEnumerable<ConsultantsViewModel> AdminGetConsultants(bool? approved)
         {
             IEnumerable<Consultant> consultants = _context.Consultants;
 
@@ -48,7 +48,23 @@ namespace cautious_waddle.Models
                 consultants = approved == true ? consultants.Where(c => c.IsApproved == 1) : consultants.Where(c => c.IsApproved == 0);
             }
 
-            return consultants;
+            IEnumerable<ConsultantsViewModel> consultantsViewModel = Mapper.Map<IEnumerable<Consultant>, IEnumerable<ConsultantsViewModel>>(consultants);
+
+            return consultantsViewModel;
+        }
+
+        public IEnumerable<ConsultantsViewModel> GetMyConsultants(string userId, bool? approved)
+        {
+            IEnumerable<Consultant> consultants = _context.Consultants.Where(c => c.UserId == userId);
+
+            if(approved != null)
+            {
+                consultants = approved == true ? consultants.Where(c => c.IsApproved == 1) : consultants.Where(c => c.IsApproved == 0);
+            }
+
+            IEnumerable<ConsultantsViewModel> consultantsViewModel = Mapper.Map<IEnumerable<Consultant>, IEnumerable<ConsultantsViewModel>>(consultants);
+
+            return consultantsViewModel;
         }
 
         public void AddConsultant(Consultant consultant)

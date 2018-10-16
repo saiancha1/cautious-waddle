@@ -40,6 +40,10 @@ export default class SubForm extends React.Component {
     this.setState({ open: false });
     res();
     this.handleSubscribe();
+    this.setState({
+      fname: '',
+      email: '',
+    });
   }
 
   handleClickOpen = () => {
@@ -52,7 +56,11 @@ export default class SubForm extends React.Component {
 
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false,
+      fname: '',
+      email: '',
+    });
   };
 
   handleSubscribe() {

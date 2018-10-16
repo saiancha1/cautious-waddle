@@ -1,19 +1,21 @@
-import React, { Fragment, Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ConST from './ConsultantStyledRender';
 
 const Consultant = (props) => {
   const consultantz = props.cl.map(con => (
     <ConST
-      consultimage={con.imageurl}
+      consultimage={con.imageURL}
       firstName={con.firstName}
       lastName={con.lastName}
       consultDescription={con.consultantDesc}
       hisemail={con.email}
       consultcity={con.city}
       consultwebsite={con.website}
+      conID={con.consultantId}
+      nation={con.country}
     />
-  ), // <h1> {con.firstName} {con.lastName}</h1>
+  ),
   );
   return (
     <div className="row">

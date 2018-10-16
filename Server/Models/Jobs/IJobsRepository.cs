@@ -8,6 +8,7 @@ namespace cautious_waddle.Models
     {
         IEnumerable<JobsViewModel> GetJobsList(int minSalary, int maxSalary, string search);
         IEnumerable<JobsViewModel> AdminGetJobs(bool? expired, bool? approved);
+        IEnumerable<JobsViewModel> GetMyJobs(string userId, bool? expired, bool? approved);
         Job GetJobById(int id);
         void AddJob(Job job);
         void DeleteJob(Job job);

@@ -16,8 +16,14 @@ import AddJob from './components/AddJob/AddJob';
 import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
+<<<<<<< HEAD
 import AddEvent from './components/Events/AddEvent';
 
+=======
+import SubForm from './components/Subscribe/SubscribeForm';
+import AddCompany from './components/Companies/AddCompany';
+import MyProfile from './components/Profile/MyProfile';
+>>>>>>> master
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {
@@ -36,8 +42,13 @@ class App extends Component {
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
+            <Route exact path="/addCompany" component={AddCompany} />
             <Route exact path="/addconsultant" component={ConForm} />
+<<<<<<< HEAD
             <Route exact path="/events/add" component={AddEvent} />
+=======
+            <Route exact path="/myProfile" component={MyProfile} />
+>>>>>>> master
           </div>
           <Footer />
         </div>

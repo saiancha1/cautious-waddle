@@ -32,7 +32,7 @@ class CompanyManagement extends Component {
           this.setState({ isAdmin: true });
         }
       });
-    fetch('api/companies/getDisapprovedCompanies', {
+    fetch('api/companies/adminGetCompanies', {
       headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` },
     }).then(res => res.json())
       .then((json) => {
@@ -108,7 +108,7 @@ class CompanyManagement extends Component {
             'content-type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('id_token')}`,
           },
-          body: n.id,
+          body: n.companyId,
         })
           .then((res) => {
             if (res.status === 200) {
@@ -133,7 +133,7 @@ class CompanyManagement extends Component {
             'content-type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('id_token')}`,
           },
-          body: n.jobId,
+          body: n.companyId,
         })
           .then((res) => {
             if (res.status === 200) {

@@ -50,12 +50,12 @@ const CompanyManagementTable = (props) => {
         <TableBody>
           {
             data.map(n => (
-              <TableRow key={n.id}>
+              <TableRow key={n.companyId}>
                 <TableCell component="th" scope="row">
-                  {n.id}
+                  {n.companyId}
                 </TableCell>
-                <TableCell><TextField key={n.jobId} type="text" value={n.companyName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'companyName')}/></TableCell>
-                <TableCell><TextField key={n.jobId} type="text" value={n.companyDescription} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'description')} /></TableCell>
+                <TableCell><TextField key={n.companyId} type="text" value={n.companyName} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'companyName')}/></TableCell>
+                <TableCell><TextField key={n.companyId} type="text" value={n.companyDescription} disabled={n.isDisabled} onChange={(e) => props.handleChange(n, e, 'description')} /></TableCell>
                 <TableCell><Checkbox checked={(n.isApproved === 1) ? true : false} disabled={n.isDisabled} onChange={(e) => props.handleIsApproved(n, e, 'isApproved')} /></TableCell>
                 <TableCell>
 

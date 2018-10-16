@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CompanyList from './Companies/CompanyList';
 import CompanyView from './Companies/CompanyView';
 import CompanyFilter from './Companies/CompanyFilter';
+import AddCompany from './Companies/AddCompany';
 class Companies extends Component {
   state = {
     companies: [],
@@ -9,7 +10,8 @@ class Companies extends Component {
     companyOpen: false,
     filter: 'All',
     menuItems:[],
-    originalCompanies:[]
+    originalCompanies:[],
+    AddCompany: null,
   }
 
   async componentWillMount() {
@@ -25,6 +27,9 @@ class Companies extends Component {
       
   }
 
+  createMarkup = (htmlData) => {
+    return {__html: htmlData};
+  }
   handleModalOpen = (company, e) => {
     this.setState({ selectedCompany: company });
     this.setState({ companyOpen: true });
@@ -54,19 +59,39 @@ class Companies extends Component {
     
   }
 
+  handleFormDataChange = (fieldName,e) => {
+    e.target.preventDefault();
+    const val = e.target.value;
+    let company = this.state.AddCompany;
+    if (fieldName === "h1")
+    {
+      
+    }
+  }
+  editCompany = (e) => {
+    this.setState({editCompany:e})
+  };
+  hideComponent = (e) => {
+    this.setState({editCompany:undefined});
+  }
   render() {
     let company;
+    const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany} hide={this.hideComponent} /> : null;
+
     if (this.state.selectedCompany !== null) {
       const selectedCompany = this.state.selectedCompany;
-      company = <CompanyView companyToRender={selectedCompany} handleClose={this.handleClose} companyOpen={this.state.companyOpen} />;
+      company = <CompanyView companyToRender={selectedCompany} handleClose={this.handleClose} companyOpen={this.state.companyOpen}
+      generateDesc= {this.createMarkup(selectedCompany.companyDesc)} />;
     }
     return (
       <div>
         <CompanyFilter filter={this.state.filter} 
         handleFilterChange={this.handleFilterChange}
         filterItems = {this.state.menuItems}/>
-        <CompanyList companies={this.state.companies} handleModalOpen={this.handleModalOpen} />
+        <CompanyList companies={this.state.companies} handleModalOpen={this.handleModalOpen} generateDesc={this.createMarkup}
+        editCompany= {this.editCompany}/>
         {company}
+        {addCompany}
 
       </div>
     );

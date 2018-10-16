@@ -55,6 +55,20 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("getMyConsultants")]
+        [Authorize]
+        public IActionResult GetMyConsultants([FromQuery] bool? approved)
+        {
+            try
+            {
+                return Ok(_consultantsRepository.GetMyConsultants(IdentityHelper.GetUserId(HttpContext), approved));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("addConsultant")]
         [Authorize]
         public IActionResult AddConsultant([FromBody] ConsultantsViewModel consultantViewModel)
@@ -107,6 +121,23 @@ namespace cautious_waddle.Controllers
                 {
                     return Unauthorized();
                 }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("adminRemoveConsultant")]
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminRemoveConsultant([FromBody] int id)
+        {
+            try
+            {
+                Consultant consultant = new Consultant();
+                consultant = _consultantsRepository.GetConsultantById(id);
+                _consultantsRepository.RemoveConsultant(consultant);
+                return Ok();
             }
             catch(Exception ex)
             {
