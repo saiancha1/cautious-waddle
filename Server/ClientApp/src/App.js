@@ -16,6 +16,8 @@ import AddJob from './components/AddJob/AddJob';
 import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
+import AddEvent from './components/Events/AddEvent';
+
 import SubForm from './components/Subscribe/SubscribeForm';
 import AddCompany from './components/Companies/AddCompany';
 import MyProfile from './components/Profile/MyProfile';
@@ -41,6 +43,7 @@ class App extends Component {
             <Route exact path="/addJob" component={AddJob} />
             <Route exact path="/addCompany" component={AddCompany} />
             <Route exact path="/addconsultant" component={ConForm} />
+            <Route exact path="/events/add" component={AddEvent} />
             <Route exact path="/myProfile" component={MyProfile} />
 
           </div>

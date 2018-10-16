@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import Card from './Events/Card';
 import AuthService from './Authentication/AuthService';
 import './events.css';
@@ -20,6 +22,8 @@ export default class Events extends Component {
       eventsSelected: [],
       loggedIn: this.Auth.loggedIn(),
     };
+
+    this.handleAddEvent = this.handleAddEvent.bind(this);
   }
 
   async componentDidMount() {
@@ -53,6 +57,16 @@ export default class Events extends Component {
     } else {
       const newArr = events.filter(event => event.eventType === param);
       this.setState({ eventsSelected: newArr });
+    }
+  }
+
+  handleAddEvent() {
+    this.setState({ loggedIn: this.Auth.loggedIn() });
+    const { loggedIn } = this.state;
+    if (loggedIn) {
+      this.props.history.push('events/add');
+    } else {
+      alert('To add your own please log in or create an account ');
     }
   }
 
@@ -90,10 +104,10 @@ export default class Events extends Component {
             All
           </button>
         </div>
-        <div>
-          {/* <Link /> */}
-
-        </div>
+        <button type="submit" className="add-event" onClick={this.handleAddEvent}>
+          <FontAwesomeIcon className="fa-plus" icon={faPlusCircle} />
+          <h4>Add your own</h4>
+        </button>
         {feature !== 'none' ? (
           <div>
             <h2>{feature.eventName}</h2>
