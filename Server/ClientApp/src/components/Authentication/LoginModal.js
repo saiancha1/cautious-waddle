@@ -9,6 +9,7 @@ import AuthService from './AuthService';
 import SignupForm from './SignupForm';
 // import '../../App.css';
 import './AuthStyle.css';
+import HeaderMenu from '../Header/HeaderMenu';
 
 
 class LoginModal extends React.Component {
@@ -19,6 +20,8 @@ class LoginModal extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleDropdownClose = this.handleDropdownClose.bind(this);
     this.Auth = new AuthService();
 
     this.state = {
@@ -42,6 +45,10 @@ class LoginModal extends React.Component {
         }
       });
   }
+
+  handleToggle = () => {
+    this.setState(state => ({ open: !state.open }));
+  };
 
   handleChange(e) {
     this.setState(
@@ -68,20 +75,30 @@ class LoginModal extends React.Component {
       this.setState({ panel: 'none' });
     }
   }
-
+  handleDropdownClose() {
+    this.setState({open:false});
+  }
 
   render() {
     const { userEmail, userPass, show } = this.state;
-
+    
     if (this.Auth.loggedIn()) {
       return (
-        <button
+        <div>
+                  <HeaderMenu isAdmin = {this.state.isAdmin} logout={this.props.handleLogout} 
+                  handleToggle={this.handleToggle}
+                  open={this.state.open}
+                  handleClose={this.handleDropdownClose}/>
+                  <button
           className="button-sign"
           type="button"
-          onClick={this.props.handleLogout}
+          onClick={this.handleToggle}
         >
-          Log out
+          Optiions
         </button>
+        
+        </div>
+        
       );
     } else {
       return (

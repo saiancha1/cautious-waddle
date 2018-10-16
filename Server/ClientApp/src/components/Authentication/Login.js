@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { compLoggedOut } from '../../store/reducer';
 import '../../App.css';
 import history from '../history';
-
+import HeaderMenu from '../Header/HeaderMenu';
 
 class Login extends Component {
   constructor(props) {
@@ -14,12 +14,24 @@ class Login extends Component {
 
     this.state = {
       loggedIn: false,
+      isAdmin:false,
     };
 
     this.Auth = new AuthService();
     this.handleLogout = this.handleLogout.bind(this);
   }
-  
+  componentDidMount() {
+    fetch('api/auth/isAdmin', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('id_token')}` },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ isAdmin: true });
+        } else {
+          this.setState({ isAdmin: false });
+        }
+  })
+}
   handleLogout = (event) => {
     event.preventDefault();
     const loggedOut = this.Auth.logout(event);
@@ -27,6 +39,7 @@ class Login extends Component {
       const sync = this.props;
       sync.syncLoggedOut();
       this.setState({ loggedIn: false });
+      this.setState({isAdmin:false});
       history.push('/');      
     }
   }
@@ -39,7 +52,10 @@ class Login extends Component {
     
     if (loggedIn === true) {
       return (
+        <div>
+        <HeaderMenu isAdmin = {this.state.isAdmin}/>
         <button className="button-sign" href="#" onClick={this.handleLogout}>Log out</button>
+        </div>
       );
     } else {
       
