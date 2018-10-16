@@ -10,6 +10,7 @@
     "@material-ui/icons": "^3.0.1",
     "@tinymce/tinymce-react": "^2.3.0",
     "bootstrap": "^3.3.7",
+    "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
     "react": "^16.4.2",
     "react-bootstrap": "^0.31.5",
