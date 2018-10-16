@@ -1,25 +1,34 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import ConST from './ConsultantStyledRender';
 
-// const Consultant = (props) => {
-//   return (<Fragment>
-//     {props.cl.map(consult => 
-//     <p>{consult.consultantDesc}</p>
-    
-//    )}
-//     </Fragment>)}
-
 const Consultant = (props) => {
-  const consultants = props.cl.map((consultant) => 
-    <ConST firstName={consultant.firstName} lastName={consultant.lastName} consultimage={consultant.imageurl} consultDescription={consultant.consultantDesc} 
-    hisemail={consultant.email}
-       />
+  const consultantz = props.cl.map(con => (
+    <ConST
+      consultimage={con.imageURL}
+      firstName={con.firstName}
+      lastName={con.lastName}
+      consultDescription={con.consultantDesc}
+      hisemail={con.email}
+      consultcity={con.city}
+      consultwebsite={con.website}
+      conID={con.consultantId}
+      nation={con.country}
+    />
+  ),
   );
   return (
-      <div className="row">
-      {consultants}
-      </div>
+    <div className="row">
+      {consultantz}
+    </div>
   );
 };
 
-export default Consultant;
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Consultant);

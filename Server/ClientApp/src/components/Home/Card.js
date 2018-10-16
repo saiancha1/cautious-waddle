@@ -81,7 +81,7 @@ class ImgMediaCard extends Component {
               alt="Contemplative Reptile"
               className={classes.media}
               height="140"
-              image={tempImage} // FIXME: im using a temp image here because API url was not working - event.imageURL.
+              image={event.imageURL} // FIXME: im using a temp image here because API url was not working - event.imageURL.
               title="temp event"
             />
             <CardContent className="card-content">
@@ -93,7 +93,10 @@ class ImgMediaCard extends Component {
               </Typography>
               <Typography className="event-host" component="p">
                 Hosted by
-                <span> Beta Solutions</span>
+                <span>
+                  {' '}
+                  {event.hostedBy}
+                </span>
               </Typography>
             </CardContent>
           </CardActionArea>

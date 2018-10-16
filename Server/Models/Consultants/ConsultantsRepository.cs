@@ -39,18 +39,37 @@ namespace cautious_waddle.Models
             return consultantsViewModel;
         }
 
-        public IEnumerable<Consultant> GetDisapprovedConsultants()
+        public IEnumerable<ConsultantsViewModel> AdminGetConsultants(bool? approved)
         {
-            IEnumerable<Consultant> consultants = _context.Consultants.Where(c => c.IsApproved == 0);
-            return consultants;
+            IEnumerable<Consultant> consultants = _context.Consultants;
+
+            if(approved != null)
+            {
+                consultants = approved == true ? consultants.Where(c => c.IsApproved == 1) : consultants.Where(c => c.IsApproved == 0);
+            }
+
+            IEnumerable<ConsultantsViewModel> consultantsViewModel = Mapper.Map<IEnumerable<Consultant>, IEnumerable<ConsultantsViewModel>>(consultants);
+
+            return consultantsViewModel;
         }
 
-        public void AddConsultant(Consultant consultant, string userId)
+        public IEnumerable<ConsultantsViewModel> GetMyConsultants(string userId, bool? approved)
+        {
+            IEnumerable<Consultant> consultants = _context.Consultants.Where(c => c.UserId == userId);
+
+            if(approved != null)
+            {
+                consultants = approved == true ? consultants.Where(c => c.IsApproved == 1) : consultants.Where(c => c.IsApproved == 0);
+            }
+
+            IEnumerable<ConsultantsViewModel> consultantsViewModel = Mapper.Map<IEnumerable<Consultant>, IEnumerable<ConsultantsViewModel>>(consultants);
+
+            return consultantsViewModel;
+        }
+
+        public void AddConsultant(Consultant consultant)
         {
             _context.Consultants.Add(consultant);
-
-            _profilesRepository.ToggleConsultant(userId);
-
             _context.SaveChanges();
         }
 
@@ -79,10 +98,9 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
-        public void RemoveConsultant(Consultant consultant, string userId)
+        public void RemoveConsultant(Consultant consultant)
         {
             _context.Consultants.Remove(consultant);
-            _profilesRepository.ToggleConsultant(userId);
             _context.SaveChanges();
         }
 

@@ -20,14 +20,14 @@ namespace cautious_waddle.Controllers
     public class CompaniesController : Controller 
     {
         private readonly ICompaniesRepository _companiesRepository;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly IEmailService _emailService;
 
         private readonly IBlobStorage _blobStorage;
 
-        public CompaniesController(ICompaniesRepository CompaniesRepository, UserManager<AppUser> userManager, IBlobStorage blobStorage)
+        public CompaniesController(ICompaniesRepository CompaniesRepository, IEmailService emailService, IBlobStorage blobStorage)
         {
             _companiesRepository = CompaniesRepository;
-            _userManager = userManager;
+            _emailService = emailService;
             _blobStorage = blobStorage;
         }
 
@@ -46,13 +46,13 @@ namespace cautious_waddle.Controllers
             }
         }
 
-        [HttpGet("getDisapprovedCompanies")]
+        [HttpGet("adminGetCompanies")]
         [Authorize(Roles="Admin")]
-        public IActionResult GetDisapprovedCompanies()
+        public IActionResult AdminGetCompanies([FromQuery] bool? approved)
         {
             try
             {
-                return Ok(_companiesRepository.GetDisapprovedCompanies());
+                return Ok(_companiesRepository.AdminGetCompanies(approved));
             }
             catch
             {
@@ -65,7 +65,7 @@ namespace cautious_waddle.Controllers
         {
             try
             {
-                Company company = _companiesRepository.GetCompanyById(id);
+                CompaniesViewModel company = _companiesRepository.GetCompanyById_viewModel(id);
 
                 if(company.IsApproved == 1)
                 {
@@ -84,12 +84,12 @@ namespace cautious_waddle.Controllers
 
         [HttpGet("getMyCompanies")]
         [Authorize]
-        public IActionResult GetMyCompanies()
+        public IActionResult GetMyCompanies([FromQuery] bool? approved)
         {
             try
             {
                 string UserId = IdentityHelper.GetUserId(HttpContext);
-                return Ok(_companiesRepository.GetMyCompanies(UserId));
+                return Ok(_companiesRepository.GetMyCompanies(UserId, approved));
             }
             catch
             {
@@ -115,6 +115,14 @@ namespace cautious_waddle.Controllers
                 company.ReminderDate = DateTime.Now.AddMonths(1);
 
                 _companiesRepository.AddCompany(company);
+
+                string content = "A new company listing has been added\n" + 
+                "\nID: " + company.CompanyId + 
+                "\nCompany name: " + company.CompanyName + 
+                "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this company listing";
+                string subject = "New company listing";
+
+                _emailService.SendToAdmins(subject, content);
                 
                 return Ok();
             }
@@ -134,14 +142,16 @@ namespace cautious_waddle.Controllers
                    return Ok(await _blobStorage.UploadFileAsync(storageAccount, file, HttpContext));
             }
             return NotFound();
-        }       
-         [HttpPost("removeCompany")]
-         [Authorize(Roles="Admin")]
+        }
+
+        [HttpPost("removeCompany")]
+        [Authorize]
         public IActionResult RemoveCompany([FromBody]int id)
         {
-            try{
+            try
+            {
                 Company company = new Company();
-                company = _companiesRepository.GetCompanyById(id);
+                company = _companiesRepository.GetCompanyById_model(id);
                 
                 if(company != null && company.Users != null)
                 {
@@ -166,6 +176,24 @@ namespace cautious_waddle.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("adminRemoveCompany")]
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminRemoveCompany([FromBody]int id)
+        {
+            try
+            {
+                Company company = new Company();
+                company = _companiesRepository.GetCompanyById_model(id);
+                _companiesRepository.DeleteCompany(company);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("editCompany")]
         [Authorize]       
         public IActionResult EditCompany([FromBody] CompaniesViewModel company)

@@ -44,6 +44,25 @@ namespace cautious_waddle.Models
             return eventsViewModel;
         }
 
+        public IEnumerable<LocalEventsViewModel> GetMyEvents(string userId, bool? expired, bool? approved)
+        {
+            IEnumerable<LocalEvent> events = _context.LocalEvents.Where(e => e.UserId == userId);
+
+            // Filtering
+            if(expired != null)
+            {
+                events = expired == true ? events.Where(e => e.Expired == 1) : events.Where(e => e.Expired == 0);
+            }
+            if(approved != null)
+            {
+                events = approved == true ? events.Where(e => e.IsApproved == 1) : events.Where(e => e.IsApproved == 0);
+            }
+
+            IEnumerable<LocalEventsViewModel> eventsViewModel = Mapper.Map<IEnumerable<LocalEvent>, IEnumerable<LocalEventsViewModel>>(events);
+
+            return eventsViewModel;
+        }
+
         public LocalEvent GetEventById(int id)
         {
             return _context.LocalEvents.SingleOrDefault(e => e.EventId == id);
@@ -63,9 +82,13 @@ namespace cautious_waddle.Models
             oldEvent.LastUpdate       = DateTime.Now;
             oldEvent.EventName        = newEvent.EventName;
             oldEvent.hostedBy         = newEvent.HostedBy;
+            oldEvent.Contact          = newEvent.Contact;
+            oldEvent.Website          = newEvent.Website;
             oldEvent.StartDate        = newEvent.StartDate;
             oldEvent.Duration         = newEvent.Duration;
+            oldEvent.Recurring        = newEvent.Recurring;
             oldEvent.EventDescription = newEvent.EventDescription;
+            oldEvent.EventType        = newEvent.EventType;
             oldEvent.EventLocation    = newEvent.EventLocation;
             oldEvent.ImageURL         = newEvent.ImageURL;
 
@@ -101,11 +124,8 @@ namespace cautious_waddle.Models
 
             foreach(LocalEvent localEvent in events)
             {
-                DateTime end = localEvent.StartDate;
-                if(localEvent.Duration != null)
-                {
-                    end.AddMinutes((double) localEvent.Duration);
-                }
+                // Then event ends duration days after the start date
+                DateTime end = localEvent.StartDate.AddDays(localEvent.Duration);
 
                 if(end < current)
                 {
