@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import Navbar from './components/NavBar/NavBar';
 import Home from './components/Home';
 import Companies from './components/Companies';
@@ -19,12 +19,14 @@ import ConForm from './components/Consultants/ConForm';
 import SubForm from './components/Subscribe/SubscribeForm';
 import AddCompany from './components/Companies/AddCompany';
 import MyProfile from './components/Profile/MyProfile';
+import history from './components/history';
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {
   render() {
     return (
-      <Router>
+      
+      <Router history={history}>
         <div className="app-root">
           <div className="main-content">
             <Header />
