@@ -37,9 +37,12 @@ class App extends Component {
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
+            <Route exact path="/addconsultant" component={Addconsultant} />
+            <Route exact path="/addJob" component={AddJob} />
             <Route exact path="/addCompany" component={AddCompany} />
             <Route exact path="/addconsultant" component={ConForm} />
             <Route exact path="/myProfile" component={MyProfile} />
+
           </div>
           <Footer />
         </div>
