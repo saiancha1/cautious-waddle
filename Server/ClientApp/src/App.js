@@ -17,7 +17,7 @@ import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
 import AddEvent from './components/Events/AddEvent';
-
+import Addconsultant from './components/Consultants/Addconsultant';
 import SubForm from './components/Subscribe/SubscribeForm';
 import AddCompany from './components/Companies/AddCompany';
 import MyProfile from './components/Profile/MyProfile';
