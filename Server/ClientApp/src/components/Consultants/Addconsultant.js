@@ -22,7 +22,6 @@ class Addconsultant extends Component {
         {this.state.loginStatus ? (
           <Link to="/addconsultant">
             <StandardButton />
-
           </Link>
         ) : (<SimplePopper />) }
 

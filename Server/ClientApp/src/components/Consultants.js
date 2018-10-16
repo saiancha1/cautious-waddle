@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Consultant from './Consultants/Consultant';
 import Addconsultant from './Consultants/Addconsultant';
-// import DelAll from './Consultants/ConDeleteAll';
-
 
 // Creating initial state and setting it to empty
 class Consultants extends Component {
@@ -31,7 +29,6 @@ class Consultants extends Component {
       <div>
         <h1>Consultants</h1>
         <Consultant cl={this.state.consultants} />
-        {/* <DelAll dl={this.state.consultants} /> */}
         <Addconsultant />
       </div>
     );
