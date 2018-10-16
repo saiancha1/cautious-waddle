@@ -6,6 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
 import AuthService from '../Authentication/AuthService';
 
 
@@ -96,5 +97,11 @@ class ConST extends Component {
   }
 }
 
+const mapStateToProps = state => (
+  {
+    auth: state.authenticated,
+  });
+
+const mapDispatchToProps = dispatch => ({});
 
 export default withStyles(styles)(ConST);
