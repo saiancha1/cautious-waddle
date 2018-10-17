@@ -6,21 +6,34 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
+import { Redirect } from 'react-router-dom';
+import AuthService from '../Authentication/AuthService';
+
+
+// const loggednow = this.Auth.loggedin();
 
 const styles = theme => ({
   typography: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit,
   },
   button: {
     margin: theme.spacing.unit,
   },
 });
 
+
 class SimplePopper extends React.Component {
-  state = {
-    anchorEl: null,
-    open: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      anchorEl: null,
+      open: false,
+
+    };
+  }
+
+  Auth = new AuthService();
+
 
   handleClick = (event) => {
     const { currentTarget } = event;
@@ -31,6 +44,10 @@ class SimplePopper extends React.Component {
   };
 
   render() {
+    if (this.Auth.loggedIn()) {
+      console.log('LOGGED IN WORKS');
+      return <Redirect to="/addconsultant" />;
+    }
     const { classes } = this.props;
     const { anchorEl, open } = this.state;
     const id = open ? 'simple-popper' : null;

@@ -2,6 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ConST from './ConsultantStyledRender';
 
+
+// const userCanEdit = (con) => {
+//   const authService = new AuthService();
+//   if (authService.loggedIn()) {
+//     const token = authService.getProfile();
+//     const userId = token.id;
+//     for (let i = 0; i < con.users.length; i++) {
+//       if (con.users[i].id == userId) {
+//         return true;
+//       }
+//       // Do something
+//     }
+//   }   else   {
+//     return false;
+//   }
+// };
+
+
 const Consultant = (props) => {
   const consultantz = props.cl.map(con => (
     <ConST
@@ -14,6 +32,8 @@ const Consultant = (props) => {
       consultwebsite={con.website}
       conID={con.consultantId}
       nation={con.country}
+      // canEdit={userCanEdit(con)}
+
     />
   ),
   );
