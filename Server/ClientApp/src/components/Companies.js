@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
 import CompanyList from './Companies/CompanyList';
 import CompanyView from './Companies/CompanyView';
-
+import CompanyFilter from './Companies/CompanyFilter';
+import AddCompany from './Companies/AddCompany';
+import Spinner from './Spinner';
 class Companies extends Component {
   state = {
     companies: [],
     selectedCompany: null,
     companyOpen: false,
+    filter: 'All',
+    menuItems:[],
+    originalCompanies:[],
+    AddCompany: null,
+    isLoaded:false,
   }
 
   async componentWillMount() {
     fetch('api/Companies/getCompanies').then(res => res.json())
       .then((json) => {
         this.setState({ companies: json });
+        this.setState({originalCompanies:this.state.companies});
+        const menuItems1 = [...new Set(this.state.companies.map(item => item.businessType))]
+        this.setState({menuItems:menuItems1});
+        this.setState({isLoaded:true});
         console.log(this.state);
+
       });
+      
   }
 
+  createMarkup = (htmlData) => {
+    return {__html: htmlData};
+  }
   handleModalOpen = (company, e) => {
     this.setState({ selectedCompany: company });
     this.setState({ companyOpen: true });
@@ -28,17 +44,63 @@ class Companies extends Component {
     this.setState({ companyOpen: false });
   }
 
+  handleFilterChange = (e) => {
+    const val = e.target.value;
+    this.setState({filter:val});
+    if(val !== 'All')
+    {
+    let newArr = this.state.originalCompanies.filter(company => company.businessType == e.target.value);
+    this.setState({companies:newArr});
+    }
+    else {
+      fetch('api/Companies/getCompanies').then(res => res.json())
+      .then((json) => {
+        this.setState({ companies: json });
+        console.log(this.state);
+      });
+    }
+    
+  }
+
+  handleFormDataChange = (fieldName,e) => {
+    e.target.preventDefault();
+    const val = e.target.value;
+    let company = this.state.AddCompany;
+    if (fieldName === "h1")
+    {
+      
+    }
+  }
+  editCompany = (e) => {
+    this.setState({editCompany:e})
+  };
+  hideComponent = (e) => {
+    this.setState({editCompany:undefined});
+  }
   render() {
+    if(!this.state.isLoaded)
+    {
+      return (
+        <Spinner/>
+      )
+    }
     let company;
+    const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany} hide={this.hideComponent} /> : null;
+
     if (this.state.selectedCompany !== null) {
       const selectedCompany = this.state.selectedCompany;
-      company = <CompanyView companyToRender={selectedCompany} handleClose={this.handleClose} companyOpen={this.state.companyOpen} />;
+      company = <CompanyView companyToRender={selectedCompany} handleClose={this.handleClose} companyOpen={this.state.companyOpen}
+      generateDesc= {this.createMarkup(selectedCompany.companyDesc)} />;
     }
     return (
       <div>
-
-        <CompanyList companies={this.state.companies} handleModalOpen={this.handleModalOpen} />
+        <CompanyFilter filter={this.state.filter} 
+        handleFilterChange={this.handleFilterChange}
+        filterItems = {this.state.menuItems}/>
+        <CompanyList companies={this.state.companies} handleModalOpen={this.handleModalOpen} generateDesc={this.createMarkup}
+        editCompany= {this.editCompany}/>
         {company}
+        {addCompany}
 
       </div>
     );

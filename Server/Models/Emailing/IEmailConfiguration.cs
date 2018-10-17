@@ -6,10 +6,5 @@ namespace cautious_waddle.Models
         int SmtpPort { get; }
         string SmtpUsername { get; set; }
         string SmtpPassword { get; set; }
-    
-        string PopServer { get; }
-        int PopPort { get; }
-        string PopUsername { get; }
-        string PopPassword { get; }
     }
 }

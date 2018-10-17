@@ -1,0 +1,15 @@
+.event-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+
+}
+
+.card-link {
+  text-decoration: none !important;
+}
+.card-link:focus, :hover, :visited, :link, :active {
+  text-decoration: none !important;
+}

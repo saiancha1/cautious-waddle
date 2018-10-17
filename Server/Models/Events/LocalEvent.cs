@@ -15,10 +15,13 @@ namespace cautious_waddle.Models
         public DateTime LastUpdate { get; set; }
         public string EventName { get; set; }
         public string hostedBy { get; set; }
+        public string Contact { get; set; }
+        public string Website { get; set; }
         public DateTime StartDate { get; set; }
-        public int? Duration { get; set; }
+        public int Duration { get; set; }
         public int? Recurring { get; set; }
         public string EventDescription { get; set; }
+        public string EventType { get; set; }
         public string EventLocation { get; set; }
 
         public string EventUrl { get; set; }

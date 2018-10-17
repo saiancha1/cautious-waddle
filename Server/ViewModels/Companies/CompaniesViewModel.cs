@@ -11,6 +11,8 @@ namespace cautious_waddle.ViewModels
         public int? CompanyId { get; set; }
         [JsonProperty("users")]
         public List<CompanyUser> Users { get; set; }
+        [JsonProperty("isApproved")]
+        public int IsApproved { get; set; }
         [JsonProperty("contactEmail")]
         public string ContactEmail { get; set; }
         [JsonProperty("companyName")]

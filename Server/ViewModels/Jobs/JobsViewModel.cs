@@ -11,6 +11,8 @@ namespace cautious_waddle.ViewModels
         public string UserId { get; set; }
         [JsonProperty("companyId")]
         public int? CompanyId { get; set; }
+        [JsonProperty("isApproved")]
+        public int IsApproved { get; set; }
         [JsonProperty("jobTitle")]
         public string JobTitle { get; set; }
         [JsonProperty("jobDescription")]
@@ -31,8 +33,5 @@ namespace cautious_waddle.ViewModels
         public string WorkType { get; set; }
         [JsonProperty("expiry")]
         public DateTime Expiry { get; set; }
-
-        [JsonProperty("isApproved")]
-        public int IsApproved {get; set;}
     }
 }

@@ -18,14 +18,14 @@ namespace cautious_waddle.Controllers
     public class EmailingController : Controller
     {
         private IEmailService _emailService;
-        private JobsDbContext _context2;
         private MailingListDbContext _context;
+        private IEmailConfiguration _emailConfiguration;
 
-        public EmailingController(IEmailService emailService, MailingListDbContext context, JobsDbContext context2)
+        public EmailingController(IEmailService emailService, MailingListDbContext context, IEmailConfiguration emailConfiguration)
         {
             _emailService = emailService;
             _context = context;
-            _context2 = context2;
+            _emailConfiguration = emailConfiguration;
         }
 
         [HttpPost("sendBulkEmail")]
@@ -35,8 +35,8 @@ namespace cautious_waddle.Controllers
             try
             {
                 MailingList_EmailAddress from = new MailingList_EmailAddress();
-                from.FullName = "Mailgun";
-                from.EmailAddress = "postmaster@sandboxc33747215c0b494eb6618dd752641b33.mailgun.org";
+                from.FullName = "Admin@TechPalmy.com";
+                from.EmailAddress = _emailConfiguration.SmtpUsername;
 
                 EmailMessage emailMessage = new EmailMessage();
 
@@ -64,28 +64,19 @@ namespace cautious_waddle.Controllers
             }
         }
 
-        [HttpPost("sendMailingListWeekly")]
-        [Authorize(Roles="Admin")]
-        public IActionResult sendMailingListWeekly()
+        [HttpPost("sendContactForm")]
+        public IActionResult sendContactForm([FromBody] ContactFormViewModel contactForm)
         {
             try
             {
-                _emailService.MailingListWeekly();
-                return Ok();
-            }
-            catch(Exception ex)
-            {
-                return BadRequest();
-            }
-        }
+                string subject = "Contact form message";
+                string content = "From: " + contactForm.FirstName + " " + contactForm.LastName 
+                + "\nAt: " + contactForm.EmailAddress
+                + "Message: " + "\n" + contactForm.Message;
 
-        [HttpGet("getEmailAddresses")]
-        [Authorize(Roles="Admin")]
-        public IActionResult getEmailAddresses()
-        {
-            try
-            {
-                return Ok(_emailService.GetEmailAddresses());
+                _emailService.SendToAdmins(subject, content);
+
+                return Ok();
             }
             catch(Exception ex)
             {

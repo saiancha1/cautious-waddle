@@ -51,9 +51,9 @@ const CompanyView = (props) => {
             </Modal.Title>
           </Modal.Header>
       
-          <Modal.Body>
-            <div>
-          {company.companyDesc}
+          <Modal.Body >
+            <div dangerouslySetInnerHTML={props.generateDesc}>
+          
           </div>
           <br/>
           <div>

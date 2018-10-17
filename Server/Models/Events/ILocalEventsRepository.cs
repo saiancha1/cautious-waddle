@@ -8,6 +8,7 @@ namespace cautious_waddle.Models
     {
         IEnumerable<LocalEventsViewModel> GetEvents();
         IEnumerable<LocalEventsViewModel> AdminGetEvents(bool? expired, bool? approved);
+        IEnumerable<LocalEventsViewModel> GetMyEvents(string userId, bool? expired, bool? approved);
         LocalEvent GetEventById(int id);
         void addEvent(LocalEvent e);
         void editEvent (LocalEventsViewModel e);
