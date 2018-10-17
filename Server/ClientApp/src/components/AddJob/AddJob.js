@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AuthService from '../Authentication/AuthService';
+import AppBar from '@material-ui/core/AppBar';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 class AddJob extends Component {
   constructor(props) {
@@ -78,76 +81,88 @@ class AddJob extends Component {
       // if (login.auth) {
       if (true) {
         return (
-          <form onSubmit={this.handleSubmit}>
+          <div>
+            <AppBar color="default" position="static">
             <h1>Add Job Listing</h1>
-            <div className="form-group">
-              <label htmlFor="sel1">Work Type </label>
-              <select className="form" id="sel1">
-                <option>Full Time</option>
-                <option>Part Time</option>
-                <option>Contract</option>
-              </select>
-              <br />
-              <label htmlFor="companyName">
-                Company Name
-              </label>
-              <input name="companyName" id="companyName" value={state.companyName} onChange={this.handleChange} required />
-              <br />
-              <br />
-              <label htmlFor="jobTitle">
-                Job Title
-              </label>
-              <input name="jobTitle" id="jobTitle" value={state.jobTitle} onChange={this.handleChange} required />
-              <br />
-              <br />
-              <label>
-                    Job Description
-              </label>
-              <input name="jobDescription" value={state.jobDescription} onChange={this.handleChange} required />
-              <br />
-              <br />
-              <label>
-                    Salary
-              </label>
-              <input name="salary" value={state.salary} onChange={this.handleChange} />
-              <br />
-              <br />
-              <label>
-                    Expiry
-              </label>
-              <input name="expiry" type="datetime" value={state.expiry} onChange={this.handleChange} required />
-            </div>
-            <br />
-            <p>Contact Details</p>
-            <div className="form-group">
-              <label>
-                    First Name
-              </label>
-              <input name="contactFirstName" value={state.contactFirstName} onChange={this.handleChange} required />
-              <br />
-              <br />
-              <label>
-                    Last Name
-              </label>
-              <input name="contactLastName" value={state.contactLastName} onChange={this.handleChange} required />
-              <br />
-              <br />
-              <label>
-                    Email
-              </label>
-              <input name="contactEmail" value={state.contactEmail} onChange={this.handleChange} required />
-              <br />
-              <br />
-              <label>
-                    Phone
-              </label>
-              <input name="contactPhone" value={state.contactPhone} onChange={this.handleChange} required />
-              <br />
-              <br />
-            </div>
-            <br />
-            <input id="submit" name="submit" type="submit" value="Submit" />
-          </form>
+            </AppBar>
+            <Grid container spacing={8} sm={12}>
+              <Grid item sm={3}/>
+              <Grid item sm={6}>
+              <Paper>
+                <form onSubmit={this.handleSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="sel1">Work Type </label>
+                    <select className="form" id="sel1">
+                      <option>Full Time</option>
+                      <option>Part Time</option>
+                      <option>Contract</option>
+                    </select>
+                <br />
+                    <label htmlFor="companyName">
+                       Company Name
+                      </label>
+                      <input name="companyName" id="companyName" value={state.companyName} onChange={this.handleChange} required />
+                      <br />
+                      <br />
+                      <label htmlFor="jobTitle">
+                        Job Title
+                      </label>
+                      <input name="jobTitle" id="jobTitle" value={state.jobTitle} onChange={this.handleChange} required />
+                      <br />
+                      <br />
+                      <label>
+                            Job Description
+                      </label>
+                      <input name="jobDescription" value={state.jobDescription} onChange={this.handleChange} required />
+                      <br />
+                      <br />
+                      <label>
+                            Salary
+                      </label>
+                      <input name="salary" value={state.salary} onChange={this.handleChange} />
+                      <br />
+                      <br />
+                      <label>
+                            Expiry
+                      </label>
+                      <input name="expiry" type="datetime" value={state.expiry} onChange={this.handleChange} required />
+                    </div>
+                    <br />
+                    <p>Contact Details</p>
+                    <div className="form-group">
+                      <label>
+                            First Name
+                      </label>
+                      <input name="contactFirstName" value={state.contactFirstName} onChange={this.handleChange} required />
+                      <br />
+                      <br />
+                      <label>
+                            Last Name
+                      </label>
+                      <input name="contactLastName" value={state.contactLastName} onChange={this.handleChange} required />
+                      <br />
+                      <br />
+                      <label>
+                            Email
+                      </label>
+                      <input name="contactEmail" value={state.contactEmail} onChange={this.handleChange} required />
+                      <br />
+                      <br />
+                      <label>
+                            Phone
+                      </label>
+                      <input name="contactPhone" value={state.contactPhone} onChange={this.handleChange} required />
+                      <br />
+                      <br />
+                    </div>
+                    <br />
+                    <input id="submit" name="submit" type="submit" value="Submit" />
+                  </form>
+                </Paper>
+              </Grid>
+              <Grid item sm={3}/>
+            </Grid>
+          </div>
         );
       } else {
         return (
