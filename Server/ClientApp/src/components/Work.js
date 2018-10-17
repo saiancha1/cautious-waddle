@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Route, Router, Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './Work.css';
 import Grid from '@material-ui/core/Grid';
@@ -12,9 +13,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import ButtonAppBar from './AppBar/ButtonAppBar';
+import ButtonAppBar from './ButtonAppBar/ButtonAppBar';
 import ComplexGrid from './ComplexGrid/ComplexGrid';
-
+import SummerTech from './SummerTech/SummerTech';
 
 const style = {
 
@@ -51,20 +52,31 @@ render() {
   console.log(this.state.jobs);
   return (
     <div className="jobs" >
-          <ButtonAppBar >
-            <Typography align="center" variant="display3"> Job Listings </Typography>
-            </ButtonAppBar>
-
+     <Route exact path="/summerTech" component={SummerTech} />
+      <AppBar style={style.AppBar} position="static" color="default">
+      <Grid 
+        container 
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={12}
+      >
+        <Grid item sm={3}></Grid>
+        <Grid item sm={6}>
+        <Typography align="center" variant="display3"> Job Listings </Typography>
+        </Grid >
+        <Grid item sm={3}>
+        </Grid>
+        </Grid>
+      </AppBar>
       <Grid container spacing={12}>
-      <Grid item sm={3}>
-          </Grid>
+        <Grid item sm={3} />
         <Grid item sm={6}>
         <Paper>
-        <AppBar  style={style.AppBar} position="static" color="default">
+        <ButtonAppBar  style={style.AppBar} position="static" color="default">
         <Typography color="inherit" variant="display2" align="center">
-          Latest Jobs
         </Typography>
-            </AppBar>
+            </ButtonAppBar>
         <List className="listing" >
           {this.state.jobs.map(job => (
             <div>
@@ -79,7 +91,8 @@ render() {
                   salary={job.salary} 
                   type={job.workType} 
                   email={job.contactEmail}
-                />           
+                  phone={job.phone}
+                />         
               </ListItem>
             <Divider />
             </div>

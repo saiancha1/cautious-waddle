@@ -8,12 +8,15 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import SummerTech from '../SummerTech/SummerTech';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
 import AddJob from '../AddJob/AddJob';
 
 const styles = {
@@ -39,45 +42,41 @@ function ButtonAppBar(props) {
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
-        <Route exact path="/summerTech" component={SummerTech} />
         <Route exact path="/addjob" component={AddJob} />
         <Toolbar>
-          <div>
-            <FormControl>
-              <TextField
-              color="default"
-                label="Search"
-                id="search-outlined"
-                variant="outlined"
-              />
-            </FormControl>
-          </div>            
-          <FormControl variant="outlined">
             <InputLabel>
             Type
             </InputLabel>
+            <Input  margin="dense">
             <Select
               color="default"
               onChange={handleChange}
-              input={(
-                <OutlinedInput
-                  name="Type"
-                  id="type"
-                />
-              )}
             >
               <MenuItem value="" color='default'>
-                <em>None</em>
+                <em>Work Type</em>
               </MenuItem>
               <MenuItem value="Full Time">Full Time</MenuItem>
               <MenuItem value="Part Time">Part Time</MenuItem>
               <MenuItem value="Contract">Contract</MenuItem>
             </Select>
-          </FormControl>
+            </Input>
+            <Input 
+            margin="dense"
+              position="static"
+              startAdornment={(
+                <InputAdornment>
+                  <SearchIcon />
+                </InputAdornment>
+              )}
+                color="default"
+                label="Search"
+                id="search-jobs"
+                variant="outlined"
+            />
           <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
             {children}
           </Typography>
-          <Button component={Link} to="/addJob" variant="contained" color="default" className={classes.button}>
+          <Button component={Link} to="/addJob" variant="outlined" color="default" className={classes.button}>
                 Add Listing
           </Button>
         </Toolbar>

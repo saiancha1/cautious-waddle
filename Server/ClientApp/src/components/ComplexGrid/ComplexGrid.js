@@ -25,7 +25,7 @@ const styles = theme => ({
 });
 
 function ComplexGrid(props) {
-  const { classes, firstName, secondName, jobTitle , jobId, company, desc, salary, type, email} = props;
+  const { classes, firstName, secondName, jobTitle , jobId, company, desc, salary, type, phone, email} = props;
   return (
       <Grid container spacing={16}>
         <Grid item>
@@ -43,15 +43,23 @@ function ComplexGrid(props) {
               <Typography variant="headline" color="textSecondary" gutterBottom>{"$"+salary}</Typography>
               <Typography variant="headline" color="textPrimary">{desc}</Typography>
             </Grid>
+           
             <Grid item>
             <Typography variant="headline" color="textSecondary">{"Contact: " +firstName+" "+secondName}</Typography>
-            
+            <Grid container direction="row" xs={12} >
+            <Grid item xs={4} >
+            <Typography variant="headline" >{"Tel: " +phone}</Typography>
+            </Grid>
+            <Grid item xs={8} >
+            <Typography variant="headline" >{"Email: " +email}</Typography> 
+            </Grid>
+            </Grid>
               <Typography variant="headline" style={{ cursor: 'pointer' }}>
               <a href={"mailto:"+ email}>Apply</a>
               </Typography>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid item >
             <Typography variant="subtitle1">{"ID:"+jobId }</Typography>
           </Grid>
         </Grid>

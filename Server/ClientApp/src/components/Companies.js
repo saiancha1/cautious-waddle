@@ -20,9 +20,13 @@ class Companies extends Component {
     fetch('api/Companies/getCompanies').then(res => res.json())
       .then((json) => {
         this.setState({ companies: json });
+        console.log('Company List');
+        console.log(this.state.companies);
         this.setState({originalCompanies:this.state.companies});
         const menuItems1 = [...new Set(this.state.companies.map(item => item.businessType))]
         this.setState({menuItems:menuItems1});
+        console.log('Menu Items');
+console.log(this.state.menuItems);
         this.setState({isLoaded:true});
         console.log(this.state);
 
