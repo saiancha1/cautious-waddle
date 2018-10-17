@@ -49,7 +49,7 @@ namespace cautious_waddle.Controllers
         {
             try
             {
-                RecurringJob.AddOrUpdate<EmailService>(e => e.MailingListWeekly(), CronExpression);
+                RecurringJob.AddOrUpdate<MailingListRepository>(e => e.MailingListWeekly(), CronExpression);
                 return Ok();
             }
             catch(Exception ex)

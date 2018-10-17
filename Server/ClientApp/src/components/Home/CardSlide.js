@@ -3,40 +3,6 @@ import Slider from 'react-slick';
 import Card from './Card';
 import './HomeFolder.css';
 
-// const events = [{
-//   id: 1,
-//   title: 'Meet tech man',
-//   info: 'meet the man himself',
-//   date: '3/9/18',
-// }, {
-//   id: 2,
-//   title: 'Hot to give up Microsoft',
-//   info: 'Learn how to stop using Microsoft',
-//   date: '10/9/18',
-// }, {
-//   id: 3,
-//   title: 'AI Today',
-//   info: 'Talk to a Robto',
-//   date: '7/2/18',
-// },
-// {
-//   id: 4,
-//   title: 'Meet tech man',
-//   info: 'meet the man himself',
-//   date: '3/9/18',
-// }, {
-//   id: 5,
-//   title: 'Hot to give up Microsoft',
-//   info: 'Learn how to stop using Microsoft',
-//   date: '10/9/18',
-// }, {
-//   id: 6,
-//   title: 'AI Today',
-//   info: 'Talk to a Robto',
-//   date: '7/2/18',
-// },
-// ];
-
 export default class CardSlide extends Component {
   state = {
     events: [],

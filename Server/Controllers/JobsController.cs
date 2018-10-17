@@ -19,16 +19,14 @@ namespace cautious_waddle.Controllers
     {
         private readonly IJobsRepository _jobsRespository;
         private readonly ICompaniesRepository _companiesRepository;
-        private readonly IProfilesRepository _profilesRepository;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly IEmailService _emailService;
         private IBlobStorage _blobStorage;
         public JobsController(IJobsRepository JobsRepository, ICompaniesRepository companiesRepository, IProfilesRepository profilesRepository,
-        UserManager<AppUser>UserManager, IBlobStorage blobStorage) 
+        UserManager<AppUser> UserManager, IEmailService emailService, IBlobStorage blobStorage) 
         {
             _jobsRespository = JobsRepository;
             _companiesRepository = companiesRepository;
-            _profilesRepository = profilesRepository;
-            _userManager = UserManager;
+            _emailService = emailService;
             _blobStorage = blobStorage;
         }
 
@@ -64,6 +62,20 @@ namespace cautious_waddle.Controllers
             }
         }
 
+        [HttpGet("getMyJobs")]
+        [Authorize]
+        public IActionResult GetMyJobs([FromQuery] bool? expired, [FromQuery] bool? approved)
+        {
+            try 
+            {
+                return Ok(_jobsRespository.GetMyJobs(IdentityHelper.GetUserId(HttpContext), expired, approved));
+            } 
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost("addJob")]
         [Authorize]
         public IActionResult AddJob([FromBody] JobsViewModel jobViewModel) {
@@ -87,7 +99,7 @@ namespace cautious_waddle.Controllers
                 // If a companyId is passed, ensure the company exists and the user has access to it
                 if(job.CompanyId.HasValue)
                 {
-                    Company company = _companiesRepository.GetCompanyById(job.CompanyId.Value);
+                    Company company = _companiesRepository.GetCompanyById_model(job.CompanyId.Value);
                     if(company == null)
                     {
                         return BadRequest();
@@ -102,17 +114,25 @@ namespace cautious_waddle.Controllers
                 }
 
                 _jobsRespository.AddJob(job);
+
+                string content = "A new job listing has been added\n" + 
+                "\nID: " + job.JobId + 
+                "\nTitle: " + job.JobTitle + 
+                "\n\nPlease go to https://capstone1.azurewebsites.net/admin to approve this job listing";
+                string subject = "New job listing";
+
+                _emailService.SendToAdmins(subject, content);
                 return Ok();
             }
             catch (Exception e)
             {
-                return NotFound(e);
+                return NotFound();
             }
         }
 
         [HttpPost("removeJob")]
         [Authorize]
-        public async System.Threading.Tasks.Task<IActionResult> RemoveJobAsync([FromBody] int id) {
+        public IActionResult RemoveJobAsync([FromBody] int id) {
             try
             {
                 Job job = new Job();
@@ -128,6 +148,22 @@ namespace cautious_waddle.Controllers
                 {
                     return Unauthorized();
                 }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("adminRemoveJob")]
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminRemoveJobAsync([FromBody] int id) {
+            try
+            {
+                Job job = new Job();
+                job = _jobsRespository.GetJobById(id);
+                _jobsRespository.DeleteJob(job);
+                return Ok();
             }
             catch (Exception ex)
             {

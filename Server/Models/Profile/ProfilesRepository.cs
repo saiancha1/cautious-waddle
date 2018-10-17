@@ -57,28 +57,5 @@ namespace cautious_waddle.Models
             IEnumerable<Profile> profiles = _context.Profiles;
             return profiles;
         }
-
-        public bool IsProfileConsultant(string userId)
-        {
-            Profile profile = GetProfileByUserId(userId);
-            if(profile.Consultant == 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public void ToggleConsultant(string userId)
-        {
-            Profile profile = GetProfileByUserId(userId);
-
-            profile.Consultant = profile.Consultant == 0 ? 1 : 0;
-
-            _context.Profiles.Update(profile);
-            _context.SaveChanges();
-        }
     }
 }
