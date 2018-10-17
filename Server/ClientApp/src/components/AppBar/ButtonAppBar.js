@@ -38,7 +38,7 @@ function ButtonAppBar(props) {
   console.log(children);
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="default">
         <Route exact path="/summerTech" component={SummerTech} />
         <Route exact path="/addjob" component={AddJob} />
         <Toolbar>

@@ -60,7 +60,7 @@ render() {
           </Grid>
         <Grid item sm={6}>
         <Paper>
-        <AppBar  style={style.AppBar} variant="primary" position="static">
+        <AppBar  style={style.AppBar} position="static" color="default">
         <Typography color="inherit" variant="display2" align="center">
           Latest Jobs
         </Typography>
