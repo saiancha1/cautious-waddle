@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css?family=Comfortaa:700");
+
+.wrapper {
+    display: grid;
+    grid-template-columns: auto 40% auto;
+    justify-items: center;
+}
+
+.compName {
+  color: blue;
+}
+
+.title{
+    text-align: center; 
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 4;
+
+}
+
+.listing {
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+}
+
+.home-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered-text h3 {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ul, ol {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.home-heading {
+  text-align: center;
+  font-size: 50px;
+  font-family: "Comfortaa", cursive;
+}
+
+
+.app-bar {
+  background-color: dimgrey
+}
+
+.MuiAppBar-colorPrimary-21 {
+  color: #fff;
+  background-color: #75767e!important;
+}
+
+.MuiAppBar-colorPrimary-11 {
+  color: #fff;
+  background-color: #75767e!important;
+}
+
+.MuiButton-containedPrimary-107 {
+	color: #fff;
+  background-color: #75767e!important;
+}

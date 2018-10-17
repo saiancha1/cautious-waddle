@@ -3,6 +3,7 @@ import CompanyList from './Companies/CompanyList';
 import CompanyView from './Companies/CompanyView';
 import CompanyFilter from './Companies/CompanyFilter';
 import AddCompany from './Companies/AddCompany';
+import Spinner from './Spinner';
 class Companies extends Component {
   state = {
     companies: [],
@@ -12,15 +13,21 @@ class Companies extends Component {
     menuItems:[],
     originalCompanies:[],
     AddCompany: null,
+    isLoaded:false,
   }
 
   async componentWillMount() {
     fetch('api/Companies/getCompanies').then(res => res.json())
       .then((json) => {
         this.setState({ companies: json });
+        console.log('Company List');
+        console.log(this.state.companies);
         this.setState({originalCompanies:this.state.companies});
         const menuItems1 = [...new Set(this.state.companies.map(item => item.businessType))]
         this.setState({menuItems:menuItems1});
+        console.log('Menu Items');
+console.log(this.state.menuItems);
+        this.setState({isLoaded:true});
         console.log(this.state);
 
       });
@@ -75,6 +82,12 @@ class Companies extends Component {
     this.setState({editCompany:undefined});
   }
   render() {
+    if(!this.state.isLoaded)
+    {
+      return (
+        <Spinner/>
+      )
+    }
     let company;
     const addCompany = (this.state.editCompany) ?  <AddCompany company={this.state.editCompany} hide={this.hideComponent} /> : null;
 
