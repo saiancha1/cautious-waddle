@@ -52,7 +52,7 @@ render() {
   return (
     <div className="jobs" >
           <ButtonAppBar >
-            <h2>Job Listings</h2>
+            <Typography align="center" variant="display3"> Job Listings </Typography>
             </ButtonAppBar>
 
       <Grid container spacing={12}>

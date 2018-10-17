@@ -33,7 +33,7 @@ function ComplexGrid(props) {
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={16}>
             <Grid item xs>
-              <Typography gutterBottom variant="display2">
+              <Typography gutterBottom variant="display2" color="textPrimary">
                 {jobTitle}
               </Typography>
               <Typography gutterBottom variant="display1">
@@ -41,10 +41,10 @@ function ComplexGrid(props) {
               </Typography>
               <Typography variant="headline" >{type}</Typography>
               <Typography variant="headline" color="textSecondary" gutterBottom>{"$"+salary}</Typography>
-              <Typography variant="headline" color="textSecondary">{desc}</Typography>
+              <Typography variant="headline" color="textPrimary">{desc}</Typography>
             </Grid>
             <Grid item>
-            <Typography variant="headline" color="textSecondary">{"Contact:" +firstName+" "+secondName}</Typography>
+            <Typography variant="headline" color="textSecondary">{"Contact: " +firstName+" "+secondName}</Typography>
             
               <Typography variant="headline" style={{ cursor: 'pointer' }}>
               <a href={"mailto:"+ email}>Apply</a>
