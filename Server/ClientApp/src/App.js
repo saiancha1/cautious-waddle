@@ -17,7 +17,6 @@ import logo from './images/logoV2.png';
 import Header from './components/Header/Header';
 import ConForm from './components/Consultants/ConForm';
 import AddEvent from './components/Events/AddEvent';
-import Addconsultant from './components/Consultants/Addconsultant';
 import SubForm from './components/Subscribe/SubscribeForm';
 import AddCompany from './components/Companies/AddCompany';
 import MyProfile from './components/Profile/MyProfile';
@@ -27,7 +26,7 @@ import history from './components/history';
 class App extends Component {
   render() {
     return (
-      
+
       <Router history={history}>
         <div className="app-root">
           <div className="main-content">
@@ -41,7 +40,6 @@ class App extends Component {
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/summerTech" component={SummerTech} />
             <Route exact path="/admin" component={AdminComponent} />
-            <Route exact path="/addconsultant" component={Addconsultant} />
             <Route exact path="/addJob" component={AddJob} />
             <Route exact path="/addCompany" component={AddCompany} />
             <Route exact path="/addconsultant" component={ConForm} />
