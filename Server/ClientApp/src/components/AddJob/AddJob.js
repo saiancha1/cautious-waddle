@@ -108,10 +108,6 @@ class AddJob extends Component {
       });
     };
 
-    //handleChange = (e) => {
-     // this.setState({ [e.target.name]: e.target.value });
-    //}
-
     render() {
       const login = this.props;
       const state = this.state;
@@ -122,109 +118,138 @@ class AddJob extends Component {
             <AppBar color="default" position="static">
             <h1> New Job Listing</h1>
             </AppBar>
-            <Grid container spacing={8} sm={12}>
-              <Grid item sm={3}/>
+            <Grid container spacing={32} sm={12}>
+             <Grid item sm={3}/>
               <Grid item sm={6}>
                 <Paper elevation4 style={style.Paper}>
-                  <Typography align="center" variant="display2">Job Details</Typography> 
-                  <Divider/>       
+                  <Typography align="center" variant="display2">Listing Details</Typography> 
+                  <Divider/>
+                  <br/>
+                  <Typography variant="headline">Job Details</Typography>       
                   <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                      <TextField
-                        id="type-select"
-                        select
-                        label="Type"
-                        value={state.workType}
-                        onChange={this.handleChange('workType')}
-                        helperText="Please select the type of work"
-                        margin="normal"
-                      >
-                        <MenuItem key="Full Time" value="Full Time">
-                        Full Time
-                        </MenuItem>
-                        <MenuItem key="Part Time" value="Part Time">
-                        Part Time
-                        </MenuItem>
-                        <MenuItem key="Contract" value="Contract">
-                        Contract
-                        </MenuItem>
-                      </TextField>
-
-                      <TextField
-                        id="companyName"
-                        label="Company Name"
-                        value={state.companyName}
-                        onChange={this.handleChange('companyName')}
-                        margin="normal"
-                      />
-
-                      <TextField
-                        id="jobTitle"
-                        label="Job Title"
-                        value={state.jobTitle}
-                        onChange={this.handleChange('jobTitle')}
-                        margin="normal"
-                      />
-                      <br/>
-                      <TextField
-                        id="jobDescription"
-                        label="Job Description"
-                        value={state.jobDescription}
-                        onChange={this.handleChange('jobDescription')}
-                        margin="normal"
-                      />
-                        <br />
-                      <TextField
-                        id="jobDescription"
-                        label="Salary"
-                        value={state.salary}
-                        onChange={this.handleChange('salary')}
-                        margin="normal"
-                      />
-                      <TextField
-                        id="date"
-                        label="Listing Expiry Date"
-                        type="date"
-                        defaultValue="2017-05-24"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
+                      <Grid container spacing={32} sm={12} direction="row"> 
+                        <Grid item>
+                          <TextField
+                            id="companyName"
+                            label="Company Name"
+                            value={state.companyName}
+                            onChange={this.handleChange('companyName')}
+                            margin="normal"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <TextField
+                            id="type-select"
+                            select
+                            label="Type"
+                            value={state.workType}
+                            onChange={this.handleChange('workType')}
+                            helperText="Please select the type of employment"
+                            margin="normal"
+                            >
+                            <MenuItem key="Full Time" value="Full Time">
+                            Full Time
+                            </MenuItem>
+                            <MenuItem key="Part Time" value="Part Time">
+                            Part Time
+                            </MenuItem>
+                            <MenuItem key="Contract" value="Contract">
+                            Contract
+                            </MenuItem>
+                          </TextField>
+                        </Grid>
+                      </Grid>
+                      <Grid container spacing={32} sm={12}>
+                        <Grid item>
+                          <TextField
+                            id="jobTitle"
+                            label="Job Title"
+                            value={state.jobTitle}
+                            onChange={this.handleChange('jobTitle')}
+                            margin="normal"
+                        />
+                        </Grid>
+                        <Grid item>
+                          <TextField
+                            id="jobDescription"
+                            label="Job Description"
+                            value={state.jobDescription}
+                            onChange={this.handleChange('jobDescription')}
+                            margin="normal"
+                          />
+                        </Grid>
+                      </Grid>
+                      <Grid container spacing={32}>
+                        <Grid item>
+                          <TextField
+                            id="salary"
+                            label="Salary"
+                            value={state.salary}
+                            onChange={this.handleChange('salary')}
+                            margin="normal"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <TextField
+                            id="date"
+                            label="Listing Expiry Date"
+                            type="date"
+                            defaultValue="2017-05-24"
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        </Grid>
+                      </Grid>
+                     
+                      
                     </div>
                     <Divider/>
                   <br/>
                     <Typography variant="headline">Contact Details</Typography>
                     <div className="form-group">
-
-                      <TextField
-                        id="jobDescription"
-                        label="First Name"
-                        value={state.contactFirstName}
-                        onChange={this.handleChange('contactFirstName')}
-                        margin="normal"
-                      />
-                      <TextField
-                        id="contactLastName"
-                        label="Surname"
-                        value={state.contactLastName}
-                        onChange={this.handleChange('contactLastName')}
-                        margin="normal"
-                      />
-                      <TextField
-                        id="contactEmail"
-                        label="Email"
-                        value={state.contactEmail}
-                        onChange={this.handleChange('contactEmail')}
-                        margin="normal"
-                      />
-                      <br />
-                      <TextField
-                        id="contactPhone"
-                        label="Telephone"
-                        value={state.contactPhone}
-                        onChange={this.handleChange('contactPhone')}
-                        margin="normal"
-                      />
+                      <Grid container spacing={32}>
+                      <Grid item>
+                        <TextField
+                          id="contactLastName"
+                          label="Surname"
+                          value={state.contactLastName}
+                          onChange={this.handleChange('contactLastName')}
+                          margin="normal"
+                        />
+                      </Grid>
+                      <Grid item>
+                        <TextField
+                          id="jobDescription"
+                          label="First Name"
+                          value={state.contactFirstName}
+                          onChange={this.handleChange('contactFirstName')}
+                          margin="normal"
+                        />
+                      </Grid>
+                      </Grid>
+                      <Grid container spacing={32}>
+                        <Grid item>
+                          <TextField
+                            id="contactEmail"
+                            label="Email"
+                            value={state.contactEmail}
+                            onChange={this.handleChange('contactEmail')}
+                            margin="normal"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <TextField
+                            id="contactPhone"
+                            label="Telephone"
+                            value={state.contactPhone}
+                            onChange={this.handleChange('contactPhone')}
+                            margin="normal"
+                          />
+                        </Grid>
+                      </Grid>
                     </div>
                     <Button variant="outlined" color="default" onclick={this.handleSubmit}>
                       Submit
