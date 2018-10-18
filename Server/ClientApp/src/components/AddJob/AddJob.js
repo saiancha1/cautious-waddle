@@ -56,6 +56,7 @@ class AddJob extends Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
+      console.log("The state after clicking submit is");
       console.log(this.state);
       const Auth = new AuthService();
       const {
@@ -207,6 +208,7 @@ class AddJob extends Component {
                             type="date"
                             defaultValue="2017-05-24"
                             margin="normal"
+                            onChange={this.handleChange('expiry')}
                             InputLabelProps={{
                               shrink: true,
                             }}
@@ -259,7 +261,7 @@ class AddJob extends Component {
                         </Grid>
                       </Grid>
                     </div>
-                    <Button variant="outlined" color="default" onclick={this.handleSubmit}>
+                    <Button variant="outlined" color="default" onClick={this.handleSubmit}>
                       Submit
                     </Button>
                   </form>
