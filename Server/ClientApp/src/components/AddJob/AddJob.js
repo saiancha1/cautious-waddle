@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import AlertDialog from '../AlertDialog/AlertDialog';
 import './AddJob.css';
+import AuthService from '../Authentication/AuthService';
 
 const style = {
 
@@ -98,28 +99,38 @@ class AddJob extends Component {
       console.log(res);
     }
 
-    handleChange = name => event => {
+    handleChange = name => (event) => {
       this.setState({
         [name]: event.target.value,
-      });
+      })
     };
 
     render() {
       const login = this.props;
-      const state = this.state;
-      // if (login.auth) {
-      if (true) {
+      const {
+        jobTitle,
+        jobDescription,
+        salary,
+        contactFirstName,
+        contactLastName,
+        contactEmail,
+        contactPhone,
+        companyName,
+        workType,
+        expiry,
+      } = this.state;
+      if (login.auth) {
         return (
           <div>
             <AppBar color="default" position="static">
             <Typography align="center" variant="display3">New Job Listing</Typography>
             </AppBar>
             <Grid container spacing={32} sm={12}>
-             <Grid item sm={3}/>
+              <Grid item sm={3}/>
               <Grid item sm={6}>
                 <Paper elevation4 style={style.Paper}>
                   <Typography align="center" variant="display2">Listing Details</Typography> 
-                  <Divider/>
+                  <Divider />
                   <br/>
                   <Typography variant="headline">Job Details</Typography>       
                   <form onSubmit={this.handleSubmit}>
@@ -129,7 +140,7 @@ class AddJob extends Component {
                           <TextField
                             id="companyName"
                             label="Company Name"
-                            value={state.companyName}
+                            value={companyName}
                             onChange={this.handleChange('companyName')}
                             margin="normal"
                           />
@@ -139,7 +150,7 @@ class AddJob extends Component {
                             id="type-select"
                             select
                             label="Type"
-                            value={state.workType}
+                            value={workType}
                             onChange={this.handleChange('workType')}
                             helperText="Please select the type of employment"
                             margin="normal"
@@ -161,7 +172,7 @@ class AddJob extends Component {
                           <TextField
                             id="jobTitle"
                             label="Job Title"
-                            value={state.jobTitle}
+                            value={jobTitle}
                             onChange={this.handleChange('jobTitle')}
                             margin="normal"
                         />
@@ -173,7 +184,7 @@ class AddJob extends Component {
                             multiline
                             rows="6"    
                             label="Job Description"
-                            value={state.jobDescription}
+                            value={jobDescription}
                             onChange={this.handleChange('jobDescription')}
                             margin="normal"
                           />
@@ -184,7 +195,7 @@ class AddJob extends Component {
                           <TextField
                             id="salary"
                             label="Salary"
-                            value={state.salary}
+                            value={salary}
                             onChange={this.handleChange('salary')}
                             margin="normal"
                           />
@@ -202,39 +213,37 @@ class AddJob extends Component {
                           />
                         </Grid>
                       </Grid>
-                     
-                      
                     </div>
-                    <Divider/>
-                  <br/>
+                    <Divider />
+                    <br />
                     <Typography variant="headline">Contact Details</Typography>
                     <div className="form-group">
                       <Grid container spacing={32}>
-                      <Grid item>
-                        <TextField
-                          id="contactLastName"
-                          label="Surname"
-                          value={state.contactLastName}
-                          onChange={this.handleChange('contactLastName')}
-                          margin="normal"
-                        />
-                      </Grid>
-                      <Grid item>
-                        <TextField
-                          id="jobDescription"
-                          label="First Name"
-                          value={state.contactFirstName}
-                          onChange={this.handleChange('contactFirstName')}
-                          margin="normal"
-                        />
-                      </Grid>
+                        <Grid item>
+                          <TextField
+                            id="contactLastName"
+                            label="Surname"
+                            value={contactLastName}
+                            onChange={this.handleChange('contactLastName')}
+                            margin="normal"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <TextField
+                            id="jobDescription"
+                            label="First Name"
+                            value={contactFirstName}
+                            onChange={this.handleChange('contactFirstName')}
+                            margin="normal"
+                          />
+                        </Grid>
                       </Grid>
                       <Grid container spacing={32}>
                         <Grid item>
                           <TextField
                             id="contactEmail"
                             label="Email"
-                            value={state.contactEmail}
+                            value={contactEmail}
                             onChange={this.handleChange('contactEmail')}
                             margin="normal"
                           />
@@ -243,7 +252,7 @@ class AddJob extends Component {
                           <TextField
                             id="contactPhone"
                             label="Telephone"
-                            value={state.contactPhone}
+                            value={contactPhone}
                             onChange={this.handleChange('contactPhone')}
                             margin="normal"
                           />
@@ -254,8 +263,8 @@ class AddJob extends Component {
                       Submit
                     </Button>
                   </form>
-                  </Paper>           
-                  </Grid>
+                </Paper>           
+              </Grid>
               <Grid item sm={3}/>
             </Grid>
           </div>
@@ -275,4 +284,3 @@ const mapStateToProps = state => (
 const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddJob);
-
