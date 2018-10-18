@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import './AddJob.css';
 
 const style = {
@@ -34,6 +35,10 @@ const style = {
 class AddJob extends Component {
   constructor(props) {
     super(props);
+
+    const today = new Date();
+    console.log(today);
+    // date = { today.getFullYear() + '-' + today.getMonth() + 1 + '-' + today.getDate()},
 
     this.state = {
       jobTitle: '',
@@ -115,100 +120,115 @@ class AddJob extends Component {
         return (
           <div>
             <AppBar color="default" position="static">
-            <h1>Add New Job Listing</h1>
+            <h1> New Job Listing</h1>
             </AppBar>
             <Grid container spacing={8} sm={12}>
               <Grid item sm={3}/>
               <Grid item sm={6}>
-            <Paper elevation4 style={style.Paper}>
-              
-              <Typography align="center" variant="display2">Add New Listing</Typography>        
-                <form onSubmit={this.handleSubmit}>
-                  <div className="form-group">
-              <TextField
-                id="type-select"
-                select
-                label="Type"
-                value={state.workType}
-                onChange={this.handleChange('workType')}
-                helperText="Please select the type of work"
-                margin="normal"
-              >
-                  <MenuItem key="Full Time" value="Full Time">
-                  Full Time
-                  </MenuItem>
-                  <MenuItem key="Part Time" value="Part Time">
-                  Part Time
-                  </MenuItem>
-                  <MenuItem key="Contract" value="Contract">
-                  Contract
-                  </MenuItem>
-              </TextField>
+                <Paper elevation4 style={style.Paper}>
+                  <Typography align="center" variant="display2">Job Details</Typography> 
+                  <Divider/>       
+                  <form onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                      <TextField
+                        id="type-select"
+                        select
+                        label="Type"
+                        value={state.workType}
+                        onChange={this.handleChange('workType')}
+                        helperText="Please select the type of work"
+                        margin="normal"
+                      >
+                        <MenuItem key="Full Time" value="Full Time">
+                        Full Time
+                        </MenuItem>
+                        <MenuItem key="Part Time" value="Part Time">
+                        Part Time
+                        </MenuItem>
+                        <MenuItem key="Contract" value="Contract">
+                        Contract
+                        </MenuItem>
+                      </TextField>
 
-                    <TextField
-                      id="companyName"
-                      label="Company Name"
-                      value={state.companyName}
-                      onChange={this.handleChange('companyName')}
-                      margin="normal"
-                    />
-                    <br/>
-                      <br />
-                      <label htmlFor="jobTitle">
-                        Job Title
-                      </label>
-                      <input name="jobTitle" id="jobTitle" value={state.jobTitle} onChange={this.handleChange} required />
-                      <br />
-                      <br />
-                      <label>
-                            Job Description
-                      </label>
-                      <input name="jobDescription" value={state.jobDescription} onChange={this.handleChange} required />
-                      <br />
-                      <br />
-                      <label>
-                            Salary
-                      </label>
-                      <input name="salary" value={state.salary} onChange={this.handleChange} />
-                      <br />
-                      <br />
-                      <label>
-                            Expiry
-                      </label>
-                      <input name="expiry" type="datetime" value={state.expiry} onChange={this.handleChange} required />
+                      <TextField
+                        id="companyName"
+                        label="Company Name"
+                        value={state.companyName}
+                        onChange={this.handleChange('companyName')}
+                        margin="normal"
+                      />
+
+                      <TextField
+                        id="jobTitle"
+                        label="Job Title"
+                        value={state.jobTitle}
+                        onChange={this.handleChange('jobTitle')}
+                        margin="normal"
+                      />
+                      <br/>
+                      <TextField
+                        id="jobDescription"
+                        label="Job Description"
+                        value={state.jobDescription}
+                        onChange={this.handleChange('jobDescription')}
+                        margin="normal"
+                      />
+                        <br />
+                      <TextField
+                        id="jobDescription"
+                        label="Salary"
+                        value={state.salary}
+                        onChange={this.handleChange('salary')}
+                        margin="normal"
+                      />
+                      <TextField
+                        id="date"
+                        label="Listing Expiry Date"
+                        type="date"
+                        defaultValue="2017-05-24"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
                     </div>
-                    <br />
                     <Divider/>
                   <br/>
                     <Typography variant="headline">Contact Details</Typography>
                     <div className="form-group">
-                      <label>
-                            First Name
-                      </label>
-                      <input name="contactFirstName" value={state.contactFirstName} onChange={this.handleChange} required />
+
+                      <TextField
+                        id="jobDescription"
+                        label="First Name"
+                        value={state.contactFirstName}
+                        onChange={this.handleChange('contactFirstName')}
+                        margin="normal"
+                      />
+                      <TextField
+                        id="contactLastName"
+                        label="Surname"
+                        value={state.contactLastName}
+                        onChange={this.handleChange('contactLastName')}
+                        margin="normal"
+                      />
+                      <TextField
+                        id="contactEmail"
+                        label="Email"
+                        value={state.contactEmail}
+                        onChange={this.handleChange('contactEmail')}
+                        margin="normal"
+                      />
                       <br />
-                      <br />
-                      <label>
-                            Last Name
-                      </label>
-                      <input name="contactLastName" value={state.contactLastName} onChange={this.handleChange} required />
-                      <br />
-                      <br />
-                      <label>
-                            Email
-                      </label>
-                      <input name="contactEmail" value={state.contactEmail} onChange={this.handleChange} required />
-                      <br />
-                      <br />
-                      <label>
-                            Phone
-                      </label>
-                      <input name="contactPhone" value={state.contactPhone} onChange={this.handleChange} required />
-                      <br />
-                      <br />
+                      <TextField
+                        id="contactPhone"
+                        label="Telephone"
+                        value={state.contactPhone}
+                        onChange={this.handleChange('contactPhone')}
+                        margin="normal"
+                      />
                     </div>
-                    <br />
-                    <input id="submit" name="submit" type="submit" value="Submit" />
+                    <Button variant="outlined" color="default" onclick={this.handleSubmit}>
+                      Submit
+                    </Button>
                   </form>
                   </Paper>           
                   </Grid>
