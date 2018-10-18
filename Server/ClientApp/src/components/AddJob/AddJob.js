@@ -96,9 +96,20 @@ class AddJob extends Component {
 
       const PostingJobInfo = () => res.JSON();
       res();
-      console.log(PostingJobInfo);
-      console.log(res);
-    }
+      this.setState(
+        {
+          jobTitle: '',
+          jobDescription: '',
+          salary: '',
+          contactFirstName: '',
+          contactLastName: '',
+          contactEmail: '',
+          contactPhone: '',
+          companyName: '',
+          workType: '',
+          expiry: '',
+        });
+  }
 
     handleChange = name => (event) => {
       this.setState({
