@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import PaperSheet from '../PaperSheet/PaperSheet';
 import Divider from '@material-ui/core/Divider';
-import AuthService from '../Authentication/AuthService';
-import FormControl from '@material-ui/core/FormControl';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import AlertDialog from '../AlertDialog/AlertDialog';
 import './AddJob.css';
 
 const style = {
@@ -116,7 +112,7 @@ class AddJob extends Component {
         return (
           <div>
             <AppBar color="default" position="static">
-            <h1> New Job Listing</h1>
+            <Typography align="center" variant="display3">New Job Listing</Typography>
             </AppBar>
             <Grid container spacing={32} sm={12}>
              <Grid item sm={3}/>
@@ -173,6 +169,9 @@ class AddJob extends Component {
                         <Grid item>
                           <TextField
                             id="jobDescription"
+                            flex="1"
+                            multiline
+                            rows="6"    
                             label="Job Description"
                             value={state.jobDescription}
                             onChange={this.handleChange('jobDescription')}
@@ -263,11 +262,8 @@ class AddJob extends Component {
         );
       } else {
         return (
-          <div>
-            <p>This function is only available to valid account holders.</p>
-            <p>If you have an account, please login to submit a new job posting.</p>
-            <p> If you do not have an account you can create and account via the login option above.</p>
-          </div>);
+          <AlertDialog />
+        );
       }
     }
 }
