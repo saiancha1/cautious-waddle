@@ -33,7 +33,7 @@ class Consultants extends Component {
   }
 
 
-  handleSubscribe() {
+  NotLoggedInMsg() {
     try {
       alert('Please Login to Add Consultant');
       // window.location.reload();
@@ -47,7 +47,7 @@ class Consultants extends Component {
        console.log('click works');
        history.push('/addconsultant');
      } else {
-       this.handleSubscribe();
+       this.NotLoggedInMsg();
      }
    }
 
