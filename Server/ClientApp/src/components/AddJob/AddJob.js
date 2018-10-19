@@ -25,7 +25,7 @@ const style = {
     gutterBottom: true,
     boxShadow: 2,
     backgroundColor: 'f9f9f9',
-  }
+  },
 };
 
 
@@ -36,7 +36,7 @@ class AddJob extends Component {
     const today = new Date();
     console.log(today);
     // date = { today.getFullYear() + '-' + today.getMonth() + 1 + '-' + today.getDate()},
-
+    this.Authh = new AuthService();
     this.state = {
       jobTitle: '',
       jobDescription: '',
@@ -56,7 +56,7 @@ class AddJob extends Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      console.log("The state after clicking submit is");
+      console.log('The state after clicking submit is');
       console.log(this.state);
       const Auth = new AuthService();
       const {
@@ -81,16 +81,16 @@ class AddJob extends Component {
           Authorization: `Bearer ${Auth.getToken()}`,
         },
         body: JSON.stringify({
-          jobTitle: jobTitle,
-          jobDescription: jobDescription,
-          salary: salary,
-          contactFirstName: contactFirstName,
-          contactLastName: contactLastName,
-          contactEmail: contactEmail,
-          contactPhone: contactPhone,
-          companyName: companyName,
-          workType: workType,
-          expiry: expiry,
+          jobTitle,
+          jobDescription,
+          salary,
+          contactFirstName,
+          contactLastName,
+          contactEmail,
+          contactPhone,
+          companyName,
+          workType,
+          expiry,
         }),
       });
 
@@ -109,12 +109,12 @@ class AddJob extends Component {
           workType: '',
           expiry: '',
         });
-  }
+    }
 
     handleChange = name => (event) => {
       this.setState({
         [name]: event.target.value,
-      })
+      });
     };
 
     render() {
@@ -131,23 +131,23 @@ class AddJob extends Component {
         workType,
         expiry,
       } = this.state;
-      if (login.auth) {
+      if (this.Authh.loggedIn()) {
         return (
           <div>
             <AppBar color="default" position="static">
-            <Typography align="center" variant="display3">New Job Listing</Typography>
+              <Typography align="center" variant="display3">New Job Listing</Typography>
             </AppBar>
             <Grid container spacing={32} sm={12}>
-              <Grid item sm={3}/>
+              <Grid item sm={3} />
               <Grid item sm={6}>
                 <Paper elevation4 style={style.Paper}>
-                  <Typography align="center" variant="display2">Listing Details</Typography> 
+                  <Typography align="center" variant="display2">Listing Details</Typography>
                   <Divider />
-                  <br/>
-                  <Typography variant="headline">Job Details</Typography>       
+                  <br />
+                  <Typography variant="headline">Job Details</Typography>
                   <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                      <Grid container spacing={32} sm={12} direction="row"> 
+                      <Grid container spacing={32} sm={12} direction="row">
                         <Grid item>
                           <TextField
                             id="companyName"
@@ -166,7 +166,7 @@ class AddJob extends Component {
                             onChange={this.handleChange('workType')}
                             helperText="Please select the type of employment"
                             margin="normal"
-                            >
+                          >
                             <MenuItem key="Full Time" value="Full Time">
                             Full Time
                             </MenuItem>
@@ -187,14 +187,14 @@ class AddJob extends Component {
                             value={jobTitle}
                             onChange={this.handleChange('jobTitle')}
                             margin="normal"
-                        />
+                          />
                         </Grid>
                         <Grid item>
                           <TextField
                             id="jobDescription"
                             flex="1"
                             multiline
-                            rows="6"    
+                            rows="6"
                             label="Job Description"
                             value={jobDescription}
                             onChange={this.handleChange('jobDescription')}
@@ -276,9 +276,9 @@ class AddJob extends Component {
                       Submit
                     </Button>
                   </form>
-                </Paper>           
+                </Paper>
               </Grid>
-              <Grid item sm={3}/>
+              <Grid item sm={3} />
             </Grid>
           </div>
         );
