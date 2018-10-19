@@ -25,7 +25,7 @@ class ConForm extends Component {
       desc: '',
       exp: '',
       selectedFile: null,
-      imgu: '',
+      imgu: null,
     }
 
 
@@ -52,38 +52,57 @@ class ConForm extends Component {
         imgu,
       } = this.state;
 
-      const res = () => fetch('api/Consultants/addConsultant', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-          // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
-          Authorization: `Bearer ${this.Auth.getToken()}`,
-        },
-        body: JSON.stringify({
+      this.checkforImage = () => {
+        if (imgu == null) {
+          try {
+            alert('Please Submit selected Image Before Submitting Consultant');
+            return false;
+          } catch (error) {
+            alert('There seems to be a problem!');
+            return false;
+          }
+        }
+      };
 
-          firstName: fname,
-          lastName: lname,
-          imageURL: imgu,
-          specialistArea: exp,
-          consultantDesc: desc,
-          phone,
-          email,
-          website,
-          address1,
-          address2,
-          suburb,
-          postalCode: postalcode,
-          city,
-          country,
-        }),
-      });
+      const res = () => {
+        if (this.checkforImage() == false) {
+          return false;
+        } else {
+          fetch('api/Consultants/addConsultant', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
+              Authorization: `Bearer ${this.Auth.getToken()}`,
+            },
+            body: JSON.stringify({
+
+              firstName: fname,
+              lastName: lname,
+              imageURL: imgu,
+              specialistArea: exp,
+              consultantDesc: desc,
+              phone,
+              email,
+              website,
+              address1,
+              address2,
+              suburb,
+              postalCode: postalcode,
+              city,
+              country,
+            }),
+          });
+          this.handleSubscribe();
+        }
+      };
+
       const PostingConsultantInfo = () => res.json();
       res();
       console.log(PostingConsultantInfo);
       console.log(res);
       console.log(`Bearer ${this.Auth.getToken()}`);
-      this.handleSubscribe();
     }
 
 
@@ -109,6 +128,7 @@ class ConForm extends Component {
 
       handleImageUpload = (e) => {
         e.preventDefault();
+        console.log(this.state.selectedFile);
         const mydata = new FormData();
         const file = this.state.selectedFile;
 

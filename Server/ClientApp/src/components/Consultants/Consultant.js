@@ -4,27 +4,23 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import ConST from './ConsultantStyledRender';
 import AuthService from '../Authentication/AuthService';
+import history from '../history';
+
 
 this.Auth = new AuthService();
-// // handleDelete = this.handleDelete.bind(this);
 
-// this.handleDelete = (e) => {
-//   const connerId = e.target.value;
-//   console.log(connerId);
+const handleNoDelError = (e) => {
+  try {
+    alert('Cannot Delete right now. Try Again Later, or Contact Support. Thank you.');
+  } catch (e) {
+    alert('There seems to be a problem!');
+  }
+};
 
-//   const res = () => fetch('api/Consultants/removeConsultant', {
-//     method: 'POST',
-//     headers: {
-//       Accept: 'application/json, text/plain, */*',
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${this.Auth.getToken()}`,
-//     },
-//     body: connerId,
-//   });
-//     // .then(res.json());
-//   res();
+const handleDelMsg = (e) => {
+  alert('The selected Consultant has been Deleted.');
+};
 
-// };
 const handleEdit = (e) => {
   console.log('EDIT SUCCESSFUL');
 };
@@ -33,18 +29,33 @@ const handleDelete = (e) => {
   const connerId = e.target.value;
   console.log(connerId);
 
-  const res = () => fetch('api/Consultants/removeConsultant', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json, text/plain, */*',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.Auth.getToken()}`,
-    },
-    body: connerId,
-  });
+  const res = () => {
+    try {
+      fetch('api/Consultants/removeConsultant', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.Auth.getToken()}`,
+        },
+        body: connerId,
+      });
+      handleDelMsg(e);
+      window.location.reload();
+
+
+      // console.log('Delete Successful');
+    } catch (error) {
+      handleNoDelError(error);
+      return null;
+    }
+  };
   // .then(res.json());
-  res();
-  console.log('Delete Successful');
+  if (connerId == undefined) {
+    handleNoDelError();
+  } else {
+    res();
+  }
 };
 
 const userCanEdit = (con) => {
@@ -55,9 +66,7 @@ const userCanEdit = (con) => {
     // const conID = con.consultantId;
     if (con.userId == userIdd) {
       // console.log(con.userId);
-      // console.log(userIdd);
-      // return 'HELLO';
-      // // return true;
+
       return (
         <div>
           <Link to="/editcon">
@@ -66,8 +75,6 @@ const userCanEdit = (con) => {
           {' '}
           <Button onClick={handleDelete} value={con.consultantId}>Delete Consultant</Button>
         </div>);
-
-      // <div><button>KUSOMAK</button></div>;
     } else {
       // console.log('IT DOESN"T WORK');
       return false;
