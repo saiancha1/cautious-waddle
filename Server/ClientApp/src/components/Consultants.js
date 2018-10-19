@@ -36,7 +36,7 @@ class Consultants extends Component {
   handleSubscribe() {
     try {
       alert('Please Login to Add Consultant');
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       alert('There seems to be a problem!');
     }
