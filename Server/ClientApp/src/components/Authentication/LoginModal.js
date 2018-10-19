@@ -39,6 +39,7 @@ class LoginModal extends React.Component {
           const sync = this.props;
           sync.syncLoggedIn();
           this.setState({ loggedIn: true });
+          window.location.reload();
         }
       });
   }
