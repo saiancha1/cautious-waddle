@@ -31,8 +31,7 @@ state = {
   jobs: [],
   selectedJob: null,
   filter: 'All',
-  menuItems:[],
-  originalJobs:[],
+  originalJobs: [],
 };
 
 async componentWillMount() {
@@ -41,11 +40,9 @@ async componentWillMount() {
       this.setState({ jobs: json });
       console.log('Job List');
       console.log(this.state.jobs);
-      this.setState({originalJobs:this.state.jobs});
-      const menuItems1 = [...new Set(this.state.jobs.map(item => item.type))]
-      this.setState({menuItems:menuItems1});
-      console.log('Menu Items');
-      console.log(this.state.menuItems);
+      this.setState({originalJobs: this.state.jobs});
+      console.log('Original Job List');
+      console.log(this.state.originalJobs);
       this.setState({isLoaded:true});
       console.log(this.state);
     });
@@ -55,9 +52,12 @@ handleFilterChange = (e) => {
   const val = e.target.value;
   this.setState({ filter: val });
   if (val !== 'All') {
-    let newArr = this.state.originalJobs.filter(job => job.type === e.target.value);
+    let newArr = this.state.originalJobs.filter(job => job.workType === e.target.value);
+    console.log("Handle Submit function has the following assigned to newArr: ");
+    console.log(newArr);
     this.setState({ jobs: newArr });
   } else {
+    console.log("Entered else section of handleFilterChange");
     fetch('api/jobs/getJobs').then(res => res.json())
       .then((json) => {
         this.setState({ jobs: json });
