@@ -21,6 +21,7 @@ import SubForm from './components/Subscribe/SubscribeForm';
 import AddCompany from './components/Companies/AddCompany';
 import MyProfile from './components/Profile/MyProfile';
 import history from './components/history';
+import EditConsultant from './components/Consultants/EditConsultant';
 
 // Changed this simple function into a class so that we can manipulate state on this page
 class App extends Component {
@@ -45,6 +46,8 @@ class App extends Component {
             <Route exact path="/addconsultant" component={ConForm} />
             <Route exact path="/events/add" component={AddEvent} />
             <Route exact path="/myProfile" component={MyProfile} />
+            <Route exact path="/editCon" component={EditConsultant} />
+
 
           </div>
           <Footer />

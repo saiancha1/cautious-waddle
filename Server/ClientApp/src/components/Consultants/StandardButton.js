@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Fragment } from 'react';
-import { connect } from 'react-redux';
 
 
 const styles = theme => ({
@@ -26,11 +25,4 @@ StandardButton.propTypes = {
 };
 
 
-const mapStateToProps = state => (
-  {
-    auth: state.authenticated,
-  });
-
-const mapDispatchToProps = dispatch => ({});
-
-export default (connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(StandardButton);
+export default withStyles(styles)(StandardButton);

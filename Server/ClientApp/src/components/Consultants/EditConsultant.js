@@ -6,10 +6,8 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import AuthService from '../Authentication/AuthService';
-import history from '../history';
 
-
-class ConForm extends Component {
+class EditConsultant extends Component {
     state = {
       fname: '',
       lname: '',
@@ -25,7 +23,7 @@ class ConForm extends Component {
       desc: '',
       exp: '',
       selectedFile: null,
-      imgu: null,
+      imgu: '',
     }
 
 
@@ -52,57 +50,38 @@ class ConForm extends Component {
         imgu,
       } = this.state;
 
-      this.checkforImage = () => {
-        if (imgu == null) {
-          try {
-            alert('Please Submit selected Image Before Submitting Consultant');
-            return false;
-          } catch (error) {
-            alert('There seems to be a problem!');
-            return false;
-          }
-        }
-      };
+      const res = () => fetch('api/Consultants/addConsultant', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
+          Authorization: `Bearer ${this.Auth.getToken()}`,
+        },
+        body: JSON.stringify({
 
-      const res = () => {
-        if (this.checkforImage() == false) {
-          return false;
-        } else {
-          fetch('api/Consultants/addConsultant', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json, text/plain, */*',
-              'Content-Type': 'application/json',
-              // Authorization : 'Token' +' '+ localStorage.getItem('id_token'),
-              Authorization: `Bearer ${this.Auth.getToken()}`,
-            },
-            body: JSON.stringify({
-
-              firstName: fname,
-              lastName: lname,
-              imageURL: imgu,
-              specialistArea: exp,
-              consultantDesc: desc,
-              phone,
-              email,
-              website,
-              address1,
-              address2,
-              suburb,
-              postalCode: postalcode,
-              city,
-              country,
-            }),
-          });
-          this.handleSubscribe();
-        }
-      };
-
+          firstName: fname,
+          lastName: lname,
+          imageURL: imgu,
+          specialistArea: exp,
+          consultantDesc: desc,
+          phone,
+          email,
+          website,
+          address1,
+          address2,
+          suburb,
+          postalCode: postalcode,
+          city,
+          country,
+        }),
+      });
       const PostingConsultantInfo = () => res.json();
       res();
       console.log(PostingConsultantInfo);
       console.log(res);
       console.log(`Bearer ${this.Auth.getToken()}`);
+      this.handleSubscribe();
     }
 
 
@@ -113,7 +92,6 @@ class ConForm extends Component {
     handleSubscribe() {
       try {
         alert('Thank you for your consultant submission. Your posting will appear after approval.');
-        history.push('/consultants');
       } catch (error) {
         alert('There seems to be a problem!');
       }
@@ -128,7 +106,6 @@ class ConForm extends Component {
 
       handleImageUpload = (e) => {
         e.preventDefault();
-        console.log(this.state.selectedFile);
         const mydata = new FormData();
         const file = this.state.selectedFile;
 
@@ -170,7 +147,7 @@ class ConForm extends Component {
             {this.Auth.loggedIn() ? (
 
               <form onSubmit={this.handleSubmit}>
-                <h2>Add Consultant</h2>
+                <h2>Edit Consultant</h2>
                 <Grid>
                   <Row>
                     <label>
@@ -315,4 +292,4 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditConsultant);

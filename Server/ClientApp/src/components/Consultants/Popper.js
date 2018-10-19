@@ -8,6 +8,7 @@ import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import { Redirect } from 'react-router-dom';
 import AuthService from '../Authentication/AuthService';
+import StandardButton from './StandardButton';
 
 
 // const loggednow = this.Auth.loggedin();
@@ -37,6 +38,10 @@ class SimplePopper extends React.Component {
 
   handleClick = (event) => {
     const { currentTarget } = event;
+    // if (this.Auth.loggedIn()) {
+    //   // console.log('LOGGED IN WORKS');
+    //   return <Redirect to="/consultants" />;
+    // }
     this.setState(state => ({
       anchorEl: currentTarget,
       open: !state.open,
@@ -45,29 +50,31 @@ class SimplePopper extends React.Component {
 
   render() {
     if (this.Auth.loggedIn()) {
-      console.log('LOGGED IN WORKS');
-      return <Redirect to="/addconsultant" />;
-    }
-    const { classes } = this.props;
-    const { anchorEl, open } = this.state;
-    const id = open ? 'simple-popper' : null;
+      // console.log('LOGGED IN WORKS');
+      return;
+        <Redirect to="/consultants" />;
+    } else {
+      const { classes } = this.props;
+      const { anchorEl, open } = this.state;
+      const id = open ? 'simple-popper' : null;
 
-    return (
-      <div>
-        <Button aria-describedby={id} variant="contained" onClick={this.handleClick} className={classes.button}>
+      return (
+        <div>
+          <Button aria-describedby={id} variant="contained" onClick={this.handleClick} className={classes.button}>
           Join Consultants Page
-        </Button>
-        <Popper id={id} open={open} anchorEl={anchorEl} transition>
-          {({ TransitionProps }) => (
-            <Fade {...TransitionProps} timeout={350}>
-              <Paper>
-                <Typography className={classes.typography}>You must be logged in</Typography>
-              </Paper>
-            </Fade>
-          )}
-        </Popper>
-      </div>
-    );
+          </Button>
+          <Popper id={id} open={open} anchorEl={anchorEl} transition>
+            {({ TransitionProps }) => (
+              <Fade {...TransitionProps} timeout={350}>
+                <Paper>
+                  <Typography className={classes.typography}>You must be logged in</Typography>
+                </Paper>
+              </Fade>
+            )}
+          </Popper>
+        </div>
+      );
+    }
   }
 }
 
