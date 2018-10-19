@@ -39,7 +39,6 @@ class Login extends Component {
     const { loggedIn } = this.state;
 
     if (loggedIn === true) {
-      window.location.reload();
       return (
         <button className="button-sign" href="#" onClick={this.handleLogout}>Log out</button>
       );
