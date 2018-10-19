@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import AuthService from '../Authentication/AuthService';
+import history from '../history';
+
 
 class ConForm extends Component {
     state = {
@@ -92,6 +94,7 @@ class ConForm extends Component {
     handleSubscribe() {
       try {
         alert('Thank you for your consultant submission. Your posting will appear after approval.');
+        history.push('/consultants');
       } catch (error) {
         alert('There seems to be a problem!');
       }
