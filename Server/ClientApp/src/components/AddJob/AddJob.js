@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import AuthService from '../Authentication/AuthService';
+import AuthService from '../Authentication/AuthService';
 
 class AddJob extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class AddJob extends Component {
       description: '',
     };
 
-    //this.Auth = new AuthService();
+    this.Auth = new AuthService();
   }
 
 
@@ -31,8 +31,8 @@ class AddJob extends Component {
   }
 
   render() {
-    const login = this.props;
-    if (login.auth) {
+    // const login = this.props;
+    if (this.Auth.loggedIn()) {
       return (
         <div>
           <h1>Add Job</h1>
