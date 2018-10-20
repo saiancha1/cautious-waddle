@@ -308,11 +308,4 @@ Submit
       }
 }
 
-const mapStateToProps = state => (
-  {
-    auth: state.authenticated,
-  });
-
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConForm);
+export default ConForm;

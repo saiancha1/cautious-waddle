@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Consultant from './Consultants/Consultant';
 import AuthService from './Authentication/AuthService';
 import history from './history';
+import Addz from './Consultants/Addz';
 
 
 // Creating initial state and setting it to empty
@@ -33,7 +34,7 @@ class Consultants extends Component {
   }
 
 
-  handleSubscribe() {
+  handleNotLogged() {
     try {
       alert('Please Login to Add Consultant');
       // window.location.reload();
@@ -44,10 +45,9 @@ class Consultants extends Component {
 
    handleClick = (e) => {
      if (this.state.loginStatus == true) {
-       console.log('click works');
        history.push('/addconsultant');
      } else {
-       this.handleSubscribe();
+       this.handleNotLogged();
      }
    }
 
@@ -57,6 +57,7 @@ class Consultants extends Component {
          <h1>Consultants</h1>
          <Consultant cl={this.state.consultants} />
          <Button onClick={this.handleClick}> Join Consultants</Button>
+         <Addz />
        </div>
      );
    }

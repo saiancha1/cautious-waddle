@@ -4,9 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
 import AuthService from '../Authentication/AuthService';
 
 
@@ -27,22 +25,22 @@ class ConST extends Component {
 
   Auth = new AuthService();
 
-  handleDelete = (e) => {
-    const connerId = e.target.value;
-    console.log(connerId);
+  // handleDelete = (e) => {
+  //   const connerId = e.target.value;
+  //   console.log(connerId);
 
-    const res = () => fetch('api/Consultants/removeConsultant', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.Auth.getToken()}`,
-      },
-      body: connerId,
-    });
-      // .then(res.json());
-    res();
-  };
+  //   const res = () => fetch('api/Consultants/removeConsultant', {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json, text/plain, */*',
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${this.Auth.getToken()}`,
+  //     },
+  //     body: connerId,
+  //   });
+  //     // .then(res.json());
+  //   res();
+  // };
 
 
   render() {
@@ -86,9 +84,9 @@ class ConST extends Component {
               {this.props.hisemail}
             </Typography>
           </CardContent>
-          <div>
+          {/* <div>
             {this.Auth.loggedIn() ? (<Button name="consultantId" value={this.props.conID} onClick={this.handleDelete}>DELETE</Button>) : (<div />) }
-          </div>
+          </div> */}
           <div>
             {' '}
             {this.props.canEdit}
@@ -101,11 +99,5 @@ class ConST extends Component {
   }
 }
 
-const mapStateToProps = state => (
-  {
-    auth: state.authenticated,
-  });
-
-const mapDispatchToProps = dispatch => ({});
 
 export default withStyles(styles)(ConST);
