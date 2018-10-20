@@ -78,6 +78,14 @@
   }
 
 } */
+@media screen and (max-width: 1000px) { 
+  .background-image-container {
+    height: 400px !important;
+  }
+
+}
+
+
 
 @media screen and (max-width: 500px) { 
   .centered-text h3 span {
@@ -88,5 +96,7 @@
     top:0;
     padding-bottom: 30px;
   }
+
+ 
 
 }

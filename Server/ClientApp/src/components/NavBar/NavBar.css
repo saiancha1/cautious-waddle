@@ -54,4 +54,12 @@
     width: 890px;
   }
 
+  .navbar-Wrapper {
+    margin-bottom: 90px;
+  }
+
+  .page-header {
+    margin-bottom: 0px;
+  }
+
 }
