@@ -120,7 +120,9 @@ label {
     object-fit: cover;
   }
 
-
+@media screen and (max-width: 770px) {
+  
+}
 
 @media screen and (max-width: 600px) { 
   .event-input {
