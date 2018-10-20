@@ -3,6 +3,7 @@ import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import NumericInput from 'react-numeric-input';
 import AuthService from '../Authentication/AuthService';
+import './events.css';
 
 
 export default class AddEvent extends Component {
@@ -52,8 +53,8 @@ export default class AddEvent extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>
-          Event Name
+          <label>Event Name</label>
+          <div>
             <input
               type="text"
               name="eventName"
@@ -61,27 +62,27 @@ export default class AddEvent extends Component {
               onChange={this.handleChange}
               required
             />
-          </label>
-          <label>
-          Description
+          </div>
+          <label>Description</label>
+          <div>
             <textarea
               name="eventDescription"
               value={eventDescription}
               onChange={this.handleChange}
               required
             />
-          </label>
-          <label>
-          Hosted By
+          </div>
+          <label>Hosted By</label>
+          <div>
             <input
               name="hostedBy"
               value={hostedBy}
               onChange={this.handleChange}
               required
             />
-          </label>
-          <label>
-          Location
+          </div>       
+          <label>Location</label>
+          <div>
             <input
               type="text"
               name="eventLocation"
@@ -89,9 +90,9 @@ export default class AddEvent extends Component {
               onChange={this.handleChange}
               required
             />
-          </label>
-          <label>
-          Type Of Event
+          </div>
+          <label>Type Of Event</label>
+          <div>
             <select
               name="eventType"
               value={eventType}
@@ -103,45 +104,45 @@ export default class AddEvent extends Component {
               <option value="Group">Group</option>
               <option value="Course">Course</option>
             </select>
-          </label>
-          <label>
-            Date
+          </div>
+          <label>Date</label>
+          <div>
             <DatePicker
               name="startDate"
               onChange={this.onChangeDate}
               value={startDate}
               required
             />
-          </label>
-          <label>
-          Contact
+          </div>
+          <label>Contact</label>
+          <div>
             <textarea
               name="contact"
               value={contact}
               onChange={this.handleChange}
               required
             />
-          </label>
-          <label>
-          Website
+          </div>
+          <label>Website</label>
+          <div>
             <textarea
               name="website"
               value={website}
               onChange={this.handleChange}
               required
             />
-          </label>
-          <label>
-          Start Time
+          </div>
+          <label>Start Time</label>
+          <div>
             <TimePicker
               onChange={this.onChangeTime}
               value={startTime}
               disableClock="true"
               required
             />
-          </label>
-          <label>
-          Is The Event Longer Than One Day?
+          </div>
+          {/* <label>Is The Event Longer Than One Day?</label>
+          <div>
             <select
               name="durationBool"
               value={durationBool}
@@ -151,9 +152,9 @@ export default class AddEvent extends Component {
               <option selected value={false}>No</option>
               <option>Yes</option>
             </select>
-          </label>
-          <label>
-          Number Of Days
+          </div> */}
+          <label>Number Of Days</label>
+          <div>
             <NumericInput
               min={0}
               max={20}
@@ -161,8 +162,7 @@ export default class AddEvent extends Component {
               value={duration}
               onChange={this.onChangeDur}
             />
-
-          </label>
+          </div>
         </form>
       </div>
     );
