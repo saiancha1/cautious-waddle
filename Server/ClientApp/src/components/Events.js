@@ -96,7 +96,7 @@ export default class Events extends Component {
           </div>
 
         </div>
-        <div>
+        <div className="event-filter">
           <button type="submit" onClick={this.handleFilterEvent.bind(this, 'Course')}>
             Course
           </button>

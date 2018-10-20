@@ -4,7 +4,7 @@ label {
 
 .event-welcome {
   margin: 0 auto;
-  width: 1000px;
+  width: 800px;
   position: absolute;
   top: 12%;
   left: 50%;
@@ -20,6 +20,31 @@ label {
   font-size: 44px;
 
 }
+
+.event-filter {
+  background-color: #000000;
+  margin: -32px auto 0 auto;
+  width: 800px;
+  height: 68px;
+  position: relative;
+  text-align: center;
+  padding-top: 9px;
+}
+
+.event-filter button {
+  width: 19%;
+  margin: 2px;
+  height: 80%;
+  background: rgba(255,255,255,.2)!important;
+  color: #fff!important;
+  box-shadow: inset -1px 1px 2px 0 rgba(0,0,0,.54);
+  font-weight: 500;
+}
+
+.event-filter button:hover {
+  background-color: #000000 !important;
+}
+
 
 .event-form {
   text-align: center;
