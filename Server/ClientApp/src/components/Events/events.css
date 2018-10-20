@@ -4,6 +4,11 @@ label {
 
 .event-form {
   text-align: center;
+  margin-top: 80px;
+}
+
+.event-add-blurb {
+  margin-bottom: 50px; 
 }
 
 .event-logo-upload {
@@ -14,11 +19,13 @@ label {
 
 .event-input {
   width: 500px;
+  border: 1px black solid;
 }
 
 .event-date-group{
   display: inline-flex;
   width: 500px;
+  margin-bottom: 8px;
 }
 
 .time-picker {
@@ -34,10 +41,47 @@ label {
   height: 29px;
 }
 
+.event-type{
+  margin-bottom: 13px;
+  background: #ffffff;
+  height: 20px;
+  -webkit-border-radius: 0;
+  border: 0;
+  outline: 1px solid #ccc;
+  outline-offset: -1px;
+  height: 29px;
+}
+
+.event-submit {
+  margin-top: 25px ;
+  width: 120px;
+  border-color: #d9534f;
+  height: 29px;
+}
+
+.event-submit:hover {
+  background: #949494 !important;
+  color: #fff;
+  }
 
 @media screen and (max-width: 600px) { 
   .event-input {
     width: 280px;
+  }
+
+  .event-date-group{
+    display: block;
+    width: 500px;
+    margin: 0px;
+    width: 100%;
+  }
+
+  .date-picker {
+    margin-right: 0px;
+  }
+
+  .time-picker {
+    margin-right: 0px;
   }
 
 

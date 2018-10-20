@@ -105,6 +105,10 @@ export default class AddEvent extends Component {
     } = this.state;
     return (
       <div className="event-form">
+        <div className="event-add-blurb">
+          <h2>List Your Own Event</h2>
+          <p>This is a paragraph about how great it would be to post your own event, meet up, group or course!</p>
+        </div>
         <form onSubmit={this.handleAddEventSubmit}>
           <label>Event Name</label>
           <div>
@@ -191,30 +195,35 @@ export default class AddEvent extends Component {
               <label>Days</label>
               <NumericInput
                 className="event-NumericInput"
-                min={0}
+                min={1}
                 max={20}
                 name="duration"
                 value={duration}
                 onChange={this.onChangeDur}
+                required
               />
             </div>
           </div>
           <label>Type Of Event</label>
           <div>
             <select
+              className="event-type"
               name="eventType"
               value={eventType}
               onChange={this.handleChange}
               required
             >
-              <option value="Event">Event</option>
+              <option className="event-type" value="Event">Event</option>
               <option value="Meetup">Meet Up</option>
               <option value="Group">Group</option>
               <option value="Course">Course</option>
             </select>
           </div>
+          <label className="event-upload">
+            Upload Event Image
+          </label>
           <input className="event-logo-upload" type="file" onChange={this.handleImageUpload} />
-          <input type="submit" value="Submit" />
+          <input className="event-submit" type="submit" value="Submit" />
         </form>
       </div>
     );
