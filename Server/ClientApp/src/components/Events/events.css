@@ -2,6 +2,50 @@ label {
   display: block;
 }
 
+.event-welcome {
+  margin: 0 auto;
+  width: 800px;
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  fill: #fff;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.54);
+}
+
+.event-welcome h1 {
+  font-family: "Comfortaa", cursive;
+  font-size: 44px;
+
+}
+
+.event-filter {
+  background-color: #000000;
+  margin: -32px auto 0 auto;
+  width: 800px;
+  height: 68px;
+  position: relative;
+  text-align: center;
+  padding-top: 9px;
+}
+
+.event-filter button {
+  width: 19%;
+  margin: 2px;
+  height: 80%;
+  background: rgba(255,255,255,.2)!important;
+  color: #fff!important;
+  box-shadow: inset -1px 1px 2px 0 rgba(0,0,0,.54);
+  font-weight: 500;
+}
+
+.event-filter button:hover {
+  background-color: #000000 !important;
+}
+
+
 .event-form {
   text-align: center;
   margin-top: 80px;
@@ -63,6 +107,22 @@ label {
   background: #949494 !important;
   color: #fff;
   }
+
+  .event-image-container {
+    display: block;
+    width: 100%;
+    height: 400px;
+  }
+
+  .event-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+@media screen and (max-width: 770px) {
+  
+}
 
 @media screen and (max-width: 600px) { 
   .event-input {

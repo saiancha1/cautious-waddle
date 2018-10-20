@@ -12,7 +12,9 @@ class Home extends Component {
     return (
       <div>
         <div className="home-container">
-          <img className="background-image" src={background} alt="background" />
+          <div className="background-image-container">
+            <img className="background-image" src={background} alt="background" />
+          </div>
           <div className="centered-text">
             <h3>
               <span>Tech Palmy</span>

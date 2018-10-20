@@ -6,6 +6,10 @@
   color: white;
 }
 
+.centered-text {
+  text-shadow: 1px 1px 0 rgba(0,0,0,.54);
+}
+
 .centered-text h3 {
   position: absolute;
   top: 43%;
@@ -28,8 +32,10 @@
 
 .background-image {
   max-width: 100%;
-  height: auto;
+  /* height: auto; */
+  height: 100% !important;
   margin-top: -90px;
+  object-fit: cover;
 }
 
 .about-block {
@@ -54,6 +60,23 @@
   max-width: 800px;
 }
 
+.background-image-container {
+  width: 100% !important;
+  height: 550px !important;
+}
+.background-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 1000px) { 
+  .background-image-container {
+    height: 400px !important;
+  }
+
+}
+
 @media screen and (max-width: 500px) { 
   .centered-text h3 span {
     display: none;
@@ -63,5 +86,7 @@
     top:0;
     padding-bottom: 30px;
   }
+
+ 
 
 }
