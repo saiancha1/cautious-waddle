@@ -2,10 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Router, Redirect, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
 import Consultant from './Consultants/Consultant';
 import AuthService from './Authentication/AuthService';
 import history from './history';
+import Addz from './Consultants/Addz';
 
+const style = {
+
+  AppBar: {
+    marginTop: 10,
+    marginBottom: 10,
+    // colorPrimary: 'white',
+    // background: 'white',
+  },
+};
 
 // Creating initial state and setting it to empty
 class Consultants extends Component {
@@ -33,7 +45,7 @@ class Consultants extends Component {
   }
 
 
-  handleSubscribe() {
+  handleNotLogged() {
     try {
       alert('Please Login to Add Consultant');
       // window.location.reload();
@@ -44,19 +56,23 @@ class Consultants extends Component {
 
    handleClick = (e) => {
      if (this.state.loginStatus == true) {
-       console.log('click works');
        history.push('/addconsultant');
      } else {
-       this.handleSubscribe();
+       this.handleNotLogged();
      }
    }
 
    render() {
      return (
        <div>
-         <h1>Consultants</h1>
+         <AppBar style={style.AppBar} position="static" color="default">
+
+           <Typography align="center" variant="headline">Consultants</Typography>
+         </AppBar>
+
          <Consultant cl={this.state.consultants} />
-         <Button onClick={this.handleClick}> Join Consultants</Button>
+         {/* <Button onClick={this.handleClick}> Join Consultants</Button> */}
+         <Addz />
        </div>
      );
    }
