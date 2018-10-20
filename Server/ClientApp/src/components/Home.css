@@ -6,6 +6,10 @@
   color: white;
 }
 
+.centered-text {
+  text-shadow: 1px 1px 0 rgba(0,0,0,.54);
+}
+
 .centered-text h3 {
   position: absolute;
   top: 43%;
@@ -65,19 +69,7 @@
   width: 100%;
   object-fit: cover;
 }
-/* 
-@media screen and (min-width: 1085px) {
-  .background-image-container {
-    width: 100%;
-    height: 550px;
-  }
-  .background-image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
 
-} */
 @media screen and (max-width: 1000px) { 
   .background-image-container {
     height: 400px !important;

@@ -2,6 +2,25 @@ label {
   display: block;
 }
 
+.event-welcome {
+  margin: 0 auto;
+  width: 1000px;
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  fill: #fff;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.54);
+}
+
+.event-welcome h1 {
+  font-family: "Comfortaa", cursive;
+  font-size: 44px;
+
+}
+
 .event-form {
   text-align: center;
   margin-top: 80px;
@@ -75,6 +94,8 @@ label {
     width: 100%;
     object-fit: cover;
   }
+
+
 
 @media screen and (max-width: 600px) { 
   .event-input {

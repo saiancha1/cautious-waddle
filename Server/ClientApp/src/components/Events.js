@@ -81,15 +81,20 @@ export default class Events extends Component {
         <div className="events-container">
           <div className="event-image-container">
             <img className="event-image" src={eventImage} alt="Hall filled with people" />
+            <div className="event-welcome">
+              <h1>Events</h1>
+              <h2>
+              Find out whats happening in tech
+                {' '}
+                <br />
+              around Palmerston North and start
+                {' '}
+                <br />
+              meeting like-minded people.
+              </h2>
+            </div>
           </div>
 
-          <div className="event-welcome">
-            <h3>
-              <span>Events</span>
-              <br />
-              Find out whats happening in technology around Palmerston North and start meeting like-minded people.
-            </h3>
-          </div>
         </div>
         <div>
           <button type="submit" onClick={this.handleFilterEvent.bind(this, 'Course')}>
