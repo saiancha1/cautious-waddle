@@ -15,7 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import TextField from '@material-ui/core/TextField';
 import { FormGroup } from 'react-bootstrap';
 import grey from '@material-ui/core/colors/grey';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import CardMedia from '@material-ui/core/CardMedia';
 import Input from '@material-ui/core/Input';
 import red from '@material-ui/core/colors/red';
@@ -51,7 +51,22 @@ const styles = theme => ({
   media: {
     height: 350,
     width: 345,
+    marginLeft: 50,
 
+  },
+
+  spacedout: {
+    marginLeft: 200,
+    marginTop: 20,
+  },
+  buttonspaced: {
+    marginLeft: 150,
+    marginTop: 20,
+  },
+
+  buttonspacedtwo: {
+    marginLeft: 170,
+    marginTop: 20,
   },
 });
 
@@ -180,7 +195,6 @@ class Addz extends React.Component {
       desc,
       exp,
       imgu,
-      cID,
     } = this.state;
 
     this.checkforImage = () => {
@@ -231,12 +245,6 @@ class Addz extends React.Component {
     res();
     this.handleClose();
     window.location.reload();
-
-    // history.push('/consultants');
-
-    // console.log(PostingConsultantInfo);
-    // console.log(res);
-    // console.log(`Bearer ${this.Auth.getToken()}`);
   }
 
   render() {
@@ -387,36 +395,61 @@ class Addz extends React.Component {
                     margin="large"
                   />
                 </FormGroup>
-                <TextField
-                  id="standard-multiline-static"
-                  label="Consultant Description"
-                  name="desc"
-                  value={this.state.desc}
-                  onChange={this.handleChange}
-                  multiline
-                  rows="4"
+                <Col>
+                  <TextField
+                    id="standard-multiline-static"
+                    label="Consultant Description"
+                    name="desc"
+                    value={this.state.desc}
+                    onChange={this.handleChange}
+                    multiline
+                    rows="4"
                   // defaultValue="Default Value"
-                  className={classes.textField}
-                  margin="large"
-                />
-                <ListItem>
-                  <FormGroup>
-                    <CardMedia
-                      className={classes.media}
-                      image={this.state.imgu}
-                    />
-                    <Typography variant="caption">
+                    className={classes.textField}
+                    margin="large"
+                  />
 
-                  Add Image
+                </Col>
+                <Col>
+                  <Col />
+
+                  <Row>
+
+                    <Typography
+                      className={classes.spacedout}
+                      variant="button"
+                    >
+
+Add Image
                     </Typography>
-                    <Row>
-                      <Input type="file" onChange={this.fileSelectedHandler} required>Upload New Image</Input>
-                    </Row>
-                    <Row>
-                      <Button onClick={this.handleImageUpload}>Submit New Image</Button>
-                    </Row>
-                  </FormGroup>
-                </ListItem>
+
+                  </Row>
+                  <Row>
+                    <Input
+                      className={classes.buttonspaced}
+                      type="file"
+                      onChange={this.fileSelectedHandler}
+                      required
+                    >
+Upload New Image
+
+                    </Input>
+                  </Row>
+                  <Row>
+                    <Button
+                      className={classes.buttonspacedtwo}
+                      onClick={this.handleImageUpload}
+                    >
+Submit New Image
+
+                    </Button>
+
+                  </Row>
+                  <CardMedia
+                    className={classes.media}
+                    image={this.state.imgu}
+                  />
+                </Col>
               </form>
             </ListItem>
           </List>
