@@ -43,7 +43,7 @@ class App extends Component {
             <Route exact path="/admin" component={AdminComponent} />
             <Route exact path="/addJob" component={AddJob} />
             <Route exact path="/addCompany" component={AddCompany} />
-            <Route exact path="/addconsultant" component={ConForm} />
+            {/* <Route exact path="/addconsultant" component={ConForm} /> */}
             <Route exact path="/events/add" component={AddEvent} />
             <Route exact path="/myProfile" component={MyProfile} />
             {/* <Route exact path="/editCon" component={EditConsultant} /> */}

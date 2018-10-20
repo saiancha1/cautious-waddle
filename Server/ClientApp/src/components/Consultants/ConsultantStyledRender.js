@@ -49,21 +49,19 @@ class ConST extends Component {
       // console.log(status),
       <div className="col-md-3">
         <Card className={classes.card}>
+          <Typography gutterBottom variant="h5" component="h2">
+            {this.props.firstName}
+            {' '}
+            {this.props.lastName}
+            {' '}
+          </Typography>
           <CardMedia
             className={classes.media}
             image={this.props.consultimage}
             title={this.props.lastName}
           />
           <CardContent>
-            <Typography gutterBottom variant="headline" component="h4">
-              {this.props.firstName}
-              {' '}
-              {this.props.lastName}
-              {' '}
-              {/* {props.conID}
-            {' '}
-            {props.nation} */}
-            </Typography>
+
             <Typography gutterBottom variant="headline" component="h3">
               {this.props.consultwebsite}
             </Typography>

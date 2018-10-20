@@ -11,7 +11,7 @@ class Contact extends Component {
       fName: '',
       lName: '',
       email: '',
-      message: '',
+      msg: '',
       isVerified: false,
     };
 
@@ -24,10 +24,32 @@ class Contact extends Component {
       this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleSubscribe() {
+    handleSubscribe(e) {
       if (this.state.isVerified) {
+        e.preventDefault();
+        console.log(this.state);
+
+        const res = () => {
+          fetch('/api/emailing/sendContactForm', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              firstName: this.state.fname,
+              lastName: this.state.lname,
+              emailAddress: this.state.email,
+              message: this.state.msg,
+
+            }),
+          });
+        };
+
+        const PostingConsultantInfo = () => res.json();
+        res();
+        window.location.reload();
         alert('Your message has been sent, thank you.');
-        // TODO: put API call and redirect code here
       } else {
         alert('Please verify that you are a human!');
       }
@@ -40,11 +62,6 @@ class Contact extends Component {
         });
       }
     }
-
-    // handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   console.log(this.state);
-    // }
 
     render() {
       const {
