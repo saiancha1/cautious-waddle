@@ -48,7 +48,7 @@ namespace cautious_waddle.Controllers
             }
         }
 
-        [HttpPost("getMailingList")]
+        [HttpGet("getMailingList")]
         [Authorize(Roles="Admin")]
         public IActionResult getMailingList()
         {
