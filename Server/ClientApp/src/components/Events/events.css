@@ -1,0 +1,148 @@
+label {
+  display: block;
+}
+
+.event-welcome {
+  margin: 0 auto;
+  width: 800px;
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  fill: #fff;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.54);
+}
+
+.event-welcome h1 {
+  font-family: "Comfortaa", cursive;
+  font-size: 44px;
+
+}
+
+.event-filter {
+  background-color: #000000;
+  margin: -32px auto 0 auto;
+  width: 800px;
+  height: 68px;
+  position: relative;
+  text-align: center;
+  padding-top: 9px;
+}
+
+.event-filter button {
+  width: 19%;
+  margin: 2px;
+  height: 80%;
+  background: rgba(255,255,255,.2)!important;
+  color: #fff!important;
+  box-shadow: inset -1px 1px 2px 0 rgba(0,0,0,.54);
+  font-weight: 500;
+}
+
+.event-filter button:hover {
+  background-color: #000000 !important;
+}
+
+
+.event-form {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.event-add-blurb {
+  margin-bottom: 50px; 
+}
+
+.event-logo-upload {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 93px;
+}
+
+.event-input {
+  width: 500px;
+  border: 1px black solid;
+}
+
+.event-date-group{
+  display: inline-flex;
+  width: 500px;
+  margin-bottom: 8px;
+}
+
+.time-picker {
+  margin-right: 72px;
+}
+
+.date-picker {
+  margin-right: 68px;
+}
+
+.event-NumericInput {
+  width: 106.55px;
+  height: 29px;
+}
+
+.event-type{
+  margin-bottom: 13px;
+  background: #ffffff;
+  height: 20px;
+  -webkit-border-radius: 0;
+  border: 0;
+  outline: 1px solid #ccc;
+  outline-offset: -1px;
+  height: 29px;
+}
+
+.event-submit {
+  margin-top: 25px ;
+  width: 120px;
+  border-color: #d9534f;
+  height: 29px;
+}
+
+.event-submit:hover {
+  background: #949494 !important;
+  color: #fff;
+  }
+
+  .event-image-container {
+    display: block;
+    width: 100%;
+    height: 400px;
+  }
+
+  .event-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+@media screen and (max-width: 770px) {
+  
+}
+
+@media screen and (max-width: 600px) { 
+  .event-input {
+    width: 280px;
+  }
+
+  .event-date-group{
+    display: block;
+    width: 500px;
+    margin: 0px;
+    width: 100%;
+  }
+
+  .date-picker {
+    margin-right: 0px;
+  }
+
+  .time-picker {
+    margin-right: 0px;
+  }
+
+
+}

@@ -46,9 +46,6 @@ class App extends Component {
             {/* <Route exact path="/addconsultant" component={ConForm} /> */}
             <Route exact path="/events/add" component={AddEvent} />
             <Route exact path="/myProfile" component={MyProfile} />
-            {/* <Route exact path="/editCon" component={EditConsultant} /> */}
-
-
           </div>
           <Footer />
         </div>

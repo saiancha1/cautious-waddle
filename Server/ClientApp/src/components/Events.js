@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import Card from './Events/Card';
 import AuthService from './Authentication/AuthService';
+import eventImage from '../images/hall-meeting.jpg';
 import './events.css';
 
 
@@ -78,16 +79,24 @@ export default class Events extends Component {
     return (
       <div>
         <div className="events-container">
-          {/* <img className="background-image" src={background} alt="background" /> */}
-          <div className="">
-            <h3>
-              <span>Events</span>
-              <br />
-              Find out whats happening in technology around Palmerston North and start meeting like-minded people.
-            </h3>
+          <div className="event-image-container">
+            <img className="event-image" src={eventImage} alt="Hall filled with people" />
+            <div className="event-welcome">
+              <h1>Events</h1>
+              <h2>
+              Find out whats happening in tech
+                {' '}
+                <br />
+              around Palmerston North and start
+                {' '}
+                <br />
+              meeting like-minded people.
+              </h2>
+            </div>
           </div>
+
         </div>
-        <div>
+        <div className="event-filter">
           <button type="submit" onClick={this.handleFilterEvent.bind(this, 'Course')}>
             Course
           </button>
