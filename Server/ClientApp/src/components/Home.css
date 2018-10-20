@@ -12,7 +12,7 @@
 
 .centered-text h3 {
   position: absolute;
-  top: 43%;
+  top: 38% !important;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -36,10 +36,13 @@
   height: 100% !important;
   margin-top: -90px;
   object-fit: cover;
+  z-index: -1;
 }
 
 .about-block {
-  margin: 50px 0 50px 0;
+  /* margin: 50px 0 50px 0; */
+  margin: -84px 0 50px 0 !important;
+  text-align: -moz-center;
 }
 
 .home-heading {
@@ -70,6 +73,13 @@
   object-fit: cover;
 }
 
+.nav-icon {
+  float: right;
+  margin-right: 42px;
+  font-size: 30px;
+
+}
+
 @media screen and (max-width: 1000px) { 
   .background-image-container {
     height: 400px !important;
@@ -77,16 +87,38 @@
 
 }
 
+@media screen and (max-width: 700px) {
+  .background-image {
+    margin-top: auto !important;
+  }
+  .about-block {
+    margin: 50px 0 50px 0 !important;
+  }
+  .home-heading {
+    font-size: 39px !important;
+  }
+}
+
 @media screen and (max-width: 500px) { 
   .centered-text h3 span {
     display: none;
   }
 
+  .background-image {
+    height: 250px !important;
+  }
+
   .centered-text h3 {
     top:0;
     padding-bottom: 30px;
+    width: 300px;
+    height: 183px;
+    padding-top: 0px!important;
+    top: 60% !important;
+    font-size: 33px !important;
   }
 
- 
-
+  .background-image-container {
+    height: 260px !important;
+  }
 }
