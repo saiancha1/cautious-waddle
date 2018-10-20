@@ -64,6 +64,18 @@ label {
   color: #fff;
   }
 
+  .event-image-container {
+    display: block;
+    width: 100%;
+    height: 400px;
+  }
+
+  .event-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
 @media screen and (max-width: 600px) { 
   .event-input {
     width: 280px;
