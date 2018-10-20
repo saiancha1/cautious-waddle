@@ -36,6 +36,7 @@
   height: 100% !important;
   margin-top: -90px;
   object-fit: cover;
+  z-index: -1;
 }
 
 .about-block {
