@@ -48,8 +48,8 @@ class Contact extends Component {
 
         const PostingConsultantInfo = () => res.json();
         res();
-        window.location.reload();
         alert('Your message has been sent, thank you.');
+        window.location.reload();
       } else {
         alert('Please verify that you are a human!');
       }
