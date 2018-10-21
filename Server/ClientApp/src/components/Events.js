@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link, Redirect, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import Card from './Events/Card';
@@ -25,10 +24,11 @@ export default class Events extends Component {
     };
 
     this.handleAddEvent = this.handleAddEvent.bind(this);
+    // this.scrollTo = this.scrollTo.bind(this);
   }
 
   async componentDidMount() {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     try {
       const res = await fetch('api/events/getEvents');
       const events = await res.json();
@@ -44,7 +44,17 @@ export default class Events extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 500);
+    }
+  }
+
+  handleAddEvent() {
+    this.setState({ loggedIn: this.Auth.loggedIn() });
+    const { loggedIn } = this.state;
+    if (loggedIn) {
+      this.props.history.push('events/add');
+    } else {
+      alert('To add your own please log in or create an account ');
     }
   }
 
@@ -58,16 +68,6 @@ export default class Events extends Component {
     } else {
       const newArr = events.filter(event => event.eventType === param);
       this.setState({ eventsSelected: newArr });
-    }
-  }
-
-  handleAddEvent() {
-    this.setState({ loggedIn: this.Auth.loggedIn() });
-    const { loggedIn } = this.state;
-    if (loggedIn) {
-      this.props.history.push('events/add');
-    } else {
-      alert('To add your own please log in or create an account ');
     }
   }
 
