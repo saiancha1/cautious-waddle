@@ -14,6 +14,7 @@ import SummerTech from './SummerTech/SummerTech';
 
 const style = {
 
+
   AppBar: {
     marginTop: 10,
     marginBottom: 10,
@@ -24,6 +25,7 @@ const style = {
     marginBottom: 30,
     gutterBottom: true,
   },
+
 };
 
 class Work extends Component {
@@ -72,21 +74,28 @@ render() {
   return (
     <div className="jobs" >
      <Route exact path="/summerTech" component={SummerTech} />
-      <AppBar style={style.AppBar} position="static" color="default">
-        <Grid
+     {/* <AppBar style={style.AppBar} position="static" color="default"> */}
+        {/*<Grid
           container
           direction="row"
           justify="center"
           alignItems="center"
           spacing={12}
-        >
-          <Grid item sm={3} />
-          <Grid item sm={6}>
-            <Typography align="center" variant="display3"> Job Listings </Typography>
-          </Grid>
-          <Grid item sm={3} />
-        </Grid>
-      </AppBar>
+        >*/}
+          {/*<Grid item sm={3} />*/}
+          {/*<Grid item sm={12}>*/}
+            <div className="jumbotron">
+              <div className="container" pull-right>
+                <h3 color="white" className="h1">Job listings</h3>
+                <p>Looking for your next gig?</p>
+                For summer internships click <Link to="/summertech">here</Link>
+              </div>
+            </div>
+            {/*<Typography align="center" variant="display3"> Job Listings </Typography>*/}
+        {/*</Grid>*/}
+          {/*<Grid item sm={3} />*/}
+        {/*</Grid>*/}
+      {/* </AppBar> */}
       <Grid container spacing={12}>
         <Grid item sm={3} />
         <Grid item sm={6}>

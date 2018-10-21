@@ -58,7 +58,7 @@ function ButtonAppBar(props) {
               <MenuItem value="Contract">Contract</MenuItem>
             </Select>
           </FormControl>
-          <Input
+          {/*<Input
             margin="dense"
             position="static"
             startAdornment={(
@@ -70,7 +70,7 @@ function ButtonAppBar(props) {
             label="Search"
             id="search-jobs"
             variant="outlined"
-          />
+            /> */}
           <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
             {children}
           </Typography>
