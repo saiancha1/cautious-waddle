@@ -6,7 +6,7 @@ import {
 import Card from './Events/Card';
 import AuthService from './Authentication/AuthService';
 import eventImage from '../images/hall-meeting.jpg';
-import './events.css';
+import './Events/events-folder.css';
 
 
 export default class Events extends Component {
@@ -93,7 +93,7 @@ export default class Events extends Component {
         <div className="events-container">
           <div className="event-image-container">
             <img className="event-image" src={eventImage} alt="Hall filled with people" />
-            <div className="event-welcome" style={this.state.type !== 'all' ? ({ top: '21%' }) : ({ top: '12%' })}>
+            <div className="event-welcome" style={this.state.type === 'all' ? ({ top: '21%' }) : ({ top: '12%' })}>
               <h1>Events</h1>
               <h2>
               Find out whats happening in tech
