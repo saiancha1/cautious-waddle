@@ -1,6 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import { Row, Col } from 'react-bootstrap';
 import grey from '@material-ui/core/colors/grey';
 import ConST from './ConsultantStyledRender';
 import AuthService from '../Authentication/AuthService';
@@ -55,25 +53,6 @@ const handleDelete = (e) => {
     res();
   }
 };
-// const handleNoEditMsg = (e) => {
-//   alert('Cannot Edit Right Now, Please Try Again.');
-// };
-
-// const handleEdit = (e) => {
-//   const connyId = e.target.value;
-//   console.log(connyId);
-
-//   if (connyId == undefined) {
-//     // console.log('undefined consultant ID');
-//     handleNoEditMsg();
-//   } else {
-//     console.log('finally  NUMBER');
-//     console.log(connyId);
-//     return connyId;
-
-//     // return <div><EditConsultant theID={connyId} /></div>;
-//   }
-// };
 
 
 const userCanEdit = (con) => {

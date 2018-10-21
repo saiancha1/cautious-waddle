@@ -1,31 +1,19 @@
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
 import Consultant from './Consultants/Consultant';
 import AuthService from './Authentication/AuthService';
 import history from './history';
 import Addz from './Consultants/Addz';
 import consultantimage from '../images/consulting1.jpg';
 import './consultants.css';
-import grey from '@material-ui/core/colors/grey';
-
-
-const mygrey = grey[700];
-
 
 const style = {
 
   AppBar: {
     marginTop: 10,
     marginBottom: 10,
-    // colorPrimary: 'white',
-    // background: 'white',
+
   },
 
-  consultimage: {
-    // width: '2000px',
-    // height: '400px',
-  },
 };
 
 // Creating initial state and setting it to empty
@@ -39,6 +27,8 @@ class Consultants extends Component {
   }
 
   // Fetching consultants info from API pre-mounting
+  // Get method gets the consultant information from the database, and places it in state to be used by
+  // other components.
 
   async componentWillMount() {
     try {
@@ -53,7 +43,7 @@ class Consultants extends Component {
     }
   }
 
-
+  // This method prompts user and displays alert when not logged in and user tries to click join consultant button
   handleNotLogged() {
     try {
       alert('Please Login to Add Consultant');
@@ -63,6 +53,7 @@ class Consultants extends Component {
     }
   }
 
+  // handle click method - self explanatory
    handleClick = (e) => {
      if (this.state.loginStatus == true) {
        history.push('/addconsultant');
@@ -70,6 +61,11 @@ class Consultants extends Component {
        this.handleNotLogged();
      }
    }
+
+   // The render here is that of the header, image banner, and then the add consultant component,
+   // only the button of which is displayed on this page, while the rest can be found in the Addz.js file in Consultants folder
+   // Finally the consultant component here passes the list of consultants that the GET method retrieves and passes it into
+   // the Consultant component also in the consultants folder
 
    render() {
      const { classes } = this.props;
@@ -83,20 +79,10 @@ class Consultants extends Component {
              {' '}
            </h4>
            <h4>
-             {/* In Palmerstorn North Tech */}
              {' '}
-
            </h4>
            <Addz className="addbutton" />
-
          </div>
-
-
-         {/* <AppBar style={style.AppBar} position="static" color="default"> */}
-
-         {/* <Typography align="center" variant="headline">Consultants</Typography> */}
-         {/* </AppBar> */}
-
          <Consultant cl={this.state.consultants} />
          {/* <Button onClick={this.handleClick}> Join Consultants</Button> */}
        </div>
