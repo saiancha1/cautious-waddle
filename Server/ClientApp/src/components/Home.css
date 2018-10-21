@@ -40,13 +40,9 @@
 }
 
 .about-block {
-<<<<<<< HEAD
-  margin: -80px 0 50px 0 !important;
-=======
   /* margin: 50px 0 50px 0; */
   margin: -84px 0 50px 0 !important;
   text-align: -moz-center;
->>>>>>> master
 }
 
 .home-heading {
