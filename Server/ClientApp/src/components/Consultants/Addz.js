@@ -112,9 +112,27 @@ class Addz extends React.Component {
     }
   }
 
+  requiredFieldMsg() {
+    try {
+      alert('Please fill out all required fields');
+      // window.location.reload();
+    } catch (error) {
+      alert('There seems to be a problem!');
+    }
+  }
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+
+  requiredFieldCheck = () => {
+    if (this.state.email == '' || this.state.exp == '' || this.state.fname == '' || this.state.lname == ''
+    || this.state.city == '' || this.state.country == '' || this.state.desc == '') {
+      this.requiredFieldMsg();
+      return false;
+    }
+  };
 
   handleImageUpload = (e) => {
     e.preventDefault();
@@ -194,6 +212,10 @@ class Addz extends React.Component {
       imgu,
     } = this.state;
 
+    if (this.requiredFieldCheck() == false) {
+      return false;
+    }
+
     this.checkforImage = () => {
       if (imgu == null) {
         try {
@@ -235,13 +257,13 @@ class Addz extends React.Component {
           }),
         });
         this.handleSubscribe();
+        this.handleClose();
+        window.location.reload();
       }
     };
 
     const PostingConsultantInfo = () => res.json();
     res();
-    this.handleClose();
-    window.location.reload();
   }
 
   render() {
@@ -311,7 +333,7 @@ class Addz extends React.Component {
                     name="website"
                     value={this.state.website}
                     onChange={this.handleChange}
-                    // placeholder={this.props.website}
+                    placeholder="http://www.MyWebsite.com"
                     className={classes.textField}
                     margin="large"
                   />
@@ -420,7 +442,7 @@ class Addz extends React.Component {
                   <FormGroup>
                     <CardMedia
                       className={classes.media}
-                      image={this.props.consultimage}
+                      image={this.state.imgu}
                       title={this.props.lastName}
                     />
                     <Typography variant="caption">
