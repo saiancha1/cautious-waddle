@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Router, Redirect, Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Consultant from './Consultants/Consultant';
 import AuthService from './Authentication/AuthService';
 import history from './history';
 import Addz from './Consultants/Addz';
+import consultantimage from '../images/consulting2.jpg';
+import './consultants.css';
+
 
 const style = {
 
@@ -16,6 +16,11 @@ const style = {
     marginBottom: 10,
     // colorPrimary: 'white',
     // background: 'white',
+  },
+
+  consultimage: {
+    // width: '2000px',
+    // height: '400px',
   },
 };
 
@@ -63,26 +68,39 @@ class Consultants extends Component {
    }
 
    render() {
+     const { classes } = this.props;
      return (
        <div>
-         <AppBar style={style.AppBar} position="static" color="default">
+         <div className="myimage">
+           <img src={consultantimage} alt="consulting1" />
+         </div>
+         <div className="consultWelcome" pull-right>
+           <h1>Tech Consultants</h1>
+           <h4>
+             Find out Who's Who
+             {' '}
+           </h4>
+           <h4>
+             In Palmerstorn North Tech
+             {' '}
 
-           <Typography align="center" variant="headline">Consultants</Typography>
-         </AppBar>
+           </h4>
+         </div>
+
+
+         {/* <AppBar style={style.AppBar} position="static" color="default"> */}
+
+         {/* <Typography align="center" variant="headline">Consultants</Typography> */}
+         {/* </AppBar> */}
 
          <Consultant cl={this.state.consultants} />
          {/* <Button onClick={this.handleClick}> Join Consultants</Button> */}
          <Addz />
        </div>
+
      );
    }
 }
 
-const mapStateToProps = state => (
-  {
-    auth: state.authenticated,
-  });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Consultants);
+export default Consultants;

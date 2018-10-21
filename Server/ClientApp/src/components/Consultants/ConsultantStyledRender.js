@@ -81,14 +81,15 @@ class ConST extends Component {
             <Typography component="p" noWrap="true" paragraph="true">
               {this.props.hisemail}
             </Typography>
+            <div>
+              {' '}
+              {this.props.canEdit}
+            </div>
           </CardContent>
           {/* <div>
             {this.Auth.loggedIn() ? (<Button name="consultantId" value={this.props.conID} onClick={this.handleDelete}>DELETE</Button>) : (<div />) }
           </div> */}
-          <div>
-            {' '}
-            {this.props.canEdit}
-          </div>
+
         </Card>
 
       </div>

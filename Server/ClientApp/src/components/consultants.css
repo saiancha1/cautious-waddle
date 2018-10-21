@@ -1,0 +1,24 @@
+
+  .consultWelcome {
+    margin: 0 auto;
+    width: 800px;
+    position: absolute;
+    top: 22%;
+    left: 50%;
+
+    transform: translate(11%, -90%);
+    
+    fill: #fff;
+    color: #fff;
+    text-shadow: 3px 3px 0 rgba(0,0,0,.54);
+  }
+  
+
+  .myimage {
+
+    margin-bottom: 70px;
+
+  }
+
+
+  
