@@ -23,6 +23,7 @@ export default class Events extends Component {
       events: [],
       eventsSelected: [],
       loggedIn: this.Auth.loggedIn(),
+      type: 'All',
     };
 
     this.handleAddEvent = this.handleAddEvent.bind(this);
@@ -68,10 +69,10 @@ export default class Events extends Component {
     };
     const { events } = this.state;
     if (param === 'all') {
-      this.setState({ eventsSelected: events });
+      this.setState({ eventsSelected: events, type: param });
     } else {
       const newArr = events.filter(event => event.eventType === param);
-      this.setState({ eventsSelected: newArr });
+      this.setState({ eventsSelected: newArr, type: param });
     }
   }
 
@@ -92,7 +93,7 @@ export default class Events extends Component {
         <div className="events-container">
           <div className="event-image-container">
             <img className="event-image" src={eventImage} alt="Hall filled with people" />
-            <div className="event-welcome">
+            <div className="event-welcome" style={this.state.type !== 'all' ? ({ top: '21%' }) : ({ top: '12%' })}>
               <h1>Events</h1>
               <h2>
               Find out whats happening in tech

@@ -41,13 +41,14 @@
   margin-top: 11px;
   margin-top: 11px;
   border: none;
+  background: none;
 }
 
 .fa-plus {
   margin-right: 10px 
 }
 
-.add-event-wrapper:hover {
+.add-event-wrapper button:hover {
   color: #d9534f;
 }
 
@@ -119,4 +120,5 @@
 
 .event-desc p {
   font-size: 16px;
+  margin: 0px;
 }
