@@ -125,6 +125,7 @@ class Addz extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+
   requiredFieldCheck = () => {
     if (this.state.email == '' || this.state.exp == '' || this.state.fname == '' || this.state.lname == ''
     || this.state.city == '' || this.state.country == '' || this.state.desc == '') {
@@ -332,7 +333,7 @@ class Addz extends React.Component {
                     name="website"
                     value={this.state.website}
                     onChange={this.handleChange}
-                    // placeholder={this.props.website}
+                    placeholder="http://www.MyWebsite.com"
                     className={classes.textField}
                     margin="large"
                   />
