@@ -1,8 +1,12 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import { Row, Col } from 'react-bootstrap';
+import grey from '@material-ui/core/colors/grey';
 import ConST from './ConsultantStyledRender';
 import AuthService from '../Authentication/AuthService';
 import Editz from './Editz';
+
+const mygrey = grey[700];
 
 
 this.Auth = new AuthService();
@@ -18,26 +22,6 @@ const handleNoDelError = (e) => {
 const handleDelMsg = (e) => {
   alert('The selected Consultant has been Deleted.');
 };
-
-// const handleNoEditMsg = (e) => {
-//   alert('Cannot Edit Right Now, Please Try Again.');
-// };
-
-// const handleEdit = (e) => {
-//   const connyId = e.target.value;
-//   console.log(connyId);
-
-//   if (connyId == undefined) {
-//     // console.log('undefined consultant ID');
-//     handleNoEditMsg();
-//   } else {
-//     console.log('finally  NUMBER');
-//     console.log(connyId);
-//     return connyId;
-
-//     // return <div><EditConsultant theID={connyId} /></div>;
-//   }
-// };
 
 const handleDelete = (e) => {
   const connerId = e.target.value;
@@ -71,6 +55,26 @@ const handleDelete = (e) => {
     res();
   }
 };
+// const handleNoEditMsg = (e) => {
+//   alert('Cannot Edit Right Now, Please Try Again.');
+// };
+
+// const handleEdit = (e) => {
+//   const connyId = e.target.value;
+//   console.log(connyId);
+
+//   if (connyId == undefined) {
+//     // console.log('undefined consultant ID');
+//     handleNoEditMsg();
+//   } else {
+//     console.log('finally  NUMBER');
+//     console.log(connyId);
+//     return connyId;
+
+//     // return <div><EditConsultant theID={connyId} /></div>;
+//   }
+// };
+
 
 const userCanEdit = (con) => {
   const authService = new AuthService();
@@ -83,7 +87,9 @@ const userCanEdit = (con) => {
 
       return (
         <div>
+          {/* <Row> */}
           {/* <Button onClick={handleEdit} value={con.consultantId}>Edit This Consultant</Button> */}
+          {/* <Button size="small" variant="contained" onClick={handleDelete} value={con.consultantId}>Delete</Button> */}
           <Editz
             consultimage={con.imageURL}
             conID={con.consultantId}
@@ -101,8 +107,7 @@ const userCanEdit = (con) => {
             consultcity={con.city}
             nation={con.country}
           />
-          {' '}
-          <Button onClick={handleDelete} value={con.consultantId}>Delete Consultant</Button>
+          {/* </Row> */}
         </div>);
     } else {
       return false;
