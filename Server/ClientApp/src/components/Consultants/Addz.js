@@ -249,7 +249,7 @@ class Addz extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Button onClick={this.handleClickOpen} value={this.props.conID}>Join Consultant Page</Button>
+        <Button variant="contained" size="medium" color={mygrey} onClick={this.handleClickOpen} value={this.props.conID}>Join Consultant Page</Button>
         <Dialog
           fullScreen
           open={this.state.open}

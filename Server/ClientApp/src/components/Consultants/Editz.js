@@ -18,7 +18,6 @@ import grey from '@material-ui/core/colors/grey';
 import { Row } from 'react-bootstrap';
 import CardMedia from '@material-ui/core/CardMedia';
 import Input from '@material-ui/core/Input';
-import red from '@material-ui/core/colors/red';
 import history from '../history';
 import AuthService from '../Authentication/AuthService';
 
@@ -53,6 +52,11 @@ const styles = theme => ({
     width: 345,
 
   },
+
+  buttonz: {
+    margin: 5,
+  },
+
 });
 
 function Transition(props) {
@@ -131,6 +135,7 @@ class Editz extends React.Component {
 
       </div>;
   };
+
 
   handleSubscribe() {
     try {
@@ -229,192 +234,238 @@ class Editz extends React.Component {
     // console.log(`Bearer ${this.Auth.getToken()}`);
   }
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <div>
-        <Button onClick={this.handleClickOpen} value={this.props.conID}>Edit This Consultant</Button>
-        <Dialog
-          fullScreen
-          open={this.state.open}
-          onClose={this.handleClose}
-          TransitionComponent={Transition}
-        >
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
-                <CloseIcon />
-              </IconButton>
-              <Typography variant="h6" color="black" className={classes.flex}>
+   handleNoDelError = (e) => {
+     try {
+       alert('Cannot Delete right now. Try Again Later, or Contact Support. Thank you.');
+     } catch (e) {
+       alert('There seems to be a problem!');
+     }
+   };
+
+   handleDelMsg = (e) => {
+     alert('The selected Consultant has been Deleted.');
+   };
+
+   handleDelete = (e) => {
+     const connerId = e.target.value;
+     console.log(connerId);
+
+     const dres = () => {
+       try {
+         fetch('api/Consultants/removeConsultant', {
+           method: 'POST',
+           headers: {
+             Accept: 'application/json, text/plain, */*',
+             'Content-Type': 'application/json',
+             Authorization: `Bearer ${this.Auth.getToken()}`,
+           },
+           body: connerId,
+         });
+         this.handleDelMsg(e);
+         window.location.reload();
+
+
+         // console.log('Delete Successful');
+       } catch (error) {
+         this.handleNoDelError(error);
+         return null;
+       }
+     };
+     // .then(res.json());
+     if (connerId == undefined) {
+       this.handleNoDelError();
+     } else {
+       dres();
+     }
+   };
+
+   render() {
+     const { classes } = this.props;
+     return (
+       <div>
+         <Button className={classes.buttonz} size="small" variant="outlined" onClick={this.handleClickOpen} value={this.props.conID}>Edit</Button>
+         <Button size="small" variant="outlined" onClick={this.handleDelete} value={this.props.conID}>Delete</Button>
+         <Dialog
+           fullScreen
+           open={this.state.open}
+           onClose={this.handleClose}
+           TransitionComponent={Transition}
+         >
+           <AppBar className={classes.appBar}>
+             <Toolbar>
+               <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                 <CloseIcon />
+               </IconButton>
+               <Typography variant="h6" color="black" className={classes.flex}>
                 Edit Consultant
-              </Typography>
-              <Button color="inherit" onClick={this.handleSubmit}>
+               </Typography>
+               <Button color="inherit" onClick={this.handleSubmit}>
                 save
-              </Button>
-            </Toolbar>
-          </AppBar>
-          <List>
-            <ListItem>
-              <form className={classes.container} noValidate autoComplete="off">
-                <FormGroup>
-                  <TextField
-                    id="standard-name"
-                    name="fname"
-                    label="First Name"
-                    className={classes.textField}
-                    placeholder={this.props.firstName}
-                    value={this.state.fname}
-                    onChange={this.handleChange}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    name="lname"
-                    label="Last Name"
-                    className={classes.textField}
-                    placeholder={this.props.lastName}
-                    value={this.state.lname}
-                    onChange={this.handleChange}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Specialist Area"
-                    name="exp"
-                    placeholder={this.props.speciality}
-                    className={classes.textField}
-                    value={this.state.exp}
-                    onChange={this.handleChange}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Website"
-                    name="website"
-                    value={this.state.website}
-                    onChange={this.handleChange}
-                    placeholder={this.props.website}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Phone"
-                    name="phone"
-                    value={this.state.phone}
-                    onChange={this.handleChange}
-                    placeholder={this.props.phone}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Email"
-                    placeholder={this.props.hisemail}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <TextField
-                    id="standard-name"
-                    label="Address Line 1"
-                    name="address1"
-                    value={this.state.address1}
-                    onChange={this.handleChange}
-                    placeholder={this.props.addy1}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Address Line 2"
-                    name="address2"
-                    value={this.state.address2}
-                    onChange={this.handleChange}
-                    placeholder={this.props.addy2}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Suburb"
-                    name="suburb"
-                    value={this.state.suburb}
-                    onChange={this.handleChange}
-                    placeholder={this.props.sub}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="City"
-                    name="city"
-                    value={this.state.city}
-                    onChange={this.handleChange}
-                    placeholder={this.props.city}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Country"
-                    name="country"
-                    value={this.state.country}
-                    onChange={this.handleChange}
-                    placeholder={this.props.nation}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Postal Code"
-                    name="postalcode"
-                    value={this.state.postalcode}
-                    onChange={this.handleChange}
-                    placeholder={this.props.pCode}
-                    className={classes.textField}
-                    margin="large"
-                  />
-                </FormGroup>
-                <TextField
-                  id="standard-multiline-static"
-                  label="Consultant Description"
-                  name="desc"
-                  value={this.state.desc}
-                  onChange={this.handleChange}
-                  multiline
-                  rows="4"
+               </Button>
+             </Toolbar>
+           </AppBar>
+           <List>
+             <ListItem>
+               <form className={classes.container} noValidate autoComplete="off">
+                 <FormGroup>
+                   <TextField
+                     id="standard-name"
+                     name="fname"
+                     label="First Name"
+                     className={classes.textField}
+                     placeholder={this.props.firstName}
+                     value={this.state.fname}
+                     onChange={this.handleChange}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     name="lname"
+                     label="Last Name"
+                     className={classes.textField}
+                     placeholder={this.props.lastName}
+                     value={this.state.lname}
+                     onChange={this.handleChange}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="Specialist Area"
+                     name="exp"
+                     placeholder={this.props.speciality}
+                     className={classes.textField}
+                     value={this.state.exp}
+                     onChange={this.handleChange}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="Website"
+                     name="website"
+                     value={this.state.website}
+                     onChange={this.handleChange}
+                     placeholder={this.props.website}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="Phone"
+                     name="phone"
+                     value={this.state.phone}
+                     onChange={this.handleChange}
+                     placeholder={this.props.phone}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="Email"
+                     placeholder={this.props.hisemail}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                 </FormGroup>
+                 <FormGroup>
+                   <TextField
+                     id="standard-name"
+                     label="Address Line 1"
+                     name="address1"
+                     value={this.state.address1}
+                     onChange={this.handleChange}
+                     placeholder={this.props.addy1}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="Address Line 2"
+                     name="address2"
+                     value={this.state.address2}
+                     onChange={this.handleChange}
+                     placeholder={this.props.addy2}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="Suburb"
+                     name="suburb"
+                     value={this.state.suburb}
+                     onChange={this.handleChange}
+                     placeholder={this.props.sub}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="City"
+                     name="city"
+                     value={this.state.city}
+                     onChange={this.handleChange}
+                     placeholder={this.props.city}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="Country"
+                     name="country"
+                     value={this.state.country}
+                     onChange={this.handleChange}
+                     placeholder={this.props.nation}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                   <TextField
+                     id="standard-name"
+                     label="Postal Code"
+                     name="postalcode"
+                     value={this.state.postalcode}
+                     onChange={this.handleChange}
+                     placeholder={this.props.pCode}
+                     className={classes.textField}
+                     margin="large"
+                   />
+                 </FormGroup>
+                 <TextField
+                   id="standard-multiline-static"
+                   label="Consultant Description"
+                   name="desc"
+                   value={this.state.desc}
+                   onChange={this.handleChange}
+                   multiline
+                   rows="4"
                   // defaultValue="Default Value"
-                  className={classes.textField}
-                  margin="large"
-                />
-                <ListItem>
-                  <FormGroup>
-                    <CardMedia
-                      className={classes.media}
-                      image={this.props.consultimage}
-                      title={this.props.lastName}
-                    />
-                    <Typography variant="caption">
+                   className={classes.textField}
+                   margin="large"
+                 />
+                 <ListItem>
+                   <FormGroup>
+                     <CardMedia
+                       className={classes.media}
+                       image={this.props.consultimage}
+                       title={this.props.lastName}
+                     />
+                     <Typography variant="caption">
 
                   Current Image
-                    </Typography>
-                    <Row>
-                      <Input type="file" onChange={this.fileSelectedHandler}>Upload New Image</Input>
-                    </Row>
-                    <Row>
-                      <Button onClick={this.handleImageUpload}>Submit New Image</Button>
-                    </Row>
-                  </FormGroup>
-                </ListItem>
-              </form>
-            </ListItem>
-          </List>
-        </Dialog>
-      </div>
-    );
-  }
+                     </Typography>
+                     <Row>
+                       <Input type="file" onChange={this.fileSelectedHandler}>Upload New Image</Input>
+                     </Row>
+                     <Row>
+                       <Button onClick={this.handleImageUpload}>Submit New Image</Button>
+                     </Row>
+                   </FormGroup>
+                 </ListItem>
+               </form>
+             </ListItem>
+           </List>
+         </Dialog>
+       </div>
+     );
+   }
 }
 
 Editz.propTypes = {
