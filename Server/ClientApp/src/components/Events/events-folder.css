@@ -35,8 +35,8 @@ label {
   width: 19%;
   margin: 2px;
   height: 80%;
-  background: rgba(255,255,255,.2)!important;
-  color: #fff!important;
+  background: rgba(255,255,255,.2);
+  color: #fff;
   box-shadow: inset -1px 1px 2px 0 rgba(0,0,0,.54);
   font-weight: 500;
 }
@@ -249,11 +249,35 @@ label {
   .event-grid {
     display: grid;
     grid-template-columns: auto auto;
-    width: 644px;
+    max-width: 630px;
   }
 
   .add-event-wrapper {
     width: 100%;
+  }
+
+  .event-grid-container {
+    width: 80%;
+  }
+
+  .event-grid-image{
+    max-width: 300px;
+    max-height: 200px;
+  }
+
+  .event-desc {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .event-headings {
+    max-width: 300px;
+    max-height: 200px;
+    margin-left: 0px;
+  }
+
+  .event-headings h2 {
+    font-size: 16px !important;
   }
 }
 
@@ -263,17 +287,36 @@ label {
     grid-template-columns: auto;
     width: 322px;
   }
+  .event-grid-container {
+    display: block; 
+  }
 
   .event-filter {
-    display: inline-grid;
-    width: 100% !important;
+    width: 36% !important;
     height: 100%!important;
-    background-color: transparent;
     text-align: center!important;
+    padding: 14px
   }
 
   .event-filter button{ 
     width: 90%;
+  }
+
+  .event-welcome {
+    display: block;
+    text-align: center;
+    width: 100%;
+    top: 6% !important;
+  }
+
+  .event-welcome h2{
+    font-size: 23px;
+  }
+
+  .event-grid-image {
+    width: 250px;
+    height: 250px;
+    margin: 17px 0;
   }
 
 }
