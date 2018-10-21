@@ -18,7 +18,6 @@ import grey from '@material-ui/core/colors/grey';
 import { Row } from 'react-bootstrap';
 import CardMedia from '@material-ui/core/CardMedia';
 import Input from '@material-ui/core/Input';
-import red from '@material-ui/core/colors/red';
 import history from '../history';
 import AuthService from '../Authentication/AuthService';
 
