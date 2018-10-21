@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Route, Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles, createMuiTheme } from '@material-ui/core/styles';
@@ -14,6 +14,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import SearchIcon from '@material-ui/icons/Search';
 import AddJob from '../AddJob/AddJob';
+import AuthService from '../Authentication/AuthService';
+import history from '../history';
 
 const styles = {
   root: {
@@ -29,11 +31,40 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
-  const handleChange = () => {
-  };
 
-  const { classes, children, filter, handleFilterChange } = props;
+class ButtonAppBar extends Component {
+  constructor(props) {
+    super(props);
+
+    const Auth = new AuthService();
+    const Authorized = Auth.loggedIn();
+  }
+
+    state = {
+      loginStatus: '',
+    }
+
+  handleClick = (e) => {
+    this.setState({ loginStatus: this.Authorized });
+    console.log(this.state);
+    const { loginStatus } = this.state;
+    if (loginStatus === true) {
+      history.push('/addJob');
+    } else {
+      this.handleNotLogged();
+    }
+  }
+
+  handleNotLogged() {
+    try {
+      alert('Please login with your account details to add a new job listing!');
+      } catch (error) {
+        alert('There seems to be a problem!');
+      }
+    } 
+
+render() {
+  const { classes, children, filter, handleFilterChange } = this.props;
   console.log(children);
   return (
     <div className={classes.root}>
@@ -41,9 +72,9 @@ function ButtonAppBar(props) {
         <Route exact path="/addjob" component={AddJob} />
         <Toolbar>
           <FormControl>
-          <InputLabel>
-            Type
-          </InputLabel>
+            <InputLabel>
+              Type
+            </InputLabel>
             <Select
               value={filter}
               color="default"
@@ -74,16 +105,18 @@ function ButtonAppBar(props) {
           <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
             {children}
           </Typography>
-          <Button component={Link} to="/addJob" variant="outlined" color="default" className={classes.button}>
+          <Button onClick={this.handleClick} color="default" className={classes.button}>
                 Add Listing
           </Button>
         </Toolbar>
       </AppBar>
     </div>
-  );
+    );
+  }
 }
 
-ButtonAppBar.propTypes = {
+
+/*{ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+};}*/
 export default withStyles(styles)(ButtonAppBar);
