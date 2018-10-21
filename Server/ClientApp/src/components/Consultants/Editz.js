@@ -73,13 +73,13 @@ class Editz extends React.Component {
     open: false,
     fname: this.props.firstName,
     lname: this.props.lastName,
-    website: this.props.website,
-    email: this.props.hisemail,
+    website: this.props.consultwebsite,
+    email: this.props.consultemail,
     phone: this.props.phone,
     address1: this.props.addy1,
     address2: this.props.addy2,
     suburb: this.props.sub,
-    city: this.props.city,
+    city: this.props.consultcity,
     country: this.props.nation,
     postalcode: this.props.pCode,
     desc: this.props.consultDescription,
@@ -361,7 +361,7 @@ class Editz extends React.Component {
                    <TextField
                      id="standard-name"
                      label="Email"
-                     placeholder={this.props.hisemail}
+                     placeholder={this.state.email}
                      className={classes.textField}
                      margin="large"
                    />

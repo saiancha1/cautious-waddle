@@ -98,7 +98,7 @@ const userCanEdit = (con) => {
             consultDescription={con.consultantDesc}
             speciality={con.specialistArea}
             consultwebsite={con.website}
-            hisemail={con.email}
+            consultemail={con.email}
             phone={con.phone}
             addy1={con.address1}
             addy2={con.address2}
@@ -126,7 +126,7 @@ const Consultant = (props) => {
       consultDescription={con.consultantDesc}
       speciality={con.specialistArea}
       consultwebsite={con.website}
-      hisemail={con.email}
+      consultemail={con.email}
       phone={con.phone}
       addy1={con.address1}
       addy2={con.address2}
