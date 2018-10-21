@@ -362,6 +362,7 @@ class Editz extends React.Component {
                      id="standard-name"
                      label="Email"
                      value={this.state.email}
+                     onChange={this.handleChange}
                      placeholder={this.props.consultemail}
                      className={classes.textField}
                      margin="large"

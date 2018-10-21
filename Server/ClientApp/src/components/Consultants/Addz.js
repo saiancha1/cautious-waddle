@@ -330,6 +330,7 @@ class Addz extends React.Component {
                     label="Email"
                     value={this.state.email}
                     className={classes.textField}
+                    onChange={this.handleChange}
                     margin="large"
                     required
                   />
