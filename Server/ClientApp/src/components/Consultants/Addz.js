@@ -49,22 +49,21 @@ const styles = theme => ({
   media: {
     height: 350,
     width: 345,
-    marginLeft: 50,
+    marginLeft: 170,
 
   },
 
   spacedout: {
-    marginLeft: 200,
-    marginTop: 20,
+    marginLeft: 350,
+    marginTop: -60,
   },
   buttonspaced: {
-    marginLeft: 150,
-    marginTop: 20,
+    marginLeft: 270,
   },
 
   buttonspacedtwo: {
-    marginLeft: 170,
-    marginTop: 20,
+    marginLeft: 320,
+    marginTop: 0,
   },
 });
 
@@ -113,9 +112,27 @@ class Addz extends React.Component {
     }
   }
 
+  requiredFieldMsg() {
+    try {
+      alert('Please fill out all required fields');
+      // window.location.reload();
+    } catch (error) {
+      alert('There seems to be a problem!');
+    }
+  }
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+
+  requiredFieldCheck = () => {
+    if (this.state.email == '' || this.state.exp == '' || this.state.fname == '' || this.state.lname == ''
+    || this.state.city == '' || this.state.country == '' || this.state.desc == '') {
+      this.requiredFieldMsg();
+      return false;
+    }
+  };
 
   handleImageUpload = (e) => {
     e.preventDefault();
@@ -195,6 +212,10 @@ class Addz extends React.Component {
       imgu,
     } = this.state;
 
+    if (this.requiredFieldCheck() == false) {
+      return false;
+    }
+
     this.checkforImage = () => {
       if (imgu == null) {
         try {
@@ -236,13 +257,13 @@ class Addz extends React.Component {
           }),
         });
         this.handleSubscribe();
+        this.handleClose();
+        window.location.reload();
       }
     };
 
     const PostingConsultantInfo = () => res.json();
     res();
-    this.handleClose();
-    window.location.reload();
   }
 
   render() {
@@ -278,30 +299,33 @@ class Addz extends React.Component {
                     name="fname"
                     label="First Name"
                     className={classes.textField}
-                    placeholder={this.props.firstName}
+                    // placeholder={this.props.firstName}
                     value={this.state.fname}
                     onChange={this.handleChange}
                     margin="large"
+                    required
                   />
                   <TextField
                     id="standard-name"
                     name="lname"
                     label="Last Name"
                     className={classes.textField}
-                    placeholder={this.props.lastName}
+                    // placeholder={this.props.lastName}
                     value={this.state.lname}
                     onChange={this.handleChange}
                     margin="large"
+                    required
                   />
                   <TextField
                     id="standard-name"
                     label="Specialist Area"
                     name="exp"
-                    placeholder={this.props.speciality}
+                    // placeholder={this.props.speciality}
                     className={classes.textField}
                     value={this.state.exp}
                     onChange={this.handleChange}
                     margin="large"
+                    required
                   />
                   <TextField
                     id="standard-name"
@@ -309,7 +333,7 @@ class Addz extends React.Component {
                     name="website"
                     value={this.state.website}
                     onChange={this.handleChange}
-                    placeholder={this.props.website}
+                    placeholder="http://www.MyWebsite.com"
                     className={classes.textField}
                     margin="large"
                   />
@@ -319,16 +343,19 @@ class Addz extends React.Component {
                     name="phone"
                     value={this.state.phone}
                     onChange={this.handleChange}
-                    placeholder={this.props.phone}
+                    // placeholder={this.props.phone}
                     className={classes.textField}
                     margin="large"
                   />
                   <TextField
                     id="standard-name"
                     label="Email"
-                    placeholder={this.props.hisemail}
+                    name="email"
+                    value={this.state.email}
                     className={classes.textField}
+                    onChange={this.handleChange}
                     margin="large"
+                    required
                   />
                 </FormGroup>
                 <FormGroup>
@@ -338,7 +365,7 @@ class Addz extends React.Component {
                     name="address1"
                     value={this.state.address1}
                     onChange={this.handleChange}
-                    placeholder={this.props.addy1}
+                    // placeholder={this.props.addy1}
                     className={classes.textField}
                     margin="large"
                   />
@@ -348,7 +375,7 @@ class Addz extends React.Component {
                     name="address2"
                     value={this.state.address2}
                     onChange={this.handleChange}
-                    placeholder={this.props.addy2}
+                    // placeholder={this.props.addy2}
                     className={classes.textField}
                     margin="large"
                   />
@@ -358,7 +385,7 @@ class Addz extends React.Component {
                     name="suburb"
                     value={this.state.suburb}
                     onChange={this.handleChange}
-                    placeholder={this.props.sub}
+                    // placeholder={this.props.sub}
                     className={classes.textField}
                     margin="large"
                   />
@@ -368,9 +395,10 @@ class Addz extends React.Component {
                     name="city"
                     value={this.state.city}
                     onChange={this.handleChange}
-                    placeholder={this.props.city}
+                    // placeholder={this.props.city}
                     className={classes.textField}
                     margin="large"
+                    required
                   />
                   <TextField
                     id="standard-name"
@@ -378,9 +406,10 @@ class Addz extends React.Component {
                     name="country"
                     value={this.state.country}
                     onChange={this.handleChange}
-                    placeholder={this.props.nation}
+                    // placeholder={this.props.nation}
                     className={classes.textField}
                     margin="large"
+                    required
                   />
                   <TextField
                     id="standard-name"
@@ -388,29 +417,47 @@ class Addz extends React.Component {
                     name="postalcode"
                     value={this.state.postalcode}
                     onChange={this.handleChange}
-                    placeholder={this.props.pCode}
+                    // placeholder={this.props.pCode}
                     className={classes.textField}
                     margin="large"
                   />
-                </FormGroup>
-                <Col>
-                  <TextField
-                    id="standard-multiline-static"
-                    label="Consultant Description"
-                    name="desc"
-                    value={this.state.desc}
-                    onChange={this.handleChange}
-                    multiline
-                    rows="4"
+                  <Col>
+                    <TextField
+                      id="standard-multiline-static"
+                      label="Consultant Description"
+                      name="desc"
+                      value={this.state.desc}
+                      onChange={this.handleChange}
+                      multiline
+                      rows="4"
                   // defaultValue="Default Value"
-                    className={classes.textField}
-                    margin="large"
-                  />
+                      className={classes.textField}
+                      margin="large"
+                      required
+                    />
 
-                </Col>
-                <Col>
-                  <Col />
+                  </Col>
+                </FormGroup>
+                <ListItem>
+                  <FormGroup>
+                    <CardMedia
+                      className={classes.media}
+                      image={this.state.imgu}
+                      title={this.props.lastName}
+                    />
+                    <Typography variant="caption">
 
+                  Current Image
+                    </Typography>
+                    <Row>
+                      <Input type="file" onChange={this.fileSelectedHandler}>Upload New Image</Input>
+                    </Row>
+                    <Row>
+                      <Button onClick={this.handleImageUpload}>Submit New Image</Button>
+                    </Row>
+                  </FormGroup>
+                </ListItem>
+                {/* <Col>
                   <Row>
 
                     <Typography
@@ -447,7 +494,7 @@ Submit New Image
                     className={classes.media}
                     image={this.state.imgu}
                   />
-                </Col>
+                </Col> */}
               </form>
             </ListItem>
           </List>
