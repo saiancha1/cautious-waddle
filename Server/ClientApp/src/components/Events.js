@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlusCircle, faCalendarAlt, faMapMarkerAlt, faUserAlt, faLaptop, faPhone,
+} from '@fortawesome/free-solid-svg-icons';
 import Card from './Events/Card';
 import AuthService from './Authentication/AuthService';
 import eventImage from '../images/hall-meeting.jpg';
@@ -24,11 +26,10 @@ export default class Events extends Component {
     };
 
     this.handleAddEvent = this.handleAddEvent.bind(this);
-    // this.scrollTo = this.scrollTo.bind(this);
+    this.getFullDate = this.getFullDate.bind(this);
   }
 
   async componentDidMount() {
-    // window.scrollTo(0, 0);
     try {
       const res = await fetch('api/events/getEvents');
       const events = await res.json();
@@ -48,14 +49,17 @@ export default class Events extends Component {
     }
   }
 
-  handleAddEvent() {
-    this.setState({ loggedIn: this.Auth.loggedIn() });
-    const { loggedIn } = this.state;
-    if (loggedIn) {
-      this.props.history.push('events/add');
-    } else {
-      alert('To add your own please log in or create an account ');
-    }
+  // Converts datetime to date string
+  getFullDate(feature) {
+    // this.getFullDate = 'getFullDate';
+    const d = new Date(feature.startDate);
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    };
+    const hour = d.toLocaleString('en-US', options);
+    return (`${d.toDateString()}, ${hour}`);
   }
 
   handleFilterEvent(param) {
@@ -71,11 +75,18 @@ export default class Events extends Component {
     }
   }
 
+  handleAddEvent() {
+    this.setState({ loggedIn: this.Auth.loggedIn() });
+    const { loggedIn } = this.state;
+    if (loggedIn) {
+      this.props.history.push('events/add');
+    } else {
+      alert('To add your own please log in or create an account ');
+    }
+  }
+
   render() {
     const { feature } = this.props.location.state;
-
-    console.log(this.state.loggedIn);
-
     return (
       <div>
         <div className="events-container">
@@ -125,17 +136,33 @@ export default class Events extends Component {
         {feature !== 'none' ? (
           <div className="event-grid-container">
             <div className="event-grid-item event-grid-image">
-              <img className="event-image" src={feature.imageURL} alt="event" />
+              <img className="event-image event-card-image" src={feature.imageURL} alt="event" />
             </div>
             <div className="event-grid-item event-headings">
               <h2>{feature.eventName}</h2>
-              <h2>{feature.startDate}</h2>
-              <h2>{feature.eventLocation}</h2>
-              <h2>{feature.hostedBy}</h2>
-              <h2>{feature.website}</h2>
-              <h2>{feature.contact}</h2>
+              <h2>
+                <FontAwesomeIcon className="feature-event-icon" icon={faCalendarAlt} />
+                {this.getFullDate(feature)}
+              </h2>
+              <h2>
+                <FontAwesomeIcon className="feature-event-icon" icon={faMapMarkerAlt} />
+                {feature.eventLocation}
+              </h2>
+              <h2>
+                <FontAwesomeIcon className="feature-event-icon" icon={faUserAlt} />
+                {feature.hostedBy}
+              </h2>
+              <h2>
+                <FontAwesomeIcon className="feature-event-icon" icon={faLaptop} />
+                {feature.website ? (feature.website) : ('Not Available')}
+              </h2>
+              <h2>
+                <FontAwesomeIcon className="feature-event-icon" icon={faPhone} />
+                {feature.contact}
+              </h2>
             </div>
             <div className="event-grid-item event-desc">
+              <h2>Whats going on:</h2>
               <p>{feature.eventDescription}</p>
             </div>
           </div>
