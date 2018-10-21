@@ -1,6 +1,9 @@
 .event-grid {
   display: grid;
   grid-template-columns: auto auto auto;
+  width: 970px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .grid-item {
@@ -13,3 +16,14 @@
 .card-link:focus, :hover, :visited, :link, :active {
   text-decoration: none !important;
 }
+
+.individual-card-event {
+  width: 300px;
+  margin: 10px auto;
+  text-align: center;
+  box-shadow: 0 0 4px #888;
+}
+
+/* [class^="MuiButtonBase-root-"] {
+  width: 298px;
+} */
