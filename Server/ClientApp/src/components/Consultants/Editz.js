@@ -361,6 +361,7 @@ class Editz extends React.Component {
                    <TextField
                      id="standard-name"
                      label="Email"
+                     name="email"
                      value={this.state.email}
                      onChange={this.handleChange}
                      placeholder={this.props.consultemail}

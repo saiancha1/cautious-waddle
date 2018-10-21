@@ -328,6 +328,7 @@ class Addz extends React.Component {
                   <TextField
                     id="standard-name"
                     label="Email"
+                    name="email"
                     value={this.state.email}
                     className={classes.textField}
                     onChange={this.handleChange}
