@@ -5,8 +5,12 @@ import Consultant from './Consultants/Consultant';
 import AuthService from './Authentication/AuthService';
 import history from './history';
 import Addz from './Consultants/Addz';
-import consultantimage from '../images/consulting2.jpg';
+import consultantimage from '../images/consulting1.jpg';
 import './consultants.css';
+import grey from '@material-ui/core/colors/grey';
+
+
+const mygrey = grey[700];
 
 
 const style = {
@@ -71,9 +75,7 @@ class Consultants extends Component {
      const { classes } = this.props;
      return (
        <div>
-         <div className="myimage">
-           <img src={consultantimage} alt="consulting1" />
-         </div>
+         <img className="consultimage" src={consultantimage} alt="consulting2" />
          <div className="consultWelcome" pull-right>
            <h1>Tech Consultants</h1>
            <h4>
@@ -81,10 +83,12 @@ class Consultants extends Component {
              {' '}
            </h4>
            <h4>
-             In Palmerstorn North Tech
+             {/* In Palmerstorn North Tech */}
              {' '}
 
            </h4>
+           <Addz className="addbutton" />
+
          </div>
 
 
@@ -95,7 +99,6 @@ class Consultants extends Component {
 
          <Consultant cl={this.state.consultants} />
          {/* <Button onClick={this.handleClick}> Join Consultants</Button> */}
-         <Addz />
        </div>
 
      );
