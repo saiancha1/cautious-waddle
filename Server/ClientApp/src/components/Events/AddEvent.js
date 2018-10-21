@@ -3,7 +3,7 @@ import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import NumericInput from 'react-numeric-input';
 import AuthService from '../Authentication/AuthService';
-import './events.css';
+import './events-folder.css';
 
 
 export default class AddEvent extends Component {
