@@ -21,9 +21,65 @@
   width: 300px;
   margin: 10px auto;
   text-align: center;
-  box-shadow: 0 0 4px #888;
+  /* box-shadow: 0 0 4px #888; */
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);
 }
 
-/* [class^="MuiButtonBase-root-"] {
+.card-action {
   width: 298px;
-} */
+}
+
+.add-event-wrapper {
+  display: table;
+  width: 945px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-event-wrapper button{
+  float: right;
+  margin-top: 11px;
+  margin-top: 11px;
+  border: none;
+}
+
+.fa-plus {
+  margin-right: 10px 
+}
+
+.add-event-wrapper:hover {
+  color: #d9534f;
+}
+
+.event-grid-container{
+  display: grid;
+  width: 945px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-grid-image {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+  width: 470px;
+  height: 285px;
+}
+
+.event-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+
+.event-headings {
+  grid-column: 4 / span 6;
+  grid-row: 1
+}
+
+.event-desc {
+  grid-column: 1 / span 6;
+  grid-row: 3;
+}
+
+

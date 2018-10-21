@@ -113,17 +113,31 @@ export default class Events extends Component {
             All
           </button>
         </div>
-        <button type="submit" className="add-event" onClick={this.handleAddEvent}>
-          <FontAwesomeIcon className="fa-plus" icon={faPlusCircle} />
-          <h4>Add your own</h4>
-        </button>
+        <div className="add-event-wrapper">
+          <button type="submit" className="add-event" onClick={this.handleAddEvent}>
+
+            <h4>
+              <FontAwesomeIcon className="fa-plus" icon={faPlusCircle} />
+                 Add your own
+            </h4>
+          </button>
+        </div>
         {feature !== 'none' ? (
-          <div>
-            <h2>{feature.eventName}</h2>
-            <br />
-            <h3>{feature.eventDescription}</h3>
-            <br />
-            <h3>{feature.eventLocation}</h3>
+          <div className="event-grid-container">
+            <div className="event-grid-item event-grid-image">
+              <img className="event-image" src={feature.imageURL} alt="event" />
+            </div>
+            <div className="event-grid-item event-headings">
+              <h2>{feature.eventName}</h2>
+              <h2>{feature.startDate}</h2>
+              <h2>{feature.eventLocation}</h2>
+              <h2>{feature.hostedBy}</h2>
+              <h2>{feature.website}</h2>
+              <h2>{feature.contact}</h2>
+            </div>
+            <div className="event-grid-item event-desc">
+              <p>{feature.eventDescription}</p>
+            </div>
           </div>
         ) : ('')}
         <div className="event-grid">
