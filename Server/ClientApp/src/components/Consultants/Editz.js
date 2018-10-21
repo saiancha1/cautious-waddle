@@ -136,6 +136,22 @@ class Editz extends React.Component {
       </div>;
   };
 
+  requiredFieldMsg() {
+    try {
+      alert('Please fill out all required fields');
+      // window.location.reload();
+    } catch (error) {
+      alert('There seems to be a problem!');
+    }
+  }
+
+  requiredFieldCheck = () => {
+    if (this.state.email == '' || this.state.exp == '' || this.state.fname == '' || this.state.lname == ''
+    || this.state.city == '' || this.state.country == '' || this.state.desc == '') {
+      this.requiredFieldMsg();
+      return false;
+    }
+  };
 
   handleSubscribe() {
     try {
@@ -175,6 +191,10 @@ class Editz extends React.Component {
       imgu,
       cID,
     } = this.state;
+
+    if (this.requiredFieldCheck() == false) {
+      return false;
+    }
 
     this.checkforImage = () => {
       if (imgu == null) {
