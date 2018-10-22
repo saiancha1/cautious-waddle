@@ -136,6 +136,8 @@ class ConST extends Component {
                   {this.props.canEdit}
                 </div>
               </CardContent>
+
+              
               {/* <div>
               <CardActions className={classes.actions} disableActionSpacing>
                 <IconButton aria-label="Add to favorites">
