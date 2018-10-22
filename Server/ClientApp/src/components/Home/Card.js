@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -66,42 +66,43 @@ class ImgMediaCard extends Component {
 
   render() {
     const { classes, event } = this.props;
-    console.log(event);
     return (
-      <div className="individual-card">
-        <Card className={classes.card}>
-          <CardActionArea>
-            <div className="card-date">
-              <span className="card-date-day">{this.getDay()}</span>
-              <br />
-              <span className="card-date-date">{this.getMonth()}</span>
-            </div>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              className={classes.media}
-              height="140"
-              image={event.imageURL} // FIXME: im using a temp image here because API url was not working - event.imageURL.
-              title="temp event"
-            />
-            <CardContent className="card-content">
-              <Typography className="full-date">
-                {this.getFullDate()}
-              </Typography>
-              <Typography className="event-title" gutterBottom component="h2">
-                {event.eventName}
-              </Typography>
-              <Typography className="event-host" component="p">
+      <Link className="card-link" to={{ pathname: '/events', state: { feature: event } }}>
+        <div className="individual-card">
+          <Card className={classes.card}>
+            <CardActionArea>
+              <div className="card-date">
+                <span className="card-date-day">{this.getDay()}</span>
+                <br />
+                <span className="card-date-date">{this.getMonth()}</span>
+              </div>
+              <CardMedia
+                component="img"
+                alt="Contemplative Reptile"
+                className={classes.media}
+                height="140"
+                image={event.imageURL} // FIXME: im using a temp image here because API url was not working - event.imageURL.
+                title="temp event"
+              />
+              <CardContent className="card-content">
+                <Typography className="full-date">
+                  {this.getFullDate()}
+                </Typography>
+                <Typography className="event-title" gutterBottom component="h2">
+                  {event.eventName}
+                </Typography>
+                <Typography className="event-host" component="p">
                 Hosted by
-                <span>
-                  {' '}
-                  {event.hostedBy}
-                </span>
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </div>
+                  <span>
+                    {' '}
+                    {event.hostedBy}
+                  </span>
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </div>
+      </Link>
     );
   }
 }
