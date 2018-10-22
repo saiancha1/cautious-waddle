@@ -76,7 +76,7 @@ handleFilterChange = (e) => {
 
  handleClick = (e) => {
    if (this.state.loginStatus == true) {
-     history.push('/addconsultant');
+     history.push('/addjob');
    } else {
      this.handleNotLogged();
    }
@@ -85,7 +85,6 @@ handleFilterChange = (e) => {
  handleNotLogged = () => {
   try {
     alert('Please login with your user account to add new job listsings!');
-    // window.location.reload();
   } catch (error) {
     alert('There seems to be a problem!');
   }
