@@ -74,7 +74,7 @@ class Consultants extends Component {
    render() {
      const { classes } = this.props;
      return (
-       <div>
+       <div className="consultimagecontainer">
          <img className="consultimage" src={consultantimage} alt="consulting2" />
          <div className="consultWelcome" pull-right>
            <h1>Tech Consultants</h1>

@@ -73,13 +73,13 @@ class Editz extends React.Component {
     open: false,
     fname: this.props.firstName,
     lname: this.props.lastName,
-    website: this.props.website,
-    email: this.props.hisemail,
+    website: this.props.consultwebsite,
+    email: this.props.consultemail,
     phone: this.props.phone,
     address1: this.props.addy1,
     address2: this.props.addy2,
     suburb: this.props.sub,
-    city: this.props.city,
+    city: this.props.consultcity,
     country: this.props.nation,
     postalcode: this.props.pCode,
     desc: this.props.consultDescription,
@@ -136,6 +136,22 @@ class Editz extends React.Component {
       </div>;
   };
 
+  requiredFieldMsg() {
+    try {
+      alert('Please fill out all required fields');
+      // window.location.reload();
+    } catch (error) {
+      alert('There seems to be a problem!');
+    }
+  }
+
+  requiredFieldCheck = () => {
+    if (this.state.email == '' || this.state.exp == '' || this.state.fname == '' || this.state.lname == ''
+    || this.state.city == '' || this.state.country == '' || this.state.desc == '') {
+      this.requiredFieldMsg();
+      return false;
+    }
+  };
 
   handleSubscribe() {
     try {
@@ -175,6 +191,10 @@ class Editz extends React.Component {
       imgu,
       cID,
     } = this.state;
+
+    if (this.requiredFieldCheck() == false) {
+      return false;
+    }
 
     this.checkforImage = () => {
       if (imgu == null) {
@@ -361,7 +381,10 @@ class Editz extends React.Component {
                    <TextField
                      id="standard-name"
                      label="Email"
-                     placeholder={this.props.hisemail}
+                     name="email"
+                     value={this.state.email}
+                     onChange={this.handleChange}
+                     placeholder={this.props.consultemail}
                      className={classes.textField}
                      margin="large"
                    />
