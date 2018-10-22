@@ -76,7 +76,7 @@ handleFilterChange = (e) => {
 
  handleClick = (e) => {
    if (this.state.loginStatus == true) {
-     history.push('/addconsultant');
+     history.push('/addjob');
    } else {
      this.handleNotLogged();
    }
@@ -85,17 +85,16 @@ handleFilterChange = (e) => {
  handleNotLogged = () => {
   try {
     alert('Please login with your user account to add new job listsings!');
-    // window.location.reload();
   } catch (error) {
     alert('There seems to be a problem!');
   }
 }
 
 
-  render() {
-    const { classes } = this.props;
-    console.log(this.state.jobs);
-    return (
+ render() {
+   const { classes } = this.props;
+   console.log(this.state.jobs);
+   return (
       <div className="jobs">
         <Route exact path="/summerTech" component={SummerTech} />
         <div className="jumbotron">
