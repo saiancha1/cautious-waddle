@@ -91,10 +91,10 @@ handleFilterChange = (e) => {
 }
 
 
-  render() {
-    const { classes } = this.props;
-    console.log(this.state.jobs);
-    return (
+ render() {
+   const { classes } = this.props;
+   console.log(this.state.jobs);
+   return (
       <div className="jobs">
         <Route exact path="/summerTech" component={SummerTech} />
         <div className="jumbotron">
