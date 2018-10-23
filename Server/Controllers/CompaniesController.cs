@@ -33,14 +33,27 @@ namespace cautious_waddle.Controllers
 
         [HttpGet("getCompanies")]
         public IActionResult GetCompanies(
-            [FromQuery] string businessType = null, [FromQuery] string specialistArea = null,
+            [FromQuery] int? summerJobs, [FromQuery] string businessType = null, [FromQuery] string specialistArea = null,
             [FromQuery] int minSize = 0, [FromQuery] int maxSize = 0, [FromQuery] string search = null) 
         {
             try 
             {
-                return Ok(_companiesRepository.GetCompaniesList(businessType, specialistArea, minSize, maxSize, search));
+                return Ok(_companiesRepository.GetCompaniesList(summerJobs, businessType, specialistArea, minSize, maxSize, search));
             } 
             catch 
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("getSummerInternships")]
+        public IActionResult GetSummerInternships()
+        {
+            try
+            {
+                return Ok(_companiesRepository.GetCompaniesList(1, null, null, 0, 0, null));
+            }
+            catch
             {
                 return BadRequest();
             }

@@ -18,7 +18,7 @@ namespace cautious_waddle.Models
             _context = context;
         }
 
-        public IEnumerable<CompaniesViewModel> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search)
+        public IEnumerable<CompaniesViewModel> GetCompaniesList(int? summerJobs, string businessType, string specialistArea, int minSize, int maxSize, string search)
         {
             IEnumerable<Company> companies = _context.Companies.Where(c => c.IsApproved == 1);
 
@@ -29,6 +29,9 @@ namespace cautious_waddle.Models
             }
 
             // Filters
+            if(summerJobs != null) {
+                companies = companies.Where(c => c.SummerJobs == summerJobs);
+            }
             if(businessType != null) {
                 companies = companies.Where(c => c.BusinessType == businessType);
             }
