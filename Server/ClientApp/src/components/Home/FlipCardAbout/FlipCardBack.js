@@ -9,9 +9,11 @@ export default class CardBack extends Component {
       <div className="card-side side-back">
         <div className="container-fluid">
           <p>
-            It is a long established fact that a reader will be distracted by the
-            readable content of a page when looking at its layout. The point of using Lorem
-            Ipsum is that it has a more-or-less normal distribution of letters.
+          We are a group of enthusiast professionals with a background in IT,
+          or a related discipline, whose mission is to connect the technology
+          companies/professionals in Palmerston North and start collaborating
+          together. If youd like to get in touch you can reach us via the
+          Contact page.
           </p>
         </div>
       </div>
