@@ -10,8 +10,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 export default class SubForm extends React.Component {
   state = {
     open: false,
-    fname: '',
-    email: '',
+    fname: null,
+    email: null,
     pop: false,
 
   };
@@ -22,7 +22,6 @@ export default class SubForm extends React.Component {
     const {
       fname,
       email,
-      pop,
     } = this.state;
 
     const res = () => fetch('/api/mailingList/subscribe', {
@@ -36,14 +35,19 @@ export default class SubForm extends React.Component {
         emailAddress: email,
       }),
     });
+
+    if (fname == null || email == null) {
+      alert('Please fill out both fields before subscribing.');
+    } else {
     // .then(res => res.json()).then(response => console.log('Success', JSON.stringify(response)));
-    this.setState({ open: false });
-    res();
-    this.handleSubscribe();
-    this.setState({
-      fname: '',
-      email: '',
-    });
+      this.setState({ open: false });
+      res();
+      this.handleSubscribe();
+      this.setState({
+        fname: null,
+        email: null,
+      });
+    }
   }
 
   handleClickOpen = () => {
