@@ -6,10 +6,10 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Redirect } from 'react-router';
 import AddCompanyForm1 from './Forms/AddCompanyForm1';
 import AddCompanyForm2 from './Forms/AddCompanyForm2';
 import AddCompanyForm3 from './Forms/AddCompanyForm3';
-import { Redirect } from 'react-router';
 
 const styles = theme => ({
   root: {
@@ -36,37 +36,37 @@ class AddCompany extends React.Component {
     this.state = {
       activeStep: 0,
       company: {
-        companyId:null,
-        users:null,
-        contactEmail:'',
-        companyName:'',
-        logo:'',
-        size:0,
-        businessType:'',
-        specialistArea:'',
-        companyDesc:'',
-        email:'',
-        address1:'',
-        address2:'',
-        suburb:'',
-        postalCode:'',
-        city:'',
-        country:'',
-        summerJobs:0
+        companyId: null,
+        users: null,
+        contactEmail: '',
+        companyName: '',
+        logo: '',
+        size: 0,
+        businessType: '',
+        specialistArea: '',
+        companyDesc: '',
+        email: '',
+        address1: '',
+        address2: '',
+        suburb: '',
+        postalCode: '',
+        city: '',
+        country: '',
+        summerJobs: 0,
       },
       file: null,
       imageUploaded: false,
-  
+
     };
     this.hide = this.hide.bind(this);
   }
-  
-componentWillMount() {
-  if(this.props.company)
-  {
-  this.setState({company:this.props.company});
+
+  componentWillMount() {
+    if (this.props.company) {
+      this.setState({ company: this.props.company });
+    }
   }
-}
+
   handleForm1Change = (e, val) => {
     const company = this.state.company;
     company[val] = e.target.value;
@@ -140,18 +140,18 @@ componentWillMount() {
     company.companyDesc = content;
     this.setState({ company });
   }
+
   hide = () => {
-    if(this.props.hide)
-    {
-    this.props.hide();
+    if (this.props.hide) {
+      this.props.hide();
     }
-    return <Redirect to='/'/>;
+    return <Redirect to="/" />;
   }
+
   handleAddCompanySubmit = () => {
     const company = this.state.company;
     const requiredFields = ['CompanyName', 'CompanyDescription', 'Company Email'];
-    if(company.companyId !== null)
-    {
+    if (company.companyId !== null) {
       fetch('api/companies/editCompany', {
         method: 'POST',
         headers: {
@@ -159,24 +159,23 @@ componentWillMount() {
           'content-Type': 'application/json',
         },
         body: JSON.stringify(company),
-  
+
       })
         .then((response) => { (response.status === 200) ? this.hide() : alert('fail1'); })
         .catch();
-    }
-    else{
-    fetch('api/companies/addCompany', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('id_token')}`,
-        'content-Type': 'application/json',
-      },
-      body: JSON.stringify(company),
+    } else {
+      fetch('api/companies/addCompany', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          'content-Type': 'application/json',
+        },
+        body: JSON.stringify(company),
 
-    })
-      .then((response) => { (response.status === 200) ? this.setState({redirect:true}): alert('fail1'); })
-      .catch();
-  }
+      })
+        .then((response) => { (response.status === 200) ? this.setState({ redirect: true }) : alert('fail1'); })
+        .catch();
+    }
   }
 
   render() {
@@ -202,11 +201,10 @@ componentWillMount() {
       Country: null,
       SummerJobs: 0,
     };
-    if(this.state.redirect)
-    {
+    if (this.state.redirect) {
       return (
-        <Redirect to='/companies'/>
-      )
+        <Redirect to="/companies" />
+      );
     }
     return (
       <div className={classes.root}>
@@ -226,22 +224,22 @@ componentWillMount() {
             </div>
           ) : (
             <div>
-                <div className="Row">
-                  {this.getStepContent(activeStep)}
-                </div>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={this.handleBack}
-                    className={classes.backButton}
-                  >
-                    Back
-                  </Button>
-                  <Button variant="contained" color="primary" onClick={this.handleNext}>
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
-                </div>
+              <div className="Row">
+                {this.getStepContent(activeStep)}
               </div>
+              <div>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={this.handleBack}
+                  className={classes.backButton}
+                >
+                    Back
+                </Button>
+                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       </div>

@@ -14,41 +14,6 @@ import Map from './Map';
 const CompanyView = (props) => {
   const company = props.companyToRender;
   const address = `${company.address1}, ${company.suburb}`;
-  // console.log(company.address1 + company.address2);
-  // let lat;
-  // let lng;
-  // let map;
-  // Geocode.setApiKey('AIzaSyDcEb-gfVWmcT1ek-MDYS_mOnvBzNVZqyI');
-  // Geocode.fromAddress(address).then(
-  //   (response) => {
-  //     const { lat, lng } = response.results[0].geometry.location;
-  //     this.lat = lat;
-  //     this.lng = lng;
-  //     // console.log(lat);
-  //     // console.log(lng);
-  //     this.map = (
-  //       <GoogleMapItem
-  //         containerElement={<div style={{ height: '500px', width: '500px' }} />}
-  //         mapElement={<div style={{ height: '80%' }} lat={this.lat} lng={this.lng} />}
-  //       />
-  //     );
-  //   },
-  //   (error) => {
-  //     console.error(error);
-  //   },
-  // );
-
-  // const GoogleMapItem = withGoogleMap(props => (
-  //   <GoogleMap
-  //     defaultCenter={{ lat: this.lat, lng: this.lng }}
-  //     defaultZoom={13}
-  //   >
-  //     {/* {console.log(this.lat)} */}
-  //     <Marker
-  //       position={{ lat: this.lat, lng: this.lng }}
-  //     />
-  //   </GoogleMap>
-  // ));
 
   return (
 

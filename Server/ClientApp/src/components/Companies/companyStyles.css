@@ -12,3 +12,46 @@
         height: 80px    
         }
 
+.company-card {
+  background-color: #2f2f2f0a !important;
+  /* border: 1px black solid; */
+  max-width:300px;
+}
+
+.company-list-container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 900px;
+}
+
+.company-card-container {
+  margin: 10px 0px 10px 0px;
+  font-family: "Open Sans Condensed", sans-serif !important;
+  border-radius: 0px;
+  border-right: 1px black solid;
+}
+
+.company-card-container:nth-child(3) {
+  border: none;
+}
+
+.show-company {
+  border: none;
+  background: none;
+}
+
+.show-company:hover {
+  color: #000000;
+}
+
+
+@media screen and (max-width: 1000px) {
+  .company-list-container {
+    text-align: -webkit-center;
+    text-align: -moz-center;
+  }
+
+  .company-card-container {
+    border: none;
+  }
+}
