@@ -7,6 +7,10 @@ import { connect } from 'react-redux';
 import { compLoggedIn } from '../../store/reducer';
 import AuthService from './AuthService';
 import SignupForm from './SignupForm';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 // import '../../App.css';
 import './AuthStyle.css';
 
@@ -76,13 +80,12 @@ class LoginModal extends React.Component {
 
     if (this.Auth.loggedIn()) {
       return (
-        <button
-          className="button-sign"
-          type="button"
-          onClick={this.props.handleLogout}
-        >
-          Log out
-        </button>
+        <div>
+        <IconButton color="inherit">
+            <AccountCircle onClick= {this.props.handleMenuOpen} />
+          </IconButton>
+        {this.props.renderMenu}
+        </div>
       );
     } else {
       return (
