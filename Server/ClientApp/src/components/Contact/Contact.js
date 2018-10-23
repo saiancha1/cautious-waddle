@@ -37,8 +37,8 @@ class Contact extends Component {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              firstName: this.state.fname,
-              lastName: this.state.lname,
+              firstName: this.state.fName,
+              lastName: this.state.lName,
               emailAddress: this.state.email,
               message: this.state.msg,
 
@@ -78,7 +78,7 @@ class Contact extends Component {
                     className="msg-name-r"
                     name="fName"
                     placeholder="First Name"
-                    value={fName}
+                    value={this.state.fName}
                     onChange={this.handleChange}
                     required
                   />
@@ -88,7 +88,7 @@ class Contact extends Component {
                     className="msg-name-l"
                     name="lName"
                     placeholder="Last Name"
-                    value={lName}
+                    value={this.state.lName}
                     onChange={this.handleChange}
                     required
                   />
@@ -101,7 +101,7 @@ class Contact extends Component {
                     name="email"
                     placeholder="Email"
                     type="email"
-                    value={email}
+                    value={this.state.email}
                     onChange={this.handleChange}
                     required
                   />
@@ -111,9 +111,9 @@ class Contact extends Component {
                 <Col xs={12}>
                   <textarea
                     className="contact-msg"
-                    name="message"
+                    name="msg"
                     placeholder="Message"
-                    value={message}
+                    value={this.state.msg}
                     onChange={this.handleChange}
                   />
                 </Col>
