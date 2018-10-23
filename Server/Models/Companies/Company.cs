@@ -18,8 +18,8 @@ namespace cautious_waddle.Models
         public DateTime ReminderDate { get; set; }
         [JsonProperty("contactEmail")]
         public string ContactEmail { get; set; }
-        [JsonProperty("users")]
-        public List<CompanyUser> Users { get; set; }
+        [JsonProperty("userId")]
+        public string UserId { get; set; }
         [JsonProperty("companyName")]
         public string CompanyName { get; set; }
         [JsonProperty("logo")]

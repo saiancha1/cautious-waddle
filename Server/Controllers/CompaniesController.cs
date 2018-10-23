@@ -105,10 +105,7 @@ namespace cautious_waddle.Controllers
 
                 Company company = Mapper.Map<CompaniesViewModel, Company>(companyViewModel);
                 
-                company.Users = new List<CompanyUser>();
-                CompanyUser user = new CompanyUser();
-                    user.Id = IdentityHelper.GetUserId(HttpContext);             
-                company.Users.Add(user);
+                company.UserId = IdentityHelper.GetUserId(HttpContext);
 
                 company.CreationDate = DateTime.Now;
                 company.LastUpdate = DateTime.Now;
@@ -153,9 +150,9 @@ namespace cautious_waddle.Controllers
                 Company company = new Company();
                 company = _companiesRepository.GetCompanyById_model(id);
                 
-                if(company != null && company.Users != null)
+                if(company != null && company.UserId != null)
                 {
-                   if(company.Users.Any(user => user.Id == IdentityHelper.GetUserId(HttpContext)))
+                   if(company.UserId == IdentityHelper.GetUserId(HttpContext))
                    {
                        _companiesRepository.DeleteCompany(company);
                        return Ok();
@@ -202,9 +199,7 @@ namespace cautious_waddle.Controllers
             {
                 if(company.CompanyId.HasValue)
                 {
-                    List<CompanyUser> users = _companiesRepository.GetUsers(company.CompanyId.Value);
-
-                    if(users.Any(u => u.Id == IdentityHelper.GetUserId(HttpContext)))
+                    if(company.UserId == IdentityHelper.GetUserId(HttpContext))
                     {
                         _companiesRepository.UpdateCompany(company);
                         return Ok();

@@ -106,7 +106,7 @@ namespace cautious_waddle.Controllers
                     }
                     else
                     {
-                        if(company.Users.Any(user => user.Id == UserId) == false)
+                        if(company.UserId != UserId)
                         {
                             return Unauthorized();
                         }
