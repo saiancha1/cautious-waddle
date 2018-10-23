@@ -30,10 +30,7 @@ const styles = {
 };
 
 function ButtonAppBar(props) {
-  const handleChange = () => {
-  };
-
-  const { classes, children, filter, handleFilterChange } = props;
+  const { classes, children, filter, handleFilterChange, handleClick } = props;
   console.log(children);
   return (
     <div className={classes.root}>
@@ -58,23 +55,10 @@ function ButtonAppBar(props) {
               <MenuItem value="Contract">Contract</MenuItem>
             </Select>
           </FormControl>
-          <Input
-            margin="dense"
-            position="static"
-            startAdornment={(
-              <InputAdornment>
-                <SearchIcon />
-              </InputAdornment>
-              )}
-            color="default"
-            label="Search"
-            id="search-jobs"
-            variant="outlined"
-          />
           <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
             {children}
           </Typography>
-          <Button component={Link} to="/addJob" variant="outlined" color="default" className={classes.button}>
+          <Button onClick={handleClick} variant="outlined" color="default" className={classes.button}>
                 Add Listing
           </Button>
         </Toolbar>
@@ -87,3 +71,4 @@ ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 export default withStyles(styles)(ButtonAppBar);
+

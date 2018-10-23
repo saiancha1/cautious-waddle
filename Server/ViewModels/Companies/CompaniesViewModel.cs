@@ -45,6 +45,7 @@ namespace cautious_waddle.ViewModels
         public string Country { get; set; }
         [JsonProperty("summerJobs")]
         public int SummerJobs { get; set; }
-
+        [JsonProperty("website")]
+        public string Website { get; set; }
     }
 }

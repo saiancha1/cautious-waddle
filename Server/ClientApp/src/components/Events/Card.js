@@ -65,12 +65,11 @@ class ImgMediaCard extends Component {
 
   render() {
     const { classes, event } = this.props;
-    console.log(event);
     return (
       <Link className="card-link" to={{ pathname: '/events', state: { feature: event } }}>
-        <div className="individual-card">
+        <div className="individual-card individual-card-event ">
           <Card className={classes.card}>
-            <CardActionArea>
+            <CardActionArea className="card-action">
               <div className="card-date">
                 <span className="card-date-day">{this.getDay()}</span>
                 <br />

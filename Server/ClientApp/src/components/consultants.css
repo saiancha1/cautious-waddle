@@ -1,0 +1,27 @@
+.heroImg {
+  position: relative;
+  background: white url("../images/fsk.jpg") center center;
+  width: 100%;
+  max-height: 100%;
+  background-size: cover;
+  overflow: visible;
+  color: white;
+  padding-bottom: 275px;
+  margin-bottom: 5%;
+}
+
+h1 {
+  /* margin-top: 1rem; */
+  font-size: 4em; /* 40px/16=2.5em */
+}
+
+p {
+  font-size: 1.50em; /* 14px/16=0.875em */
+}
+
+  .mycontainer {
+      position: relative;
+      left: 7em;
+      top: 7em;
+
+}

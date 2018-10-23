@@ -8,11 +8,15 @@ import AppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
+import AuthService from './Authentication/AuthService';
 import ButtonAppBar from './ButtonAppBar/ButtonAppBar';
 import ComplexGrid from './ComplexGrid/ComplexGrid';
 import SummerTech from './SummerTech/SummerTech';
+import history from './history';
+
 
 const style = {
+
 
   AppBar: {
     marginTop: 10,
@@ -24,14 +28,18 @@ const style = {
     marginBottom: 30,
     gutterBottom: true,
   },
+
 };
 
 class Work extends Component {
+  Auth = new AuthService();
+
 state = {
   jobs: [],
   selectedJob: null,
   filter: 'All',
   originalJobs: [],
+  loginStatus: this.Auth.loggedIn(),
 };
 
 async componentWillMount() {
@@ -66,67 +74,77 @@ handleFilterChange = (e) => {
   }
 }
 
-render() {
-  const { classes } = this.props;
-  console.log(this.state.jobs);
-  return (
-    <div className="jobs" >
-     <Route exact path="/summerTech" component={SummerTech} />
-      <AppBar style={style.AppBar} position="static" color="default">
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          spacing={12}
-        >
+ handleClick = (e) => {
+   if (this.state.loginStatus == true) {
+     history.push('/addjob');
+   } else {
+     this.handleNotLogged();
+   }
+ }
+
+ handleNotLogged = () => {
+  try {
+    alert('Please login with your user account to add new job listsings!');
+  } catch (error) {
+    alert('There seems to be a problem!');
+  }
+}
+
+
+ render() {
+   const { classes } = this.props;
+   console.log(this.state.jobs);
+   return (
+      <div className="jobs">
+        <Route exact path="/summerTech" component={SummerTech} />
+        <div className="jumbotron">
+          <div className="container" pull-right>
+            <h3 color="white" className="h1">Job listings</h3>
+              <p>Looking for your next gig?</p>
+                  For summer internships click <Link to="/summertech">here</Link>
+          </div>
+        </div>
+        <Grid container spacing={12}>
           <Grid item sm={3} />
           <Grid item sm={6}>
-            <Typography align="center" variant="display3"> Job Listings </Typography>
+            <Paper>
+              <ButtonAppBar
+                style={style.AppBar}
+                position="static"
+                color="default"
+                filter={this.state.filter}
+                handleFilterChange={this.handleFilterChange}
+                handleClick={this.handleClick}
+              >
+                <Typography color="inherit" variant="display2" align="center" />
+              </ButtonAppBar>
+              <List className="listing" >
+                {this.state.jobs.map(job => (
+                  <div>
+                    <ListItem>
+                      <ComplexGrid
+                        jobTitle={job.jobTitle} 
+                        jobId={job.jobId} 
+                        firstName={job.contactFirstName} 
+                        secondName={job.contactLastName} 
+                        company={job.companyName} 
+                        desc={job.jobDescription} 
+                        salary={job.salary} 
+                        type={job.workType} 
+                        email={job.contactEmail}
+                        phone={job.phone}
+                      />    
+                  </ListItem>
+                    <Divider />
+                  </div>
+                ))}
+              </List>
+            </Paper>
           </Grid>
           <Grid item sm={3} />
         </Grid>
-      </AppBar>
-      <Grid container spacing={12}>
-        <Grid item sm={3} />
-        <Grid item sm={6}>
-          <Paper>
-            <ButtonAppBar
-              style={style.AppBar}
-              position="static"
-              color="default"
-              filter={this.state.filter}
-              handleFilterChange={this.handleFilterChange}
-            >
-              <Typography color="inherit" variant="display2" align="center" />
-            </ButtonAppBar>
-            <List className="listing" >
-              {this.state.jobs.map(job => (
-                <div>
-                  <ListItem>
-                    <ComplexGrid
-                      jobTitle={job.jobTitle} 
-                      jobId={job.jobId} 
-                      firstName={job.contactFirstName} 
-                      secondName={job.contactLastName} 
-                      company={job.companyName} 
-                      desc={job.jobDescription} 
-                      salary={job.salary} 
-                      type={job.workType} 
-                      email={job.contactEmail}
-                      phone={job.phone}
-                    />    
-                </ListItem>
-                  <Divider />
-                </div>
-              ))}
-            </List>
-          </Paper>
-        </Grid>
-         <Grid item sm={3} />
-      </Grid>
-    </div>
-  );
-}
+      </div>
+    );
+  }
 }
 export default Work;

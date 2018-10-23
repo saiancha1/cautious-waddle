@@ -1,10 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
+import grey from '@material-ui/core/colors/grey';
 import ConST from './ConsultantStyledRender';
 import AuthService from '../Authentication/AuthService';
-import history from '../history';
+import Editz from './Editz';
+
+const mygrey = grey[700];
 
 
 this.Auth = new AuthService();
@@ -19,10 +21,6 @@ const handleNoDelError = (e) => {
 
 const handleDelMsg = (e) => {
   alert('The selected Consultant has been Deleted.');
-};
-
-const handleEdit = (e) => {
-  console.log('EDIT SUCCESSFUL');
 };
 
 const handleDelete = (e) => {
@@ -57,6 +55,26 @@ const handleDelete = (e) => {
     res();
   }
 };
+// const handleNoEditMsg = (e) => {
+//   alert('Cannot Edit Right Now, Please Try Again.');
+// };
+
+// const handleEdit = (e) => {
+//   const connyId = e.target.value;
+//   console.log(connyId);
+
+//   if (connyId == undefined) {
+//     // console.log('undefined consultant ID');
+//     handleNoEditMsg();
+//   } else {
+//     console.log('finally  NUMBER');
+//     console.log(connyId);
+//     return connyId;
+
+//     // return <div><EditConsultant theID={connyId} /></div>;
+//   }
+// };
+
 
 const userCanEdit = (con) => {
   const authService = new AuthService();
@@ -69,14 +87,29 @@ const userCanEdit = (con) => {
 
       return (
         <div>
-          <Link to="/editcon">
-            <Button onClick={handleEdit}>Edit This Consultant</Button>
-          </Link>
-          {' '}
-          <Button onClick={handleDelete} value={con.consultantId}>Delete Consultant</Button>
+          {/* <Row> */}
+          {/* <Button onClick={handleEdit} value={con.consultantId}>Edit This Consultant</Button> */}
+          {/* <Button size="small" variant="contained" onClick={handleDelete} value={con.consultantId}>Delete</Button> */}
+          <Editz
+            consultimage={con.imageURL}
+            conID={con.consultantId}
+            firstName={con.firstName}
+            lastName={con.lastName}
+            consultDescription={con.consultantDesc}
+            speciality={con.specialistArea}
+            consultwebsite={con.website}
+            consultemail={con.email}
+            phone={con.phone}
+            addy1={con.address1}
+            addy2={con.address2}
+            sub={con.suburb}
+            pCode={con.postalCode}
+            consultcity={con.city}
+            nation={con.country}
+          />
+          {/* </Row> */}
         </div>);
     } else {
-      // console.log('IT DOESN"T WORK');
       return false;
     }
   }
@@ -87,19 +120,27 @@ const Consultant = (props) => {
   const consultantz = props.cl.map(con => (
     <ConST
       consultimage={con.imageURL}
+      conID={con.consultantId}
       firstName={con.firstName}
       lastName={con.lastName}
       consultDescription={con.consultantDesc}
-      hisemail={con.email}
-      consultcity={con.city}
+      speciality={con.specialistArea}
       consultwebsite={con.website}
-      conID={con.consultantId}
+      consultemail={con.email}
+      phone={con.phone}
+      addy1={con.address1}
+      addy2={con.address2}
+      sub={con.suburb}
+      pCode={con.postalCode}
+      consultcity={con.city}
       nation={con.country}
+
       canEdit={userCanEdit(con)}
 
     />
   ),
   );
+
   return (
     <div className="row">
       {consultantz}
@@ -107,11 +148,4 @@ const Consultant = (props) => {
   );
 };
 
-const mapStateToProps = state => (
-  {
-    auth: state.authenticated,
-  });
-
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Consultant);
+export default Consultant;

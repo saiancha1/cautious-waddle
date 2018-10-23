@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Router, Redirect, Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
 import Consultant from './Consultants/Consultant';
 import AuthService from './Authentication/AuthService';
 import history from './history';
+import Addz from './Consultants/Addz';
+import consultantimage from '../images/consulting1.jpg';
+import './consultants.css';
+import grey from '@material-ui/core/colors/grey';
 
+
+const mygrey = grey[700];
+
+
+const style = {
+
+  AppBar: {
+    marginTop: 10,
+    marginBottom: 10,
+    // colorPrimary: 'white',
+    // background: 'white',
+  },
+
+  consultimage: {
+    // width: '2000px',
+    // height: '400px',
+  },
+};
 
 // Creating initial state and setting it to empty
 class Consultants extends Component {
@@ -33,7 +54,7 @@ class Consultants extends Component {
   }
 
 
-  handleSubscribe() {
+  handleNotLogged() {
     try {
       alert('Please Login to Add Consultant');
       // window.location.reload();
@@ -44,29 +65,33 @@ class Consultants extends Component {
 
    handleClick = (e) => {
      if (this.state.loginStatus == true) {
-       console.log('click works');
        history.push('/addconsultant');
      } else {
-       this.handleSubscribe();
+       this.handleNotLogged();
      }
    }
 
    render() {
+     const { classes } = this.props;
      return (
-       <div>
-         <h1>Consultants</h1>
+       <div className="consultants">
+         <div className="heroImg">
+           <div className="mycontainer" pull-right>
+             <h1>Consultants</h1>
+             <p>Find out Who's who</p>
+             {' '}
+             <Addz />
+           </div>
+         </div>
+
          <Consultant cl={this.state.consultants} />
-         <Button onClick={this.handleClick}> Join Consultants</Button>
+         {/* <Button onClick={this.handleClick}> Join Consultants</Button> */}
        </div>
+
+
      );
    }
 }
 
-const mapStateToProps = state => (
-  {
-    auth: state.authenticated,
-  });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Consultants);
+export default Consultants;
