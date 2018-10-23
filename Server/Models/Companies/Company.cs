@@ -50,6 +50,7 @@ namespace cautious_waddle.Models
         public string Country { get; set; }
         [JsonProperty("summerJobs")]
         public int SummerJobs { get; set; }
-       
+        [JsonProperty("website")]
+        public string Website { get; set; }
     }
 }

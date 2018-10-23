@@ -119,6 +119,7 @@ namespace cautious_waddle.Models
             oldCompany.City           = company.City;
             oldCompany.Country        = company.Country;
             oldCompany.SummerJobs     = company.SummerJobs;
+            oldCompany.Website        = company.Website;
 
             // I don't think these are necassary because you can't pass them with the view model
             // _context.Entry(oldCompany).Property(c => c.CompanyId).IsModified = false;
