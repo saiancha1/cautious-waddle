@@ -67,7 +67,7 @@ class ImgMediaCard extends Component {
   render() {
     const { classes, event } = this.props;
     return (
-      <Link className="card-link" to={{ pathname: '/events', state: { feature: event } }}>
+      <Link to={{ pathname: '/events', state: { feature: event } }}>
         <div className="individual-card">
           <Card className={classes.card}>
             <CardActionArea>
@@ -81,7 +81,7 @@ class ImgMediaCard extends Component {
                 alt="Contemplative Reptile"
                 className={classes.media}
                 height="140"
-                image={event.imageURL} // FIXME: im using a temp image here because API url was not working - event.imageURL.
+                image={event.imageURL}
                 title="temp event"
               />
               <CardContent className="card-content">

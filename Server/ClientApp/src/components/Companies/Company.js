@@ -10,8 +10,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
     card: {
       maxWidth: 345,
-      marginTop:"30px"
-      
+      marginTop:"30px", 
     },
     media: {
       height: 140,
@@ -23,12 +22,13 @@ const styles = {
     let companyEdit;
     const edit = (props.canEdit) ? <Button onClick={this.companyEdit = props.editCompany}>Edit</Button> : null;
     return(
-    <div className="col-md-4">
-    <Card className={classes.card}>
+    <div className="col-md-4 company-card-container">
+    <Card className="company-card">
     <CardMedia
       className={classes.media}
       image={props.companyLogo}
       title={props.companyName}
+      height="140"
     />
     <CardContent>
       <Typography gutterBottom variant="headline" component="h2">
@@ -39,10 +39,9 @@ const styles = {
       </Typography>
     </CardContent>
     <CardActions>
-      
-      <Button size="small" color="primary" onClick={this.modal = props.handleModalOpen}>
-        More...
-      </Button>
+      <button className="show-company" onClick={this.modal = props.handleModalOpen}>
+        Show Details
+      </button>
       {edit}
     </CardActions>
   </Card>

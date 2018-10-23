@@ -9,9 +9,8 @@ export default class CardFront extends Component {
       <div className="card-side side-back">
         <div className="container-fluid">
           <p>
-          We various services via this site such as - company, consultant & job
-          listings. As well as Summer internships local events/meet up listings
-          and a subscription mailing list. Check out the site for more info.
+          We offer various services via this site such as listings for companies, consultants, jobs & summer internships.
+          We also provide listings of local events/meet-ups and a subscription mailing list. Check out the site for more info.
           </p>
         </div>
       </div>

@@ -29,7 +29,8 @@
     "react-date-picker": "7.0.0",
     "react-time-picker": "3.0.0",
     "react-numeric-input": "2.2.3",
-    "react-responsive-navbar": "1.0.11"
+    "react-responsive-navbar": "1.0.11",
+    "google-map-react":"1.0.9"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
