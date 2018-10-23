@@ -45,9 +45,29 @@
   text-align: -moz-center;
 }
 
+.about-blurb {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.about-block hr {
+  border: 0.5px black solid;
+  width: 90%;
+  max-width: 1000px;
+}
+
+.about-blurb h4 {
+  max-width: 903px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.3;
+  padding: 0 20px 0 20px;
+}
+
 .home-heading {
   text-align: center;
   font-size: 50px;
+  margin: 40px 0;
   font-family: "Comfortaa", cursive;
 }
 
@@ -56,16 +76,16 @@
 }
 
 .card-grid {
-  max-width: 800px;
+  max-width: 900px !important;
   text-align: -webkit-center;
 }
 .flip-cards {
-  max-width: 800px;
+  max-width: 900px !important;
 }
 
 .background-image-container {
   width: 100% !important;
-  height: 400px !important;
+  height: 410px !important;
 }
 .background-image {
   height: 100%;

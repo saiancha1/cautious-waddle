@@ -1,5 +1,6 @@
 CREATE TABLE Companies (
 	CompanyId        int           NOT NULL IDENTITY(1, 1),
+	UserId           nvarchar(450) NOT NULL,
 	IsApproved       int           NOT NULL,
 	CreationDate     datetime      NOT NULL,
 	LastUpdate       datetime      NOT NULL,

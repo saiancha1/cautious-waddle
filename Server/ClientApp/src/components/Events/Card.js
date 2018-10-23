@@ -65,7 +65,6 @@ class ImgMediaCard extends Component {
 
   render() {
     const { classes, event } = this.props;
-    console.log(event);
     return (
       <Link className="card-link" to={{ pathname: '/events', state: { feature: event } }}>
         <div className="individual-card individual-card-event ">

@@ -20,7 +20,7 @@ namespace cautious_waddle.Models
 
         public IEnumerable<CompaniesViewModel> GetCompaniesList(string businessType, string specialistArea, int minSize, int maxSize, string search)
         {
-            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users).Where(c => c.IsApproved == 1);
+            IEnumerable<Company> companies = _context.Companies.Where(c => c.IsApproved == 1);
 
             // Search
             if(search != null) {
@@ -47,7 +47,7 @@ namespace cautious_waddle.Models
 
         public IEnumerable<CompaniesViewModel> AdminGetCompanies(bool? approved)
         {
-            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
+            IEnumerable<Company> companies = _context.Companies;
 
             if(approved != null)
             {
@@ -61,27 +61,14 @@ namespace cautious_waddle.Models
 
         public IEnumerable<CompaniesViewModel> GetMyCompanies(string userId, bool? approved)
         {
-            IEnumerable<Company> companies = _context.Companies.Include(a => a.Users);
+            IEnumerable<Company> companies = _context.Companies.Where(c => c.UserId == userId);
 
             if(approved != null)
             {
                 companies = approved == true ? companies.Where(c => c.IsApproved == 1) : companies.Where(c => c.IsApproved == 0);
             }
 
-            List<Company> myCompanies = new List<Company>();
-            int count = 0;
-
-            foreach(Company company in companies)
-            {
-                List<CompanyUser> users = GetUsers(company.CompanyId.Value);
-                if(users.Any(u => u.Id == userId))
-                {
-                    count++;
-                    myCompanies.Add(company);
-                }
-            }
-
-            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(myCompanies);
+            IEnumerable<CompaniesViewModel> companiesViewModel = Mapper.Map<IEnumerable<Company>, IEnumerable<CompaniesViewModel>>(companies);
 
             return companiesViewModel;
         }
@@ -119,6 +106,7 @@ namespace cautious_waddle.Models
             oldCompany.City           = company.City;
             oldCompany.Country        = company.Country;
             oldCompany.SummerJobs     = company.SummerJobs;
+            oldCompany.Website        = company.Website;
 
             // I don't think these are necassary because you can't pass them with the view model
             // _context.Entry(oldCompany).Property(c => c.CompanyId).IsModified = false;
@@ -130,7 +118,7 @@ namespace cautious_waddle.Models
         }
         public CompaniesViewModel GetCompanyById_viewModel(int id)
         {
-            Company company = _context.Companies.Include(a => a.Users).SingleOrDefault(x => x.CompanyId == id);
+            Company company = _context.Companies.SingleOrDefault(x => x.CompanyId == id);
             CompaniesViewModel viewModel = Mapper.Map<Company, CompaniesViewModel>(company);
 
             return viewModel;
@@ -138,12 +126,7 @@ namespace cautious_waddle.Models
 
         public Company GetCompanyById_model(int id)
         {
-           return _context.Companies.Include(a => a.Users).SingleOrDefault(x => x.CompanyId == id);
-        }
-
-        public List<CompanyUser> GetUsers(int id)
-        {
-            return _context.Companies.Include(a => a.Users).SingleOrDefault(c => c.CompanyId == id).Users;
+           return _context.Companies.SingleOrDefault(x => x.CompanyId == id);
         }
 
         public void approveCompany(int id)

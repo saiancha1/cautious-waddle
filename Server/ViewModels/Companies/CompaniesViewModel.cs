@@ -9,8 +9,8 @@ namespace cautious_waddle.ViewModels
     {
         [JsonProperty("companyId")]
         public int? CompanyId { get; set; }
-        [JsonProperty("users")]
-        public List<CompanyUser> Users { get; set; }
+        [JsonProperty("userId")]
+        public string UserId { get; set; }
         [JsonProperty("isApproved")]
         public int IsApproved { get; set; }
         [JsonProperty("contactEmail")]
@@ -45,6 +45,7 @@ namespace cautious_waddle.ViewModels
         public string Country { get; set; }
         [JsonProperty("summerJobs")]
         public int SummerJobs { get; set; }
-
+        [JsonProperty("website")]
+        public string Website { get; set; }
     }
 }

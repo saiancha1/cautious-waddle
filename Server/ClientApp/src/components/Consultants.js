@@ -74,32 +74,20 @@ class Consultants extends Component {
    render() {
      const { classes } = this.props;
      return (
-       <div className="consultimagecontainer">
-         <img className="consultimage" src={consultantimage} alt="consulting2" />
-         <div className="consultWelcome" pull-right>
-           <h1>Tech Consultants</h1>
-           <h4>
-             Find out Who's Who
+       <div className="consultants">
+         <div className="heroImg">
+           <div className="mycontainer" pull-right>
+             <h1>Consultants</h1>
+             <p>Find out Who's who</p>
              {' '}
-           </h4>
-           <h4>
-             {/* In Palmerstorn North Tech */}
-             {' '}
-
-           </h4>
-           <Addz className="addbutton" />
-
+             <Addz />
+           </div>
          </div>
-
-
-         {/* <AppBar style={style.AppBar} position="static" color="default"> */}
-
-         {/* <Typography align="center" variant="headline">Consultants</Typography> */}
-         {/* </AppBar> */}
 
          <Consultant cl={this.state.consultants} />
          {/* <Button onClick={this.handleClick}> Join Consultants</Button> */}
        </div>
+
 
      );
    }
