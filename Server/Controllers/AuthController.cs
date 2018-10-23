@@ -22,13 +22,23 @@ namespace cautious_waddle.Controllers
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
         private readonly IProfilesRepository _profileRepo;
+        private readonly ICompaniesRepository _companiesRepository;
+        private readonly IConsultantsRepository _consultantsRepository;
+        private readonly IJobsRepository _jobsRepository;
+        private readonly ILocalEventsRepository _localEventsRepository;
         public AuthController(UserManager<AppUser> userManager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions,
-        IProfilesRepository profileRepo)
+        IProfilesRepository profileRepo, ICompaniesRepository companiesRepository, IConsultantsRepository consultantsRepository,
+        IJobsRepository jobsRepository, ILocalEventsRepository localEventsRepository)
         {
             _userManager = userManager;
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
             _profileRepo = profileRepo;
+            _companiesRepository = companiesRepository;
+            _consultantsRepository = consultantsRepository;
+            _jobsRepository = jobsRepository;
+            _localEventsRepository = localEventsRepository;
+            _jobsRepository = jobsRepository;
         }
         [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody]CredentialsViewModel credentials)
@@ -173,6 +183,16 @@ namespace cautious_waddle.Controllers
             
             try 
             {
+                // Delete all of the users listings first
+                _companiesRepository.DeleteMyCompanies(Id);
+                _consultantsRepository.DeleteMyConsultants(Id);
+                _jobsRepository.DeleteMyJobs(Id);
+                _localEventsRepository.DeleteMyEvents(Id);
+
+                // Delete the profile
+                _profileRepo.DeleteProfile(_profileRepo.GetProfileByUserId(Id));
+
+                // Now delete the user
                 AppUser user = await _userManager.FindByIdAsync(Id);
                 var isDeleted = await _userManager.DeleteAsync(user);
                 if(isDeleted.Succeeded)

@@ -93,6 +93,17 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
+        public void DeleteMyJobs(string userId)
+        {
+            IEnumerable<JobsViewModel> myJobs = GetMyJobs(userId, null, null);
+
+            foreach(JobsViewModel jobViewModel in myJobs)
+            {
+                Job job = GetJobById(jobViewModel.JobId.Value);
+                DeleteJob(job);
+            }
+        }
+
         public void EditJob(JobsViewModel job)
         {
             Job oldJob = GetJobById(job.JobId.Value);

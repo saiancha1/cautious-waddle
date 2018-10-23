@@ -9,6 +9,7 @@ namespace cautious_waddle.Models
         void AddCompany(Company company);
         void UpdateCompany(CompaniesViewModel company);
         void DeleteCompany(Company company);
+        void DeleteMyCompanies(string userId);
         CompaniesViewModel GetCompanyById_viewModel(int id);
         Company GetCompanyById_model(int id);
         IEnumerable<CompaniesViewModel> GetCompaniesList(int? summerJobs, string businessType, string specialistArea, int minSize, int maxSize, string search);
