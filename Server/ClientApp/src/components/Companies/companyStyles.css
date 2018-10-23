@@ -17,6 +17,7 @@
   /* border: 1px black solid; */
   max-width:300px;
   border-radius: 0px;
+  height: 100%;
 }
 
 .company-list-container {
@@ -30,6 +31,7 @@
   font-family: "Open Sans Condensed", sans-serif !important;
   border-radius: 0px;
   border-right: 1px black solid;
+  height: 400px;
 }
 
 .company-card-container:nth-child(3) {

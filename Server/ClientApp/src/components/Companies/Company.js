@@ -28,6 +28,7 @@ const styles = {
       className={classes.media}
       image={props.companyLogo}
       title={props.companyName}
+      height="140"
     />
     <CardContent>
       <Typography gutterBottom variant="headline" component="h2">
