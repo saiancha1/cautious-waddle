@@ -8,11 +8,8 @@ const userCanEdit = (company) => {
   if (authService.loggedIn()) {
     const token = authService.getProfile();
     const userId = token.id;
-    for (let i = 0; i < company.users.length; i++) {
-      if (company.users[i].id == userId) {
-        return true;
-      }
-      // Do something
+    if (company.userId == userId) {
+      return true;
     }
   } else {
     return false;
