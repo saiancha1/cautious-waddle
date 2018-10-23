@@ -86,6 +86,17 @@ namespace cautious_waddle.Models
             _context.Companies.Remove(company);
             _context.SaveChanges();
         }
+
+        public void DeleteMyCompanies(string userId)
+        {
+            IEnumerable<CompaniesViewModel> myCompanies = GetMyCompanies(userId, null);
+            foreach(CompaniesViewModel companyViewModel in myCompanies)
+            {
+                Company company = GetCompanyById_model(companyViewModel.CompanyId.Value);
+                DeleteCompany(company);
+            }
+        }
+
         public void UpdateCompany(CompaniesViewModel company)
         {
             Company oldCompany = GetCompanyById_model(company.CompanyId.Value);

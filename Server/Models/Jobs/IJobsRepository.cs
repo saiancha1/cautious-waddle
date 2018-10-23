@@ -12,6 +12,7 @@ namespace cautious_waddle.Models
         Job GetJobById(int id);
         void AddJob(Job job);
         void DeleteJob(Job job);
+        void DeleteMyJobs(string userId);
         void EditJob(JobsViewModel job);
         void ExpiredJob(Job job);
         void ExpiredJobs();

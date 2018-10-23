@@ -104,6 +104,17 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
+        public void DeleteMyConsultants(string userId)
+        {
+            IEnumerable<ConsultantsViewModel> myConsultants = GetMyConsultants(userId, null);
+
+            foreach(ConsultantsViewModel consultantViewModel in myConsultants)
+            {
+                Consultant consultant = GetConsultantById(consultantViewModel.ConsultantId.Value);
+                RemoveConsultant(consultant);
+            }
+        }
+
         public void ApproveConsultant(int id)
         {
             Consultant consultant = GetConsultantById(id);

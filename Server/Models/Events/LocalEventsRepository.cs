@@ -101,6 +101,17 @@ namespace cautious_waddle.Models
             _context.SaveChanges();
         }
 
+        public void DeleteMyEvents(string userId)
+        {
+            IEnumerable<LocalEventsViewModel> myEvents = GetMyEvents(userId, null, null);
+
+            foreach(LocalEventsViewModel localEventViewModel in myEvents)
+            {
+                LocalEvent localEvent = GetEventById(localEventViewModel.EventId.Value);
+                removeEvent(localEvent);
+            }
+        }
+
         public void expireEvent(LocalEvent localEvent)
         {
             _context.LocalEvents.Attach(localEvent);
