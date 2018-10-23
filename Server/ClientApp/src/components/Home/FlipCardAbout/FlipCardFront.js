@@ -15,12 +15,6 @@ export default class CardFront extends Component {
           </div>
           <div>
             <h3>About</h3>
-            <p>
-            We are a group of enthusiast professionals with a background
-            in IT, or a related discipline, whose mission is to connect the
-            technology companies/professionals in Palmerston North and
-            start collaborating together.
-            </p>
           </div>
         </div>
       </div>

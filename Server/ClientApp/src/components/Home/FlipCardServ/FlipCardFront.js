@@ -15,9 +15,6 @@ export default class CardFront extends Component {
           </div>
           <div>
             <h3>Services</h3>
-            <p>
-            This is a short paragraph introducing the copy on the back.
-            </p>
           </div>
         </div>
       </div>

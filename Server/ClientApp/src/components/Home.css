@@ -56,11 +56,11 @@
 }
 
 .card-grid {
-  max-width: 800px;
+  max-width: 900px !important;
   text-align: -webkit-center;
 }
 .flip-cards {
-  max-width: 800px;
+  max-width: 900px !important;
 }
 
 .background-image-container {
