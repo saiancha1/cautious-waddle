@@ -50,8 +50,7 @@ class CompanyModal extends Component {
                 </Modal.Header>
             
                 <Modal.Body>
-                    <div>
-                {companyDesc}
+                    <div dangerouslySetInnerHTML={this.props.generateDesc}> 
                 </div>
                 <br/>
                 <div>

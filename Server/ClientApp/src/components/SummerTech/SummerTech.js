@@ -3,10 +3,12 @@ import './SummerTech.css';
 import CompanyModal from './CompanyModal';
 import '../Companies/companyStyles.css';
 import background from '../../images/homepage-image.jpg';
-
+import CompanyView from '../Companies/CompanyView';
 class SummerTech extends Component {
   state = {
     companies: [],
+    companyOpen:false,
+    selectedCompany: null
   };
 
   async componentWillMount() {
@@ -14,6 +16,13 @@ class SummerTech extends Component {
       .then((json) => {
         this.setState({ companies: json });
       });
+  }
+  createMarkup = (htmlData) => {
+    return {__html: htmlData};
+  }
+  handleClose = () => {
+    this.setState({ selectedCompany: null });
+    this.setState({ companyOpen: false });
   }
 
   render() {
@@ -43,23 +52,8 @@ class SummerTech extends Component {
                     </a>
                     <div className="media-body">
                       <h4 className="media-heading">{company.companyName}</h4>
-                      <p>{company.companyDesc}</p>
-                      <CompanyModal
-                          size={company.size}
-                          companyName={company.companyName}
-                          logo={company.logo}
-                          size={company.size}
-                          businessType={company.businessType}
-                          specialistArea={company.specialistArea}
-                          companyDesc={company.companyDesc}
-                          phone={company.phone}
-                          email={company.email}
-                          address1={company.address1}
-                          address2={company.address2}
-                          suburb={company.suburb}
-                          postalCode={company.postalCode}
-                          city={company.city}
-                      />
+                      <p dangerouslySetInnerHTML ={this.createMarkup(company.companyDesc)}></p>
+                     
                     </div>
                   </li>
                 ))}
