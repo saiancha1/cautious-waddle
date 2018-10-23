@@ -17,7 +17,7 @@ const CompanyView = (props) => {
 
   return (
 
-    <Modal show={props.companyOpen} onHide={props.handleClose} bsSize="lg">
+    <Modal className="company-modal-container" show={props.companyOpen} onHide={props.handleClose} bsSize="lg">
 
       <Modal.Header>
         <Modal.Title>
@@ -49,7 +49,6 @@ const CompanyView = (props) => {
           {company.email}
           <br />
           <div>
-            {/* {this.map} */}
             <Map company={props.companyToRender} />
           </div>
 

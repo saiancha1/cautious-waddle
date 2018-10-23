@@ -16,6 +16,7 @@
   background-color: #2f2f2f0a !important;
   /* border: 1px black solid; */
   max-width:300px;
+  border-radius: 0px;
 }
 
 .company-list-container {
@@ -54,4 +55,15 @@
   .company-card-container {
     border: none;
   }
+}
+
+/* modal */
+
+.company-modal-container {
+
+}
+
+.company-map {
+  max-width: 300px;
+  max-height: 300px !important;
 }
