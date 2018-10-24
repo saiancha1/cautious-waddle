@@ -46,8 +46,8 @@ async componentWillMount() {
   fetch('api/jobs/getJobs').then(res => res.json())
     .then((json) => {
       this.setState({ jobs: json });
-      this.setState({originalJobs: this.state.jobs});
-      this.setState({isLoaded:true});
+      this.setState({ originalJobs: this.state.jobs });
+      this.setState({ isLoaded: true });
     });
 }
 
@@ -55,7 +55,7 @@ handleFilterChange = (e) => {
   const val = e.target.value;
   this.setState({ filter: val });
   if (val !== 'All') {
-    let newArr = this.state.originalJobs.filter(job => job.workType === e.target.value);
+    const newArr = this.state.originalJobs.filter(job => job.workType === e.target.value);
     this.setState({ jobs: newArr });
   } else {
     fetch('api/jobs/getJobs').then(res => res.json())
@@ -74,30 +74,32 @@ handleFilterChange = (e) => {
  }
 
  handleNotLogged = () => {
-  try {
-    alert('Please login with your user account to add new job listings!');
-  } catch (error) {
-    alert('There seems to be a problem!');
-  }
-}
+   try {
+     alert('Please login with your user account to add new job listings!');
+   } catch (error) {
+     alert('There seems to be a problem!');
+   }
+ }
 
 
  render() {
    const { classes } = this.props;
    console.log(this.state.jobs);
    return (
-      <div className="jobs">
-        <Route exact path="/summerTech" component={SummerTech} />
-        <div className="jumbotron">
-          <div className="container" pull-right>
+     <div className="jobs">
+       <Route exact path="/summerTech" component={SummerTech} />
+       <div className="jumbotron">
+         <div className="container" pull-right>
             <h3 color="white" className="h1">Job listings</h3>
-              <p>Looking for your next gig?</p>
-                  For summer internships click <Link to="/summertech">here</Link>
+            <p>Looking for your next gig?</p>
+                  For summer internships click
+            {' '}
+            <Link to="/summertech">here</Link>
           </div>
-        </div>
-        <Grid container spacing={12}>
-          <Grid item sm={3} />
-          <Grid item sm={6}>
+       </div>
+       <Grid container spacing={12}>
+         <Grid item sm={3} />
+         <Grid item sm={6}>
             <Paper>
               <ButtonAppBar
                 style={style.AppBar}
@@ -109,33 +111,35 @@ handleFilterChange = (e) => {
               >
                 <Typography color="inherit" variant="display2" align="center" />
               </ButtonAppBar>
-              <List className="listing" >
+              <List className="listing">
                 {this.state.jobs.map(job => (
                   <div>
                     <ListItem>
                       <ComplexGrid
-                        jobTitle={job.jobTitle} 
-                        jobId={job.jobId} 
-                        firstName={job.contactFirstName} 
-                        secondName={job.contactLastName} 
-                        company={job.companyName} 
-                        desc={job.jobDescription} 
-                        salary={job.salary} 
-                        type={job.workType} 
+                        jobTitle={job.jobTitle}
+                        jobId={job.jobId}
+                        firstName={job.contactFirstName}
+                        secondName={job.contactLastName}
+                        company={job.companyName}
+                        desc={job.jobDescription}
+                        salary={job.salary}
+                        type={job.workType}
                         email={job.contactEmail}
-                        phone={job.phone}
-                      />    
-                  </ListItem>
+                        phone={job.contactPhone}
+                        userId={job.userId}
+                        expiry={job.expiry}
+                      />
+                    </ListItem>
                     <Divider />
                   </div>
                 ))}
               </List>
             </Paper>
           </Grid>
-          <Grid item sm={3} />
-        </Grid>
-      </div>
-    );
-  }
+         <Grid item sm={3} />
+       </Grid>
+     </div>
+   );
+ }
 }
 export default Work;
