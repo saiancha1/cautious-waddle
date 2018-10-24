@@ -4,6 +4,7 @@ import CompanyView from './Companies/CompanyView';
 import CompanyFilter from './Companies/CompanyFilter';
 import AddCompany from './Companies/AddCompany';
 import Spinner from './Spinner';
+import CompanyPage from './Companies/CompanyPage';
 
 class Companies extends Component {
   state = {
@@ -96,19 +97,15 @@ class Companies extends Component {
       );
     }
     let company;
+    let selectedCompany;
     const addCompany = (this.state.editCompany) ? <AddCompany company={this.state.editCompany} hide={this.hideComponent} /> : null;
 
     if (this.state.selectedCompany !== null) {
-      const selectedCompany = this.state.selectedCompany;
-      company = (
-        <CompanyView
-          companyToRender={selectedCompany}
-          handleClose={this.handleClose}
-          companyOpen={this.state.companyOpen}
-          generateDesc={this.createMarkup(selectedCompany.companyDesc)}
-        />
-      );
+      selectedCompany = this.state.selectedCompany;
+
     }
+    if(this.state.selectedCompany == null)
+    {
     return (
       <div>
         <CompanyFilter
@@ -127,6 +124,14 @@ class Companies extends Component {
 
       </div>
     );
+    }
+    if(this.state.selectedCompany) {
+      return (
+        <div>
+        <CompanyPage company = {selectedCompany} generateDesc = {this.createMarkup(selectedCompany.companyDesc)}/>
+        </div>
+      )
+    }
   }
 }
 
