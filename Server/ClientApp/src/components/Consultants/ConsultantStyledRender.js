@@ -25,11 +25,26 @@ export default class ConST extends Component {
               {this.props.consultDescription}
             </p>
             <ul>
-              <li>{this.props.speciality}</li>
-              <li>{this.props.consultcity}</li>
-              <li>{this.props.nation}</li>
-              <li><a href={this.props.consultwebsite}>{this.props.consultwebsite}</a></li>
-              <li>{this.props.consultemail}</li>
+              <li>
+                <label>Speciality:</label>
+                {this.props.speciality}
+              </li>
+              <li>
+                <label>City:</label>
+                {this.props.consultcity}
+              </li>
+              <li>
+                <label>Country:</label>
+                {this.props.nation}
+              </li>
+              <li>
+                <label>Website:</label>
+                <a href={this.props.consultwebsite}>{this.props.consultwebsite}</a>
+              </li>
+              <li>
+                <label>Email:</label>
+                {this.props.consultemail}
+              </li>
             </ul>
             <div>
               {this.props.canEdit}

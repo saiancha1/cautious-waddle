@@ -53,3 +53,17 @@ p {
   object-fit: cover;
   
 }
+
+.consult-card-body h3{
+  text-align: center;
+  text-decoration: underline;
+}
+
+.consult-card-body p {
+  font-size: 17px;
+  margin: 28px;
+}
+
+.consult-card-body ul  {
+  list-style-type: none;
+}
