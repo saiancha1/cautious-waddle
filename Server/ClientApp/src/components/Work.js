@@ -89,17 +89,17 @@ handleFilterChange = (e) => {
      <div className="jobs">
        <Route exact path="/summerTech" component={SummerTech} />
        <div className="jumbotron">
-          <div className="container" pull-right>
+         <div className="container" pull-right>
             <h3 color="white" className="h1">Job listings</h3>
             <p>Looking for your next gig?</p>
                   For summer internships click
             {' '}
             <Link to="/summertech">here</Link>
           </div>
-        </div>
+       </div>
        <Grid container spacing={12}>
-          <Grid item sm={3} />
-          <Grid item sm={6}>
+         <Grid item sm={3} />
+         <Grid item sm={6}>
             <Paper>
               <ButtonAppBar
                 style={style.AppBar}
@@ -125,8 +125,9 @@ handleFilterChange = (e) => {
                         salary={job.salary}
                         type={job.workType}
                         email={job.contactEmail}
-                        phone={job.phone}
+                        phone={job.contactPhone}
                         userId={job.userId}
+                        expiry={job.expiry}
                       />
                     </ListItem>
                     <Divider />
@@ -135,8 +136,8 @@ handleFilterChange = (e) => {
               </List>
             </Paper>
           </Grid>
-          <Grid item sm={3} />
-        </Grid>
+         <Grid item sm={3} />
+       </Grid>
      </div>
    );
  }

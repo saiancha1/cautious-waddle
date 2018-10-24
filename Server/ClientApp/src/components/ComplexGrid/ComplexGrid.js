@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 import AuthService from '../Authentication/AuthService';
+import EditJob from './EditJob';
 
 const styles = theme => ({
   root: {
@@ -30,44 +31,48 @@ const authService = new AuthService();
 
 function ComplexGrid(props) {
   const {
-    classes, firstName, secondName, jobTitle, jobId, company, desc, salary, type, phone, email, userId,
+    classes, firstName, secondName, jobTitle, jobId, company, desc, salary, type, phone, email, userId, expiry,
   } = props;
 
-  const handleDelMsg = (e) => {
-    alert('The selected Job has been Deleted.');
-  };
+  // const handleDelMsg = (e) => {
+  //   alert('The selected Job has been Deleted.');
+  // };
 
-  const handleNoDelMsg = (e) => {
-    alert('Cannot Delete Right Now, Please Try Again.');
-  };
+  // const handleNoDelMsg = (e) => {
+  //   alert('Cannot Delete Right Now, Please Try Again.');
+  // };
 
-  const dres = () => {
-    try {
-      fetch('api/Jobs/removeJob', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${authService.getToken()}`,
-        },
-        body: props.jobId,
-      });
-      handleDelMsg();
-      window.location.reload();
+  // const dres = () => {
+  //   try {
+  //     fetch('api/Jobs/removeJob', {
+  //       method: 'POST',
+  //       headers: {
+  //         Accept: 'application/json, text/plain, */*',
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${authService.getToken()}`,
+  //       },
+  //       body: props.jobId,
+  //     });
+  //     handleDelMsg();
+  //     window.location.reload();
 
-      console.log('Delete Successful');
-    } catch (error) {
-      console.log(error);
-      handleNoDelMsg(error);
-      return null;
-    }
-  };
+  //     console.log('Delete Successful');
+  //   } catch (error) {
+  //     console.log(error);
+  //     handleNoDelMsg(error);
+  //     return null;
+  //   }
+  // };
 
-  const handleDelete = (e) => {
-    const jobId = props.jobId;
-    console.log(jobId);
-    dres();
-  };
+  // // const handleEdit = (e) => {
+  // //   history.push('editjob');
+  // // };
+
+  // const handleDelete = (e) => {
+  //   const jobId = props.jobId;
+  //   console.log(jobId);
+  //   dres();
+  // };
 
   const userCanEdit = (props) => {
     if (authService.loggedIn()) {
@@ -98,8 +103,22 @@ function ComplexGrid(props) {
               <div>
                 { userCanEdit(props) ? (
                   <div>
-                    <Button>Edit Job</Button>
-                    <Button onClick={handleDelete} value={jobId}>Delete</Button>
+                    {/* <Button>Edit Job</Button> */}
+                    {/* <Button onClick={handleDelete} value={jobId}>Delete</Button> */}
+                    <EditJob
+                      fname={firstName}
+                      lname={secondName}
+                      title={jobTitle}
+                      jobId={jobId}
+                      company={company}
+                      description={desc}
+                      salary={salary}
+                      type={type}
+                      phone={phone}
+                      email={email}
+                      userId={userId}
+                      expiry={expiry}
+                    />
                   </div>
                 ) : null }
                 {' '}
