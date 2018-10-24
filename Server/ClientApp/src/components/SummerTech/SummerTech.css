@@ -1,5 +1,5 @@
 .media-object {
-width: 80px    
+width: 120px    
 }
 .a {
   color: darkblue;
@@ -67,7 +67,7 @@ width: 80px
 }
 
 @media screen and (max-width: 500px) { 
-  .centered-text h3 span {
+  .centered-text h3{
     display: none;
   }
 
@@ -95,8 +95,8 @@ width: 80px
   color: white;
 }
 
-.p {
-  font-size: 15px;
+.coText {
+  font-size: 13px;
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
@@ -106,6 +106,8 @@ width: 80px
 .mycontainer {
       position: relative;
       left: 3em;
-      top: 7em;
+      top: 5em;
       margin: 10px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
 }

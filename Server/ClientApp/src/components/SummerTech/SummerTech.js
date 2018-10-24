@@ -41,10 +41,11 @@ class SummerTech extends Component {
               <h1>Summer of Tech </h1>
               <h3>Want to be part of New Zealand’s premier IT internship programme?</h3>
               <br/>
-                <Grid container sm={12}>
-                  <Grid item sm={11}>
+                <Grid container wrap="nowrap" sm={12} >
+                  <Grid item sm={11} zeroMinWidth>
               With a firm belief in the importance of the next generation of IT talent, the Summer Of Tech programme connects employers with top local students for paid work experience and graduate jobs. 
               If you want to participate then look no further than the local companies that are listed below, they all offer summer work or internships. 
+              <br/>
               For more information on the programme visit <a href="http://www.summeroftech.co.nz">www.summeroftech.co.nz</a>
                   </Grid>
                 </Grid>
@@ -55,8 +56,6 @@ class SummerTech extends Component {
           <div className="row">
             <div className="col-sm-3" />
             <div className="col-sm-6">
-            <p> </p>
-            <p> </p>
               <ul>
                 {this.state.companies.map(company => (
                   <li className="media">
@@ -64,10 +63,16 @@ class SummerTech extends Component {
                       <img className="media-object" src={company.logo} alt="company logo" />
                     </a>
                     <div className="media-body">
-                      <h4 className="media-heading">{company.companyName}</h4>
-                      <p id="pp" dangerouslySetInnerHTML ={this.createMarkup(company.companyDesc)}></p>
+                      <h2 className="media-heading">{company.companyName}</h2>
+                      {/*<p dangerouslySetInnerHTML ={this.createMarkup(company.companyDesc)}></p>*/}
+                      <p className="coText"><b>Business type: </b>{company.businessType}</p>
+                      <p className="coText"><b>Specialist Area(s): </b>{company.specialistArea}</p>
+                      <p className="coText"><b>Email: </b>{company.email}</p>
+                      <p className="coText"><b>Telephone: </b>{company.telephone}</p>
+                      <p className="coText"><i>For more details visit the <a href="/companies">companies</a> section</i></p>
+                      <hr />
                     </div>
-                  </li>
+                  </li> 
                 ))}
               </ul>
             </div>
