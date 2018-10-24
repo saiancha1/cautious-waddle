@@ -1,8 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Map from './Map';
 
-const CompanyPage = (props) => {
-    return (
+const CompanyPage = (props) => (
         <div className="row">
         <div className="col-md-8 col-md-offset-1 col-xs-offset-1">
     
@@ -39,6 +38,5 @@ const CompanyPage = (props) => {
         </div>
 
     );
-}
 
 export default CompanyPage;

@@ -1,22 +1,9 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode';
 import GoogleMapReact from 'google-map-react';
-
-const Marker = ({ text }) => (
-  <div style={{
-    color: 'white', 
-    background: 'grey',
-    padding: '15px 10px',
-    display: 'inline-flex',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '100%',
-    transform: 'translate(-50%, -50%)'
-  }}>
-    {text}
-  </div>
-);
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import './companyStyles.css';
 
 export default class Map extends Component {
   constructor(props) {
@@ -57,10 +44,12 @@ export default class Map extends Component {
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
         >
-          <Marker
+
+          <FontAwesomeIcon
             lat={this.state.center.lat}
             lng={this.state.center.lng}
-            text={this.props.company.companyName}
+            className="company-marker"
+            icon={faMapMarkerAlt}
           />
         </GoogleMapReact>
       </div>
