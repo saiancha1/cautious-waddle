@@ -46,13 +46,8 @@ async componentWillMount() {
   fetch('api/jobs/getJobs').then(res => res.json())
     .then((json) => {
       this.setState({ jobs: json });
-      console.log('Job List');
-      console.log(this.state.jobs);
       this.setState({originalJobs: this.state.jobs});
-      console.log('Original Job List');
-      console.log(this.state.originalJobs);
       this.setState({isLoaded:true});
-      console.log(this.state);
     });
 }
 
@@ -61,15 +56,11 @@ handleFilterChange = (e) => {
   this.setState({ filter: val });
   if (val !== 'All') {
     let newArr = this.state.originalJobs.filter(job => job.workType === e.target.value);
-    console.log("Handle Submit function has the following assigned to newArr: ");
-    console.log(newArr);
     this.setState({ jobs: newArr });
   } else {
-    console.log("Entered else section of handleFilterChange");
     fetch('api/jobs/getJobs').then(res => res.json())
       .then((json) => {
         this.setState({ jobs: json });
-        console.log(this.state);
       });
   }
 }
@@ -84,7 +75,7 @@ handleFilterChange = (e) => {
 
  handleNotLogged = () => {
   try {
-    alert('Please login with your user account to add new job listsings!');
+    alert('Please login with your user account to add new job listings!');
   } catch (error) {
     alert('There seems to be a problem!');
   }
