@@ -114,7 +114,8 @@ class EditJob extends React.Component {
   handleSubscribe() {
     try {
       alert('Thank you for your Changes. Your posting will appear after approval.');
-      history.push('/work');
+      this.handleClose();
+      window.location.reload();
     } catch (error) {
       alert('There seems to be a problem!');
     }
