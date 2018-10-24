@@ -7,6 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+// This is the component that controls and runs the Subscribe to mailing list function from the front end
+// it is placed on the right hand side footer of the website
+// It is a popup form that requires both name and email fields to be inputted before submission
 export default class SubForm extends React.Component {
   state = {
     open: false,
@@ -16,6 +19,10 @@ export default class SubForm extends React.Component {
 
   };
 
+  // handle submit function is a post request to the end point URL of the backend API - tranfers the name and
+  // email submitted into format that can be processed by the bbackend and placed in the body of post request
+  // method also does a check if either field is empty then an error message is displayed to user,
+  // both name and email fields are needed for submission
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
@@ -58,7 +65,7 @@ export default class SubForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-
+  // handles closing of the subsribe popup forms, resets input fields
   handleClose = () => {
     this.setState({
       open: false,
@@ -67,6 +74,7 @@ export default class SubForm extends React.Component {
     });
   };
 
+  // popup message when subscribe is successful or when there is an error
   handleSubscribe() {
     try {
       alert('Thank you. You have been Subscribed.');
