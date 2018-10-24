@@ -21,6 +21,9 @@ import history from '../history';
 import AuthService from '../Authentication/AuthService';
 
 
+// This FORM is to ADD a consultant. This is a popup form that only appears if a user is logged in.
+
+// here we are defining some constant colors and styles
 const mygrey = grey[700];
 
 const styles = theme => ({
@@ -71,6 +74,9 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
+// the Addz class which adds a new consultant (after being approved by the admin of course)
+
+// The state for all the fields is initially set as empty
 class Addz extends React.Component {
   constructor(props) {
     super(props);
@@ -95,14 +101,19 @@ class Addz extends React.Component {
     imgu: null,
   };
 
+  // here we have a constructor for the authentication component
   Auth = new AuthService();
 
+
+  // this method sets the state for a container that holds the image file the user selects when clicking
+  // on the add image button
   fileSelectedHandler = (event) => {
     this.setState({
       selectedFile: event.target.files[0],
     });
   };
 
+  // error message method when user presses button for join consultants.
   handleNotLogged() {
     try {
       alert('Please Login to Add Consultant');
@@ -112,6 +123,7 @@ class Addz extends React.Component {
     }
   }
 
+  // method that alerts user if there are missing required input fields that are empty
   requiredFieldMsg() {
     try {
       alert('Please fill out all required fields');
@@ -121,11 +133,14 @@ class Addz extends React.Component {
     }
   }
 
+  // this method sets the target to the value - here the input field defines both and this is a generic
+  // method that works for all the input fields depending on their name and value fields. We match the names to the
+  // names in state, and the value to the value of those states.
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-
+  // method that does the check for missing/empty input fields that are required
   requiredFieldCheck = () => {
     if (this.state.email == '' || this.state.exp == '' || this.state.fname == '' || this.state.lname == ''
     || this.state.city == '' || this.state.country == '' || this.state.desc == '') {
@@ -133,6 +148,13 @@ class Addz extends React.Component {
       return false;
     }
   };
+
+  // This method handles when a user uploads an image. The selected file container is holding the actual file
+  // before it is uploaded, the method takes this file and posts it to the URL endpoint, which in turn returns
+  // a resulting URL. This method takes the returned result from the backend and uses that data to display an
+  // image that is stored
+
+  // the part where this method is receiving the data from the database starts with .then((res)) and onwards.
 
   handleImageUpload = (e) => {
     e.preventDefault();
@@ -170,6 +192,8 @@ class Addz extends React.Component {
       </div>;
   };
 
+  // This is a method that is a popup message after user submission is successful, also redirects user to
+  // consultants page
   handleSubscribe() {
     try {
       alert('Thank you. Your posting will appear after approval.');
@@ -179,6 +203,9 @@ class Addz extends React.Component {
     }
   }
 
+  // method that is invoked when user clicks on joing consultants page button. First it checks if user is
+  // logged in by using the loggedin() method from the Authentication component, if so it sets state
+  // to open and the form pops up
   handleClickOpen = () => {
     if (this.Auth.loggedIn() == false) {
       this.handleNotLogged();
@@ -188,10 +215,20 @@ class Addz extends React.Component {
     // console.log(this.props.conID);
   };
 
+  // method that closes form when close button pressed
   handleClose = () => {
     this.setState({ open: false });
   };
 
+  // method that processes subbmission once submit button is pressed in the add consultant form
+  // first the method sets the state constants, then it transfers the current state held to a format that
+  // is accepted by the backend system, and transfers that to the body of the POST request in the res() method
+  // before posting however, this method also invokes the checkimage method which ensures that the form user
+  // has both selected and submitted an image, and it also invokes the required fields method which ensures
+  // that all requried fields are filled out
+
+  // after all this the res method is defined, and then called followed by methods for checking errors, and
+  // methods that provide messages to the users confirming that the submission was successful.
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);

@@ -22,7 +22,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import history from '../history';
 import AuthService from '../Authentication/AuthService';
 
+// This page renders 2 buttons that are placed in the complex grid component. These bbuttons are edit and delete.
+// The Edit button opens up a form with the current information of the posted job and allows
+// the logged in user to make a change to their posting.
 
+// These edit and delete buttons only show up to logged in users and only to their OWN postings. This is controlled
+// in the complex grid component by the userCanEdit method.
+
+// styling and color variables
 const mygrey = grey[700];
 
 const styles = theme => ({
@@ -64,10 +71,16 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
+
+// the EditJob Class
 class EditJob extends React.Component {
   constructor(props) {
     super(props);
   }
+
+
+  // State here holds the info that is passed on from the ComplexGrid component in the < EditJob > section
+  // they are passed on in the form of props
 
   state = {
     open: false,
@@ -87,13 +100,15 @@ class EditJob extends React.Component {
 
   };
 
+  // here we have a constructor for the authentication component
   Auth = new AuthService();
 
-
+  // handleChange when the form inputs are being changed by user
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  // This method provides the user with an alret if required fields are missing, doesn't allow submission
   requiredFieldMsg() {
     try {
       alert('Please fill out all required fields');
@@ -103,6 +118,7 @@ class EditJob extends React.Component {
     }
   }
 
+  // Checks required fields are filled in
   requiredFieldCheck = () => {
     if (this.state.email == '' || this.state.title == '' || this.state.fname == '' || this.state.lname == ''
     || this.state.company == '' || this.state.salary == '' || this.state.desc == '' || this.state.jobbtype == '') {
@@ -111,6 +127,8 @@ class EditJob extends React.Component {
     }
   };
 
+  // This is a method that is a popup message after user submission is successful, also redirects user to
+  // work page and reloads the page
   handleSubscribe() {
     try {
       alert('Thank you for your Changes. Your posting will appear after approval.');
@@ -121,15 +139,21 @@ class EditJob extends React.Component {
     }
   }
 
+  // when edit bubtton is clicked state of drawer is true and it pops up
   handleClickOpen = () => {
     this.setState({ open: true });
     // console.log(this.props.jobId);
   };
 
+  // closes drawer
   handleClose = () => {
     this.setState({ open: false });
   };
 
+
+  // submits filled out form
+  // this method takes the most recent state of defined state containers and transfers them to the body of
+  // the defined POST request method res()
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
@@ -148,10 +172,14 @@ class EditJob extends React.Component {
       expiry,
     } = this.state;
 
+    // checking that required fields are filled - invoking method
     if (this.requiredFieldCheck() == false) {
       return false;
     }
 
+    // defining the method for the POST request for edit using the edit JOB url endpoint, the body section
+    // takes in the latest defined states and changes them to the form that the url endpoint (backend) accepts
+    // even a small mismatch in this format will cause a 400 bad request
     const res = () => {
       fetch('/api/jobs/editJob', {
         method: 'POST',
@@ -179,17 +207,21 @@ class EditJob extends React.Component {
       });
       this.handleSubscribe();
     };
+    // invoking the method to post
     res();
   };
 
+  // this is a handle deletemessage
    handleDelMsg = () => {
      alert('The selected Job has been Deleted.');
    };
 
+   // if there is an error with delete this error pops up
    handleNoDelMsg = () => {
      alert('Cannot Delete Right Now, Please Try Again.');
    };
 
+   // defining the method for deleting a job using delete job endpoint
    dres = () => {
      try {
        fetch('api/Jobs/removeJob', {
@@ -213,6 +245,7 @@ class EditJob extends React.Component {
      }
    };
 
+   // when delete button is clicked the delete method is invoked dres()
  handleDelete = () => {
    //    const jobId = jobId;
    //    console.log(jobId);

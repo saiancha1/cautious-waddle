@@ -34,46 +34,9 @@ function ComplexGrid(props) {
     classes, firstName, secondName, jobTitle, jobId, company, desc, salary, type, phone, email, userId, expiry,
   } = props;
 
-  // const handleDelMsg = (e) => {
-  //   alert('The selected Job has been Deleted.');
-  // };
 
-  // const handleNoDelMsg = (e) => {
-  //   alert('Cannot Delete Right Now, Please Try Again.');
-  // };
-
-  // const dres = () => {
-  //   try {
-  //     fetch('api/Jobs/removeJob', {
-  //       method: 'POST',
-  //       headers: {
-  //         Accept: 'application/json, text/plain, */*',
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${authService.getToken()}`,
-  //       },
-  //       body: props.jobId,
-  //     });
-  //     handleDelMsg();
-  //     window.location.reload();
-
-  //     console.log('Delete Successful');
-  //   } catch (error) {
-  //     console.log(error);
-  //     handleNoDelMsg(error);
-  //     return null;
-  //   }
-  // };
-
-  // // const handleEdit = (e) => {
-  // //   history.push('editjob');
-  // // };
-
-  // const handleDelete = (e) => {
-  //   const jobId = props.jobId;
-  //   console.log(jobId);
-  //   dres();
-  // };
-
+  // this checks if use can edit - ie is the user logged in and if so does the user id match that of
+  // the job poster, if so, it renders the Edit job component which shows an edit and delete button
   const userCanEdit = (props) => {
     if (authService.loggedIn()) {
       const token = authService.getProfile();
@@ -103,8 +66,6 @@ function ComplexGrid(props) {
               <div>
                 { userCanEdit(props) ? (
                   <div>
-                    {/* <Button>Edit Job</Button> */}
-                    {/* <Button onClick={handleDelete} value={jobId}>Delete</Button> */}
                     <EditJob
                       fname={firstName}
                       lname={secondName}
