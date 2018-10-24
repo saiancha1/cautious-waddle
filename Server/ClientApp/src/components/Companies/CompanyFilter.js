@@ -41,6 +41,7 @@ const CompanyFilter = (props) => {
             <InputLabel htmlFor="company-filter-search">Search Companies</InputLabel>
             <Input
               id="company-filter-search"
+              onChange={props.handleSearchBarChange}
               startAdornment={(
                 <InputAdornment position="start">
                   <SearchIcon />
