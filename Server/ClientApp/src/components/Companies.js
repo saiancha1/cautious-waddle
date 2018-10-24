@@ -62,6 +62,28 @@ class Companies extends Component {
     }
   }
 
+  handleSearchBarChange = (e) => {
+    let val = e.target.value;
+    if(val !== "")
+    {
+      val = val.toLowerCase();
+      const companies = this.state.companies;
+      const filteredCompanies = companies.filter(c => (c.companyName.toLowerCase().includes(val) || 
+      c.companyDesc.toLowerCase().includes(val) ||
+      c.businessType.toLowerCase().includes(val) ||
+      c.suburb.toLowerCase().includes(val) ||
+      c.specialistArea.toLowerCase().includes(val)||
+      c.website.toLowerCase().includes(val)));
+      this.setState({companies:filteredCompanies});
+    }
+    else {
+      fetch('api/Companies/getCompanies').then(res => res.json())
+        .then((json) => {
+          this.setState({ companies: json });
+          // console.log(this.state);
+        });
+    }
+  }
   handleFormDataChange = (fieldName, e) => {
     e.target.preventDefault();
     const val = e.target.value;
@@ -112,6 +134,7 @@ class Companies extends Component {
           filter={this.state.filter}
           handleFilterChange={this.handleFilterChange}
           filterItems={this.state.menuItems}
+          handleSearchBarChange = {this.handleSearchBarChange}
         />
         <CompanyList
           companies={this.state.companies}

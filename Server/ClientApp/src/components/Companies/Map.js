@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode';
 import GoogleMapReact from 'google-map-react';
-
-const Marker = ({ address }) => <div>{address}</div>;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import './companyStyles.css';
 
 export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
       address: `${this.props.company.address1}, ${this.props.company.suburb}`,
-      zoom: 12,
+      zoom: 10,
       center: {
         lat: -40.3,
         lng: 175.6,
@@ -43,10 +44,12 @@ export default class Map extends Component {
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
         >
-          <Marker
+
+          <FontAwesomeIcon
             lat={this.state.center.lat}
             lng={this.state.center.lng}
-            text={this.state.address}
+            className="company-marker"
+            icon={faMapMarkerAlt}
           />
         </GoogleMapReact>
       </div>

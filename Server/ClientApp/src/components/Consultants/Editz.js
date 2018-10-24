@@ -246,15 +246,9 @@ class Editz extends React.Component {
     res();
     this.handleClose();
     window.location.reload();
-
-    // history.push('/consultants');
-
-    // console.log(PostingConsultantInfo);
-    // console.log(res);
-    // console.log(`Bearer ${this.Auth.getToken()}`);
   }
 
-   handleNoDelError = (e) => {
+   handleNoDelError = () => {
      try {
        alert('Cannot Delete right now. Try Again Later, or Contact Support. Thank you.');
      } catch (e) {
@@ -262,14 +256,11 @@ class Editz extends React.Component {
      }
    };
 
-   handleDelMsg = (e) => {
+   handleDelMsg = () => {
      alert('The selected Consultant has been Deleted.');
    };
 
    handleDelete = (e) => {
-     const connerId = e.target.value;
-     console.log(connerId);
-
      const dres = () => {
        try {
          fetch('api/Consultants/removeConsultant', {
@@ -279,9 +270,9 @@ class Editz extends React.Component {
              'Content-Type': 'application/json',
              Authorization: `Bearer ${this.Auth.getToken()}`,
            },
-           body: connerId,
+           body: this.state.cID,
          });
-         this.handleDelMsg(e);
+         this.handleDelMsg();
          window.location.reload();
 
 
@@ -291,12 +282,8 @@ class Editz extends React.Component {
          return null;
        }
      };
-     // .then(res.json());
-     if (connerId == undefined) {
-       this.handleNoDelError();
-     } else {
-       dres();
-     }
+
+     dres(e);
    };
 
    render() {

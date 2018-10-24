@@ -10,11 +10,10 @@ export default class Footer extends Component {
         <Grid>
           <Row>
             <Col className="footer-col-l" xs={6}>
-              <a href="/">Something Here</a>
+              <a href="/">Home</a>
             </Col>
             <Col className="footer-col-r" xs={6}>
-            <SubscribeForm/> 
-              <a href="/">Another thing</a>
+              <SubscribeForm />
             </Col>
           </Row>
         </Grid>
