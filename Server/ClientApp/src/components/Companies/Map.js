@@ -2,14 +2,28 @@ import React, { Component } from 'react';
 import Geocode from 'react-geocode';
 import GoogleMapReact from 'google-map-react';
 
-const Marker = ({ address }) => <div>{address}</div>;
+const Marker = ({ text }) => (
+  <div style={{
+    color: 'white', 
+    background: 'grey',
+    padding: '15px 10px',
+    display: 'inline-flex',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '100%',
+    transform: 'translate(-50%, -50%)'
+  }}>
+    {text}
+  </div>
+);
 
 export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
       address: `${this.props.company.address1}, ${this.props.company.suburb}`,
-      zoom: 12,
+      zoom: 10,
       center: {
         lat: -40.3,
         lng: 175.6,
@@ -46,7 +60,7 @@ export default class Map extends Component {
           <Marker
             lat={this.state.center.lat}
             lng={this.state.center.lng}
-            text={this.state.address}
+            text={this.props.company.companyName}
           />
         </GoogleMapReact>
       </div>
