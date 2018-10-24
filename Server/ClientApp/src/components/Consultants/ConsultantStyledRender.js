@@ -90,7 +90,7 @@ class ConST extends Component {
         <Col>
           <div className="col-md-3">
             <Card className={classes.card}>
-              <Typography gutterBottom variant="h3" component="h4">
+              <Typography variant="headline" color="textPrimary">
                 {this.props.firstName}
                 {' '}
                 {this.props.lastName}
@@ -114,8 +114,11 @@ class ConST extends Component {
                   <a href={this.props.consultwebsite}>{this.props.consultwebsite}</a>
                 </Typography>
                 <br />
-                <Typography variant="h3" component="h6" gutterBottom>
+
+                <Typography variant="headline" color="textSecondary" gutterBottom>
                   {this.props.consultDescription}
+                  <br />
+                  <br />
 
                 </Typography>
                 <Typography>
