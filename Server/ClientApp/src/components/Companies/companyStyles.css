@@ -47,6 +47,12 @@
   color: #000000;
 }
 
+.company-marker {
+  font-size: 34px;
+  color: blue;
+
+}
+
 
 @media screen and (max-width: 1000px) {
   .company-list-container {
