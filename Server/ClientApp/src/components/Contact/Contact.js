@@ -3,6 +3,8 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import Recaptcha from 'react-recaptcha';
 import './contact.css';
 
+// This is a contact form, that allows user to submit a message to the admin support
+
 class Contact extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +21,12 @@ class Contact extends Component {
     this.verifyCallback = this.verifyCallback.bind(this);
   }
 
-
+  // input field changes state held
     handleChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
     }
 
+    // when the captcha field is verified, the post request to the bbackedn API is processed
     handleSubscribe(e) {
       if (this.state.isVerified) {
         e.preventDefault();

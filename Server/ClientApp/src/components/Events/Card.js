@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import '../Home/HomeFolder.css';
-import '../events.css';
+import './events-folder.css';
 
 const styles = {
   card: {

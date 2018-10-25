@@ -52,6 +52,108 @@ export default class ConST extends Component {
           </CardBody>
         </Card>
       </Col>
+=======
+      // console.log(status),
+      <div>
+        <Col>
+          <div className="col-md-3">
+            <Card className={classes.card}>
+              <Typography variant="headline" color="textPrimary">
+                {this.props.firstName}
+                {' '}
+                {this.props.lastName}
+                {' '}
+              </Typography>
+              <CardMedia
+                className={classes.media}
+                image={this.props.consultimage}
+                title={this.props.lastName}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h3" component="h5">
+                  {this.props.specialty}
+                  {' '}
+
+                </Typography>
+                <Typography variant="subtitle2">
+                  {this.props.speciality}
+                </Typography>
+                <Typography variant="button" gutterBottom>
+                  <a href={this.props.consultwebsite}>{this.props.consultwebsite}</a>
+                </Typography>
+                <br />
+
+                <Typography variant="headline" color="textSecondary" gutterBottom>
+                  {this.props.consultDescription}
+                  <br />
+                  <br />
+
+                </Typography>
+                <Typography>
+                  {this.props.consultcity}
+                </Typography>
+                <Typography>
+                  {this.props.nation}
+                  {' '}
+
+                </Typography>
+                <Typography>
+                  {this.props.consultemail}
+                </Typography>
+                <br />
+
+                <div>
+                  {' '}
+                  {this.props.canEdit}
+                </div>
+              </CardContent>
+              {/* <div>
+              <CardActions className={classes.actions} disableActionSpacing>
+                <IconButton aria-label="Add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="Share">
+                  <ShareIcon />
+                </IconButton>
+                <IconButton
+                  className={(classes.expand, {
+                    [classes.expandOpen]: this.state.expanded,
+                  })}
+                  onClick={this.handleExpandClick}
+                  aria-expanded={this.state.expanded}
+                  aria-label="Show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <Typography paragraph>
+Contact Details:
+                    {' '}
+                  </Typography>
+                  <Typography paragraph>
+                    {' '}
+                    {this.props.hisemail}
+
+                  </Typography>
+                  <Typography paragraph>Consultant Description:</Typography>
+
+                  <Typography paragraph>
+                    {this.props.consultDescription}
+                  </Typography>
+                </CardContent>
+              </Collapse> */}
+              {/* <div>
+            {this.Auth.loggedIn() ? (<Button name="consultantId" value={this.props.conID} onClick={this.handleDelete}>DELETE</Button>) : (<div />) }
+          </div> */}
+
+            </Card>
+
+          </div>
+
+        </Col>
+      </div>
     );
   }
 }

@@ -87,6 +87,12 @@ export default class Events extends Component {
   }
 
   render() {
+    if (this.props.location.state === undefined) {
+      this.props.location.state = {
+        feature: 'none',
+      };
+    }
+
     const { feature } = this.props.location.state;
     return (
       <div>

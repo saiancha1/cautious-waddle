@@ -21,6 +21,14 @@ import Input from '@material-ui/core/Input';
 import history from '../history';
 import AuthService from '../Authentication/AuthService';
 
+// This page renders 2 buttons that are placed in the Consultant component. These buttons are edit and delete.
+// The Edit button opens up a form with the current information of the posted consultant and allows
+// the logged-in user to make a change to their postings.
+
+// These edit and delete buttons only show up to logged in users and only to their OWN postings. This is controlled
+// in the complex grid component by the userCanEdit method.
+
+// styling and color variables
 
 const mygrey = grey[700];
 
@@ -68,6 +76,9 @@ class Editz extends React.Component {
     super(props);
   }
 
+  // State here holds the info that is passed on from the consultant component in the < Editz > section
+  // they are passed on in the form of props
+
   state = {
     cID: this.props.conID,
     open: false,
@@ -88,6 +99,8 @@ class Editz extends React.Component {
     selectedFile: null,
   };
 
+  // here we have a constructor for the authentication component
+
   Auth = new AuthService();
 
   fileSelectedHandler = (event) => {
@@ -96,10 +109,18 @@ class Editz extends React.Component {
     });
   };
 
+  // handleChange when the form inputs are being changed by user
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  // This method handles when a user uploads an image. The selected file container is holding the actual file
+  // before it is uploaded, the method takes this file and posts it to the URL endpoint, which in turn returns
+  // a resulting URL. This method takes the returned result from the backend and uses that data to display an
+  // image that is stored
+
+  // the part where this method is receiving the data from the database starts with .then((res)) and onwards.
   handleImageUpload = (e) => {
     e.preventDefault();
     console.log(this.state.selectedFile);
@@ -121,11 +142,11 @@ class Editz extends React.Component {
             res.json()
               .then((retrieveddata) => {
                 const iii = retrieveddata;
-                console.log(iii);
+                // console.log(iii);
                 this.setState({
                   imgu: iii.imageUrl,
                 });
-                console.log(this.state.imgu);
+                // console.log(this.state.imgu);
               });
           })
 
@@ -136,6 +157,7 @@ class Editz extends React.Component {
       </div>;
   };
 
+  // This method provides the user with an alret if required fields are missing, doesn't allow submission
   requiredFieldMsg() {
     try {
       alert('Please fill out all required fields');
@@ -145,6 +167,7 @@ class Editz extends React.Component {
     }
   }
 
+  // Checks required fields are filled in
   requiredFieldCheck = () => {
     if (this.state.email == '' || this.state.exp == '' || this.state.fname == '' || this.state.lname == ''
     || this.state.city == '' || this.state.country == '' || this.state.desc == '') {
@@ -153,6 +176,9 @@ class Editz extends React.Component {
     }
   };
 
+
+  // This is a method that is a popup message after user submission is successful, also redirects user to
+  // consultants page
   handleSubscribe() {
     try {
       alert('Thank you for your Changes. Your posting will appear after approval.');
@@ -196,6 +222,9 @@ class Editz extends React.Component {
       return false;
     }
 
+    // This is a method that checks for an image being uploaded before submission, if there is no image uploaded
+    // or if the user selected an image but did not press SUBMIT IMAGE then the user is prompted to submit
+    // the image 1st before submitting the whole form
     this.checkforImage = () => {
       if (imgu == null) {
         try {
@@ -208,6 +237,12 @@ class Editz extends React.Component {
       }
     };
 
+    // This is the edit consultant method as defined as a constant before being invoked at res()
+    // here the method first invokes the check for image method, if there is an image that has been
+    // successfully uploaded including the image added when the user initially created the consultant
+    // then the method foes on to submit a POST request using fetch to the endpoint URL in the API
+    // the body of the POST request must be
+    // formatted to match the format of the backend system and then submitted
     const res = () => {
       if (this.checkforImage() == false) {
         return false;
@@ -248,6 +283,7 @@ class Editz extends React.Component {
     window.location.reload();
   }
 
+  // If a consultant can't be deleted they get an error message
    handleNoDelError = () => {
      try {
        alert('Cannot Delete right now. Try Again Later, or Contact Support. Thank you.');
@@ -256,10 +292,16 @@ class Editz extends React.Component {
      }
    };
 
+   // If a consultant is deleted they get a confirmation message
+
    handleDelMsg = () => {
      alert('The selected Consultant has been Deleted.');
    };
 
+   // when delete is pressed the dres() method is defined then invoked.
+   // the dres() method sends a POST request to the backdoor URL endpoint with the consultant ID in the body
+   // the request then deletes it from the backdoor and the page is re-rendered with the updated consultant
+   // listings
    handleDelete = (e) => {
      const dres = () => {
        try {
