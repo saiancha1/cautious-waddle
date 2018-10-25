@@ -4,6 +4,7 @@ import CompanyView from './Companies/CompanyView';
 import CompanyFilter from './Companies/CompanyFilter';
 import AddCompany from './Companies/AddCompany';
 import Spinner from './Spinner';
+import CompanyPage from './Companies/CompanyPage';
 
 class Companies extends Component {
   state = {
@@ -61,6 +62,28 @@ class Companies extends Component {
     }
   }
 
+  handleSearchBarChange = (e) => {
+    let val = e.target.value;
+    if(val !== "")
+    {
+      val = val.toLowerCase();
+      const companies = this.state.companies;
+      const filteredCompanies = companies.filter(c => (c.companyName.toLowerCase().includes(val) || 
+      c.companyDesc.toLowerCase().includes(val) ||
+      c.businessType.toLowerCase().includes(val) ||
+      c.suburb.toLowerCase().includes(val) ||
+      c.specialistArea.toLowerCase().includes(val)||
+      c.website.toLowerCase().includes(val)));
+      this.setState({companies:filteredCompanies});
+    }
+    else {
+      fetch('api/Companies/getCompanies').then(res => res.json())
+        .then((json) => {
+          this.setState({ companies: json });
+          // console.log(this.state);
+        });
+    }
+  }
   handleFormDataChange = (fieldName, e) => {
     e.target.preventDefault();
     const val = e.target.value;
@@ -96,25 +119,22 @@ class Companies extends Component {
       );
     }
     let company;
+    let selectedCompany;
     const addCompany = (this.state.editCompany) ? <AddCompany company={this.state.editCompany} hide={this.hideComponent} /> : null;
 
     if (this.state.selectedCompany !== null) {
-      const selectedCompany = this.state.selectedCompany;
-      company = (
-        <CompanyView
-          companyToRender={selectedCompany}
-          handleClose={this.handleClose}
-          companyOpen={this.state.companyOpen}
-          generateDesc={this.createMarkup(selectedCompany.companyDesc)}
-        />
-      );
+      selectedCompany = this.state.selectedCompany;
+
     }
+    if(this.state.selectedCompany == null)
+    {
     return (
       <div>
         <CompanyFilter
           filter={this.state.filter}
           handleFilterChange={this.handleFilterChange}
           filterItems={this.state.menuItems}
+          handleSearchBarChange = {this.handleSearchBarChange}
         />
         <CompanyList
           companies={this.state.companies}
@@ -127,6 +147,14 @@ class Companies extends Component {
 
       </div>
     );
+    }
+    if(this.state.selectedCompany) {
+      return (
+        <div>
+        <CompanyPage company = {selectedCompany} generateDesc = {this.createMarkup(selectedCompany.companyDesc)}/>
+        </div>
+      )
+    }
   }
 }
 
