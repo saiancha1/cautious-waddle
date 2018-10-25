@@ -494,44 +494,7 @@ class Addz extends React.Component {
                     </Row>
                   </FormGroup>
                 </ListItem>
-                {/* <Col>
-                  <Row>
 
-                    <Typography
-                      className={classes.spacedout}
-                      variant="button"
-                    >
-
-Add Image
-                    </Typography>
-
-                  </Row>
-                  <Row>
-                    <Input
-                      className={classes.buttonspaced}
-                      type="file"
-                      onChange={this.fileSelectedHandler}
-                      required
-                    >
-Upload New Image
-
-                    </Input>
-                  </Row>
-                  <Row>
-                    <Button
-                      className={classes.buttonspacedtwo}
-                      onClick={this.handleImageUpload}
-                    >
-Submit New Image
-
-                    </Button>
-
-                  </Row>
-                  <CardMedia
-                    className={classes.media}
-                    image={this.state.imgu}
-                  />
-                </Col> */}
               </form>
             </ListItem>
           </List>
