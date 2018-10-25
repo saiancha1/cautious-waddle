@@ -74,7 +74,7 @@ const Consultant = (props) => {
   );
 
   return (
-    <div className="row">
+    <div className="row consult-grid">
       {consultantz}
     </div>
   );

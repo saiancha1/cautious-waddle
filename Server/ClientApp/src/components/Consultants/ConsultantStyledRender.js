@@ -1,90 +1,58 @@
 import React, { Component } from 'react';
-// import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import { Col } from 'react-bootstrap';
-import { withStyles } from '@material-ui/core/styles';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import red from '@material-ui/core/colors/red';
-
-import AuthService from '../Authentication/AuthService';
+import {
+  Card, CardBody, CardHeader,
+} from 'react-simple-card';
+import '../consultants.css';
 
 
-const styles = theme => ({
-
-  card: {
-    maxWidth: 345,
-    height: 600,
-    margin: 10,
-    padding: 10,
-
-  },
-  media: {
-    height: 350,
-  },
-  actions: {
-    display: 'flex',
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-    marginLeft: 'auto',
-    [theme.breakpoints.up('sm')]: {
-      marginRight: -8,
-    },
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-});
-
-class ConST extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  state = { expanded: false };
-
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
-  };
-
-  Auth = new AuthService();
-
-  // handleDelete = (e) => {
-  //   const connerId = e.target.value;
-  //   console.log(connerId);
-
-  //   const res = () => fetch('api/Consultants/removeConsultant', {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json, text/plain, */*',
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${this.Auth.getToken()}`,
-  //     },
-  //     body: connerId,
-  //   });
-  //     // .then(res.json());
-  //   res();
-  // };
-
-
+export default class ConST extends Component {
   render() {
-    const { classes } = this.props;
     return (
+      <Col md={4} lg={3}>
+        <Card className="consult-card-container">
+          <CardBody className="consult-card-body">
+            <div className="consult-card-img-container">
+              <img className="consult-card-img" alt="profile pic" src={this.props.consultimage} />
+            </div>
+            <h3>
+              {this.props.firstName}
+              {' '}
+              {this.props.lastName}
+              {' '}
+            </h3>
+            <p>
+              {this.props.consultDescription}
+            </p>
+            <ul>
+              <li>
+                <label>Speciality:</label>
+                {this.props.speciality}
+              </li>
+              <li>
+                <label>City:</label>
+                {this.props.consultcity}
+              </li>
+              <li>
+                <label>Country:</label>
+                {this.props.nation}
+              </li>
+              <li>
+                <label>Website:</label>
+                <a href={this.props.consultwebsite}>{this.props.consultwebsite}</a>
+              </li>
+              <li>
+                <label>Email:</label>
+                {this.props.consultemail}
+              </li>
+            </ul>
+            <div>
+              {this.props.canEdit}
+            </div>
+          </CardBody>
+        </Card>
+      </Col>
+=======
       // console.log(status),
       <div>
         <Col>
@@ -189,6 +157,3 @@ Contact Details:
     );
   }
 }
-
-
-export default withStyles(styles)(ConST);
