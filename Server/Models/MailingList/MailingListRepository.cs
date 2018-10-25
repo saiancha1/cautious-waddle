@@ -24,9 +24,9 @@ namespace cautious_waddle.Models
             _emailService = emailService;
         }
 
-        public IEnumerable<MailingList_EmailAddress> getMailingList()
+        public IEnumerable<Emailing_EmailAddress> getMailingList()
         {
-            IEnumerable<MailingList_EmailAddress> emailAddresses = _context.MailingList;
+            IEnumerable<Emailing_EmailAddress> emailAddresses = _context.MailingList;
             return emailAddresses;
         }
 
@@ -58,12 +58,12 @@ namespace cautious_waddle.Models
             EmailMessage emailMessage = new EmailMessage();
 
             // From email address
-            MailingList_EmailAddress from = new MailingList_EmailAddress();
+            Emailing_EmailAddress from = new Emailing_EmailAddress();
             from.FullName = "Admin@TechPalmy.com";
             from.EmailAddress = _emailConfiguration.SmtpUsername;
 
             // Send email to all email addresses on the mailing list
-            List<MailingList_EmailAddress> mailingList = _context.MailingList.ToList();
+            List<Emailing_EmailAddress> mailingList = _context.MailingList.ToList();
             emailMessage.ToAddresses = mailingList;
 
             emailMessage.FromAddresses.Add(from);
@@ -73,7 +73,7 @@ namespace cautious_waddle.Models
             _emailService.Send(emailMessage);
         }
 
-        public void subscribe(MailingList_EmailAddress emailAddress)
+        public void subscribe(Emailing_EmailAddress emailAddress)
         {
             _context.MailingList.Add(emailAddress);
             _context.SaveChanges();

@@ -65,20 +65,12 @@ namespace cautious_waddle.Models
             EmailMessage emailMessage = new EmailMessage();
 
             // From email address
-            MailingList_EmailAddress from = new MailingList_EmailAddress();
+            Emailing_EmailAddress from = new Emailing_EmailAddress();
             from.FullName = "Admin@TechPalmy.com";
             from.EmailAddress = _emailConfiguration.SmtpUsername;
 
             // To email addresses (Admin email addresses)
-            List<MailingList_EmailAddress> addresses = new List<MailingList_EmailAddress>();
-            MailingList_EmailAddress admin1 = new MailingList_EmailAddress();
-            admin1.EmailAddress = "millar9819@gmail.com";
-            admin1.FullName = "Millar Calder";
-            MailingList_EmailAddress admin2 = new MailingList_EmailAddress();
-            admin2.EmailAddress = "millar.calder@outlook.com";
-            admin2.FullName = "Millar Calder";
-            addresses.Add(admin1);
-            addresses.Add(admin2);
+            List<Emailing_EmailAddress> addresses = _emailConfiguration.adminEmailAddresses;
 
             emailMessage.FromAddresses.Add(from);
             emailMessage.ToAddresses = addresses;
