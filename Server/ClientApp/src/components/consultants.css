@@ -28,21 +28,25 @@ p {
 }
 .consult-card-body{
   padding: 0px !important;
+  
 }
 
 .consult-grid {
-  max-width: 1200px;
+  max-width: 1325px;
   margin-right: auto;
   margin-left: auto;
 }
 .consult-card-container {
-  border: 1px black solid;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);
   width: 300px !important;
-  height: 700px;
+  height: 750px;
+  margin-bottom: 30px !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .consult-card-img-container {
-  width: 300px;
+  width: 298px;
   height: 300px;
   margin: 0px;
 }
