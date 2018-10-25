@@ -1,95 +1,27 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import { Row, Col } from 'react-bootstrap';
 import grey from '@material-ui/core/colors/grey';
 import ConST from './ConsultantStyledRender';
 import AuthService from '../Authentication/AuthService';
 import Editz from './Editz';
 
-const mygrey = grey[700];
-
 
 this.Auth = new AuthService();
 
-const handleNoDelError = (e) => {
-  try {
-    alert('Cannot Delete right now. Try Again Later, or Contact Support. Thank you.');
-  } catch (e) {
-    alert('There seems to be a problem!');
-  }
-};
-
-const handleDelMsg = (e) => {
-  alert('The selected Consultant has been Deleted.');
-};
-
-const handleDelete = (e) => {
-  const connerId = e.target.value;
-  console.log(connerId);
-
-  const res = () => {
-    try {
-      fetch('api/Consultants/removeConsultant', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.Auth.getToken()}`,
-        },
-        body: connerId,
-      });
-      handleDelMsg(e);
-      window.location.reload();
-
-
-      // console.log('Delete Successful');
-    } catch (error) {
-      handleNoDelError(error);
-      return null;
-    }
-  };
-  // .then(res.json());
-  if (connerId == undefined) {
-    handleNoDelError();
-  } else {
-    res();
-  }
-};
-// const handleNoEditMsg = (e) => {
-//   alert('Cannot Edit Right Now, Please Try Again.');
-// };
-
-// const handleEdit = (e) => {
-//   const connyId = e.target.value;
-//   console.log(connyId);
-
-//   if (connyId == undefined) {
-//     // console.log('undefined consultant ID');
-//     handleNoEditMsg();
-//   } else {
-//     console.log('finally  NUMBER');
-//     console.log(connyId);
-//     return connyId;
-
-//     // return <div><EditConsultant theID={connyId} /></div>;
-//   }
-// };
-
+// This function determines whether the user is logged in, and also checks if the user matches the user id
+// of the person who created the specific consultant. If so it invokes the Editz component, bby displaying two
+// buttons - edit and delete - and passing on props to editz to set up and run the functions for edit and
+// delete consultant.
+// This is conditional rendering at its finest.
 
 const userCanEdit = (con) => {
   const authService = new AuthService();
   if (authService.loggedIn()) {
     const token = authService.getProfile();
     const userIdd = token.id;
-    // const conID = con.consultantId;
     if (con.userId == userIdd) {
-      // console.log(con.userId);
-
       return (
         <div>
-          {/* <Row> */}
-          {/* <Button onClick={handleEdit} value={con.consultantId}>Edit This Consultant</Button> */}
-          {/* <Button size="small" variant="contained" onClick={handleDelete} value={con.consultantId}>Delete</Button> */}
+
           <Editz
             consultimage={con.imageURL}
             conID={con.consultantId}
