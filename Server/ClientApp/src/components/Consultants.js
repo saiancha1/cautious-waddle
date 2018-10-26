@@ -58,25 +58,6 @@ class Consultants extends Component {
     }
   }
 
-  // This method handles users trying to click add consultant when not logged in
-  // handleNotLogged() {
-  //   try {
-  //     alert('Please Login to Add Consultant');
-  //     // window.location.reload();
-  //   } catch (error) {
-  //     alert('There seems to be a problem!');
-  //   }
-  // }
-
-  // // this method handles the click on the join consultant page button, if user is logged in then he is passed on
-  // //
-  //  handleClick = (e) => {
-  //    if (this.state.loginStatus == true) {
-  //      history.push('/addconsultant');
-  //    } else {
-  //      this.handleNotLogged();
-  //    }
-  //  }
 
   render() {
     const { classes } = this.props;
@@ -92,7 +73,6 @@ class Consultants extends Component {
         </div>
 
         <Consultant cl={this.state.consultants} />
-        {/* <Button onClick={this.handleClick}> Join Consultants</Button> */}
       </div>
 
 
