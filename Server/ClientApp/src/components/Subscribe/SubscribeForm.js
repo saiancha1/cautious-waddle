@@ -31,6 +31,7 @@ export default class SubForm extends React.Component {
       email,
     } = this.state;
 
+    // Post request to submit data
     const res = () => fetch('/api/mailingList/subscribe', {
       method: 'POST',
       headers: {
@@ -43,10 +44,10 @@ export default class SubForm extends React.Component {
       }),
     });
 
+    // This is a check that neither name or email fields are empty
     if (fname == null || email == null) {
       alert('Please fill out both fields before subscribing.');
     } else {
-    // .then(res => res.json()).then(response => console.log('Success', JSON.stringify(response)));
       this.setState({ open: false });
       res();
       this.handleSubscribe();
@@ -61,6 +62,7 @@ export default class SubForm extends React.Component {
     this.setState({ open: true });
   };
 
+  // matching of input values from form to name inputs
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }

@@ -252,6 +252,8 @@ class EditJob extends React.Component {
    this.dres();
  };
 
+
+ // We render a form with different input fields and we are using Material UI library and plugins
  render() {
    const { classes } = this.props;
    return (

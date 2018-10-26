@@ -26,12 +26,14 @@ class Contact extends Component {
       this.setState({ [e.target.name]: e.target.value });
     }
 
-    // when the captcha field is verified, the post request to the bbackedn API is processed
+    // when the captcha field is verified, the post request to the backend API is processed
     handleSubscribe(e) {
       if (this.state.isVerified) {
         e.preventDefault();
         console.log(this.state);
 
+        // POST call to backend API being defined as res.
+        // the body of the request is made up of data from state which is collected form user form input
         const res = () => {
           fetch('/api/emailing/sendContactForm', {
             method: 'POST',
@@ -48,7 +50,7 @@ class Contact extends Component {
             }),
           });
         };
-
+        // we reload the page once submission is successful and provide an alert to user
         const PostingConsultantInfo = () => res.json();
         res();
         window.location.reload();

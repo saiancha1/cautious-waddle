@@ -328,6 +328,9 @@ class Editz extends React.Component {
      dres(e);
    };
 
+   // This renders the Edit form and the content of that form
+   // While it may look only like a simple form, a lot of work is done at this stage, placeholders of the forms
+   // are set here, as well as the function calls and the names and values of each input field.
    render() {
      const { classes } = this.props;
      return (
