@@ -83,7 +83,6 @@ class Addz extends React.Component {
   }
 
   state = {
-    // loginStatus: this.Auth.loggedIn(),
     fname: '',
     lname: '',
     website: '',
@@ -220,7 +219,7 @@ class Addz extends React.Component {
     this.setState({ open: false });
   };
 
-  // method that processes subbmission once submit button is pressed in the add consultant form
+  // method that processes submission once submit button is pressed in the add consultant form
   // first the method sets the state constants, then it transfers the current state held to a format that
   // is accepted by the backend system, and transfers that to the body of the POST request in the res() method
   // before posting however, this method also invokes the checkimage method which ensures that the form user
@@ -252,7 +251,7 @@ class Addz extends React.Component {
     if (this.requiredFieldCheck() == false) {
       return false;
     }
-
+    // checks that an image has bbeen submited by checking whether imgu state is filled
     this.checkforImage = () => {
       if (imgu == null) {
         try {
@@ -265,6 +264,7 @@ class Addz extends React.Component {
       }
     };
 
+    // this is the post method being defined for add consultant call
     const res = () => {
       if (this.checkforImage() == false) {
         return false;
@@ -303,6 +303,7 @@ class Addz extends React.Component {
     res();
   }
 
+  // This part essentially renders the form which takes in all the inputs from the user.
   render() {
     const { classes } = this.props;
     return (

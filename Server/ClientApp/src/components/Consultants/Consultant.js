@@ -47,6 +47,18 @@ const userCanEdit = (con) => {
   }
 };
 
+// Here we have the ConST component which passes on properties to the ConsultantStyledRender
+// component, these props are then formatted and displayed.
+
+// We can see the canEdit prop which determines, whether this particular consultant is one that can
+// be edited or deleted by the user currently logged in.
+
+// The way this all comes together is that the props //from the Consultants.js file that was obtained by a GET
+// request are passed on to here, then the consultant.js file maps the full list that was gotten from the database
+// and then the map function is used to separate the list into different variable such as name, email, phone
+// etc. then these components are passed on into the ConST component where they are formatted
+// While this component we are in only maps each consultant one by one, they are all called and displayed
+// in the consultants.js file outside of this folder
 
 const Consultant = (props) => {
   const consultantz = props.cl.map(con => (
