@@ -52,6 +52,69 @@ export default class ConST extends Component {
           </CardBody>
         </Card>
       </Col>
+
+    // Alternative Styling For CONSULTANTS Display - as was used in the presentation to the class
+
+    /* <Col>
+<div className="col-md-3">
+  <Card className={classes.card}>
+    <Typography variant="headline" color="textPrimary">
+      {this.props.firstName}
+      {' '}
+      {this.props.lastName}
+      {' '}
+    </Typography>
+    <CardMedia
+      className={classes.media}
+      image={this.props.consultimage}
+      title={this.props.lastName}
+    />
+    <CardContent>
+      <Typography gutterBottom variant="h3" component="h5">
+        {this.props.specialty}
+        {' '}
+
+      </Typography>
+      <Typography variant="subtitle2">
+        {this.props.speciality}
+      </Typography>
+      <Typography variant="button" gutterBottom>
+        <a href={this.props.consultwebsite}>{this.props.consultwebsite}</a>
+      </Typography>
+      <br />
+
+      <Typography variant="headline" color="textSecondary" gutterBottom>
+        {this.props.consultDescription}
+        <br />
+        <br />
+
+      </Typography>
+      <Typography>
+        {this.props.consultcity}
+      </Typography>
+      <Typography>
+        {this.props.nation}
+        {' '}
+
+      </Typography>
+      <Typography>
+        {this.props.consultemail}
+      </Typography>
+      <br />
+
+      <div>
+        {' '}
+        {this.props.canEdit}
+      </div>
+    </CardContent>
+
+  </Card>
+
+</div>
+
+// </Col> */
+
+
     );
   }
 }
