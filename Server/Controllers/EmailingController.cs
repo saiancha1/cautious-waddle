@@ -34,7 +34,7 @@ namespace cautious_waddle.Controllers
         {
             try
             {
-                MailingList_EmailAddress from = new MailingList_EmailAddress();
+                Emailing_EmailAddress from = new Emailing_EmailAddress();
                 from.FullName = "Admin@TechPalmy.com";
                 from.EmailAddress = _emailConfiguration.SmtpUsername;
 
@@ -42,7 +42,7 @@ namespace cautious_waddle.Controllers
 
                 if(emailMessageViewModel.ToAddresses.Count == 0)
                 {
-                    List<MailingList_EmailAddress> emailAddresses = _context.MailingList.ToList();
+                    List<Emailing_EmailAddress> emailAddresses = _context.MailingList.ToList();
                     emailMessage.ToAddresses = emailAddresses;
                 }
                 else

@@ -4,8 +4,8 @@ namespace cautious_waddle.Models
 {
     public interface IMailingListRepository
     {
-        void subscribe(MailingList_EmailAddress emailAddress);
-        IEnumerable<MailingList_EmailAddress> getMailingList();
+        void subscribe(Emailing_EmailAddress emailAddress);
+        IEnumerable<Emailing_EmailAddress> getMailingList();
         string formMessage();
         void MailingListWeekly();
     }

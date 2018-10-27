@@ -20,7 +20,7 @@ namespace cautious_waddle.Controllers
         }
 
         [HttpPost("subscribe")]
-        public IActionResult subscribe([FromBody] MailingList_EmailAddress emailAddress)
+        public IActionResult subscribe([FromBody] Emailing_EmailAddress emailAddress)
         {
             try
             {

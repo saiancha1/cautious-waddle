@@ -74,7 +74,7 @@ namespace cautious_waddle.Models
 
     public class MailingListDbContext : DbContext
     {
-        public DbSet<MailingList_EmailAddress> MailingList { get; set; }
+        public DbSet<Emailing_EmailAddress> MailingList { get; set; }
         public MailingListDbContext(DbContextOptions<MailingListDbContext> opts) : base(opts)
         {
             

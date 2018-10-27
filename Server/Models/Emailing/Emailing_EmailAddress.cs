@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace cautious_waddle.Models
 {
-    public class MailingList_EmailAddress
+    public class Emailing_EmailAddress
     {
         [JsonProperty("emailAddress")]
         [Key]
